@@ -57,6 +57,7 @@
 \usepackage{indentfirst}		% Indenta o primeiro parágrafo de cada seção.
 \usepackage{color}				% Controle das cores
 \usepackage{graphicx}			% Inclusão de gráficos
+\graphicspath{{imagens/}}
 \usepackage{microtype} 			% para melhorias de justificação
 % ---
 		
@@ -229,7 +230,7 @@
 %
 %% TODO: utilizar a ficha catalográfica gerada em https://www.poli.usp.br/bibliotecas/servicos/catalogacao-na-publicacao
 \begin{fichacatalografica}
-    \includepdf{ficha.pdf}
+    \includepdf{pre-textuais/ficha.pdf}
 \end{fichacatalografica}
 
 % \begin{fichacatalografica}
@@ -484,27 +485,27 @@ To ensure the security of the physical space, CAUSP-LOCK generates single-use, t
 \textual
 
 % Capítulo 1. Introdução
-\include{Cap1-Intro}
+\include{capitulos/Cap1-Intro}
 
 % Capítulo 2. Aspectos Conceituais
-\include{Cap2-Conceitos}
+\include{capitulos/Cap2-Conceitos}
 
 % Capítulo 3. Metodologia do Trabalho
-\include{Cap3-Metodo}
+\include{capitulos/Cap3-Metodo}
 
 % Capítulo 4. Especificação de Requisitos
-\include{Cap4-Especificacao}
+\include{capitulos/Cap4-Especificacao}
 
 % Capítulo 5. Desenvolvimento do Trabalho
-\include{Cap5-Desenvolvimento}
+\include{capitulos/Cap5-Desenvolvimento}
 
 % ---
 % Capitulo com exemplos de comandos inseridos de arquivo externo 
 % ---
-% \include{abntex2-modelo-include-comandos}
+% \include{exemplos/abntex2-modelo-include-comandos}
 % ---
 % Conteúdos específicos do modelo de trabalho acadêmico
-% \include{quadros}
+% \include{exemplos/quadros}
 
 % ----------------------------------------------------------
 % Finaliza a parte no bookmark do PDF
@@ -517,7 +518,7 @@ To ensure the security of the physical space, CAUSP-LOCK generates single-use, t
 % Conclusão
 % ---
 % Capítulo 6. Considerações Finais
-\include{Cap6-Consideracoes}
+\include{capitulos/Cap6-Consideracoes}
 
 % ----------------------------------------------------------
 % ELEMENTOS PÓS-TEXTUAIS
@@ -528,7 +529,7 @@ To ensure the security of the physical space, CAUSP-LOCK generates single-use, t
 % ----------------------------------------------------------
 % Referências bibliográficas
 % ----------------------------------------------------------
-\bibliography{abntex2-modelo-references}
+\bibliography{referencias/abntex2-modelo-references}
 
 % ----------------------------------------------------------
 % Glossário

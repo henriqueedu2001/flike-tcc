@@ -28,7 +28,7 @@ Não foram alterados frontend, backend ou firmware; não foram executados script
 | Frontend Next.js, principal desta análise | `origin/frontend_prototype` | `9005601719e98b5cac1c3586d07ef79b06a28a00`, 20/08/2026 |
 | Firmware | `main` + arquivos locais | `c2983f4ce6e02fd4ce68c212a54e8c5fd6ef1e78`, 09/03/2026, com mudanças descritas abaixo |
 | TCC | `main` | `ae922115f778c18a81b581697026d122a94adab4`, 30/08/2026 |
-| PDF recebido | arquivo local ainda não rastreado | `TCC___CAUSP_LOCK-1.pdf`, 45 páginas; metadados de criação em 30/08/2026, 22:35:27, UTC−03 |
+| PDF recebido | arquivo local ainda não rastreado | `pdfs/FLIKE-referencia-2026-08-30.pdf` (nome original: `TCC___CAUSP_LOCK-1.pdf`), 45 páginas; metadados de criação em 30/08/2026, 22:35:27, UTC−03 |
 
 Alterações já existentes antes deste trabalho: backend `scripts/run_server.sh` modificado; firmware `src/digital_key.cpp` e `src/digital_key.h` modificados, além de `sdkconfig.defaults`, `src/digital_lock.cpp` e `src/digital_lock.h` não rastreados. O PDF também já estava não rastreado. Esses arquivos foram preservados.
 
@@ -570,7 +570,7 @@ Os caminhos abaixo são relativos à raiz identificada pelo prefixo, para permit
 | W01 | `platformio.ini`, arquivo local `sdkconfig.defaults` |
 | W02 | `src/main.cpp`, `src/qr_code.{cpp,h}`, `src/digital_key.{cpp,h}`, `src/binutils.{cpp,h}` |
 | W03 | Arquivos locais `src/digital_lock.{cpp,h}` e mudanças locais de `digital_key` |
-| T01 | `TCC___CAUSP_LOCK-1.pdf`; `TCC___CAUSP_LOCK/main.tex`, `Cap1-Intro.tex` a `Cap6-Consideracoes.tex` |
-| T02 | PNGs de contexto, aplicação, tranca física, relacionamentos e `uml.png` em `TCC___CAUSP_LOCK/` |
+| T01 | `pdfs/FLIKE-referencia-2026-08-30.pdf`; `FLIKE/main.tex`, capítulos em `FLIKE/capitulos/` |
+| T02 | PNGs de contexto, aplicação, tranca física, relacionamentos e `uml.png` em `FLIKE/imagens/` |
 
 Referências conceituais externas usadas apenas para qualificar a terminologia criptográfica: [NIST SP 800-38B — CMAC](https://csrc.nist.gov/pubs/sp/800/38/b/upd1/final) e [NIST — Message Authentication Code](https://csrc.nist.gov/glossary/term/message_authentication_code). A bibliografia acadêmica já presente no TCC não foi validada bibliograficamente neste trabalho; suas entradas não devem ser consideradas verificadas por este documento.
