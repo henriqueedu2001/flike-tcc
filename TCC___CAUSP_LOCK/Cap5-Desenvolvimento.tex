@@ -1,0 +1,50 @@
+\chapter{Desenvolvimento do Trabalho} \label{cap:desenvolvimento}
+
+\section{Tecnologias Utilizadas}
+O CAUSP-LOCK utiliza um conjunto integrado de tecnologias de hardware e software para implementar um sistema seguro e eficiente de controle de acesso.
+
+No hardware, destaca-se o uso do microcontrolador ESP32-CAM, que integra processamento e comunicação, juntamente com a câmera OV2640 para leitura de QR Codes. O dispositivo é responsável por validar os códigos e acionar a fechadura elétrica, permitindo ou negando o acesso. O sistema também conta com uma interface simples (HMI), com LEDs e botões para feedback ao usuário.
+
+No software, a solução é dividida em frontend, backend e firmware embarcado. O frontend (web) permite cadastro e acesso dos usuários. O backend, desenvolvido em Python com FastAPI, gerencia autenticação, geração e assinatura dos QR Codes, além do armazenamento de dados em banco relacional.
+
+A segurança é garantida por meio de QR Codes únicos, temporários e assinados com criptografia simétrica, assegurando autenticidade e integridade. A validação é feita localmente no dispositivo, permitindo operação offline.
+
+Essas tecnologias permitem um sistema acessível, seguro e automatizado para controle de acesso ao espaço físico.
+
+
+\section{Projeto e Implementação}
+Descrever os resultados do projeto e da implementação do trabalho, com justificativas das decisões tomadas.
+
+\section{Testes e Avaliação}
+Descrever o procedimento da avaliação do trabalho (teste de hardware, teste de software, teste de módulo, teste de integração, teste de validação), de acordo com o tipo do sistema, com o apoio do orientador, se necessário.
+\section{Diagramas de arquitetura}
+O sistema integra dispositivos físicos e softwares. Os usuários acessam uma interface web em React para se cadastrar, solicitar acesso e obter QR Codes; administradores podem gerenciar usuários, consultar o histórico, conceder ou negar acessos e controlar a ocupação da sala. A aplicação se comunica com uma API em Python (FastAPI), responsável por gerar os QR Codes e interagir com o banco de dados SQL, onde são armazenadas informações de usuários, chaves secretas e registros de uso.
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{relacionamentos.drawio.png}
+    \caption{ Diagrama entidade relacionamento}
+    \label{fig:relacionamentos}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{contexto_c4.drawio.png}
+    \caption{ Diagrama C4 de arquitetura C4, a nível de contexto}
+    \label{fig:contexto_c4}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{application_container_c4.drawio.png}
+    \caption{  Diagrama C4 de arquitetura a nível de contêiner da aplicação}
+    \label{fig:application_container_c4}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{physical_lock_container_c4.drawio.png}
+    \caption{  Diagrama C4 de arquitetura a nível de contêiner da tranca}
+    \label{fig:physical_lock_container_c4}
+\end{figure}

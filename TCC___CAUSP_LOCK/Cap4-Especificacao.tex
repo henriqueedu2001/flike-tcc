@@ -1,0 +1,73 @@
+\chapter{Especificação de Requisitos} \label{cap:especificacao}
+
+Este capítulo documenta os requisitos do sistema.
+\section{Requisitos do sistema}
+\begin{enumerate}
+    \item [] RF-00-00: O sistema deve permitir o controle seguro, auditável e automatizado de acesso à sala de amamentação e regulação sensorial por meio de chaves digitais baseadas em QR Code.
+    
+    \item [] RNF-00-00: O sistema deve garantir confidencialidade, integridade e disponibilidade das informações, em conformidade com boas práticas de segurança da informação e proteção de dados.
+\end{enumerate}
+    
+\section{Requisitos da tranca física}
+\begin{enumerate}
+    \item [] RF-01-00: A tranca física deve autorizar o acesso ao espaço, destravando a tranca elétrica, sem necessidade de internet.
+    \item [] RF-01-01: A tranca física deve ser agnóstica para a tranca elétrica, permitindo qualquer tipo ou modelo.
+    \item [] RF-01-02: A tranca física deve operar mesmo após uma eventual queda de energia da rede elétrica.
+    \item [] RF-01-03: A tranca física deve operar por no mínimo 6 horas após uma eventual queda de energia da rede elétrica.
+    \item [] RNF-01-00: A tranca física deve ter MTTF (mean time to failure) superior a 6 meses.
+\end{enumerate}
+
+\section{Requisitos da tranca elétrica}
+\begin{enumerate}
+    \item [] RF-02-00: A tranca elétrica pode ser aberta por chaves físicas a qualquer momento, no caso de falha do microcontrolador.
+\end{enumerate}
+
+\section{Requisitos do microcontrolador}
+\begin{enumerate}
+    \item [] RF-03-00: O microcontrolador deve destravar a tranca elétrica mediante a leitura de chaves digitais legítimas pela câmera.
+    \item [] RF-03-01: O microcontrolador deve registrar os eventos de leitura da chave digital, abertura e fechamento da tranca física, configurações e envio de dados no histórico de eventos.
+    \item [] RF-03-02: O microcontrolador deve armazenar internamente o histórico de eventos em um documento auditável.
+\end{enumerate}
+
+\section{Requisitos da câmera}
+\begin{enumerate}
+    \item [] RF-04-00: A câmera deve ter resolução suficiente para efetuar a leitura e interpretação de um QR Code versão 3.
+\end{enumerate}
+
+\section{Requisitos da HMI}
+\begin{enumerate}
+    \item [] RF-05-00: A HMI deve fornecer feedback claro ao usuário sobre o status da tranca
+\end{enumerate}
+
+\section{Requisitos das chaves digitais}
+\begin{enumerate}
+    \item [] RF-06-00: A chave digital de acesso deve conter a identificação do usuário, a identificação da sala, o tempo em que a chave foi gerada e sua expiração.
+    \item [] RF-06-01: A chave digital deve fornecer autenticidade.
+    \item [] RF-06-02: A chave digital deve fornecer integridade.
+    \item [] RF-06-03: A chave digital deve fornecer irretratabilidade do acesso ao espaço.
+    \item [] RF-06-04: A chave digital deve ser assinada eletronicamente.
+    \item [] RNF-06-00: A chave digital deve ser lida pela câmera em menos de 2 segundos.
+\end{enumerate}
+
+\section{Requisitos das trancas digitais}
+\begin{enumerate}
+    \item [] RF-07-00: A tranca digital deve validar a autenticidade, integridade, expiração e uso único da chave digital antes de autorizar a abertura da tranca elétrica.
+\end{enumerate}
+
+\section{Requisitos da aplicação web}
+\begin{enumerate}
+    \item [] RF-09-00: A aplicação web deve ser responsiva, permitindo ao usuário realizar cadastro, login, solicitação de acesso, visualização e armazenamento das chaves digitais, além de fornecer painel administrativo para gestores autorizados.
+
+\end{enumerate}
+
+\section{Requisitos do back end}
+\begin{enumerate}
+    \item [] RF-10-00: RF-10-00: O back end deve implementar serviços de autenticação, autorização, geração e assinatura criptográfica das chaves digitais, validação de permissões, persistência em banco de dados e registro auditável de todas as operações relevantes.
+\end{enumerate}
+
+\section{Requisitos de Acessibilidade}
+\begin{enumerate}
+    \item [] REQ-FUNC-01: A tranca elétrica não deve ser sensorialmente hiperestimulante.
+    \item [] REQ-FUNC-01: O processo de acessar o espaço, desde o registro na plataforma web até o destravamento da tranca, deve minimizar a sobrecarga cognitiva
+    \item [] REQ-FUNC-01: O sistema deve minimizar as interações obrigatórias com seres humanos.
+\end{enumerate}
