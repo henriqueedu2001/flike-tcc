@@ -369,7 +369,7 @@ A próxima rodada será o **passo 1**. A equipe enviará as teses de referência
 | Passo | Estado | Registro | Próxima ação |
 | --- | --- | --- | --- |
 | 0. Validar o processo | **Aprovado** | Plano de trabalho aprovado pela equipe em 31/08/2026 | Iniciar o passo 1 |
-| 1. Receber referências | **Aguardando material** | Nenhuma análise iniciada | Equipe enviar teses-modelo e, se disponíveis, normas, prazo e feedback do orientador |
+| 1. Receber referências | **Em andamento — coleta de teses concluída** | 50 monografias recentes do PCS selecionadas, baixadas e validadas em 31/08/2026 | Equipe validar a coleção; normas, prazo e feedback do orientador poderão ser adicionados separadamente |
 | 2. Analisar as boas teses | **Não iniciado** | Depende do passo 1 | Assistente produzir fichas comparativas após receber o material |
 | 3. Fechar o contrato do TCC | **Não iniciado** | Depende da aprovação do padrão editorial | Preparar alternativas para pergunta, objetivos, escopo e limitações |
 | 4. Fixar vocabulário e alegações | **Não iniciado** | Depende do passo 3 | Consolidar terminologia e alegações permitidas |
