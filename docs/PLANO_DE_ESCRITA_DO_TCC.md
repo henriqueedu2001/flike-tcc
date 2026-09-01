@@ -4,12 +4,24 @@
 
 Este documento organiza a produção da monografia do FLIKE. Ele preserva a estrutura geral do trabalho atual — seis capítulos, além dos elementos pré-textuais e pós-textuais — e transforma essa estrutura em um roteiro de pesquisa, redação, coleta de evidências e revisão.
 
-O plano será validado pela equipe antes da reescrita dos capítulos. Ele não substitui as orientações formais da Escola Politécnica da USP nem decisões do orientador. Teses de referência fornecidas pela equipe serão usadas para calibrar profundidade, extensão, organização visual e estilo argumentativo, sem copiar texto, resultados ou estrutura de forma mecânica.
+O plano será validado pela equipe antes da reescrita dos capítulos. Ele não substitui as orientações formais da Escola Politécnica da USP nem decisões do orientador. Teses de referência fornecidas pela equipe serão usadas para calibrar profundidade, extensão, organização visual e estilo argumentativo, sem copiar texto, resultados ou estrutura de forma mecânica. A estrutura de seis capítulos foi confirmada pelas recomendações do PCS de 2024, com possibilidade de adaptação em acordo com o orientador.
 
 As duas fontes internas centrais são:
 
 - `pdfs/FLIKE-referencia-2026-08-30.pdf`, que registra a estrutura atual do TCC;
 - `docs/ARQUITETURA_E_ESTADO_DO_PROJETO.md`, que consolida a arquitetura, o estado do código, as decisões confirmadas e as lacunas de evidência.
+
+As regras editoriais e institucionais extraídas dos materiais fornecidos pela equipe estão consolidadas em `docs/ORIENTACOES_INSTITUCIONAIS_TCC.md`. Esse documento deverá integrar a verificação de todas as rodadas.
+
+### 1.1 Estado da execução em 01/09/2026
+
+| Passo | Estado | Registro |
+| --- | --- | --- |
+| Fase A, passo 0 | aprovado | Processo incremental aprovado pela equipe. |
+| Fase A, passo 1 | concluído | 50 monografias de 2024 e 2025 coletadas e validadas. |
+| Fase A, passo 2 | aprovado | 50 fichas concluídas; padrão técnico, detalhado e visual aprovado pela equipe. |
+| Fase A, passo 3 | próximo | Fechar pergunta, objetivos, escopo e limitações com a equipe. |
+| Fase A, passo 4 | pendente | Fixar vocabulário e alegações após a aprovação do contrato do TCC. |
 
 ## 2. Tese central proposta
 
@@ -360,18 +372,18 @@ Se algum teste não puder ser feito, a equipe decidirá entre reduzir o requisit
 | 24. Revisar o todo | Cada autor faz leitura integral e registra correções | Fazer revisão técnica, editorial e de consistência; compilar e inspecionar o PDF | Versão candidata aprovada pelos autores |
 | 25. Incorporar orientação formal | Enviar retorno do orientador ou banca | Aplicar cada correção em rodadas rastreáveis e repetir QA | Versão final autorizada para entrega |
 
-### Próxima ação após a validação deste plano
+### Próxima ação
 
-A próxima rodada será o **passo 1**. A equipe enviará as teses de referência e, se disponíveis, normas, prazo e feedback do orientador. O assistente apenas organizará e analisará esse material; a tese ainda não será modificada. Depois que a equipe aprovar o padrão editorial extraído dos exemplos, será iniciado o passo 3.
+A próxima rodada será o **passo 3**. Assistente e equipe fecharão pergunta de pesquisa, objetivo geral, objetivos específicos, escopo e limitações antes de modificar os capítulos. As orientações institucionais fornecidas já foram incorporadas ao planejamento; regras específicas de 2026 e decisões do orientador serão acrescentadas quando estiverem disponíveis.
 
 ### Acompanhamento da Fase A
 
 | Passo | Estado | Registro | Próxima ação |
 | --- | --- | --- | --- |
-| 0. Validar o processo | **Aprovado** | Plano de trabalho aprovado pela equipe em 31/08/2026 | Iniciar o passo 1 |
-| 1. Receber referências | **Em andamento — coleta de teses concluída** | 50 monografias recentes do PCS selecionadas, baixadas e validadas em 31/08/2026 | Equipe validar a coleção; normas, prazo e feedback do orientador poderão ser adicionados separadamente |
-| 2. Analisar as boas teses | **Não iniciado** | Depende do passo 1 | Assistente produzir fichas comparativas após receber o material |
-| 3. Fechar o contrato do TCC | **Não iniciado** | Depende da aprovação do padrão editorial | Preparar alternativas para pergunta, objetivos, escopo e limitações |
+| 0. Validar o processo | **Aprovado** | Plano de trabalho aprovado pela equipe em 31/08/2026 | Concluído |
+| 1. Receber referências | **Concluído** | 50 monografias e sete materiais institucionais organizados e examinados | Incorporar futuros documentos quando fornecidos |
+| 2. Analisar as boas teses | **Aprovado** | 50 fichas e síntese comparativa; equipe escolheu padrão técnico, detalhado e visual em 01/09/2026 | Concluído |
+| 3. Fechar o contrato do TCC | **Próximo** | Padrão editorial e orientações institucionais disponíveis | Preparar alternativas para pergunta, objetivos, escopo e limitações |
 | 4. Fixar vocabulário e alegações | **Não iniciado** | Depende do passo 3 | Consolidar terminologia e alegações permitidas |
 
 ## 7. Fontes e informações a solicitar à equipe
@@ -495,15 +507,17 @@ Antes de qualquer versão candidata à entrega:
 9. Validar referências bibliográficas e conformidade ABNT aplicável.
 10. Fazer revisão final separada de conteúdo técnico, português e apresentação.
 
-## 12. Pontos para validação da equipe
+## 12. Registro da validação da equipe
 
-Nesta revisão do plano, a equipe precisa validar somente a dinâmica de trabalho:
+A equipe aprovou a dinâmica de trabalho e o padrão editorial:
 
 1. trabalhar em rodadas pequenas e verificáveis;
 2. receber uma proposta de escopo antes de cada modificação substantiva na tese;
 3. revisar a entrega de cada rodada antes de avançarmos;
 4. preservar as partes já aprovadas enquanto outra seção é trabalhada;
 5. seguir os passos 0–25, admitindo reordenação quando uma dependência prática exigir;
-6. começar pelas teses de referência, sem modificar os capítulos nessa primeira análise.
+6. começar pelas teses de referência, sem modificar os capítulos nessa primeira análise;
+7. adotar texto técnico e detalhado;
+8. usar diagramas, tabelas, esquemas e fotografias em quantidade suficiente para documentar o projeto.
 
-A tese central, a pergunta, os objetivos e cada parte do conteúdo serão validados nos portões específicos descritos na seção 6. A equipe não precisa decidir tudo agora. Depois da aprovação deste fluxo, começa o passo 1: recebimento e organização das teses-modelo e demais orientações disponíveis.
+As teses de referência e as orientações institucionais já foram analisadas. A tese central, a pergunta, os objetivos e o escopo serão fechados no passo 3, que é a próxima rodada. Cada parte do conteúdo continuará sujeita aos portões específicos descritos na seção 6.

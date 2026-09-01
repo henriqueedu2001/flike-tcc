@@ -5,3 +5,6 @@
 /pdfs/FLIKE.pdf
 /pdfs/.FLIKE-*
 __pycache__/
+
+# Large source recordings are kept locally and are not versioned.
+/orientações-tcc/*.mp4

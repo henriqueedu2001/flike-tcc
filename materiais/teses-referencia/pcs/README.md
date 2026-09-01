@@ -6,11 +6,15 @@ Coleção de 50 monografias selecionadas no portal de Projetos de Formatura do D
 - Anos selecionados: 2025 e 2024.
 - Composição: 30 monografias de 2025 e 20 monografias de 2024.
 - Data da coleta: 31/08/2026.
-- Finalidade: formar uma amostra recente e diversa para a futura análise editorial do TCC do FLIKE.
+- Finalidade: formar uma amostra recente e diversa para a análise editorial do TCC do FLIKE.
 
 Durante a coleta, o servidor do PCS passou a recusar conexões diretas. Os mesmos endereços públicos dos PDFs foram então acessados por um proxy público de leitura. Os arquivos recebidos foram validados localmente e seus hashes estão registrados em `SHA256SUMS`.
 
-Nesta etapa, a escolha considerou somente as informações públicas do catálogo, especialmente tema, tipo de sistema e aparente utilidade para observar projetos integrados, sistemas embarcados, segurança, acessibilidade, saúde, arquitetura de software e avaliação experimental. A avaliação sistemática do conteúdo será realizada separadamente.
+Na seleção, foram consideradas as informações públicas do catálogo, especialmente tema, tipo de sistema e aparente utilidade para observar projetos integrados, sistemas embarcados, segurança, acessibilidade, saúde, arquitetura de software e avaliação experimental. A leitura sistemática posterior foi concluída para os 50 arquivos:
+
+- critérios: [`../../../docs/CRITERIOS_ANALISE_TESES_REFERENCIA.md`](../../../docs/CRITERIOS_ANALISE_TESES_REFERENCIA.md);
+- fichas e progresso: [`analises/`](analises/);
+- síntese comparativa: [`../../../docs/ANALISE_COMPARATIVA_TESES_PCS.md`](../../../docs/ANALISE_COMPARATIVA_TESES_PCS.md).
 
 ## Seleção de 2025
 

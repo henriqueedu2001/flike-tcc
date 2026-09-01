@@ -1,0 +1,4701 @@
+[
+  {
+    "year": 2025,
+    "group": "C01",
+    "id": "2025-C01",
+    "title": "Framework para Imputação de Dados Faltantes em Séries Espaço-Temporais de Sensores Físicos",
+    "filename": "Monografia_PCS3860_COOP_2025_Grupo_C01.pdf",
+    "relative_pdf": "2025/Monografia_PCS3860_COOP_2025_Grupo_C01.pdf",
+    "pages": 54,
+    "characters": 105197,
+    "words": 13880,
+    "figures": 10,
+    "tables": 1,
+    "sha256": "27427b558dd4017f6b69f714491c9f08dbc8a7612cf4046d96b76ddfc84557e6",
+    "headings": [
+      {
+        "page": 25,
+        "number": "",
+        "title": "Qk T"
+      }
+    ],
+    "packet": "/tmp/flike-teses-corpus/pacotes/2025-C01.md"
+  },
+  {
+    "year": 2025,
+    "group": "C02",
+    "id": "2025-C02",
+    "title": "Sistema de Geração de Recomendações de Treinos e Dicas Alimentares com uso de Inteligência Artificial",
+    "filename": "Monografia_PCS3860_COOP_2025_Grupo_C02.pdf",
+    "relative_pdf": "2025/Monografia_PCS3860_COOP_2025_Grupo_C02.pdf",
+    "pages": 109,
+    "characters": 201423,
+    "words": 25522,
+    "figures": 40,
+    "tables": 20,
+    "sha256": "d9807e14eed6324552c6966ca38b1527492792237fb1cc0b9ce16769adbe35c0",
+    "headings": [
+      {
+        "page": 10,
+        "number": "",
+        "title": "Apêndices 105"
+      },
+      {
+        "page": 14,
+        "number": "",
+        "title": "Medicine, 2014)"
+      },
+      {
+        "page": 22,
+        "number": "2.5.1",
+        "title": "Lgpd"
+      }
+    ],
+    "packet": "/tmp/flike-teses-corpus/pacotes/2025-C02.md"
+  },
+  {
+    "year": 2025,
+    "group": "C04",
+    "id": "2025-C04",
+    "title": "Sensoriamento e Comunicação Wi-Fi Integrados para Monitoramento da Umidade do Solo",
+    "filename": "Monografia_PCS3860_COOP_2025_Grupo_C04.pdf",
+    "relative_pdf": "2025/Monografia_PCS3860_COOP_2025_Grupo_C04.pdf",
+    "pages": 76,
+    "characters": 119413,
+    "words": 15074,
+    "figures": 24,
+    "tables": 5,
+    "sha256": "f1e46c5fccebfeb77e1e7c3a6b3299cb5cac9e7db8db1c79707187ef26b58bb5",
+    "headings": [
+      {
+        "page": 22,
+        "number": "",
+        "title": "Apêndices 69"
+      },
+      {
+        "page": 73,
+        "number": "",
+        "title": "And"
+      },
+      {
+        "page": 74,
+        "number": "",
+        "title": "And"
+      }
+    ],
+    "packet": "/tmp/flike-teses-corpus/pacotes/2025-C04.md"
+  },
+  {
+    "year": 2025,
+    "group": "C05",
+    "id": "2025-C05",
+    "title": "ULA: Plataforma Digital para Gerenciamento de Pequenos Negócios",
+    "filename": "Monografia_PCS3860_COOP_2025_Grupo_C05.pdf",
+    "relative_pdf": "2025/Monografia_PCS3860_COOP_2025_Grupo_C05.pdf",
+    "pages": 70,
+    "characters": 94257,
+    "words": 12029,
+    "figures": 48,
+    "tables": 0,
+    "sha256": "932220598d25f01796bb6a8418a2a7422e4d463ac73dc663ea1e4e48e1c72d7b",
+    "headings": [],
+    "packet": "/tmp/flike-teses-corpus/pacotes/2025-C05.md"
+  },
+  {
+    "year": 2025,
+    "group": "C07",
+    "id": "2025-C07",
+    "title": "Sistema de Otimização Semafórica Baseada em Algoritmo Genético Multiobjetivo",
+    "filename": "Monografia_PCS3860_COOP_2025_Grupo_C07.pdf",
+    "relative_pdf": "2025/Monografia_PCS3860_COOP_2025_Grupo_C07.pdf",
+    "pages": 88,
+    "characters": 175695,
+    "words": 25346,
+    "figures": 35,
+    "tables": 22,
+    "sha256": "e56c2f4c841c31fe72c4c813df56c5abca7473fcc949434ec513f0ef5b5b9a6c",
+    "headings": [
+      {
+        "page": 11,
+        "number": "",
+        "title": "Apêndices 81"
+      },
+      {
+        "page": 11,
+        "number": "",
+        "title": "Apêndice A – Detalhamento Do Non-Dominated Sor-"
+      },
+      {
+        "page": 58,
+        "number": "",
+        "title": "Moto Carro Ônib Cam"
+      },
+      {
+        "page": 87,
+        "number": "",
+        "title": "N N N N"
+      }
+    ],
+    "packet": "/tmp/flike-teses-corpus/pacotes/2025-C07.md"
+  },
+  {
+    "year": 2025,
+    "group": "C08",
+    "id": "2025-C08",
+    "title": "Seleção de Camadas para o Ajuste Fino Eficiente de LLMs",
+    "filename": "Monografia_PCS3860_COOP_2025_Grupo_C08.pdf",
+    "relative_pdf": "2025/Monografia_PCS3860_COOP_2025_Grupo_C08.pdf",
+    "pages": 44,
+    "characters": 89966,
+    "words": 12397,
+    "figures": 10,
+    "tables": 6,
+    "sha256": "70518ee5d90d472ab96859ed5c2e8ff1bb6f5ae7f3446d6ee8a0787599fdd3b5",
+    "headings": [
+      {
+        "page": 12,
+        "number": "",
+        "title": "Apêndices 42"
+      },
+      {
+        "page": 12,
+        "number": "",
+        "title": "Apêndice A – A Primeira Camada De Modelos Encoder-"
+      },
+      {
+        "page": 17,
+        "number": "",
+        "title": "Mlp"
+      },
+      {
+        "page": 18,
+        "number": "",
+        "title": "Qk T"
+      },
+      {
+        "page": 23,
+        "number": "",
+        "title": "Hsic(K, L)"
+      },
+      {
+        "page": 23,
+        "number": "",
+        "title": "Hsic(K, K)Hsic(L, L)"
+      },
+      {
+        "page": 34,
+        "number": "",
+        "title": "Cola Qnli Rte Mrpc Stsb Sst2 Qqp Mnli"
+      },
+      {
+        "page": 35,
+        "number": "",
+        "title": "Cola Mnli Mrpc Qnli Qqp Rte Sst2 Stsb"
+      },
+      {
+        "page": 44,
+        "number": "",
+        "title": "Mrpc"
+      },
+      {
+        "page": 44,
+        "number": "",
+        "title": "Cola"
+      },
+      {
+        "page": 44,
+        "number": "",
+        "title": "Qqp"
+      },
+      {
+        "page": 44,
+        "number": "",
+        "title": "Sst2"
+      },
+      {
+        "page": 44,
+        "number": "0.8",
+        "title": "Rte"
+      },
+      {
+        "page": 44,
+        "number": "",
+        "title": "Mnli"
+      },
+      {
+        "page": 44,
+        "number": "",
+        "title": "Stsb"
+      },
+      {
+        "page": 44,
+        "number": "",
+        "title": "Qnli"
+      }
+    ],
+    "packet": "/tmp/flike-teses-corpus/pacotes/2025-C08.md"
+  },
+  {
+    "year": 2025,
+    "group": "C09",
+    "id": "2025-C09",
+    "title": "got.it: Sistema de Gerenciamento de Aprendizado Integrado com Agentes de Inteligência Artificial",
+    "filename": "Monografia_PCS3860_COOP_2025_Grupo_C09.pdf",
+    "relative_pdf": "2025/Monografia_PCS3860_COOP_2025_Grupo_C09.pdf",
+    "pages": 75,
+    "characters": 142512,
+    "words": 19011,
+    "figures": 22,
+    "tables": 2,
+    "sha256": "faa1e8dc271dcc66a9ff0b75e876766226ae7a2d2f0ce41b75872cafa461797e",
+    "headings": [
+      {
+        "page": 12,
+        "number": "",
+        "title": "Apêndices 69"
+      },
+      {
+        "page": 33,
+        "number": "",
+        "title": "Mvp"
+      }
+    ],
+    "packet": "/tmp/flike-teses-corpus/pacotes/2025-C09.md"
+  },
+  {
+    "year": 2025,
+    "group": "C11",
+    "id": "2025-C11",
+    "title": "Detecção de Golpes “Rug Pull” em Criptoativos usando Análise de Sentimentos",
+    "filename": "Monografia_PCS3860_COOP_2025_Grupo_C11.pdf",
+    "relative_pdf": "2025/Monografia_PCS3860_COOP_2025_Grupo_C11.pdf",
+    "pages": 69,
+    "characters": 126363,
+    "words": 17317,
+    "figures": 28,
+    "tables": 3,
+    "sha256": "89cf6afbf00349e9c2ce2bb15855640ba5f93437aee597a8f16962d56f4edba0",
+    "headings": [
+      {
+        "page": 37,
+        "number": "",
+        "title": "X X"
+      },
+      {
+        "page": 57,
+        "number": "",
+        "title": "Auc-Roc 0,9955"
+      },
+      {
+        "page": 57,
+        "number": "",
+        "title": "Auc-Pr 0,9996"
+      }
+    ],
+    "packet": "/tmp/flike-teses-corpus/pacotes/2025-C11.md"
+  },
+  {
+    "year": 2025,
+    "group": "C12",
+    "id": "2025-C12",
+    "title": "EcoVision: Automação Inteligente de Coleta Seletiva",
+    "filename": "Monografia_PCS3860_COOP_2025_Grupo_C12.pdf",
+    "relative_pdf": "2025/Monografia_PCS3860_COOP_2025_Grupo_C12.pdf",
+    "pages": 51,
+    "characters": 93015,
+    "words": 10291,
+    "figures": 21,
+    "tables": 3,
+    "sha256": "990dcd55cd42ef33254a87f0f2c62bfa6fa7d5ac4ab945a0d5d5236b51cad47c",
+    "headings": [
+      {
+        "page": 21,
+        "number": "2.2.1",
+        "title": "Yolo"
+      },
+      {
+        "page": 32,
+        "number": "",
+        "title": "Gpio"
+      },
+      {
+        "page": 43,
+        "number": "",
+        "title": "Esp32 Com7"
+      },
+      {
+        "page": 45,
+        "number": "",
+        "title": "Com7"
+      }
+    ],
+    "packet": "/tmp/flike-teses-corpus/pacotes/2025-C12.md"
+  },
+  {
+    "year": 2025,
+    "group": "C14",
+    "id": "2025-C14",
+    "title": "Plataforma para Análise da Produtividade de Equipes com Integração ao GitHub Copilot",
+    "filename": "Monografia_PCS3860_COOP_2025_Grupo_C14.pdf",
+    "relative_pdf": "2025/Monografia_PCS3860_COOP_2025_Grupo_C14.pdf",
+    "pages": 92,
+    "characters": 171446,
+    "words": 23623,
+    "figures": 41,
+    "tables": 8,
+    "sha256": "223d26fbd1299f92a4a694ee68bd79bd70335965e78817ce4aac1a224fc61752",
+    "headings": [
+      {
+        "page": 18,
+        "number": "",
+        "title": "P P"
+      },
+      {
+        "page": 18,
+        "number": "",
+        "title": "P 2 P 2"
+      }
+    ],
+    "packet": "/tmp/flike-teses-corpus/pacotes/2025-C14.md"
+  },
+  {
+    "year": 2025,
+    "group": "C15",
+    "id": "2025-C15",
+    "title": "Simulador em Realidade Virtual para Treinamento na Indústria de Petróleo e Gás",
+    "filename": "Monografia_PCS3860_COOP_2025_Grupo_C15.pdf",
+    "relative_pdf": "2025/Monografia_PCS3860_COOP_2025_Grupo_C15.pdf",
+    "pages": 92,
+    "characters": 112737,
+    "words": 15280,
+    "figures": 35,
+    "tables": 0,
+    "sha256": "0b361af93665f2b922877a4aa825cf51067379adfdd1f07c9e64a8621d359170",
+    "headings": [
+      {
+        "page": 19,
+        "number": "",
+        "title": "Apêndices 75"
+      },
+      {
+        "page": 46,
+        "number": "",
+        "title": "Plan"
+      },
+      {
+        "page": 62,
+        "number": "",
+        "title": "Mqhd"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Mqhd"
+      }
+    ],
+    "packet": "/tmp/flike-teses-corpus/pacotes/2025-C15.md"
+  },
+  {
+    "year": 2025,
+    "group": "C17",
+    "id": "2025-C17",
+    "title": "Modernização Tecnológica de Simulador de Realidade Virtual para Treinamento do Procedimento de Punção Venosa com Aplicação em Educação de Enfermagem",
+    "filename": "Monografia_PCS3860_COOP_2025_Grupo_C17.pdf",
+    "relative_pdf": "2025/Monografia_PCS3860_COOP_2025_Grupo_C17.pdf",
+    "pages": 101,
+    "characters": 170804,
+    "words": 21756,
+    "figures": 28,
+    "tables": 0,
+    "sha256": "13e826f959a4b3ee5718b663777553c7bb898066284db9a33f377858d75c9123",
+    "headings": [
+      {
+        "page": 1,
+        "number": "",
+        "title": "Júlia Carvalho Muniz"
+      },
+      {
+        "page": 1,
+        "number": "",
+        "title": "Kauã Fillipe Rodrigues Da Silva"
+      },
+      {
+        "page": 1,
+        "number": "",
+        "title": "Modernização Tecnológica De Simulador De Realidade"
+      },
+      {
+        "page": 1,
+        "number": "",
+        "title": "Virtual Para Treinamento Do Procedimento De Punção"
+      },
+      {
+        "page": 1,
+        "number": "",
+        "title": "Venosa Com Aplicação Em Educação De Enfermagem"
+      },
+      {
+        "page": 3,
+        "number": "",
+        "title": "Júlia Carvalho Muniz"
+      },
+      {
+        "page": 3,
+        "number": "",
+        "title": "Kauã Fillipe Rodrigues Da Silva"
+      },
+      {
+        "page": 3,
+        "number": "",
+        "title": "Modernização Tecnológica De Simulador De Realidade"
+      },
+      {
+        "page": 3,
+        "number": "",
+        "title": "Virtual Para Treinamento Do Procedimento De Punção"
+      },
+      {
+        "page": 3,
+        "number": "",
+        "title": "Venosa Com Aplicação Em Educação De Enfermagem"
+      },
+      {
+        "page": 5,
+        "number": "",
+        "title": "Agradecimentos"
+      },
+      {
+        "page": 18,
+        "number": "",
+        "title": "Lista De Abreviaturas E Siglas"
+      },
+      {
+        "page": 23,
+        "number": "1",
+        "title": "Introdução"
+      },
+      {
+        "page": 28,
+        "number": "2",
+        "title": "Aspectos Conceituais"
+      },
+      {
+        "page": 35,
+        "number": "3",
+        "title": "Metodologia De Trabalho"
+      },
+      {
+        "page": 36,
+        "number": "4",
+        "title": "Especificação De Requisitos"
+      },
+      {
+        "page": 42,
+        "number": "5",
+        "title": "Desenvolvimento Do Projeto"
+      },
+      {
+        "page": 78,
+        "number": "6",
+        "title": "Considerações Finais"
+      },
+      {
+        "page": 82,
+        "number": "",
+        "title": "Referências"
+      },
+      {
+        "page": 86,
+        "number": "",
+        "title": "Apêndices"
+      },
+      {
+        "page": 86,
+        "number": "",
+        "title": "Apêndice A - Desafios Técnicos E Lições Aprendidas"
+      },
+      {
+        "page": 88,
+        "number": "",
+        "title": "Apêndice B - Resultados Dos Testes"
+      },
+      {
+        "page": 89,
+        "number": "",
+        "title": "Apêndice C - Estrutura De Validação Pedagógica Das Etapas De In-"
+      },
+      {
+        "page": 89,
+        "number": "",
+        "title": "Teração"
+      },
+      {
+        "page": 90,
+        "number": "",
+        "title": "Ciedade Brasileira De Patologia Clí-"
+      },
+      {
+        "page": 93,
+        "number": "",
+        "title": "Sociedade Brasileira De Patologia Clí-"
+      },
+      {
+        "page": 95,
+        "number": "",
+        "title": "Sociedade Brasileira De Patologia Clí-"
+      },
+      {
+        "page": 97,
+        "number": "",
+        "title": "Sociedade Brasileira De Patologia Clí-"
+      },
+      {
+        "page": 98,
+        "number": "",
+        "title": "Apêndice D - Descrição Completa Do Procedimento De Coleta De"
+      },
+      {
+        "page": 98,
+        "number": "",
+        "title": "Sangue Venoso A Vácuo"
+      }
+    ],
+    "packet": "/tmp/flike-teses-corpus/pacotes/2025-C17.md"
+  },
+  {
+    "year": 2025,
+    "group": "C18",
+    "id": "2025-C18",
+    "title": "Projeto de Hardware para Violação de Boot Seguro via Multiplexação de BIOS: um Estudo de Caso com ATM",
+    "filename": "Monografia_PCS3860_COOP_2025_Grupo_C18.pdf",
+    "relative_pdf": "2025/Monografia_PCS3860_COOP_2025_Grupo_C18.pdf",
+    "pages": 77,
+    "characters": 112324,
+    "words": 12866,
+    "figures": 50,
+    "tables": 4,
+    "sha256": "3ef756aa53a9b754202bf9f49e7f2820b0316d47dc601b9ff275681326ae332a",
+    "headings": [
+      {
+        "page": 1,
+        "number": "",
+        "title": "Universidade De São Paulo"
+      },
+      {
+        "page": 1,
+        "number": "",
+        "title": "Escola Politécnica"
+      },
+      {
+        "page": 1,
+        "number": "",
+        "title": "Matheus Tavares De Andrade"
+      },
+      {
+        "page": 1,
+        "number": "",
+        "title": "Projeto De Hardware Para Violação De Boot"
+      },
+      {
+        "page": 1,
+        "number": "",
+        "title": "Seguro Via Multiplexação De Bios: Um Estudo De"
+      },
+      {
+        "page": 1,
+        "number": "",
+        "title": "Caso Com Atm"
+      },
+      {
+        "page": 1,
+        "number": "",
+        "title": "São Paulo"
+      },
+      {
+        "page": 2,
+        "number": "",
+        "title": "Matheus Tavares De Andrade"
+      },
+      {
+        "page": 2,
+        "number": "",
+        "title": "Projeto De Hardware Para Violação De Boot"
+      },
+      {
+        "page": 2,
+        "number": "",
+        "title": "Seguro Via Multiplexação De Bios: Um Estudo De"
+      },
+      {
+        "page": 2,
+        "number": "",
+        "title": "Caso Com Atm"
+      },
+      {
+        "page": 2,
+        "number": "",
+        "title": "São Paulo"
+      },
+      {
+        "page": 4,
+        "number": "",
+        "title": "Agradecimentos"
+      },
+      {
+        "page": 11,
+        "number": "",
+        "title": "Lista De Siglas"
+      },
+      {
+        "page": 13,
+        "number": "1",
+        "title": "Introdução 16"
+      },
+      {
+        "page": 13,
+        "number": "2",
+        "title": "Procedimento Metodológico 22"
+      },
+      {
+        "page": 13,
+        "number": "3",
+        "title": "Interações Prévias Ao Engajamento 24"
+      },
+      {
+        "page": 13,
+        "number": "4",
+        "title": "Coleta De Inteligência 26"
+      },
+      {
+        "page": 14,
+        "number": "5",
+        "title": "Modelagem De Ameaças 30"
+      },
+      {
+        "page": 14,
+        "number": "6",
+        "title": "Análise De Vulnerabilidades 52"
+      },
+      {
+        "page": 14,
+        "number": "7",
+        "title": "Exploração 58"
+      },
+      {
+        "page": 15,
+        "number": "8",
+        "title": "Pós-Exploração 67"
+      },
+      {
+        "page": 15,
+        "number": "9",
+        "title": "Considerações Finais 68"
+      },
+      {
+        "page": 15,
+        "number": "",
+        "title": "Referências 70"
+      },
+      {
+        "page": 15,
+        "number": "",
+        "title": "Apêndices 72"
+      },
+      {
+        "page": 15,
+        "number": "",
+        "title": "A Procedimentos Para Identificação - U26 73"
+      },
+      {
+        "page": 16,
+        "number": "1",
+        "title": "Introdução"
+      },
+      {
+        "page": 16,
+        "number": "1.1",
+        "title": "Motivação"
+      },
+      {
+        "page": 18,
+        "number": "1.2",
+        "title": "Objetivos"
+      },
+      {
+        "page": 19,
+        "number": "1.3",
+        "title": "Justificativa"
+      },
+      {
+        "page": 20,
+        "number": "1.4",
+        "title": "Organização Do Trabalho"
+      },
+      {
+        "page": 22,
+        "number": "2",
+        "title": "Procedimento Metodológico"
+      },
+      {
+        "page": 22,
+        "number": "2.1",
+        "title": "Interações Prévias Ao Engajamento"
+      },
+      {
+        "page": 22,
+        "number": "2.2",
+        "title": "Coleta De Inteligência"
+      },
+      {
+        "page": 22,
+        "number": "2.3",
+        "title": "Modelagem De Ameaças"
+      },
+      {
+        "page": 23,
+        "number": "2.4",
+        "title": "Análise De Vulnerabilidades"
+      },
+      {
+        "page": 23,
+        "number": "2.5",
+        "title": "Exploração"
+      },
+      {
+        "page": 23,
+        "number": "2.6",
+        "title": "Pós-Exploração"
+      },
+      {
+        "page": 24,
+        "number": "3",
+        "title": "Interações Prévias Ao Engajamento"
+      },
+      {
+        "page": 24,
+        "number": "3.1",
+        "title": "Do Escopo De Exploração"
+      },
+      {
+        "page": 24,
+        "number": "3.2",
+        "title": "Da Divulgação Pública"
+      },
+      {
+        "page": 26,
+        "number": "4",
+        "title": "Coleta De Inteligência"
+      },
+      {
+        "page": 26,
+        "number": "4.1",
+        "title": "Dispositivos De"
+      },
+      {
+        "page": 28,
+        "number": "4.2",
+        "title": "Dispositivos De"
+      },
+      {
+        "page": 30,
+        "number": "5",
+        "title": "Modelagem De Ameaças"
+      },
+      {
+        "page": 30,
+        "number": "5.1",
+        "title": "Análise Do"
+      },
+      {
+        "page": 36,
+        "number": "",
+        "title": "Cs 1 8 Vcc Cs 1 8 Vcc Cs 1 8 Vcc"
+      },
+      {
+        "page": 36,
+        "number": "",
+        "title": "Do 2 7 Hold Io1 2 7 Hold Io1 2 7 Io3"
+      },
+      {
+        "page": 36,
+        "number": "",
+        "title": "Wp 3 6 Clk Wp 3 6 Clk Io2 3 6 Clk"
+      },
+      {
+        "page": 36,
+        "number": "",
+        "title": "Gnd 4 5 Di Gnd 4 5 Io0 Gnd 4 5 Io0"
+      },
+      {
+        "page": 40,
+        "number": "",
+        "title": "D1 D2 D3 D4"
+      },
+      {
+        "page": 40,
+        "number": "",
+        "title": "Sel"
+      },
+      {
+        "page": 40,
+        "number": "",
+        "title": "Gnd En"
+      },
+      {
+        "page": 40,
+        "number": "",
+        "title": "S1A S1B S2A S2B S3A S3B S4A S4B"
+      },
+      {
+        "page": 44,
+        "number": "5.2",
+        "title": "Análise Do Firmware"
+      },
+      {
+        "page": 52,
+        "number": "6",
+        "title": "Análise De Vulnerabilidades"
+      },
+      {
+        "page": 55,
+        "number": "",
+        "title": "Validando Bios Off Bios Validada"
+      },
+      {
+        "page": 58,
+        "number": "7",
+        "title": "Exploração"
+      },
+      {
+        "page": 58,
+        "number": "7.1",
+        "title": "Etapa 01 - Alteração De Bytes De Texto No Firmware"
+      },
+      {
+        "page": 59,
+        "number": "7.2",
+        "title": "Etapa 02 - Inserção De Memória Externa No Barramento"
+      },
+      {
+        "page": 61,
+        "number": "7.3",
+        "title": "Etapa 03 - Construção De Trilhas Na Placa"
+      },
+      {
+        "page": 62,
+        "number": "7.4",
+        "title": "Etapa 04 - Boot Pelos Pinos Externos"
+      },
+      {
+        "page": 63,
+        "number": "7.5",
+        "title": "Etapa 05 - Circuito De Chaveamento"
+      },
+      {
+        "page": 64,
+        "number": "",
+        "title": "Sa2"
+      },
+      {
+        "page": 64,
+        "number": "",
+        "title": "Sb2"
+      },
+      {
+        "page": 64,
+        "number": "",
+        "title": "Sel"
+      },
+      {
+        "page": 64,
+        "number": "",
+        "title": "Gnd Vcc (Bios)"
+      },
+      {
+        "page": 64,
+        "number": "",
+        "title": "Sa1"
+      },
+      {
+        "page": 64,
+        "number": "",
+        "title": "Sb1"
+      },
+      {
+        "page": 64,
+        "number": "7.6",
+        "title": "Etapa 06 - Montagem Do Protótipo"
+      },
+      {
+        "page": 66,
+        "number": "7.7",
+        "title": "Etapa 07 - Execução Do Ataque"
+      },
+      {
+        "page": 67,
+        "number": "8",
+        "title": "Pós-Exploração"
+      },
+      {
+        "page": 68,
+        "number": "9",
+        "title": "Considerações Finais"
+      },
+      {
+        "page": 68,
+        "number": "9.1",
+        "title": "Conclusões Do Projeto De Formatura"
+      },
+      {
+        "page": 68,
+        "number": "9.2",
+        "title": "Contribuições"
+      },
+      {
+        "page": 69,
+        "number": "9.3",
+        "title": "Perspectivas De Continuidade"
+      },
+      {
+        "page": 70,
+        "number": "",
+        "title": "Referências"
+      },
+      {
+        "page": 72,
+        "number": "",
+        "title": "Apêndices"
+      },
+      {
+        "page": 73,
+        "number": "",
+        "title": "A Procedimentos Para Identificação - U26"
+      },
+      {
+        "page": 75,
+        "number": "",
+        "title": "Gnd Y"
+      },
+      {
+        "page": 75,
+        "number": "",
+        "title": "Gnd"
+      },
+      {
+        "page": 75,
+        "number": "",
+        "title": "Vin"
+      }
+    ],
+    "packet": "/tmp/flike-teses-corpus/pacotes/2025-C18.md"
+  },
+  {
+    "year": 2025,
+    "group": "C19",
+    "id": "2025-C19",
+    "title": "Implementação de uma Arquitetura de Laboratório Remoto",
+    "filename": "Monografia_PCS3860_COOP_2025_Grupo_C19.pdf",
+    "relative_pdf": "2025/Monografia_PCS3860_COOP_2025_Grupo_C19.pdf",
+    "pages": 49,
+    "characters": 59239,
+    "words": 8153,
+    "figures": 15,
+    "tables": 0,
+    "sha256": "1c8b80bad41b8344e1f96a4ce3dfbf8ca73db8bed8eca74beb82da318b827570",
+    "headings": [],
+    "packet": "/tmp/flike-teses-corpus/pacotes/2025-C19.md"
+  },
+  {
+    "year": 2025,
+    "group": "C20",
+    "id": "2025-C20",
+    "title": "VFF-NAV: Autonomous UAV Navigation for Infrastructure Inspection Using Virtual Force Fields",
+    "filename": "Monografia_PCS3860_COOP_2025_Grupo_C20.pdf",
+    "relative_pdf": "2025/Monografia_PCS3860_COOP_2025_Grupo_C20.pdf",
+    "pages": 62,
+    "characters": 118519,
+    "words": 14284,
+    "figures": 6,
+    "tables": 5,
+    "sha256": "1f76d639501ecad05343a498a9f4187600f708c5fc20cd7ccbbdcf198c81959d",
+    "headings": [
+      {
+        "page": 30,
+        "number": "3.4",
+        "title": "Px4"
+      },
+      {
+        "page": 32,
+        "number": "",
+        "title": "X X"
+      }
+    ],
+    "packet": "/tmp/flike-teses-corpus/pacotes/2025-C20.md"
+  },
+  {
+    "year": 2025,
+    "group": "C21",
+    "id": "2025-C21",
+    "title": "Project Petalite: A Proposal for a Post-Quantum Trusted Platform Module",
+    "filename": "Monografia_PCS3860_COOP_2025_Grupo_C21.pdf",
+    "relative_pdf": "2025/Monografia_PCS3860_COOP_2025_Grupo_C21.pdf",
+    "pages": 112,
+    "characters": 223325,
+    "words": 29169,
+    "figures": 22,
+    "tables": 39,
+    "sha256": "e8c320dcd004d103efb12a558a9100509573a2352421c1a94cf00c0843ef148b",
+    "headings": [
+      {
+        "page": 18,
+        "number": "",
+        "title": "Appendix 97"
+      },
+      {
+        "page": 18,
+        "number": "",
+        "title": "Appendix C – Example Of A Hal High-Level Firmware"
+      },
+      {
+        "page": 18,
+        "number": "",
+        "title": "Annex 107"
+      },
+      {
+        "page": 82,
+        "number": "",
+        "title": "Tpm"
+      },
+      {
+        "page": 101,
+        "number": "",
+        "title": "Kdf / Mgf"
+      }
+    ],
+    "packet": "/tmp/flike-teses-corpus/pacotes/2025-C21.md"
+  },
+  {
+    "year": 2025,
+    "group": "C22",
+    "id": "2025-C22",
+    "title": "Implementação e Avaliação de uma Solução Criptográfica para Mobilidade Segura em Eleições Brasileiras",
+    "filename": "Monografia_PCS3860_COOP_2025_Grupo_C22.pdf",
+    "relative_pdf": "2025/Monografia_PCS3860_COOP_2025_Grupo_C22.pdf",
+    "pages": 75,
+    "characters": 105783,
+    "words": 14777,
+    "figures": 45,
+    "tables": 0,
+    "sha256": "7340e93b0b2e0dcaf818b536fc6e836fb5ecf1896fe4bc008e4e1332d78c8542",
+    "headings": [
+      {
+        "page": 10,
+        "number": "",
+        "title": "Apêndices 49"
+      },
+      {
+        "page": 10,
+        "number": "",
+        "title": "Apêndice B – Execução Completa Da Demonstração"
+      }
+    ],
+    "packet": "/tmp/flike-teses-corpus/pacotes/2025-C22.md"
+  },
+  {
+    "year": 2025,
+    "group": "C23",
+    "id": "2025-C23",
+    "title": "ARTEVOKE: AI-Powered Platform to Trigger Memories in Alzheimer’s Patients Using Art Imagery",
+    "filename": "Monografia_PCS3860_COOP_2025_Grupo_C23.pdf",
+    "relative_pdf": "2025/Monografia_PCS3860_COOP_2025_Grupo_C23.pdf",
+    "pages": 153,
+    "characters": 353511,
+    "words": 43190,
+    "figures": 71,
+    "tables": 32,
+    "sha256": "239856264cc65cc6a90a7ffb3208cb2172cc93ca656844c2f2b880c3e32fae35",
+    "headings": [
+      {
+        "page": 15,
+        "number": "",
+        "title": "Contents 13"
+      },
+      {
+        "page": 39,
+        "number": "2.4.1",
+        "title": "Faiss"
+      },
+      {
+        "page": 52,
+        "number": "",
+        "title": "Damo"
+      },
+      {
+        "page": 73,
+        "number": "",
+        "title": "En Pt Fr En Pt Fr En Pt Fr"
+      },
+      {
+        "page": 74,
+        "number": "",
+        "title": "En Pt Fr En Pt Fr En Pt Fr"
+      },
+      {
+        "page": 74,
+        "number": "",
+        "title": "Damo"
+      },
+      {
+        "page": 78,
+        "number": "5.5.1",
+        "title": "Faiss"
+      },
+      {
+        "page": 143,
+        "number": "",
+        "title": "Bge-M3 - 1024 569"
+      }
+    ],
+    "packet": "/tmp/flike-teses-corpus/pacotes/2025-C23.md"
+  },
+  {
+    "year": 2025,
+    "group": "C24",
+    "id": "2025-C24",
+    "title": "Simulating Spiking Neural Networks: An Application to Liquid State Machines",
+    "filename": "Monografia_PCS3860_COOP_2025_Grupo_C24.pdf",
+    "relative_pdf": "2025/Monografia_PCS3860_COOP_2025_Grupo_C24.pdf",
+    "pages": 75,
+    "characters": 160909,
+    "words": 20188,
+    "figures": 24,
+    "tables": 10,
+    "sha256": "94bf57d61967805b45970ecfcb9453efba1835aa2648a0606c0fb7ed64481a31",
+    "headings": [
+      {
+        "page": 1,
+        "number": "",
+        "title": "Universidade De São Paulo – Usp"
+      },
+      {
+        "page": 1,
+        "number": "",
+        "title": "Escola Politécnica"
+      },
+      {
+        "page": 24,
+        "number": "2.4.2",
+        "title": "N-Mnist"
+      },
+      {
+        "page": 32,
+        "number": "",
+        "title": "Foundation 01/09 – 30/09"
+      },
+      {
+        "page": 32,
+        "number": "",
+        "title": "Refinement 01/10 – 31/10"
+      },
+      {
+        "page": 32,
+        "number": "",
+        "title": "Application 01/11 – 23/11"
+      },
+      {
+        "page": 32,
+        "number": "",
+        "title": "Deliverables 01/09 – 10/12"
+      }
+    ],
+    "packet": "/tmp/flike-teses-corpus/pacotes/2025-C24.md"
+  },
+  {
+    "year": 2025,
+    "group": "C25",
+    "id": "2025-C25",
+    "title": "Assessing Mobility Policies A Priori: A Change Detection Methodology Using Traffic Simulation",
+    "filename": "Monografia_PCS3860_COOP_2025_Grupo_C25.pdf",
+    "relative_pdf": "2025/Monografia_PCS3860_COOP_2025_Grupo_C25.pdf",
+    "pages": 119,
+    "characters": 270198,
+    "words": 36669,
+    "figures": 33,
+    "tables": 8,
+    "sha256": "1e48dcedd9b48aee8d20dd4a7be92f8a4abd300952f061e0c1c9ffbcb3b6f7ec",
+    "headings": [
+      {
+        "page": 12,
+        "number": "",
+        "title": "Appendix 106"
+      },
+      {
+        "page": 12,
+        "number": "",
+        "title": "Appendix A – Justification For Poisson Arrival Mod-"
+      },
+      {
+        "page": 13,
+        "number": "",
+        "title": "Appendix B – Aggregated Visualization Distribution"
+      },
+      {
+        "page": 38,
+        "number": "2.5.2",
+        "title": "Qt-Ewma"
+      },
+      {
+        "page": 76,
+        "number": "",
+        "title": "P1 128"
+      },
+      {
+        "page": 76,
+        "number": "",
+        "title": "P2 128"
+      },
+      {
+        "page": 76,
+        "number": "",
+        "title": "P3 128"
+      },
+      {
+        "page": 82,
+        "number": "",
+        "title": "P1 128"
+      },
+      {
+        "page": 82,
+        "number": "",
+        "title": "P2 128"
+      },
+      {
+        "page": 82,
+        "number": "",
+        "title": "P3 128"
+      },
+      {
+        "page": 83,
+        "number": "",
+        "title": "P1 128"
+      },
+      {
+        "page": 83,
+        "number": "",
+        "title": "P2 128"
+      },
+      {
+        "page": 83,
+        "number": "",
+        "title": "P3 128"
+      },
+      {
+        "page": 93,
+        "number": "",
+        "title": "P1 128"
+      },
+      {
+        "page": 93,
+        "number": "",
+        "title": "P2 128"
+      },
+      {
+        "page": 93,
+        "number": "",
+        "title": "P3 128"
+      },
+      {
+        "page": 95,
+        "number": "",
+        "title": "P1 128"
+      },
+      {
+        "page": 95,
+        "number": "",
+        "title": "P2 128"
+      },
+      {
+        "page": 95,
+        "number": "",
+        "title": "P3 128"
+      }
+    ],
+    "packet": "/tmp/flike-teses-corpus/pacotes/2025-C25.md"
+  },
+  {
+    "year": 2025,
+    "group": "C26",
+    "id": "2025-C26",
+    "title": "Laboratory Energy Insight Assistant – An LLM-Leveraged Tool for Energy Usage Monitoring in University Laboratories",
+    "filename": "Monografia_PCS3860_COOP_2025_Grupo_C26.pdf",
+    "relative_pdf": "2025/Monografia_PCS3860_COOP_2025_Grupo_C26.pdf",
+    "pages": 65,
+    "characters": 154712,
+    "words": 20726,
+    "figures": 6,
+    "tables": 10,
+    "sha256": "85d81598b91eb999eb3e53884a8c17c08fe9501873cbec8ed31a478e6d3fe4f4",
+    "headings": [
+      {
+        "page": 20,
+        "number": "",
+        "title": "Gpt-4(0125)"
+      },
+      {
+        "page": 26,
+        "number": "",
+        "title": "Gpt Oss 20B"
+      },
+      {
+        "page": 26,
+        "number": "",
+        "title": "Gpt Oss 120B"
+      },
+      {
+        "page": 33,
+        "number": "",
+        "title": "Sct1111-0040 Sct1111-0040 Sct1111-0040"
+      },
+      {
+        "page": 36,
+        "number": "",
+        "title": "End"
+      },
+      {
+        "page": 37,
+        "number": "",
+        "title": "End"
+      },
+      {
+        "page": 42,
+        "number": "",
+        "title": "Never Use Import Statements, You Must Assume That All"
+      },
+      {
+        "page": 42,
+        "number": "",
+        "title": "Necessary Libraries Are Already"
+      },
+      {
+        "page": 45,
+        "number": "",
+        "title": "User:"
+      },
+      {
+        "page": 45,
+        "number": "",
+        "title": "Assistant :"
+      },
+      {
+        "page": 65,
+        "number": "",
+        "title": "System"
+      },
+      {
+        "page": 65,
+        "number": "",
+        "title": "Human"
+      }
+    ],
+    "packet": "/tmp/flike-teses-corpus/pacotes/2025-C26.md"
+  },
+  {
+    "year": 2025,
+    "group": "C27",
+    "id": "2025-C27",
+    "title": "Attention-Based Deep Learning for Predicting Recurrent Hospital Readmissions",
+    "filename": "Monografia_PCS3860_COOP_2025_Grupo_C27.pdf",
+    "relative_pdf": "2025/Monografia_PCS3860_COOP_2025_Grupo_C27.pdf",
+    "pages": 112,
+    "characters": 217029,
+    "words": 26994,
+    "figures": 42,
+    "tables": 36,
+    "sha256": "d7baff8e4919ed6529101ccced2a0a3f1434b94db2595d3e65585d4684b92c5f",
+    "headings": [
+      {
+        "page": 1,
+        "number": "",
+        "title": "Universidade De São Paulo – Usp"
+      },
+      {
+        "page": 1,
+        "number": "",
+        "title": "Escola Politécnica"
+      },
+      {
+        "page": 16,
+        "number": "",
+        "title": "Appendices 97"
+      },
+      {
+        "page": 16,
+        "number": "",
+        "title": "Appendix B – Python Packages Used In The Project 99"
+      },
+      {
+        "page": 16,
+        "number": "",
+        "title": "Appendix E – Further Details Of Api Model Perfor-"
+      },
+      {
+        "page": 16,
+        "number": "",
+        "title": "Appendix F – Hospital Readmission Prediction Api"
+      },
+      {
+        "page": 40,
+        "number": "",
+        "title": "Fr-09"
+      }
+    ],
+    "packet": "/tmp/flike-teses-corpus/pacotes/2025-C27.md"
+  },
+  {
+    "year": 2025,
+    "group": "C28",
+    "id": "2025-C28",
+    "title": "Projeto COCAD: Sistema Generativo Multimodal de CAD Paramétrico",
+    "filename": "Monografia_PCS3860_COOP_2025_Grupo_C28.pdf",
+    "relative_pdf": "2025/Monografia_PCS3860_COOP_2025_Grupo_C28.pdf",
+    "pages": 102,
+    "characters": 234875,
+    "words": 28378,
+    "figures": 25,
+    "tables": 10,
+    "sha256": "25042f48a29e00cee26b0672488e369abacedb80920ff98e2970f4efca883868",
+    "headings": [
+      {
+        "page": 26,
+        "number": "2.2.3",
+        "title": "Hnc-Cad (2023)"
+      },
+      {
+        "page": 49,
+        "number": "",
+        "title": "Rf03"
+      },
+      {
+        "page": 49,
+        "number": "",
+        "title": "Rf06"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Cad Cad"
+      },
+      {
+        "page": 64,
+        "number": "",
+        "title": "Cad:"
+      },
+      {
+        "page": 77,
+        "number": "",
+        "title": "Mlp Mlp"
+      },
+      {
+        "page": 77,
+        "number": "",
+        "title": "Cad"
+      },
+      {
+        "page": 80,
+        "number": "1",
+        "title": "X 1 X"
+      },
+      {
+        "page": 93,
+        "number": "",
+        "title": "Rf01"
+      },
+      {
+        "page": 95,
+        "number": "",
+        "title": "Rnf04"
+      }
+    ],
+    "packet": "/tmp/flike-teses-corpus/pacotes/2025-C28.md"
+  },
+  {
+    "year": 2025,
+    "group": "C29",
+    "id": "2025-C29",
+    "title": "Identificação de Defeitos em Pás de Turbinas Eólicas a Partir de Imagens e com o Uso de Classificadores de Aprendizado de Máquina",
+    "filename": "Monografia_PCS3860_COOP_2025_Grupo_C29.pdf",
+    "relative_pdf": "2025/Monografia_PCS3860_COOP_2025_Grupo_C29.pdf",
+    "pages": 96,
+    "characters": 155070,
+    "words": 20602,
+    "figures": 50,
+    "tables": 9,
+    "sha256": "f33ae43554ac00afcd3db2d221926b5d3ce9ebbd68affe71a7076d1a70a7579b",
+    "headings": [
+      {
+        "page": 10,
+        "number": "",
+        "title": "Apêndices 85"
+      },
+      {
+        "page": 10,
+        "number": "",
+        "title": "Apêndice A – Descrição Das Redes Neurais De-"
+      },
+      {
+        "page": 16,
+        "number": "",
+        "title": "Takis, 2021)"
+      },
+      {
+        "page": 32,
+        "number": "2.4.4",
+        "title": "Dice"
+      },
+      {
+        "page": 43,
+        "number": "",
+        "title": "Oil Leakage 324"
+      },
+      {
+        "page": 74,
+        "number": "",
+        "title": "Rpn"
+      }
+    ],
+    "packet": "/tmp/flike-teses-corpus/pacotes/2025-C29.md"
+  },
+  {
+    "year": 2025,
+    "group": "C30",
+    "id": "2025-C30",
+    "title": "Redesign of a Micromouse Robot: Hardware, Software, and Control Integration for Intelligent Navigation",
+    "filename": "Monografia_PCS3860_COOP_2025_Grupo_C30.pdf",
+    "relative_pdf": "2025/Monografia_PCS3860_COOP_2025_Grupo_C30.pdf",
+    "pages": 83,
+    "characters": 142702,
+    "words": 18337,
+    "figures": 30,
+    "tables": 1,
+    "sha256": "baf20997d8929530e58f5e3c86e5e2c016729f34d2775820dba2b40c4bb6426a",
+    "headings": [
+      {
+        "page": 26,
+        "number": "",
+        "title": "Feng, 1996):"
+      },
+      {
+        "page": 67,
+        "number": "",
+        "title": "Z T"
+      },
+      {
+        "page": 68,
+        "number": "",
+        "title": "Z T Z Z Z"
+      },
+      {
+        "page": 75,
+        "number": "",
+        "title": "Stm32G4 Stm32H7"
+      }
+    ],
+    "packet": "/tmp/flike-teses-corpus/pacotes/2025-C30.md"
+  },
+  {
+    "year": 2025,
+    "group": "S01",
+    "id": "2025-S01",
+    "title": "Análise de Público por Visão Computacional na Indústria 4.0: Extração de Métricas de Fluxo e Permanência em Espaços Comerciais",
+    "filename": "Monografia_PCS3560_SEM_2025_Grupo_S01.pdf",
+    "relative_pdf": "2025/Monografia_PCS3560_SEM_2025_Grupo_S01.pdf",
+    "pages": 119,
+    "characters": 220747,
+    "words": 30275,
+    "figures": 47,
+    "tables": 4,
+    "sha256": "f2fcf813ab044ca9f95eafb29315cb71fb0e798ac31024332cce93990f6afffb",
+    "headings": [
+      {
+        "page": 17,
+        "number": "",
+        "title": "Apêndices 108"
+      },
+      {
+        "page": 17,
+        "number": "",
+        "title": "Apêndice A – Guia De Execução: Containers, Cli, Api"
+      },
+      {
+        "page": 17,
+        "number": "",
+        "title": "Apêndice B – Repositório De Arquivos Experimentais115"
+      }
+    ],
+    "packet": "/tmp/flike-teses-corpus/pacotes/2025-S01.md"
+  },
+  {
+    "year": 2025,
+    "group": "S02",
+    "id": "2025-S02",
+    "title": "ColaborEJA: Sistema de Apoio ao Letramento Digital de Alunos do Programa de Educação de Jovens e Adultos",
+    "filename": "Monografia_PCS3560_SEM_2025_Grupo_S02.pdf",
+    "relative_pdf": "2025/Monografia_PCS3560_SEM_2025_Grupo_S02.pdf",
+    "pages": 90,
+    "characters": 135732,
+    "words": 16046,
+    "figures": 25,
+    "tables": 3,
+    "sha256": "f75498c3d9e2cad6a71b6ee6344c649eed647592829b4fc4feff4fa644c754f6",
+    "headings": [
+      {
+        "page": 21,
+        "number": "",
+        "title": "Anexos 65"
+      },
+      {
+        "page": 35,
+        "number": "2.3.7",
+        "title": "Rag"
+      },
+      {
+        "page": 37,
+        "number": "2.3.9",
+        "title": "Rag"
+      },
+      {
+        "page": 47,
+        "number": "5.1.1",
+        "title": "Llm"
+      },
+      {
+        "page": 59,
+        "number": "5.5.2",
+        "title": "Llm"
+      },
+      {
+        "page": 61,
+        "number": "6.1.2",
+        "title": "Llm"
+      }
+    ],
+    "packet": "/tmp/flike-teses-corpus/pacotes/2025-S02.md"
+  },
+  {
+    "year": 2025,
+    "group": "S03",
+    "id": "2025-S03",
+    "title": "Módulos Interativos de Aprendizagem para Apoiar o Ensino Inclusivo de Matemática",
+    "filename": "Monografia_PCS3560_SEM_2025_Grupo_S03.pdf",
+    "relative_pdf": "2025/Monografia_PCS3560_SEM_2025_Grupo_S03.pdf",
+    "pages": 60,
+    "characters": 93599,
+    "words": 16326,
+    "figures": 0,
+    "tables": 0,
+    "sha256": "2fdd80442c6ec76dc2e0fe51a54327861f644a323f848cbf63988608d2ab28aa",
+    "headings": [
+      {
+        "page": 1,
+        "number": "",
+        "title": "Isaac Yusuke Yanagui"
+      },
+      {
+        "page": 1,
+        "number": "",
+        "title": "Para Apoiar O Ensino Inclusivo De"
+      },
+      {
+        "page": 2,
+        "number": "",
+        "title": "Isaac Yusuke Yanagui"
+      },
+      {
+        "page": 2,
+        "number": "",
+        "title": "Para Apoiar O Ensino Inclusivo De"
+      },
+      {
+        "page": 3,
+        "number": "",
+        "title": "Isaac Yusuke Yanagui"
+      },
+      {
+        "page": 3,
+        "number": "",
+        "title": "Para Apoiar O Ensino Inclusivo De"
+      },
+      {
+        "page": 8,
+        "number": "",
+        "title": "Desmos 46"
+      },
+      {
+        "page": 12,
+        "number": "2",
+        "title": "Aspectos Conceituais"
+      },
+      {
+        "page": 39,
+        "number": "6",
+        "title": "Interface De Autoria"
+      },
+      {
+        "page": 45,
+        "number": "",
+        "title": "Futuros"
+      },
+      {
+        "page": 48,
+        "number": "",
+        "title": "Ferramentas"
+      },
+      {
+        "page": 48,
+        "number": "",
+        "title": "Desmos"
+      },
+      {
+        "page": 51,
+        "number": "",
+        "title": "Arquivos Do Ilm"
+      },
+      {
+        "page": 51,
+        "number": "",
+        "title": "Itarefa"
+      }
+    ],
+    "packet": "/tmp/flike-teses-corpus/pacotes/2025-S03.md"
+  },
+  {
+    "year": 2025,
+    "group": "S04",
+    "id": "2025-S04",
+    "title": "Sistema de Medição para Sensores Ópticos Aplicados a Sistemas Elétricos de Potência, com Digitalização e Comunicação Avançada",
+    "filename": "Monografia_PCS3560_SEM_2025_Grupo_S04.pdf",
+    "relative_pdf": "2025/Monografia_PCS3560_SEM_2025_Grupo_S04.pdf",
+    "pages": 68,
+    "characters": 234999,
+    "words": 13091,
+    "figures": 13,
+    "tables": 1,
+    "sha256": "45d34532f70fd7123dd3ceca04ca5af1542f6649f0108a7c8f70fbc9ee94675f",
+    "headings": [
+      {
+        "page": 19,
+        "number": "",
+        "title": "Apêndices 55"
+      },
+      {
+        "page": 60,
+        "number": "",
+        "title": "A A"
+      },
+      {
+        "page": 60,
+        "number": "",
+        "title": "Usart"
+      },
+      {
+        "page": 60,
+        "number": "",
+        "title": "B B"
+      },
+      {
+        "page": 60,
+        "number": "",
+        "title": "C C"
+      },
+      {
+        "page": 61,
+        "number": "",
+        "title": "A A"
+      },
+      {
+        "page": 61,
+        "number": "",
+        "title": "B B"
+      },
+      {
+        "page": 61,
+        "number": "",
+        "title": "C13 R6"
+      },
+      {
+        "page": 61,
+        "number": "",
+        "title": "Gnd"
+      },
+      {
+        "page": 61,
+        "number": "",
+        "title": "R10 R12"
+      },
+      {
+        "page": 61,
+        "number": "",
+        "title": "U6 15"
+      },
+      {
+        "page": 61,
+        "number": "",
+        "title": "Ada4841-2Yrmz"
+      },
+      {
+        "page": 61,
+        "number": "",
+        "title": "R9 C14"
+      },
+      {
+        "page": 61,
+        "number": "",
+        "title": "C C"
+      },
+      {
+        "page": 61,
+        "number": "",
+        "title": "C15 R11"
+      },
+      {
+        "page": 62,
+        "number": "",
+        "title": "A A"
+      },
+      {
+        "page": 62,
+        "number": "",
+        "title": "U10"
+      },
+      {
+        "page": 62,
+        "number": "",
+        "title": "Adr445Brz"
+      },
+      {
+        "page": 62,
+        "number": "",
+        "title": "Vin Nc"
+      },
+      {
+        "page": 62,
+        "number": "",
+        "title": "In Nr Gnd Trim C5 C6"
+      },
+      {
+        "page": 62,
+        "number": "",
+        "title": "Gnd Gnd"
+      },
+      {
+        "page": 62,
+        "number": "",
+        "title": "B B"
+      },
+      {
+        "page": 62,
+        "number": "",
+        "title": "Gnd"
+      },
+      {
+        "page": 62,
+        "number": "",
+        "title": "Ad7766Bruz-1"
+      },
+      {
+        "page": 62,
+        "number": "",
+        "title": "Refgnd Mclk"
+      },
+      {
+        "page": 62,
+        "number": "",
+        "title": "Agnd Dgnd Gnd"
+      },
+      {
+        "page": 62,
+        "number": "",
+        "title": "Mclk"
+      },
+      {
+        "page": 62,
+        "number": "",
+        "title": "Agnd Dgnd"
+      },
+      {
+        "page": 62,
+        "number": "",
+        "title": "C7 C8 7 10"
+      },
+      {
+        "page": 62,
+        "number": "",
+        "title": "Dvdd Vdrive"
+      },
+      {
+        "page": 62,
+        "number": "",
+        "title": "Gnd Gnd Gnd"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "A A"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Gnd 3V3"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "C32 R19"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Vbat"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "C19"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Gnd 81"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Sw6"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Vdda"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Vdd"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Vddldo"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Vddsmps"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Gnd"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Vddxspi1"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Vdd33Usb"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Vdd50Usb"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Y2 25 36"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Nrst Nrst Pa0 Nmi"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Gnd 153 38"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "C20 R64 14 43"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Gnd Gnd Vfbsmps Pa9 Stm6524Ahardl6F"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Hse1 111 R51"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Y1 Gnd Pa10"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Gnd Pp1 Pa12 Drdy Vss Vcc"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "C18 Pp4 Pa15(Jtdi)"
+      },
+      {
+        "page": 63,
+        "number": "72",
+        "title": "Sw1"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Pp5 R20"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Po0 Pb3(Jtdo Swo"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Po4 Pb6"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Pb8"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Pm0 Pb9"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "D 144 95 D"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Pm6 Pb14 3V3 3V3"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Pm8 Pb15"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Gnd Pm9"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Pm11 Pc0"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "C33 C34 C35 C36 C37 158 105 Nc/Tdi"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Pf0 Pc8"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Pf1 Pc9"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Pf2 Pc10 J2"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Gnd 161 122"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Gnd 162 123"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Pf4 Pc12"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "E 21 124 E"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Pd3"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Vdda Vrefp Gnd Pe1 Pd5"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Vbat 172 155"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Pe2 Pd6"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Fb2 10 85"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Pe8 Pd12"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Pe9 Pd13"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Pe10 Pd14"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Pe11 Pd15"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Pe12"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Pe13"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Pe14"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "F Pe15 F"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Dvdd"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Vcap1"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Vcap2"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Vsssmps"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Vcap3"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Vssusb"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Vcap4"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Vssa"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Vss"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Gnda"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "G G"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "H H"
+      },
+      {
+        "page": 64,
+        "number": "",
+        "title": "Vdd2A Vdd1A"
+      },
+      {
+        "page": 64,
+        "number": "",
+        "title": "Fb5"
+      },
+      {
+        "page": 64,
+        "number": "",
+        "title": "Cr1"
+      },
+      {
+        "page": 64,
+        "number": "",
+        "title": "B Usblc6-4Sc6 B"
+      },
+      {
+        "page": 64,
+        "number": "",
+        "title": "C55 C54 C53 R34 R35 R36 R37"
+      },
+      {
+        "page": 64,
+        "number": "",
+        "title": "Gnd Vbus Gnd Gnd"
+      },
+      {
+        "page": 64,
+        "number": "",
+        "title": "Vdd 4 3"
+      },
+      {
+        "page": 64,
+        "number": "",
+        "title": "Gnd"
+      },
+      {
+        "page": 64,
+        "number": "",
+        "title": "R31 R30"
+      },
+      {
+        "page": 64,
+        "number": "",
+        "title": "Lan8742A-Cz-Tr Cn1"
+      },
+      {
+        "page": 64,
+        "number": "",
+        "title": "R23 7 19 5 12 7"
+      },
+      {
+        "page": 64,
+        "number": "",
+        "title": "C50 11 15 R29 Sh2"
+      },
+      {
+        "page": 64,
+        "number": "13",
+        "title": "Gnd 10"
+      },
+      {
+        "page": 64,
+        "number": "",
+        "title": "C56 C57 12"
+      },
+      {
+        "page": 64,
+        "number": "",
+        "title": "Vddcr"
+      },
+      {
+        "page": 64,
+        "number": "",
+        "title": "Vdd C59"
+      },
+      {
+        "page": 64,
+        "number": "",
+        "title": "C51 C52"
+      },
+      {
+        "page": 64,
+        "number": "",
+        "title": "D D"
+      },
+      {
+        "page": 64,
+        "number": "",
+        "title": "E E"
+      },
+      {
+        "page": 64,
+        "number": "",
+        "title": "F F"
+      },
+      {
+        "page": 65,
+        "number": "",
+        "title": "U12 J1"
+      },
+      {
+        "page": 65,
+        "number": "",
+        "title": "Vbus"
+      },
+      {
+        "page": 65,
+        "number": "",
+        "title": "C61 3 12 2"
+      },
+      {
+        "page": 65,
+        "number": "",
+        "title": "Gp1 D- D-"
+      },
+      {
+        "page": 65,
+        "number": "",
+        "title": "Gnd"
+      },
+      {
+        "page": 65,
+        "number": "",
+        "title": "B R43 R44 B"
+      },
+      {
+        "page": 65,
+        "number": "",
+        "title": "Usbcfg Gp2 Gp3"
+      },
+      {
+        "page": 65,
+        "number": "",
+        "title": "D1 D2"
+      },
+      {
+        "page": 65,
+        "number": "",
+        "title": "C C"
+      },
+      {
+        "page": 66,
+        "number": "",
+        "title": "U11"
+      },
+      {
+        "page": 66,
+        "number": "",
+        "title": "Ad9102Bcpz"
+      },
+      {
+        "page": 66,
+        "number": "",
+        "title": "Gnd Dgnd Nc"
+      },
+      {
+        "page": 66,
+        "number": "",
+        "title": "Dldo2 Nc"
+      },
+      {
+        "page": 66,
+        "number": "",
+        "title": "Dldo1 Ioutn J3"
+      },
+      {
+        "page": 66,
+        "number": "",
+        "title": "B 8 26 B"
+      },
+      {
+        "page": 66,
+        "number": "",
+        "title": "Nc Clkvdd 3V3"
+      },
+      {
+        "page": 66,
+        "number": "",
+        "title": "Nc Clkn"
+      },
+      {
+        "page": 66,
+        "number": "",
+        "title": "Gnda Agnd Clkgnd Gnd"
+      },
+      {
+        "page": 66,
+        "number": "",
+        "title": "Nc Refio"
+      },
+      {
+        "page": 66,
+        "number": "",
+        "title": "C64 C65 R63"
+      },
+      {
+        "page": 66,
+        "number": "",
+        "title": "Gnda Gnd"
+      },
+      {
+        "page": 66,
+        "number": "",
+        "title": "C C"
+      },
+      {
+        "page": 67,
+        "number": "",
+        "title": "A A"
+      },
+      {
+        "page": 67,
+        "number": "",
+        "title": "R52 R53 R54 R55"
+      },
+      {
+        "page": 67,
+        "number": "",
+        "title": "Sw2 Sw3 Sw4 Sw5"
+      },
+      {
+        "page": 67,
+        "number": "",
+        "title": "B B"
+      },
+      {
+        "page": 67,
+        "number": "",
+        "title": "Gnd Gnd Gnd Gnd"
+      },
+      {
+        "page": 67,
+        "number": "",
+        "title": "C D8 C"
+      },
+      {
+        "page": 68,
+        "number": "",
+        "title": "Tp12 Tp14"
+      },
+      {
+        "page": 68,
+        "number": "",
+        "title": "Tp13 Tp15"
+      },
+      {
+        "page": 68,
+        "number": "",
+        "title": "Tp10 Tp16"
+      },
+      {
+        "page": 68,
+        "number": "",
+        "title": "Tp11 Tp17"
+      },
+      {
+        "page": 68,
+        "number": "",
+        "title": "Tp35"
+      },
+      {
+        "page": 68,
+        "number": "",
+        "title": "Tp36"
+      },
+      {
+        "page": 68,
+        "number": "",
+        "title": "Tp37"
+      },
+      {
+        "page": 68,
+        "number": "",
+        "title": "Tp26"
+      },
+      {
+        "page": 68,
+        "number": "",
+        "title": "Tp27"
+      },
+      {
+        "page": 68,
+        "number": "",
+        "title": "Tp28"
+      },
+      {
+        "page": 68,
+        "number": "",
+        "title": "Tp38"
+      },
+      {
+        "page": 68,
+        "number": "",
+        "title": "Swdio Tp44"
+      },
+      {
+        "page": 68,
+        "number": "",
+        "title": "Tp39"
+      },
+      {
+        "page": 68,
+        "number": "",
+        "title": "Swclk Tp45"
+      },
+      {
+        "page": 68,
+        "number": "",
+        "title": "Tp40"
+      },
+      {
+        "page": 68,
+        "number": "",
+        "title": "Swo Tp49 Tp50 Tp51 Tp52 Tp53"
+      },
+      {
+        "page": 68,
+        "number": "",
+        "title": "Lse1"
+      },
+      {
+        "page": 68,
+        "number": "",
+        "title": "Lse2"
+      },
+      {
+        "page": 68,
+        "number": "",
+        "title": "Tp42"
+      },
+      {
+        "page": 68,
+        "number": "",
+        "title": "Nmi"
+      },
+      {
+        "page": 68,
+        "number": "",
+        "title": "Tp48"
+      },
+      {
+        "page": 68,
+        "number": "",
+        "title": "Tp43 Boot0 Gnd Dvdd Gnda"
+      }
+    ],
+    "packet": "/tmp/flike-teses-corpus/pacotes/2025-S04.md"
+  },
+  {
+    "year": 2025,
+    "group": "S05",
+    "id": "2025-S05",
+    "title": "Development of an Automatic Segmentation Model for Legal Documents",
+    "filename": "Monografia_PCS3560_SEM_2025_Grupo_S05.pdf",
+    "relative_pdf": "2025/Monografia_PCS3560_SEM_2025_Grupo_S05.pdf",
+    "pages": 61,
+    "characters": 115152,
+    "words": 15662,
+    "figures": 19,
+    "tables": 3,
+    "sha256": "73c1bae4259c0e4d3d2134cd73a1e4683b4de1fcb6cc4a823bb09ebb4ff23182",
+    "headings": [
+      {
+        "page": 32,
+        "number": "",
+        "title": "X 1 X"
+      },
+      {
+        "page": 37,
+        "number": "5.1.1.6",
+        "title": "Tqdm"
+      },
+      {
+        "page": 38,
+        "number": "5.1.2.6",
+        "title": "Tqdm"
+      },
+      {
+        "page": 53,
+        "number": "",
+        "title": "A Prompt Example"
+      }
+    ],
+    "packet": "/tmp/flike-teses-corpus/pacotes/2025-S05.md"
+  },
+  {
+    "year": 2024,
+    "group": "C01",
+    "id": "2024-C01",
+    "title": "Sistema Multissetorial de Saúde em Nuvem",
+    "filename": "Monografia_PCS3860_COOP_2024_Grupo_C01.pdf",
+    "relative_pdf": "2024/Monografia_PCS3860_COOP_2024_Grupo_C01.pdf",
+    "pages": 84,
+    "characters": 185459,
+    "words": 22023,
+    "figures": 27,
+    "tables": 21,
+    "sha256": "9a6e932ffaf8cdcc4c17ffa5172a16d730f50bcc4451df3d4046ebd61d6da13c",
+    "headings": [],
+    "packet": "/tmp/flike-teses-corpus/pacotes/2024-C01.md"
+  },
+  {
+    "year": 2024,
+    "group": "C02",
+    "id": "2024-C02",
+    "title": "NANDesis – Simulador Didático de Circuitos Digitais",
+    "filename": "Monografia_PCS3860_COOP_2024_Grupo_C02.pdf",
+    "relative_pdf": "2024/Monografia_PCS3860_COOP_2024_Grupo_C02.pdf",
+    "pages": 124,
+    "characters": 151879,
+    "words": 20381,
+    "figures": 34,
+    "tables": 1,
+    "sha256": "f429b52e0534191aa3897df4d4ea53d121aec43376e67913afed11fbb7c43be4",
+    "headings": [
+      {
+        "page": 10,
+        "number": "",
+        "title": "Apêndices 59"
+      },
+      {
+        "page": 12,
+        "number": "",
+        "title": "Apêndice C – Resultado Da Construção De Circui-"
+      },
+      {
+        "page": 13,
+        "number": "",
+        "title": "Apêndice D – Resultado Do Formulário De Feedback"
+      }
+    ],
+    "packet": "/tmp/flike-teses-corpus/pacotes/2024-C02.md"
+  },
+  {
+    "year": 2024,
+    "group": "C03",
+    "id": "2024-C03",
+    "title": "MiniMoni: Sistema de Micropagamentos em Tempo Real",
+    "filename": "Monografia_PCS3860_COOP_2024_Grupo_C03.pdf",
+    "relative_pdf": "2024/Monografia_PCS3860_COOP_2024_Grupo_C03.pdf",
+    "pages": 62,
+    "characters": 100873,
+    "words": 13232,
+    "figures": 9,
+    "tables": 1,
+    "sha256": "f476068814a124180d444a082fe94cbbd94b9c9744eb18c3b5e70073bbcae7a3",
+    "headings": [
+      {
+        "page": 58,
+        "number": "",
+        "title": "Sha3-256 (Nist):"
+      }
+    ],
+    "packet": "/tmp/flike-teses-corpus/pacotes/2024-C03.md"
+  },
+  {
+    "year": 2024,
+    "group": "C06",
+    "id": "2024-C06",
+    "title": "Análise Formal de Segurança Crítica de Inteligência Artificial em Sistemas de Detecção de Arritmias Cardíacas",
+    "filename": "Monografia_PCS3860_COOP_2024_Grupo_C06.pdf",
+    "relative_pdf": "2024/Monografia_PCS3860_COOP_2024_Grupo_C06.pdf",
+    "pages": 75,
+    "characters": 135696,
+    "words": 17067,
+    "figures": 18,
+    "tables": 14,
+    "sha256": "e3e6c7ebe7fd963abd22a3b45ea93f9a9a32aa16fedf05acb82242b025f3713f",
+    "headings": [
+      {
+        "page": 1,
+        "number": "",
+        "title": "Gabriel Stephano Santos"
+      },
+      {
+        "page": 1,
+        "number": "",
+        "title": "Análise Formal De Segurança Crítica (Safety) De"
+      },
+      {
+        "page": 1,
+        "number": "",
+        "title": "Inteligência Artificial Em Sistemas De Detecção De"
+      },
+      {
+        "page": 1,
+        "number": "",
+        "title": "Arritmias Cardíacas: Diferenciação Entre Indivíduos"
+      },
+      {
+        "page": 1,
+        "number": "",
+        "title": "Saudáveis E Não Saudáveis"
+      },
+      {
+        "page": 2,
+        "number": "",
+        "title": "Gabriel Stephano Santos"
+      },
+      {
+        "page": 2,
+        "number": "",
+        "title": "Análise Formal De Segurança Crítica (Safety) De"
+      },
+      {
+        "page": 2,
+        "number": "",
+        "title": "Inteligência Artificial Em Sistemas De Detecção De"
+      },
+      {
+        "page": 2,
+        "number": "",
+        "title": "Arritmias Cardíacas: Diferenciação Entre Indivíduos"
+      },
+      {
+        "page": 2,
+        "number": "",
+        "title": "Saudáveis E Não Saudáveis"
+      },
+      {
+        "page": 4,
+        "number": "",
+        "title": "Gabriel Stephano Santos"
+      },
+      {
+        "page": 4,
+        "number": "",
+        "title": "Análise Formal De Segurança Crítica (Safety) De"
+      },
+      {
+        "page": 4,
+        "number": "",
+        "title": "Inteligência Artificial Em Sistemas De Detecção De"
+      },
+      {
+        "page": 4,
+        "number": "",
+        "title": "Arritmias Cardíacas: Diferenciação Entre Indivíduos"
+      },
+      {
+        "page": 4,
+        "number": "",
+        "title": "Saudáveis E Não Saudáveis"
+      },
+      {
+        "page": 6,
+        "number": "",
+        "title": "Agradecimentos"
+      },
+      {
+        "page": 10,
+        "number": "",
+        "title": "Lista De Ilustrações"
+      },
+      {
+        "page": 12,
+        "number": "",
+        "title": "Lista De Siglas E Abreviações"
+      },
+      {
+        "page": 12,
+        "number": "",
+        "title": "Caisar"
+      },
+      {
+        "page": 12,
+        "number": "",
+        "title": "Eran"
+      },
+      {
+        "page": 12,
+        "number": "",
+        "title": "Eth"
+      },
+      {
+        "page": 12,
+        "number": "",
+        "title": "Nnv"
+      },
+      {
+        "page": 12,
+        "number": "",
+        "title": "Onnx"
+      },
+      {
+        "page": 12,
+        "number": "",
+        "title": "Pca"
+      },
+      {
+        "page": 13,
+        "number": "",
+        "title": "Siicusp"
+      },
+      {
+        "page": 13,
+        "number": "",
+        "title": "Smote"
+      },
+      {
+        "page": 13,
+        "number": "",
+        "title": "Smt-Lib"
+      },
+      {
+        "page": 13,
+        "number": "",
+        "title": "Umce"
+      },
+      {
+        "page": 13,
+        "number": "",
+        "title": "Vnn-Lib"
+      },
+      {
+        "page": 13,
+        "number": "",
+        "title": "Vnncomp"
+      },
+      {
+        "page": 14,
+        "number": "",
+        "title": "Caracterização Da Análise Formal De Segurança Crítica (Safety) De"
+      },
+      {
+        "page": 15,
+        "number": "",
+        "title": "Apêndice A – E-Mails Trocados Com A Equipe Da Ferramenta Alpha-"
+      },
+      {
+        "page": 16,
+        "number": "",
+        "title": "Definições"
+      },
+      {
+        "page": 16,
+        "number": "",
+        "title": "Motivação"
+      },
+      {
+        "page": 17,
+        "number": "",
+        "title": "Objetivos"
+      },
+      {
+        "page": 18,
+        "number": "",
+        "title": "Justificativa"
+      },
+      {
+        "page": 19,
+        "number": "",
+        "title": "Estrutura Da Monografia"
+      },
+      {
+        "page": 21,
+        "number": "",
+        "title": "Inteligência Artificial"
+      },
+      {
+        "page": 21,
+        "number": "",
+        "title": "Método De Revisão De Literatura"
+      },
+      {
+        "page": 22,
+        "number": "",
+        "title": "Caracterização Da Análise Formal De Segurança Crítica (Safety) De"
+      },
+      {
+        "page": 22,
+        "number": "",
+        "title": "Detecção De Arritmias Cardíacas Baseada Em Inteligência Artificial"
+      },
+      {
+        "page": 24,
+        "number": "",
+        "title": "Conclusão Da Revisão Sistemática De Literatura"
+      },
+      {
+        "page": 25,
+        "number": "",
+        "title": "Introdução Sobre Eletrocardiografia"
+      },
+      {
+        "page": 37,
+        "number": "",
+        "title": "Cronograma De Atividades Do Projeto"
+      },
+      {
+        "page": 37,
+        "number": "",
+        "title": "X X"
+      },
+      {
+        "page": 37,
+        "number": "",
+        "title": "X X X X X"
+      },
+      {
+        "page": 37,
+        "number": "",
+        "title": "X X X X X X X X"
+      },
+      {
+        "page": 39,
+        "number": "",
+        "title": "Recursos Técnicos Utilizados No Projeto"
+      },
+      {
+        "page": 40,
+        "number": "",
+        "title": "Custos Do Projeto"
+      },
+      {
+        "page": 42,
+        "number": "",
+        "title": "Método De Desenvolvimento"
+      },
+      {
+        "page": 42,
+        "number": "",
+        "title": "Tradução Do Modelo De Ia Para Onnx"
+      },
+      {
+        "page": 43,
+        "number": "",
+        "title": "Verificação Da Tradução Do Modelo De Ia Para Onnx"
+      },
+      {
+        "page": 48,
+        "number": "",
+        "title": "Análise Comparativa De Ferramentas Para Verificação Formal"
+      },
+      {
+        "page": 49,
+        "number": "",
+        "title": "Intelligence,"
+      },
+      {
+        "page": 49,
+        "number": "",
+        "title": "Frischknecht,"
+      },
+      {
+        "page": 50,
+        "number": "",
+        "title": "Shoukry, 2021)"
+      },
+      {
+        "page": 50,
+        "number": "",
+        "title": "Modelagem Matemática Do Comportamento Seguro Da Rede Neural"
+      },
+      {
+        "page": 51,
+        "number": "",
+        "title": "Problemas Com A Ferramenta De Verificação Formal"
+      },
+      {
+        "page": 53,
+        "number": "",
+        "title": "Arquivos De Verificação Iniciais"
+      },
+      {
+        "page": 57,
+        "number": "",
+        "title": "Verificação Por Ataques Adversários"
+      },
+      {
+        "page": 60,
+        "number": "",
+        "title": "Resultados Da Análise Formal De Segurança"
+      },
+      {
+        "page": 63,
+        "number": "",
+        "title": "Considerações Sobre O Cumprimento Dos Requisitos Do Projeto"
+      },
+      {
+        "page": 66,
+        "number": "",
+        "title": "Referências"
+      },
+      {
+        "page": 70,
+        "number": "",
+        "title": "Apêndice"
+      }
+    ],
+    "packet": "/tmp/flike-teses-corpus/pacotes/2024-C06.md"
+  },
+  {
+    "year": 2024,
+    "group": "C08",
+    "id": "2024-C08",
+    "title": "Reconhecimento Facial para Detecção de Doença Renal Crônica",
+    "filename": "Monografia_PCS3860_COOP_2024_Grupo_C08.pdf",
+    "relative_pdf": "2024/Monografia_PCS3860_COOP_2024_Grupo_C08.pdf",
+    "pages": 82,
+    "characters": 155340,
+    "words": 21452,
+    "figures": 21,
+    "tables": 0,
+    "sha256": "ac4689da6ff2779eac27f24f22873cc5be7ceffdd7086232ed7bdd9a6135d5ef",
+    "headings": [
+      {
+        "page": 9,
+        "number": "",
+        "title": "Apêndices 66"
+      },
+      {
+        "page": 9,
+        "number": "",
+        "title": "Apêndice A – Brochura Da Pesquisa Submetido Para"
+      },
+      {
+        "page": 9,
+        "number": "",
+        "title": "Apêndice B – Termo De Consentimento Livre E Es-"
+      },
+      {
+        "page": 33,
+        "number": "4.2.6",
+        "title": "Aws S3"
+      },
+      {
+        "page": 69,
+        "number": "",
+        "title": "Universidade De São Paulo"
+      },
+      {
+        "page": 69,
+        "number": "",
+        "title": "Trabalho De Conclusão De Curso"
+      },
+      {
+        "page": 70,
+        "number": "",
+        "title": "Desenho"
+      },
+      {
+        "page": 70,
+        "number": "",
+        "title": "Introdução"
+      },
+      {
+        "page": 74,
+        "number": "",
+        "title": "Hipótese"
+      },
+      {
+        "page": 74,
+        "number": "",
+        "title": "Perguntas De Pesquisa"
+      },
+      {
+        "page": 74,
+        "number": "",
+        "title": "Objetivo Primário"
+      },
+      {
+        "page": 74,
+        "number": "",
+        "title": "Objetivo Secundário"
+      },
+      {
+        "page": 74,
+        "number": "",
+        "title": "Metodologia Proposta"
+      },
+      {
+        "page": 75,
+        "number": "",
+        "title": "Tipo De Pesquisa"
+      },
+      {
+        "page": 75,
+        "number": "",
+        "title": "Técnicas Da Pesquisa"
+      },
+      {
+        "page": 75,
+        "number": "",
+        "title": "Corpus"
+      },
+      {
+        "page": 75,
+        "number": "",
+        "title": "Critério De Inclusão:"
+      },
+      {
+        "page": 76,
+        "number": "",
+        "title": "Critério De Exclusão:"
+      },
+      {
+        "page": 76,
+        "number": "",
+        "title": "Custos Estimados Da Pesquisa"
+      },
+      {
+        "page": 76,
+        "number": "",
+        "title": "Metodologia Para Análise De Dados"
+      },
+      {
+        "page": 76,
+        "number": "",
+        "title": "Desfecho Primário"
+      },
+      {
+        "page": 77,
+        "number": "",
+        "title": "Cronograma De Execução"
+      },
+      {
+        "page": 77,
+        "number": "",
+        "title": "Mai/ Jun/ Jul/ Ago/ Set/ Out/ Nov/ Dez/"
+      },
+      {
+        "page": 78,
+        "number": "",
+        "title": "Bibliografia"
+      },
+      {
+        "page": 81,
+        "number": "",
+        "title": "Termo De Consentimento Livre E Esclarecido"
+      }
+    ],
+    "packet": "/tmp/flike-teses-corpus/pacotes/2024-C08.md"
+  },
+  {
+    "year": 2024,
+    "group": "C10",
+    "id": "2024-C10",
+    "title": "Desenvolvimento de um Robô de Alto Desempenho para a Categoria MicroMouse",
+    "filename": "Monografia_PCS3860_COOP_2024_Grupo_C10.pdf",
+    "relative_pdf": "2024/Monografia_PCS3860_COOP_2024_Grupo_C10.pdf",
+    "pages": 90,
+    "characters": 148002,
+    "words": 17417,
+    "figures": 62,
+    "tables": 2,
+    "sha256": "2642b6da8b345361feeb3a66f3e056f321f0d30fda1f633de4f212f633ff61cd",
+    "headings": [
+      {
+        "page": 32,
+        "number": "",
+        "title": "Tavares, 2010)"
+      },
+      {
+        "page": 48,
+        "number": "4.3.1.1",
+        "title": "Gpio"
+      },
+      {
+        "page": 50,
+        "number": "4.3.2.2",
+        "title": "Pwm"
+      },
+      {
+        "page": 50,
+        "number": "4.3.2.3",
+        "title": "Pwm Dma"
+      },
+      {
+        "page": 51,
+        "number": "4.3.2.4",
+        "title": "Adc Dma"
+      },
+      {
+        "page": 51,
+        "number": "4.3.2.5",
+        "title": "Crc"
+      },
+      {
+        "page": 51,
+        "number": "4.3.2.6",
+        "title": "Spi"
+      },
+      {
+        "page": 54,
+        "number": "4.3.3.1",
+        "title": "Led"
+      }
+    ],
+    "packet": "/tmp/flike-teses-corpus/pacotes/2024-C10.md"
+  },
+  {
+    "year": 2024,
+    "group": "C12",
+    "id": "2024-C12",
+    "title": "Negação Plausível em Sequestros Relâmpagos: Implementação de um Ambiente de Pânico em Aplicativos Bancários",
+    "filename": "Monografia_PCS3860_COOP_2024_Grupo_C12.pdf",
+    "relative_pdf": "2024/Monografia_PCS3860_COOP_2024_Grupo_C12.pdf",
+    "pages": 63,
+    "characters": 118301,
+    "words": 15541,
+    "figures": 0,
+    "tables": 0,
+    "sha256": "47e5a9b9df5ebd7b345d414fc074aaa87829b6431aa02705b7667a186b87763b",
+    "headings": [
+      {
+        "page": 1,
+        "number": "",
+        "title": "Paulo Henrique Diniz Fernandes"
+      },
+      {
+        "page": 2,
+        "number": "",
+        "title": "Paulo Henrique Diniz Fernandes"
+      },
+      {
+        "page": 3,
+        "number": "",
+        "title": "Paulo Henrique Diniz Fernandes"
+      },
+      {
+        "page": 8,
+        "number": "",
+        "title": "Lista De Siglas"
+      },
+      {
+        "page": 12,
+        "number": "1",
+        "title": "Introdução"
+      },
+      {
+        "page": 21,
+        "number": "2",
+        "title": "Aspectos Conceituais"
+      },
+      {
+        "page": 24,
+        "number": "3",
+        "title": "Método De Trabalho"
+      },
+      {
+        "page": 25,
+        "number": "4",
+        "title": "Especificação De Requisitos"
+      },
+      {
+        "page": 40,
+        "number": "",
+        "title": "Gps"
+      },
+      {
+        "page": 42,
+        "number": "",
+        "title": "Cep 12345-678"
+      },
+      {
+        "page": 47,
+        "number": "5",
+        "title": "Desenvolvimento Do Trabalho"
+      },
+      {
+        "page": 57,
+        "number": "6",
+        "title": "Considerações Finais"
+      },
+      {
+        "page": 59,
+        "number": "",
+        "title": "Referências Bibliográficas"
+      }
+    ],
+    "packet": "/tmp/flike-teses-corpus/pacotes/2024-C12.md"
+  },
+  {
+    "year": 2024,
+    "group": "C13",
+    "id": "2024-C13",
+    "title": "Desenvolvimento de uma Solução para Monitoramento de Presença e Engajamento para o Cursinho Popular da Escola Politécnica da USP",
+    "filename": "Monografia_PCS3860_COOP_2024_Grupo_C13.pdf",
+    "relative_pdf": "2024/Monografia_PCS3860_COOP_2024_Grupo_C13.pdf",
+    "pages": 73,
+    "characters": 111981,
+    "words": 14759,
+    "figures": 22,
+    "tables": 12,
+    "sha256": "21a58db179343108bcc0e316b25a0859d1399a0cf4129be581798bb7ad895149",
+    "headings": [
+      {
+        "page": 37,
+        "number": "",
+        "title": "Jan Fev Mar Abr Mai Jun Jul Ago Set Out Nov Dez"
+      },
+      {
+        "page": 37,
+        "number": "",
+        "title": "Adaptação"
+      },
+      {
+        "page": 37,
+        "number": "",
+        "title": "Da Meto- X"
+      },
+      {
+        "page": 37,
+        "number": "",
+        "title": "Dologia"
+      },
+      {
+        "page": 37,
+        "number": "",
+        "title": "Primeira"
+      },
+      {
+        "page": 37,
+        "number": "",
+        "title": "Iteração"
+      },
+      {
+        "page": 37,
+        "number": "",
+        "title": "Design X X X X"
+      },
+      {
+        "page": 37,
+        "number": "",
+        "title": "Sprint"
+      },
+      {
+        "page": 37,
+        "number": "",
+        "title": "Adaptado"
+      },
+      {
+        "page": 37,
+        "number": "",
+        "title": "Desenvol-"
+      },
+      {
+        "page": 37,
+        "number": "",
+        "title": "X X X X X X"
+      },
+      {
+        "page": 37,
+        "number": "",
+        "title": "Vimento"
+      },
+      {
+        "page": 37,
+        "number": "",
+        "title": "Testagem"
+      },
+      {
+        "page": 37,
+        "number": "",
+        "title": "X X"
+      },
+      {
+        "page": 37,
+        "number": "",
+        "title": "Com O Cp"
+      },
+      {
+        "page": 37,
+        "number": "",
+        "title": "Avaliação"
+      },
+      {
+        "page": 37,
+        "number": "",
+        "title": "E Coleta X"
+      },
+      {
+        "page": 37,
+        "number": "",
+        "title": "De Dados"
+      },
+      {
+        "page": 65,
+        "number": "",
+        "title": "Novembro Dezembro"
+      },
+      {
+        "page": 65,
+        "number": "",
+        "title": "X X"
+      }
+    ],
+    "packet": "/tmp/flike-teses-corpus/pacotes/2024-C13.md"
+  },
+  {
+    "year": 2024,
+    "group": "C14",
+    "id": "2024-C14",
+    "title": "Desenvolvimento de um Ambiente Integrado para Testes e Comparações de Múltiplos LLMs",
+    "filename": "Monografia_PCS3860_COOP_2024_Grupo_C14.pdf",
+    "relative_pdf": "2024/Monografia_PCS3860_COOP_2024_Grupo_C14.pdf",
+    "pages": 71,
+    "characters": 114008,
+    "words": 16000,
+    "figures": 28,
+    "tables": 1,
+    "sha256": "c5087201eb6d8bf970b9abbab53bc6405a9f2460d9294ae2a1732ae297d1d9a9",
+    "headings": [],
+    "packet": "/tmp/flike-teses-corpus/pacotes/2024-C14.md"
+  },
+  {
+    "year": 2024,
+    "group": "C15",
+    "id": "2024-C15",
+    "title": "Sistema de Apoio e Gerenciamento de ONGs: Instância de Resgate e Adoção de Animais",
+    "filename": "Monografia_PCS3860_COOP_2024_Grupo_C15.pdf",
+    "relative_pdf": "2024/Monografia_PCS3860_COOP_2024_Grupo_C15.pdf",
+    "pages": 65,
+    "characters": 121496,
+    "words": 15317,
+    "figures": 34,
+    "tables": 0,
+    "sha256": "aa2e44d48fb3a56f64741f8d0cd5401059ada5c05f5ef3b9f872acf46833f451",
+    "headings": [
+      {
+        "page": 1,
+        "number": "",
+        "title": "Sistema De Apoio E Gerenciamento"
+      },
+      {
+        "page": 1,
+        "number": "",
+        "title": "De Ongs: Instância De Resgate E"
+      },
+      {
+        "page": 1,
+        "number": "",
+        "title": "Adoção De Animais"
+      },
+      {
+        "page": 2,
+        "number": "",
+        "title": "Sistema De Apoio E Gerenciamento De Ongs:"
+      },
+      {
+        "page": 2,
+        "number": "",
+        "title": "Instância De Resgate E Adoção De Animais"
+      },
+      {
+        "page": 44,
+        "number": "",
+        "title": "Api"
+      }
+    ],
+    "packet": "/tmp/flike-teses-corpus/pacotes/2024-C15.md"
+  },
+  {
+    "year": 2024,
+    "group": "C17",
+    "id": "2024-C17",
+    "title": "Prescrição Personalizada de Tratamento de Diálise Peritoneal",
+    "filename": "Monografia_PCS3860_COOP_2024_Grupo_C17.pdf",
+    "relative_pdf": "2024/Monografia_PCS3860_COOP_2024_Grupo_C17.pdf",
+    "pages": 57,
+    "characters": 106147,
+    "words": 14056,
+    "figures": 8,
+    "tables": 4,
+    "sha256": "9643c14425e1dd3dad0dac0573d319918265275104421c087652cbfb4c29d54a",
+    "headings": [
+      {
+        "page": 9,
+        "number": "1.1",
+        "title": "Motivação"
+      },
+      {
+        "page": 10,
+        "number": "1.2",
+        "title": "Objetivo"
+      },
+      {
+        "page": 11,
+        "number": "1.3",
+        "title": "Justificativa"
+      },
+      {
+        "page": 12,
+        "number": "2.1",
+        "title": "Terapia De Substituição Renal"
+      },
+      {
+        "page": 13,
+        "number": "2.2",
+        "title": "Diálise Peritoneal"
+      },
+      {
+        "page": 14,
+        "number": "2.3",
+        "title": "Modelos De Prescrição Personalizada Na Dp"
+      },
+      {
+        "page": 15,
+        "number": "2.4",
+        "title": "Inteligência Artificial E Medicina Personalizada"
+      },
+      {
+        "page": 16,
+        "number": "2.5",
+        "title": "Aprendizado Por Reforço Na Prescrição Médica"
+      },
+      {
+        "page": 17,
+        "number": "2.6",
+        "title": "Perspectivas Econômicas Do Tratamento De Drc"
+      },
+      {
+        "page": 17,
+        "number": "2.7",
+        "title": "Aplicação De Inteligência Artificial Para Dp"
+      },
+      {
+        "page": 21,
+        "number": "3.1",
+        "title": "Dados"
+      },
+      {
+        "page": 21,
+        "number": "3.2",
+        "title": "Limpeza De Dados"
+      },
+      {
+        "page": 22,
+        "number": "3.3",
+        "title": "Arquitetura Multiagente"
+      },
+      {
+        "page": 23,
+        "number": "3.4",
+        "title": "Aprendizado Por Reforço"
+      },
+      {
+        "page": 23,
+        "number": "3.4.1",
+        "title": "Seleção De Algoritmo"
+      },
+      {
+        "page": 24,
+        "number": "3.5",
+        "title": "Ferramentas De Implantação"
+      },
+      {
+        "page": 26,
+        "number": "4.1",
+        "title": "Especificação De Requisitos"
+      },
+      {
+        "page": 26,
+        "number": "4.1.1",
+        "title": "Requisitos Funcionais"
+      },
+      {
+        "page": 27,
+        "number": "4.1.2",
+        "title": "Requisitos Não Funcionais"
+      },
+      {
+        "page": 28,
+        "number": "4.2",
+        "title": "Arquitetura"
+      },
+      {
+        "page": 30,
+        "number": "4.3",
+        "title": "Modelo"
+      },
+      {
+        "page": 30,
+        "number": "4.3.1",
+        "title": "Dados Utilizados"
+      },
+      {
+        "page": 31,
+        "number": "4.3.2",
+        "title": "Tratamento E Pré-Processamento"
+      },
+      {
+        "page": 34,
+        "number": "",
+        "title": "Bmi 10449 1294"
+      },
+      {
+        "page": 34,
+        "number": "",
+        "title": "Crp 10299 3790"
+      },
+      {
+        "page": 34,
+        "number": "",
+        "title": "Pth 8657 1353"
+      },
+      {
+        "page": 34,
+        "number": "",
+        "title": "Ecw 6161 1616"
+      },
+      {
+        "page": 35,
+        "number": "4.3.3",
+        "title": "Preparação Para Treinamento Do Modelo"
+      },
+      {
+        "page": 36,
+        "number": "4.3.3",
+        "title": "Modelagem Do Ambiente"
+      },
+      {
+        "page": 37,
+        "number": "4.3.4",
+        "title": "Mapeamento De Estados"
+      },
+      {
+        "page": 38,
+        "number": "4.3.5",
+        "title": "Mapeamento De Ações"
+      },
+      {
+        "page": 39,
+        "number": "4.3.6",
+        "title": "Elaboração De Pesos De Atributos De Recompensa"
+      },
+      {
+        "page": 40,
+        "number": "4.3.7",
+        "title": "Estado Inicial Da Tabela De Q-Learning"
+      },
+      {
+        "page": 40,
+        "number": "4.3.8",
+        "title": "Treinamento"
+      },
+      {
+        "page": 42,
+        "number": "4.4",
+        "title": "Back-End"
+      },
+      {
+        "page": 42,
+        "number": "4.4.1",
+        "title": "Agente Coletor De Dados"
+      },
+      {
+        "page": 42,
+        "number": "4.4.2",
+        "title": "Agente Recomendador"
+      },
+      {
+        "page": 42,
+        "number": "4.4.3",
+        "title": "Agente De Interação"
+      },
+      {
+        "page": 43,
+        "number": "4.5",
+        "title": "Desenvolvimento De Front-End"
+      },
+      {
+        "page": 44,
+        "number": "4.5.2",
+        "title": "Implementação E Estrutura Do Projeto"
+      },
+      {
+        "page": 47,
+        "number": "4.5.3",
+        "title": "Comparação Com Outras Tecnologias"
+      },
+      {
+        "page": 48,
+        "number": "4.5.4",
+        "title": "Considerações"
+      },
+      {
+        "page": 52,
+        "number": "5.1",
+        "title": "Testes E Validações"
+      },
+      {
+        "page": 53,
+        "number": "5.2",
+        "title": "Testes Da Plataforma"
+      }
+    ],
+    "packet": "/tmp/flike-teses-corpus/pacotes/2024-C17.md"
+  },
+  {
+    "year": 2024,
+    "group": "C20",
+    "id": "2024-C20",
+    "title": "Banco de Dados Chave-Valor Distribuído",
+    "filename": "Monografia_PCS3860_COOP_2024_Grupo_C20.pdf",
+    "relative_pdf": "2024/Monografia_PCS3860_COOP_2024_Grupo_C20.pdf",
+    "pages": 73,
+    "characters": 128284,
+    "words": 17086,
+    "figures": 23,
+    "tables": 0,
+    "sha256": "003510be963c9298974228407bae18fb2ee8e8fd0392a9900225fd0a8952ae47",
+    "headings": [],
+    "packet": "/tmp/flike-teses-corpus/pacotes/2024-C20.md"
+  },
+  {
+    "year": 2024,
+    "group": "C22",
+    "id": "2024-C22",
+    "title": "Aprimoramento das Técnicas de Medição por meio de uma Aplicação de Realidade Virtual para Tratamento Cardíaco Complexo",
+    "filename": "Monografia_PCS3860_COOP_2024_Grupo_C22.pdf",
+    "relative_pdf": "2024/Monografia_PCS3860_COOP_2024_Grupo_C22.pdf",
+    "pages": 87,
+    "characters": 132357,
+    "words": 17851,
+    "figures": 28,
+    "tables": 3,
+    "sha256": "cb7fb3fa62cf190d50f7a16e025cd2cae03148421403b784cd8184c0b976ebf3",
+    "headings": [
+      {
+        "page": 1,
+        "number": "",
+        "title": "Guilherme Mariano Silva Francisco"
+      },
+      {
+        "page": 3,
+        "number": "",
+        "title": "Guilherme Mariano Silva Francisco"
+      },
+      {
+        "page": 7,
+        "number": "",
+        "title": "Agradecimentos"
+      },
+      {
+        "page": 13,
+        "number": "",
+        "title": "Lista De Ilustrações"
+      },
+      {
+        "page": 15,
+        "number": "",
+        "title": "Lista De Abreviaturas E Siglas"
+      },
+      {
+        "page": 17,
+        "number": "",
+        "title": "Lista De Símbolos"
+      },
+      {
+        "page": 21,
+        "number": "",
+        "title": "Apêndices 75"
+      },
+      {
+        "page": 23,
+        "number": "1",
+        "title": "Introdução"
+      },
+      {
+        "page": 27,
+        "number": "2",
+        "title": "Aspectos Conceituais"
+      },
+      {
+        "page": 31,
+        "number": "3",
+        "title": "Trabalhos Relacionados"
+      },
+      {
+        "page": 49,
+        "number": "4",
+        "title": "Método Do Trabalho"
+      },
+      {
+        "page": 55,
+        "number": "5",
+        "title": "Desenvolvimento Do Trabalho"
+      },
+      {
+        "page": 69,
+        "number": "6",
+        "title": "Considerações Finais"
+      },
+      {
+        "page": 73,
+        "number": "",
+        "title": "Refências"
+      },
+      {
+        "page": 77,
+        "number": "",
+        "title": "Apêndices"
+      },
+      {
+        "page": 79,
+        "number": "",
+        "title": "Apêndice A – Questionário"
+      },
+      {
+        "page": 85,
+        "number": "",
+        "title": "Apêndice B – Artigos Revisados"
+      }
+    ],
+    "packet": "/tmp/flike-teses-corpus/pacotes/2024-C22.md"
+  },
+  {
+    "year": 2024,
+    "group": "C23",
+    "id": "2024-C23",
+    "title": "Building a Cybersecurity Maturity Guide for Small and Medium-Sized Enterprises with Open Source Solutions",
+    "filename": "Monografia_PCS3860_COOP_2024_Grupo_C23.pdf",
+    "relative_pdf": "2024/Monografia_PCS3860_COOP_2024_Grupo_C23.pdf",
+    "pages": 83,
+    "characters": 186796,
+    "words": 24557,
+    "figures": 10,
+    "tables": 10,
+    "sha256": "8c618f75e0765c53480b5f7097f602857752f7c79c6f16bac66d7aae4d7f9f94",
+    "headings": [
+      {
+        "page": 27,
+        "number": "",
+        "title": "Iso"
+      },
+      {
+        "page": 28,
+        "number": "",
+        "title": "Nist"
+      },
+      {
+        "page": 30,
+        "number": "",
+        "title": "Owasp"
+      },
+      {
+        "page": 31,
+        "number": "",
+        "title": "Osint"
+      },
+      {
+        "page": 31,
+        "number": "",
+        "title": "Anssi"
+      },
+      {
+        "page": 34,
+        "number": "",
+        "title": "Govern"
+      },
+      {
+        "page": 34,
+        "number": "",
+        "title": "Detect"
+      },
+      {
+        "page": 34,
+        "number": "",
+        "title": "Recover"
+      }
+    ],
+    "packet": "/tmp/flike-teses-corpus/pacotes/2024-C23.md"
+  },
+  {
+    "year": 2024,
+    "group": "S01",
+    "id": "2024-S01",
+    "title": "MarmoNet: um Sistema de Biotelemetria para Monitoramento de Saguis Urbanos do Gênero Callithrix",
+    "filename": "Monografia_PCS3560_SEM_2024_Grupo_S01.pdf",
+    "relative_pdf": "2024/Monografia_PCS3560_SEM_2024_Grupo_S01.pdf",
+    "pages": 117,
+    "characters": 191533,
+    "words": 26865,
+    "figures": 40,
+    "tables": 6,
+    "sha256": "9bc1d9913c8739e8f25cd6f80114ffa1bfd0860ed9d04a18fe7835e049248f39",
+    "headings": [
+      {
+        "page": 25,
+        "number": "2",
+        "title": "Aspectos Conceituais E Revisão Do Estado Da Arte 31"
+      },
+      {
+        "page": 26,
+        "number": "",
+        "title": "Anexos 107"
+      },
+      {
+        "page": 41,
+        "number": "",
+        "title": "Magrath, 2021):"
+      },
+      {
+        "page": 79,
+        "number": "",
+        "title": "Rt T"
+      }
+    ],
+    "packet": "/tmp/flike-teses-corpus/pacotes/2024-S01.md"
+  },
+  {
+    "year": 2024,
+    "group": "S02",
+    "id": "2024-S02",
+    "title": "Ferramenta Digital de Auxílio ao Aprendizado de Matemática para Deficientes Visuais",
+    "filename": "Monografia_PCS3560_SEM_2024_Grupo_S02.pdf",
+    "relative_pdf": "2024/Monografia_PCS3560_SEM_2024_Grupo_S02.pdf",
+    "pages": 60,
+    "characters": 95272,
+    "words": 13089,
+    "figures": 15,
+    "tables": 1,
+    "sha256": "07823a7a1cdaeffc901ed6a8e2e408646626a55053378d15c02d31bb290d9202",
+    "headings": [
+      {
+        "page": 1,
+        "number": "",
+        "title": "Universidade De São Paulo"
+      },
+      {
+        "page": 1,
+        "number": "",
+        "title": "Escola Politécnica"
+      },
+      {
+        "page": 1,
+        "number": "",
+        "title": "Curso De Engenharia Elétrica Com Enfâse Em Computação"
+      },
+      {
+        "page": 1,
+        "number": "",
+        "title": "Greghory Do Amaral"
+      },
+      {
+        "page": 1,
+        "number": "",
+        "title": "Letícia Mendonça Carraro"
+      },
+      {
+        "page": 1,
+        "number": "",
+        "title": "Paulo De Tarso Parenti Filho"
+      },
+      {
+        "page": 1,
+        "number": "",
+        "title": "Um Jogo Para Auxiliar O Aprendizado De Matemática Para"
+      },
+      {
+        "page": 1,
+        "number": "",
+        "title": "Deficientes Visuais"
+      },
+      {
+        "page": 1,
+        "number": "",
+        "title": "São Paulo"
+      },
+      {
+        "page": 2,
+        "number": "",
+        "title": "Greghory Do Amaral"
+      },
+      {
+        "page": 2,
+        "number": "",
+        "title": "Letícia Mendonça Carraro"
+      },
+      {
+        "page": 2,
+        "number": "",
+        "title": "Paulo De Tarso Parenti Filho"
+      },
+      {
+        "page": 2,
+        "number": "",
+        "title": "Um Jogo Para Auxiliar O Aprendizado De Matemática Para"
+      },
+      {
+        "page": 2,
+        "number": "",
+        "title": "Deficientes Visuais"
+      },
+      {
+        "page": 2,
+        "number": "",
+        "title": "São Paulo"
+      },
+      {
+        "page": 3,
+        "number": "",
+        "title": "Greghory Do Amaral"
+      },
+      {
+        "page": 3,
+        "number": "",
+        "title": "Letícia Mendonça Carraro"
+      },
+      {
+        "page": 3,
+        "number": "",
+        "title": "Paulo De Tarso Parenti Filho"
+      },
+      {
+        "page": 3,
+        "number": "",
+        "title": "Um Jogo Para Auxiliar O Aprendizado De Matemática Para"
+      },
+      {
+        "page": 3,
+        "number": "",
+        "title": "Deficientes Visuais"
+      },
+      {
+        "page": 3,
+        "number": "",
+        "title": "Banca Examinadora:"
+      },
+      {
+        "page": 5,
+        "number": "",
+        "title": "Agradecimentos"
+      },
+      {
+        "page": 10,
+        "number": "",
+        "title": "Lista De Ilustrações"
+      },
+      {
+        "page": 11,
+        "number": "",
+        "title": "Lista De Códigos"
+      },
+      {
+        "page": 13,
+        "number": "",
+        "title": "Lista De Abreviaturas E Siglas"
+      },
+      {
+        "page": 14,
+        "number": "",
+        "title": "Lista De Símbolos"
+      },
+      {
+        "page": 15,
+        "number": "3.2",
+        "title": "Pesquisa De Campo No Colégio Vicentino De Cegos"
+      },
+      {
+        "page": 16,
+        "number": "",
+        "title": "Anexo C – Modelo Do Questionário Utilizado Nos"
+      },
+      {
+        "page": 17,
+        "number": "1",
+        "title": "Introdução"
+      },
+      {
+        "page": 17,
+        "number": "1.1",
+        "title": "Motivação"
+      },
+      {
+        "page": 18,
+        "number": "1.2",
+        "title": "Objetivo"
+      },
+      {
+        "page": 19,
+        "number": "1.3",
+        "title": "Justificativa"
+      },
+      {
+        "page": 20,
+        "number": "1.4",
+        "title": "Organização Do Trabalho"
+      },
+      {
+        "page": 21,
+        "number": "2",
+        "title": "Aspectos Conceituais"
+      },
+      {
+        "page": 21,
+        "number": "2.1",
+        "title": "Metodologias Ativas"
+      },
+      {
+        "page": 21,
+        "number": "2.2",
+        "title": "Letramento Digital"
+      },
+      {
+        "page": 22,
+        "number": "2.3",
+        "title": "Conceitos Matemáticos Abordados No Jogo"
+      },
+      {
+        "page": 23,
+        "number": "2.4",
+        "title": "Desenvolvimento Das Fases"
+      },
+      {
+        "page": 25,
+        "number": "3",
+        "title": "Método De Trabalho"
+      },
+      {
+        "page": 25,
+        "number": "3.1",
+        "title": "Pesquisa De Campo Na Fundação Dorina Nowill"
+      },
+      {
+        "page": 27,
+        "number": "3.2",
+        "title": "Pesquisa De Campo No Colégio Vicentino De Cegos Padre Chico"
+      },
+      {
+        "page": 30,
+        "number": "3.3",
+        "title": "Jogos Similares Existentes No Mercado"
+      },
+      {
+        "page": 30,
+        "number": "3.4",
+        "title": "Testes Na Fundação Dorina Nowill"
+      },
+      {
+        "page": 31,
+        "number": "4",
+        "title": "Especificação De Requisitos"
+      },
+      {
+        "page": 31,
+        "number": "4.1",
+        "title": "Especificação Dos Jogos"
+      },
+      {
+        "page": 37,
+        "number": "5",
+        "title": "Desenvolvimento Do Trabalho"
+      },
+      {
+        "page": 37,
+        "number": "5.1",
+        "title": "Tecnologias Utilizadas"
+      },
+      {
+        "page": 38,
+        "number": "5.2",
+        "title": "Projeto E Implementação"
+      },
+      {
+        "page": 44,
+        "number": "5.3",
+        "title": "Testes E Avaliação De Acessibilidade"
+      },
+      {
+        "page": 46,
+        "number": "5.4",
+        "title": "Teste De Compatibilidade"
+      },
+      {
+        "page": 48,
+        "number": "6",
+        "title": "Considerações Finais"
+      },
+      {
+        "page": 48,
+        "number": "6.1",
+        "title": "Conclusões Do Projeto De Formatura"
+      },
+      {
+        "page": 48,
+        "number": "6.2",
+        "title": "Contribuições"
+      },
+      {
+        "page": 49,
+        "number": "6.3",
+        "title": "Perspectivas De Continuidade"
+      },
+      {
+        "page": 50,
+        "number": "",
+        "title": "Referências"
+      },
+      {
+        "page": 52,
+        "number": "",
+        "title": "Apêndices"
+      },
+      {
+        "page": 53,
+        "number": "",
+        "title": "Apêndice A – Telas De Introdução E História"
+      },
+      {
+        "page": 54,
+        "number": "",
+        "title": "Apêndice B – Telas De Introdução"
+      },
+      {
+        "page": 55,
+        "number": "",
+        "title": "Apêndice C – Documentos - Plataforma Brasil"
+      },
+      {
+        "page": 56,
+        "number": "",
+        "title": "Anexos"
+      },
+      {
+        "page": 57,
+        "number": "",
+        "title": "Anexo A – Assets Utilizados No Jogo"
+      },
+      {
+        "page": 58,
+        "number": "",
+        "title": "Anexo B – Url Do Projeto Disponibilizado No Git"
+      },
+      {
+        "page": 59,
+        "number": "",
+        "title": "Anexo C – Modelo Do Questionário Utilizado Nos"
+      },
+      {
+        "page": 59,
+        "number": "",
+        "title": "Entrevistados"
+      }
+    ],
+    "packet": "/tmp/flike-teses-corpus/pacotes/2024-S02.md"
+  },
+  {
+    "year": 2024,
+    "group": "S03",
+    "id": "2024-S03",
+    "title": "Treinamento para Radiologistas Utilizando Realidade Virtual",
+    "filename": "Monografia_PCS3560_SEM_2024_Grupo_S03.pdf",
+    "relative_pdf": "2024/Monografia_PCS3560_SEM_2024_Grupo_S03.pdf",
+    "pages": 49,
+    "characters": 74093,
+    "words": 9879,
+    "figures": 5,
+    "tables": 0,
+    "sha256": "2d0e72636fa1c0736912463b63df8c78d17cc5f9ee7c85ac60fcf4d442f97c78",
+    "headings": [],
+    "packet": "/tmp/flike-teses-corpus/pacotes/2024-S03.md"
+  },
+  {
+    "year": 2024,
+    "group": "S04",
+    "id": "2024-S04",
+    "title": "Desenvolvimento de um Aplicativo para Mobilidade Interna na Cidade Universitária Armando de Salles Oliveira: BusCar",
+    "filename": "Monografia_PCS3560_SEM_2024_Grupo_S04.pdf",
+    "relative_pdf": "2024/Monografia_PCS3560_SEM_2024_Grupo_S04.pdf",
+    "pages": 90,
+    "characters": 165105,
+    "words": 21501,
+    "figures": 49,
+    "tables": 3,
+    "sha256": "1c54213973cafe7cc1e5fd98d3baa18d6858c0c3e1bfede451f69a3e746dbedb",
+    "headings": [
+      {
+        "page": 4,
+        "number": "",
+        "title": "Agradecimentos"
+      },
+      {
+        "page": 6,
+        "number": "",
+        "title": "Agradecimentos"
+      },
+      {
+        "page": 7,
+        "number": "",
+        "title": "Agradecimentos"
+      }
+    ],
+    "packet": "/tmp/flike-teses-corpus/pacotes/2024-S04.md"
+  },
+  {
+    "year": 2024,
+    "group": "S07",
+    "id": "2024-S07",
+    "title": "Desenvolvimento de Plataforma de Visualização de Veredas no Cerrado Brasileiro",
+    "filename": "Monografia_PCS3560_SEM_2024_Grupo_S07.pdf",
+    "relative_pdf": "2024/Monografia_PCS3560_SEM_2024_Grupo_S07.pdf",
+    "pages": 84,
+    "characters": 165628,
+    "words": 22725,
+    "figures": 0,
+    "tables": 0,
+    "sha256": "e16194454d5b2afee412199871bf81e6c1a837333bfcfe6953fa88fd171176e5",
+    "headings": [
+      {
+        "page": 1,
+        "number": "",
+        "title": "Escola Politécnica Da Universidade De São Paulo"
+      },
+      {
+        "page": 1,
+        "number": "",
+        "title": "Desenvolvimento De Plataforma De"
+      },
+      {
+        "page": 1,
+        "number": "",
+        "title": "Visualização De Veredas No Cerrado Brasileiro"
+      },
+      {
+        "page": 1,
+        "number": "",
+        "title": "Eduardo Petrone Motta"
+      },
+      {
+        "page": 1,
+        "number": "",
+        "title": "Fillipe Pinheiro Lima Da Silva"
+      },
+      {
+        "page": 1,
+        "number": "",
+        "title": "Gustavo César Prieto"
+      },
+      {
+        "page": 3,
+        "number": "",
+        "title": "Eduardo Petrone Motta"
+      },
+      {
+        "page": 3,
+        "number": "",
+        "title": "Fillipe Pinheiro Lima Da Silva"
+      },
+      {
+        "page": 3,
+        "number": "",
+        "title": "Gustavo César Prieto"
+      },
+      {
+        "page": 3,
+        "number": "",
+        "title": "Desenvolvimento De Plataforma De Visualização De"
+      },
+      {
+        "page": 3,
+        "number": "",
+        "title": "Veredas No Cerrado Brasileiro"
+      },
+      {
+        "page": 7,
+        "number": "",
+        "title": "Agradecimentos"
+      },
+      {
+        "page": 17,
+        "number": "",
+        "title": "Lista De Abreviaturas E Siglas"
+      },
+      {
+        "page": 22,
+        "number": "1",
+        "title": "Introdução"
+      },
+      {
+        "page": 22,
+        "number": "1.1",
+        "title": "Motivação"
+      },
+      {
+        "page": 25,
+        "number": "1.2",
+        "title": "Objetivos"
+      },
+      {
+        "page": 27,
+        "number": "2",
+        "title": "Aspectos Conceituais"
+      },
+      {
+        "page": 27,
+        "number": "2.1",
+        "title": "Cerrado"
+      },
+      {
+        "page": 28,
+        "number": "2.2",
+        "title": "Veredas"
+      },
+      {
+        "page": 30,
+        "number": "2.3",
+        "title": "Ciência De Dados"
+      },
+      {
+        "page": 33,
+        "number": "2.4",
+        "title": "Desenvolvimento Web"
+      },
+      {
+        "page": 38,
+        "number": "3",
+        "title": "Tecnologias"
+      },
+      {
+        "page": 38,
+        "number": "3.1",
+        "title": "Amazon Web Services"
+      },
+      {
+        "page": 43,
+        "number": "3.2",
+        "title": "Google Earth Engine"
+      },
+      {
+        "page": 44,
+        "number": "3.3",
+        "title": "Pyhton"
+      },
+      {
+        "page": 47,
+        "number": "3.4",
+        "title": "Html"
+      },
+      {
+        "page": 48,
+        "number": "3.5",
+        "title": "Css"
+      },
+      {
+        "page": 49,
+        "number": "3.6",
+        "title": "Javascript"
+      },
+      {
+        "page": 52,
+        "number": "4",
+        "title": "Trabalhos Relacionados"
+      },
+      {
+        "page": 56,
+        "number": "5",
+        "title": "Metodologia"
+      },
+      {
+        "page": 56,
+        "number": "5.1",
+        "title": "Requisitos"
+      },
+      {
+        "page": 59,
+        "number": "5.2",
+        "title": "Estrutura Do Projeto"
+      },
+      {
+        "page": 60,
+        "number": "5.3",
+        "title": "Fluxo De Trabalho Do Projeto"
+      },
+      {
+        "page": 63,
+        "number": "6",
+        "title": "Desenvolvimento Back-End"
+      },
+      {
+        "page": 63,
+        "number": "6.1",
+        "title": "Escolha E Justificativas Das Tecnologias Utilizadas"
+      },
+      {
+        "page": 66,
+        "number": "6.2",
+        "title": "Arquitetura Do Sistema"
+      },
+      {
+        "page": 67,
+        "number": "6.3",
+        "title": "Implementação"
+      },
+      {
+        "page": 75,
+        "number": "7",
+        "title": "Desenvolvimento Front-End"
+      },
+      {
+        "page": 75,
+        "number": "7.1",
+        "title": "Escolha E Justificativas Das Tecnologias Utilizadas"
+      },
+      {
+        "page": 75,
+        "number": "7.1.1",
+        "title": "Html"
+      },
+      {
+        "page": 76,
+        "number": "7.1.3",
+        "title": "Css"
+      },
+      {
+        "page": 78,
+        "number": "8",
+        "title": "Validação, Testes E Comentários"
+      },
+      {
+        "page": 80,
+        "number": "9",
+        "title": "Conclusão"
+      },
+      {
+        "page": 80,
+        "number": "9.1",
+        "title": "Resultados"
+      },
+      {
+        "page": 81,
+        "number": "9.2",
+        "title": "Contribuições"
+      },
+      {
+        "page": 82,
+        "number": "9.3",
+        "title": "Trabalhos Futuros"
+      },
+      {
+        "page": 84,
+        "number": "",
+        "title": "Referências"
+      }
+    ],
+    "packet": "/tmp/flike-teses-corpus/pacotes/2024-S07.md"
+  },
+  {
+    "year": 2024,
+    "group": "S11",
+    "id": "2024-S11",
+    "title": "Simulador de Sistemas Embarcados para Aplicações Robóticas",
+    "filename": "Monografia_PCS3560_SEM_2024_Grupo_S11.pdf",
+    "relative_pdf": "2024/Monografia_PCS3560_SEM_2024_Grupo_S11.pdf",
+    "pages": 76,
+    "characters": 111167,
+    "words": 14230,
+    "figures": 28,
+    "tables": 4,
+    "sha256": "f267e0359a08414f2a523b38d9182e1e0e55d330cbaa207a14a8a1be9ce726a5",
+    "headings": [
+      {
+        "page": 38,
+        "number": "5.1.2.1",
+        "title": "Qemu"
+      },
+      {
+        "page": 38,
+        "number": "5.1.2.2",
+        "title": "Ros"
+      },
+      {
+        "page": 40,
+        "number": "5.1.6.2",
+        "title": "Lm317"
+      },
+      {
+        "page": 71,
+        "number": "",
+        "title": "N P N P"
+      },
+      {
+        "page": 72,
+        "number": "",
+        "title": "Rst Txd"
+      },
+      {
+        "page": 72,
+        "number": "",
+        "title": "Io26 Io22"
+      },
+      {
+        "page": 72,
+        "number": "",
+        "title": "Io18 Io21"
+      },
+      {
+        "page": 72,
+        "number": "",
+        "title": "Io19 Io17"
+      },
+      {
+        "page": 72,
+        "number": "",
+        "title": "Io5 Gnd"
+      },
+      {
+        "page": 72,
+        "number": "",
+        "title": "Tck Td0"
+      },
+      {
+        "page": 72,
+        "number": "",
+        "title": "G1 6"
+      },
+      {
+        "page": 72,
+        "number": "",
+        "title": "G2 5"
+      }
+    ],
+    "packet": "/tmp/flike-teses-corpus/pacotes/2024-S11.md"
+  }
+]
