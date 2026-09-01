@@ -24,6 +24,8 @@ O projeto histórico do Laboratório de Processadores, incluindo circuito, fotog
 | Fase A, passo 2 | aprovado | 50 fichas concluídas; padrão técnico, detalhado e visual aprovado pela equipe. |
 | Fase A, passo 3 | aprovado | Contrato acadêmico aprovado pela equipe em 01/09/2026. |
 | Fase A, passo 4 | aprovado | Vocabulário e alegações controladas revisados e aprovados pela equipe em 01/09/2026. |
+| Pesquisa transversal de referências — conjunto original | aprovado | Oito obras inventariadas; sete PDFs lidos integralmente e a norma ISO analisada pelos conteúdos oficiais públicos. Fichamento aceito pela equipe em 01/09/2026. |
+| Pesquisa transversal de referências — conjunto complementar | aprovado | Dez fontes selecionadas, obtidas, validadas e fichadas para cobrir autismo e ambiente, acessibilidade web, QR Code, AES-CMAC, gestão de chaves, LGPD e ESP32. Fichamento aceito pela equipe em 01/09/2026. |
 
 ## 2. Tese central proposta
 
@@ -395,7 +397,7 @@ Se algum teste não puder ser feito, a equipe decidirá entre reduzir o requisit
 
 ### Próxima ação
 
-O **passo 6** está em andamento. Os blocos 1 e 2 do Capítulo 4 foram aprovados pela equipe em 01/09/2026. Antes da redação do bloco 3, o assistente deverá apresentar seu escopo e um mapa que associe cada afirmação externa às fontes que serão citadas no próprio texto. A primeira auditoria de referências também abrangerá os blocos já aprovados, sem reabrir suas decisões de conteúdo.
+O **passo 6** está em andamento. Os blocos 1 e 2 do Capítulo 4 foram aprovados pela equipe em 01/09/2026. O escopo de RF-04 a RF-08, o mapa de fontes do bloco 3 e a primeira auditoria de citações dos blocos anteriores estão em `docs/PROPOSTA_BLOCO_3_CAPITULO_4.md`, aguardando aprovação antes da edição da tese.
 
 ### Acompanhamento da Fase A
 
@@ -412,7 +414,7 @@ O **passo 6** está em andamento. Os blocos 1 e 2 do Capítulo 4 foram aprovados
 | Passo | Estado | Registro | Próxima ação |
 | --- | --- | --- | --- |
 | 5. Planejar o Capítulo 4 | **Aprovado** | Estrutura, 14 requisitos funcionais, quatro não funcionais, quatro de acessibilidade, critérios de verificação e decisões P1–P8 aprovados em 01/09/2026 | Concluído |
-| 6. Reescrever o Capítulo 4 | **Em andamento — bloco 2 aprovado** | Blocos 1 e 2 aprovados; RF-01 a RF-03 aceitos pela equipe em 01/09/2026; protocolo de inserção contínua de referências incorporado ao plano | Preparar a proposta do bloco 3 e seu mapa de fontes antes da redação |
+| 6. Reescrever o Capítulo 4 | **Em andamento — bloco 3 planejado** | Blocos 1 e 2 aprovados; RF-01 a RF-03 aceitos; proposta de RF-04 a RF-08 e mapa de fontes preparados em 01/09/2026 | Equipe revisar `docs/PROPOSTA_BLOCO_3_CAPITULO_4.md` e autorizar a redação |
 
 ## 7. Fontes e informações a solicitar à equipe
 
