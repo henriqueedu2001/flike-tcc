@@ -68,6 +68,37 @@ Projetar, implementar e avaliar tecnicamente um protótipo de controle de acesso
 - Alegação de conformidade integral com normas de segurança, acessibilidade ou proteção de dados sem avaliação específica.
 - Alegação de benefício comprovado ao público-alvo, pois não houve estudo com usuários.
 
+### 3.3 Protocolo de trabalho conjunto
+
+A escrita será incremental e colaborativa. **Não será produzido um capítulo inteiro de uma vez para a equipe revisar somente no final.** Cada alteração substantiva na tese seguirá uma rodada curta:
+
+1. **Proposta:** antes de editar, o assistente apresenta a seção que será alterada, sua função, as fontes disponíveis, as decisões pendentes e o resultado esperado.
+2. **Contexto da equipe:** a equipe corrige premissas, fornece documentos ou relatos e decide as alternativas que não podem ser resolvidas pelo código ou pela literatura.
+3. **Escopo acordado:** assistente e equipe fixam quais arquivos e quais trechos pertencem à rodada. Informações ainda ausentes ficam marcadas; não serão preenchidas por suposição.
+4. **Modificação:** o assistente altera somente o escopo acordado, preservando as demais partes da tese.
+5. **Verificação:** o assistente compila o TCC, inspeciona o PDF e apresenta um resumo do que mudou, das fontes usadas, das verificações realizadas e das pendências.
+6. **Revisão da equipe:** a equipe lê a entrega e aprova ou envia correções.
+7. **Consolidação:** o assistente incorpora o feedback, repete a verificação e marca a seção como aprovada. Só então propõe a rodada seguinte.
+
+Uma rodada deve produzir uma unidade fácil de revisar: uma decisão editorial, um conjunto pequeno de requisitos, uma subseção, um diagrama ou uma tabela de resultados. Quando uma etapa do plano envolver várias subseções, cada subseção será tratada em uma rodada própria.
+
+O documento `ARQUITETURA_E_ESTADO_DO_PROJETO.md` continuará funcionando como base factual. Se a equipe fornecer informação técnica nova, primeiro será avaliado se essa base precisa ser atualizada; depois a informação será convertida em texto acadêmico. Assim, correções factuais não ficam escondidas apenas dentro de um capítulo.
+
+#### Registro de cada rodada
+
+Cada entrega deverá informar:
+
+- número e nome da rodada;
+- objetivo e escopo autorizado;
+- arquivos alterados;
+- fontes e decisões utilizadas;
+- resumo do conteúdo produzido;
+- compilação e verificações executadas;
+- pontos que exigem revisão humana;
+- estado: `aguardando revisão`, `correções solicitadas` ou `aprovada`.
+
+Commits poderão acompanhar os marcos aprovados pela equipe. Não será misturada no mesmo commit uma alteração editorial aprovada com experimentos ou mudanças de código sem relação.
+
 ## 4. Estrutura planejada da monografia
 
 A macroestrutura atual será mantida. Subseções podem ser criadas, removidas ou reordenadas para construir uma sequência argumentativa clara. As proporções abaixo são referências editoriais, não metas formais de páginas; deverão ser recalibradas após a leitura das boas teses fornecidas pela equipe e das regras do curso.
@@ -268,27 +299,84 @@ Esses elementos serão finalizados depois do corpo principal, quando contribuiç
 - considerar anexos somente para documentos externos indispensáveis;
 - registrar endereço e versão dos repositórios se a política do curso permitir.
 
-## 6. Ordem de produção
+## 6. Passo a passo de trabalho
 
-A ordem de escrita não deve seguir a ordem de leitura. O núcleo técnico precisa estabilizar antes da introdução, do resumo e das conclusões.
+A ordem de escrita não seguirá a ordem de leitura. Primeiro será definido o contrato acadêmico e estabilizado o núcleo técnico; introdução, resumo e conclusões serão escritos quando os resultados estiverem claros. A coluna “portão de saída” indica o que a equipe precisa validar antes do passo seguinte.
 
-| Etapa | Trabalho | Produto para revisão | Dependência principal |
+### Fase A — Alinhamento e padrão editorial
+
+| Passo | Participação da equipe | Ação do assistente | Entrega e portão de saída |
 | --- | --- | --- | --- |
-| 0 | Validar este plano e analisar teses-modelo | Estrutura e padrão editorial aprovados | Feedback da equipe e exemplos |
-| 1 | Fechar pergunta, objetivos, escopo e requisitos | Documento de decisões + Cap. 4 estruturado | Equipe e orientador |
-| 2 | Reunir evidências técnicas e do processo | Inventário de fontes, fotos, esquemas, versões e testes possíveis | Três autores |
-| 3 | Redigir arquitetura e implementação | Primeira versão do Cap. 5, sem resultados inventados | Código e evidências |
-| 4 | Executar/documentar avaliação | Seção de testes, tabelas e rastreabilidade | Ambiente e hardware |
-| 5 | Redigir método | Cap. 3 coerente com o que realmente foi feito | Cronologia e etapas anteriores |
-| 6 | Fazer revisão bibliográfica direcionada | Cap. 2 e base de referências consolidada | Fontes acadêmicas |
-| 7 | Reescrever introdução | Cap. 1 alinhado ao trabalho efetivo | Caps. 2–5 estáveis |
-| 8 | Redigir considerações finais | Cap. 6 respondendo aos objetivos | Resultados estabilizados |
-| 9 | Finalizar resumo, abstract e demais pré/pós-textuais | Manuscrito completo | Corpo aprovado |
-| 10 | Revisão cruzada, normalização e QA do PDF | Versão candidata à entrega | Revisão dos autores/orientador |
+| 0. Validar o processo | Revisar este plano e corrigir a dinâmica de colaboração | Incorporar o feedback sem editar os capítulos | Plano de trabalho aprovado |
+| 1. Receber referências | Enviar boas teses, normas, prazos e feedback do orientador | Organizar e identificar o papel de cada material | Inventário de referências confirmado |
+| 2. Analisar as boas teses | Indicar o que agrada ou incomoda em cada exemplo | Produzir fichas comparativas de estrutura, profundidade, figuras, testes e estilo | Padrão editorial escolhido pela equipe |
+| 3. Fechar o contrato do TCC | Decidir com o assistente a pergunta, os objetivos, o escopo e as limitações | Preparar uma proposta curta com alternativas e impactos | Pergunta, objetivo geral, objetivos específicos e escopo aprovados |
+| 4. Fixar vocabulário e alegações | Corrigir termos e promessas que não representam o projeto | Produzir lista controlada de termos e afirmações permitidas/proibidas | Vocabulário aprovado e arquitetura factual atualizada, se necessário |
 
-Cada etapa deve terminar com uma revisão da equipe. Correções conceituais devem ser resolvidas antes de polimento de estilo, para evitar reescrita desnecessária.
+Nenhum capítulo será reescrito antes da aprovação do passo 4.
+
+### Fase B — Requisitos e núcleo técnico
+
+| Passo | Participação da equipe | Ação do assistente | Entrega e portão de saída |
+| --- | --- | --- | --- |
+| 5. Planejar o Capítulo 4 | Confirmar quais requisitos ainda representam o produto | Apresentar nova organização, IDs e critérios de verificação, sem editar o capítulo | Estrutura e decisões dos requisitos aprovadas |
+| 6. Reescrever o Capítulo 4 | Revisar os requisitos em pequenos grupos | Editar um grupo por rodada, compilar e apresentar o diff | Capítulo 4 aprovado e requisitos rastreáveis |
+| 7. Preparar evidências do Capítulo 5 | Fornecer commits, fotos, circuito, componentes, demonstrações e decisões | Classificar cada item como código, relato, teste ou evidência física | Inventário técnico validado; lacunas explicitadas |
+| 8. Aprovar o esqueleto do Capítulo 5 | Revisar ordem e profundidade das subseções | Propor títulos, função de cada seção, figuras e fontes | Esqueleto detalhado aprovado, ainda sem redação extensa |
+| 9. Escrever visão geral e arquitetura | Validar fronteiras, componentes e diagramas | Redigir a visão geral e produzir diagramas atualizados | Subseções e diagramas aprovados |
+| 10. Escrever software | Corrigir descrições funcionais e decisões de produto | Redigir modelo de dados, backend, frontend e fluxos; uma subseção por rodada | Bloco de software aprovado |
+| 11. Escrever credencial e segurança | Validar política de validade e riscos aceitos | Redigir protocolo, AES-CMAC, operação offline, segredo e modelo de ameaça | Bloco de credencial e segurança aprovado |
+| 12. Escrever firmware e hardware | Fornecer detalhes da montagem e dizer exatamente o que funcionou | Redigir firmware, circuito e integração física, separando estado atual e intenção | Bloco embarcado aprovado |
+| 13. Consolidar limitações | Confirmar que nenhuma lacuna ou promessa foi disfarçada | Relacionar incompatibilidades, requisitos não atendidos e efeitos nas conclusões | Parte descritiva do Capítulo 5 aprovada |
+
+Nos passos 9 a 13, cada linha representa várias rodadas pequenas. Por exemplo, backend e frontend não serão entregues juntos se isso impedir uma revisão cuidadosa.
+
+### Fase C — Avaliação e resultados
+
+| Passo | Participação da equipe | Ação do assistente | Entrega e portão de saída |
+| --- | --- | --- | --- |
+| 14. Definir testes possíveis | Informar hardware, ambientes e tempo disponíveis | Propor casos, métricas, repetições e critérios ligados aos requisitos | Protocolo de testes aprovado antes da execução |
+| 15. Produzir evidências | Participar de montagens ou procedimentos que dependam de acesso físico e fornecer registros existentes | Executar os testes acessíveis no workspace, organizar resultados e registrar falhas | Dados brutos e condições de teste conferidos pela equipe |
+| 16. Escrever testes e resultados | Verificar se a interpretação corresponde ao que foi observado | Redigir uma família de testes por rodada, com tabelas e limitações | Seção de avaliação e matriz de rastreabilidade aprovadas |
+
+Se algum teste não puder ser feito, a equipe decidirá entre reduzir o requisito, registrá-lo como não avaliado ou tratá-lo como trabalho futuro. O texto nunca receberá um resultado presumido.
+
+### Fase D — Fundamentação e narrativa acadêmica
+
+| Passo | Participação da equipe | Ação do assistente | Entrega e portão de saída |
+| --- | --- | --- | --- |
+| 17. Reconstruir o método | Relatar cronologia, responsabilidades e decisões reais | Preparar perguntas objetivas e redigir uma etapa do método por rodada | Capítulo 3 aprovado, sem processo inventado |
+| 18. Planejar a revisão bibliográfica | Validar os temas e fornecer fontes já usadas | Propor perguntas de busca e bibliografia comentada | Fontes e estrutura do Capítulo 2 aprovadas |
+| 19. Escrever os conceitos | Revisar clareza e pertinência ao FLIKE | Redigir uma seção conceitual por rodada, com citações verificadas | Capítulo 2 aprovado e bibliografia consistente |
+| 20. Reescrever a introdução | Confirmar contexto, motivação e tom das contribuições | Redigir uma seção por rodada, alinhada aos capítulos já aprovados | Capítulo 1 aprovado |
+| 21. Escrever as considerações finais | Validar o balanço dos três autores | Relacionar cada conclusão a objetivo e evidência | Capítulo 6 aprovado |
+
+### Fase E — Fechamento do manuscrito
+
+| Passo | Participação da equipe | Ação do assistente | Entrega e portão de saída |
+| --- | --- | --- | --- |
+| 22. Finalizar pré-textuais | Fornecer agradecimentos e dados institucionais pendentes | Redigir resumo, abstract, palavras-chave e limpar listas provisórias | Elementos pré-textuais aprovados |
+| 23. Finalizar pós-textuais | Confirmar materiais suplementares e referências | Consolidar BibTeX, apêndices e anexos | Referências e materiais complementares aprovados |
+| 24. Revisar o todo | Cada autor faz leitura integral e registra correções | Fazer revisão técnica, editorial e de consistência; compilar e inspecionar o PDF | Versão candidata aprovada pelos autores |
+| 25. Incorporar orientação formal | Enviar retorno do orientador ou banca | Aplicar cada correção em rodadas rastreáveis e repetir QA | Versão final autorizada para entrega |
+
+### Próxima ação após a validação deste plano
+
+A próxima rodada será o **passo 1**. A equipe enviará as teses de referência e, se disponíveis, normas, prazo e feedback do orientador. O assistente apenas organizará e analisará esse material; a tese ainda não será modificada. Depois que a equipe aprovar o padrão editorial extraído dos exemplos, será iniciado o passo 3.
+
+### Acompanhamento da Fase A
+
+| Passo | Estado | Registro | Próxima ação |
+| --- | --- | --- | --- |
+| 0. Validar o processo | **Aprovado** | Plano de trabalho aprovado pela equipe em 31/08/2026 | Iniciar o passo 1 |
+| 1. Receber referências | **Aguardando material** | Nenhuma análise iniciada | Equipe enviar teses-modelo e, se disponíveis, normas, prazo e feedback do orientador |
+| 2. Analisar as boas teses | **Não iniciado** | Depende do passo 1 | Assistente produzir fichas comparativas após receber o material |
+| 3. Fechar o contrato do TCC | **Não iniciado** | Depende da aprovação do padrão editorial | Preparar alternativas para pergunta, objetivos, escopo e limitações |
+| 4. Fixar vocabulário e alegações | **Não iniciado** | Depende do passo 3 | Consolidar terminologia e alegações permitidas |
 
 ## 7. Fontes e informações a solicitar à equipe
+
+A lista abaixo é um mapa de dependências, não um pedido para que tudo seja reunido de uma vez. Em cada passo, o assistente solicitará apenas o material necessário para a rodada seguinte e explicará como ele será usado.
 
 ### 7.1 Prioridade imediata — antes da redação substantiva
 
@@ -409,15 +497,13 @@ Antes de qualquer versão candidata à entrega:
 
 ## 12. Pontos para validação da equipe
 
-Antes de iniciar a escrita, a equipe deve validar:
+Nesta revisão do plano, a equipe precisa validar somente a dinâmica de trabalho:
 
-1. a tese central, a pergunta e os objetivos propostos;
-2. a manutenção dos seis capítulos com as subseções sugeridas;
-3. o tratamento explícito das limitações e dos requisitos não atendidos;
-4. o recorte da avaliação técnica e a ausência de estudo com usuários;
-5. a ordem de produção dos capítulos;
-6. quais teses serão usadas como padrão editorial;
-7. quais documentos e evidências podem ser fornecidos imediatamente;
-8. prazo, marcos internos e responsável por revisar cada parte.
+1. trabalhar em rodadas pequenas e verificáveis;
+2. receber uma proposta de escopo antes de cada modificação substantiva na tese;
+3. revisar a entrega de cada rodada antes de avançarmos;
+4. preservar as partes já aprovadas enquanto outra seção é trabalhada;
+5. seguir os passos 0–25, admitindo reordenação quando uma dependência prática exigir;
+6. começar pelas teses de referência, sem modificar os capítulos nessa primeira análise.
 
-Depois dessa validação, a primeira entrega de redação deve ser a revisão dos objetivos e do Capítulo 4, seguida do esqueleto detalhado do Capítulo 5. Essa sequência fixa o contrato do trabalho antes de transformar a arquitetura em narrativa acadêmica.
+A tese central, a pergunta, os objetivos e cada parte do conteúdo serão validados nos portões específicos descritos na seção 6. A equipe não precisa decidir tudo agora. Depois da aprovação deste fluxo, começa o passo 1: recebimento e organização das teses-modelo e demais orientações disponíveis.
