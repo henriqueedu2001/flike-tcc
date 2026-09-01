@@ -1,12 +1,12 @@
-# FLIKE / CAUSP-LOCK — arquitetura e estado do projeto
+# FLIKE — arquitetura e estado do projeto
 
 Documento de trabalho para orientar a redação do TCC e receber correções da equipe. Levantamento realizado em 30–31/08/2026, a partir do PDF, dos fontes LaTeX, dos diagramas e das versões locais dos repositórios. **Não é uma declaração de homologação, segurança ou conclusão do sistema.**
 
 ## 1. Como interpretar este levantamento
 
-O projeto propõe controle de acesso físico com credenciais em QR Code, emissão centralizada e validação criptográfica local no ESP32-CAM. Há implementação de backend, aplicação web em Next.js/React e firmware de leitura/verificação de QR. Entretanto, as versões disponíveis não permitem afirmar que todo o percurso até a abertura física, uso único, expiração e auditoria esteja integrado e validado.
+O projeto propõe controle de acesso físico com credenciais em QR Code, emissão centralizada e validação criptográfica local no ESP32-CAM. Há implementação de backend, aplicação web em Next.js/React e firmware de leitura/verificação de QR. Entretanto, as versões disponíveis não permitem afirmar que todo o percurso até a abertura física, validação da janela temporal e auditoria esteja integrado e validado.
 
-A distinção entre versões é essencial: a branch aberta do frontend contém um protótipo HTML antigo; a aplicação React está na referência local `origin/frontend_prototype`. Ela foi lida diretamente do Git, sem checkout. O backend aberto está em `massive-vibe-code-session`, e não em `main`. O firmware possui mudanças locais ainda não commitadas. Portanto, “o código do projeto” não corresponde simplesmente às quatro branches `main`.
+A aplicação React examinada está na referência local `origin/frontend_prototype`. Ela foi lida diretamente do Git, sem checkout. A equipe não indicou uma versão mais recente e confirmou que adotou uma abordagem de esforço reduzido na fase final. O backend aberto está em `massive-vibe-code-session`, e não em `main`. O firmware possui mudanças locais ainda não commitadas cuja origem a equipe não reconhece; elas não devem ser tratadas como refatoração ativa. Portanto, “o código do projeto” não corresponde simplesmente às quatro branches `main`.
 
 As afirmações usam estas categorias:
 
@@ -24,17 +24,16 @@ Não foram alterados frontend, backend ou firmware; não foram executados script
 | --- | --- | --- |
 | Backend principal desta análise | `massive-vibe-code-session` | `6f9efd40f019efd659fcb5f4f382f775300cacdd`, commit de 28/07/2026 |
 | Backend anterior, consultado para comparação | `main` / referência `origin/main` | `ae703ad4b4af9ac207f523df63cf87510899239b` na referência remota local; API mais antiga |
-| Frontend HTML | `main` | `844a30cc98b74e49678e39c49f745c283be8aac0`, 08/04/2026 |
 | Frontend Next.js, principal desta análise | `origin/frontend_prototype` | `9005601719e98b5cac1c3586d07ef79b06a28a00`, 20/08/2026 |
 | Firmware | `main` + arquivos locais | `c2983f4ce6e02fd4ce68c212a54e8c5fd6ef1e78`, 09/03/2026, com mudanças descritas abaixo |
 | TCC | `main` | `ae922115f778c18a81b581697026d122a94adab4`, 30/08/2026 |
-| PDF recebido | arquivo local ainda não rastreado | `pdfs/FLIKE-referencia-2026-08-30.pdf` (nome original: `TCC___CAUSP_LOCK-1.pdf`), 45 páginas; metadados de criação em 30/08/2026, 22:35:27, UTC−03 |
+| PDF recebido | arquivo local ainda não rastreado | `pdfs/FLIKE-referencia-2026-08-30.pdf`, 45 páginas; metadados de criação em 30/08/2026, 22:35:27, UTC−03 |
 
 Alterações já existentes antes deste trabalho: backend `scripts/run_server.sh` modificado; firmware `src/digital_key.cpp` e `src/digital_key.h` modificados, além de `sdkconfig.defaults`, `src/digital_lock.cpp` e `src/digital_lock.h` não rastreados. O PDF também já estava não rastreado. Esses arquivos foram preservados.
 
 ### 1.2 Convenção de evidências
 
-Nas referências abaixo, **B** significa backend na versão principal acima; **F** significa frontend **no commit Next.js**, não o diretório HTML aberto; **W** significa firmware com as mudanças locais; **T** significa TCC. A seção 15 relaciona caminhos e símbolos para localizar cada evidência. Para F, a consulta reproduzível é `git show 9005601719e98b5cac1c3586d07ef79b06a28a00:caminho/do/arquivo`, executada no repositório do frontend.
+Nas referências abaixo, **B** significa backend na versão principal acima; **F** significa frontend no commit Next.js; **W** significa firmware com as mudanças locais; **T** significa TCC. A seção 15 relaciona caminhos e símbolos para localizar cada evidência. Para F, a consulta reproduzível é `git show 9005601719e98b5cac1c3586d07ef79b06a28a00:caminho/do/arquivo`, executada no repositório do frontend.
 
 ## 2. Problema, contexto e fronteira do sistema
 
@@ -44,7 +43,7 @@ O cenário descrito é a sala de apoio à amamentação e regulação sensorial 
 
 O objetivo é proporcionar autonomia a usuários autorizados e reduzir interações obrigatórias para entrar no espaço, mantendo controle e rastreabilidade. A aprovação administrativa continua existindo no fluxo implementado; a proposta não elimina toda intervenção humana na concessão de acesso. O cadastro não comprova por si só vínculo com a USP nem pertencimento ao público-alvo.
 
-**Nomenclatura:** CAUSP-LOCK aparece na tese e no HTML; FLIKE aparece nos repositórios e na interface Next.js. O resumo explica CAUSP como referência ao Coletivo Autista da USP. Não foi encontrada explicação inequívoca da sigla FLIKE nem decisão formal de renomeação; a equipe deve fixar a terminologia final.
+**Nomenclatura:** o nome oficial e único do projeto é **FLIKE**. O nome foi escolhido em homenagem ao gato de infância de um dos autores; não é uma sigla. Denominações anteriores foram descontinuadas e não devem aparecer na redação final, nos diagramas, na interface ou na documentação.
 
 Embora o caso de uso seja uma sala específica, o modelo implementado suporta múltiplas instituições, prédios, salas e fechaduras. Isso é capacidade estrutural do modelo, não evidência de implantação em vários locais.
 
@@ -64,7 +63,7 @@ Embora o caso de uso seja uma sala específica, o modelo implementado suporta m�
 | Chave secreta criptográfica | Segredo simétrico de 32 bytes usado para gerar e verificar o CMAC; não é a credencial entregue ao usuário |
 | Solicitação | Pedido de uma chave, com estado `pending`, `approved` ou `rejected` |
 
-O banco não tem classes/tabelas separadas de cliente e administrador nem campo de papel em `user`. Uma pessoa pode possuir instituições e também receber chaves. Não há evidência de um superadministrador global ou de múltiplos administradores associados à mesma instituição. [B02, B03, B04]
+O banco não tem classes/tabelas separadas de cliente e administrador nem campo de papel em `user`. Isso corresponde à decisão do produto: todo usuário pode administrar as instituições que possui e atuar como cliente nas instituições de outros usuários. O papel é contextual, derivado da propriedade de `institution`, e não uma característica global da conta. Não existe superadministrador global nem suporte atual a vários administradores para a mesma instituição. [B02, B03, B04]
 
 ## 3. Visão arquitetural
 
@@ -77,7 +76,7 @@ O banco não tem classes/tabelas separadas de cliente e administrador nem campo 
 | MySQL | Persistência relacional de contas, infraestrutura, segredos, chaves e solicitações | DDL examinado; banco em execução não inspecionado |
 | Firmware Arduino/C++ | Aquisição de QR e cálculo/comparação de AES-CMAC via mbedTLS | Validador parcial; árvore local tem incompatibilidade de chamada |
 | ESP32-CAM / câmera | Plataforma alvo e aquisição óptica | Modelo AI-Thinker no código; OV2640 declarada na tese; montagem não inspecionada |
-| Fechadura elétrica / energia / HMI | Abertura física, continuidade elétrica e feedback pretendidos | Sem circuito ou lógica completa de atuação encontrados |
+| Fechadura elétrica / energia / HMI | Abertura física, continuidade elétrica e feedback pretendidos | Circuito simples confirmado pela equipe; esquema e lógica completa de atuação ainda não documentados |
 
 ```mermaid
 flowchart LR
@@ -89,7 +88,7 @@ flowchart LR
     Q -->|Captura óptica prevista na integração| W[ESP32-CAM: leitura e CMAC]
     W --> S[Resultado no monitor serial]
     W -.->|Atuação não localizada| E[Fechadura elétrica]
-    W -.->|Sincronização não localizada| B
+    W -.->|Sem consulta durante a validação| B
 ```
 
 As ligações com API e banco são implementadas nos fontes. O diagrama não afirma que a combinação dessas versões executou de ponta a ponta. O percurso óptico tem emissor e leitor implementados separadamente, mas não foi ensaiado neste levantamento. [B01–B08, F01–F08, W01–W03]
@@ -98,9 +97,11 @@ As ligações com API e banco são implementadas nos fontes. O diagrama não afi
 
 A proposta permite que o dispositivo confira uma credencial sem consultar o servidor no instante da leitura, desde que já possua o segredo correto. A função de CMAC do firmware não usa rede.
 
-Isso não demonstra operação completa da tranca offline: ainda são necessários decisão de autorização, checagem temporal, proteção contra repetição e acionamento físico. Também não significa que emissão, solicitação e gestão web funcionem sem internet. O frontend consulta a API para recuperar o payload ao abrir o QR; não foi localizado service worker ou armazenamento persistente de credenciais para uso offline. Depois de renderizado, o QR é uma imagem local no navegador; a persistência após recarga não está implementada como funcionalidade dedicada.
+“Offline” qualifica principalmente o firmware: a tranca deve decidir localmente se abre, sem consultar o servidor a cada leitura. Isso ainda exige checagem temporal e acionamento físico, ambos incompletos no firmware disponível. A emissão, a solicitação, a gestão e a obtenção inicial da imagem exigem internet e acesso ao frontend.
 
-Uma tranca sem contato com o servidor não toma conhecimento imediato de revogações ou mudanças administrativas. A arquitetura final precisa explicitar como distribui segredos, mantém horário confiável, preserva o conjunto de credenciais consumidas e reconcilia eventos. Esses mecanismos não devem ser inferidos apenas da palavra “offline”.
+Depois de obtido, o QR deve permanecer disponível ao cliente por pelo menos uma das formas prometidas pelo projeto: download para o celular ou disponibilidade contínua na página de chaves digitais. Um aplicativo móvel seria apenas uma alternativa hipotética de apresentação; ele não será desenvolvido. Download e persistência após recarga ainda não estão implementados nos fontes examinados.
+
+O custo deliberadamente aceito da validação offline é não conseguir revogar de forma confiável uma credencial já emitida antes do término de sua validade. O projeto trabalha com concessão de permissões e não implementará revogação. A tranca deve possuir horário confiável para limitar a janela autorizada. O segredo e a identidade da tranca são definidos pelo fornecedor durante a programação do ESP32-CAM; configuração em campo, troca de segredo e provisionamento remoto estão fora do escopo.
 
 ## 4. Backend
 
@@ -256,29 +257,31 @@ O código concatena dados legíveis por decodificação binária e tag; **não c
 
 **Inferências para este sistema:** quem conhece o segredo compartilhado pode gerar tags; um QR pode ser copiado e apresentado por outra pessoa; conter `user_id` não prova presença física do titular; um CMAC válido não comprova que uma porta abriu ou que uma pessoa entrou. Assim, a “irretratabilidade dos acessos” afirmada no resumo e no requisito RF-06-03 não é sustentada por esse mecanismo isolado.
 
-### 6.4 Expiração e uso único
+### 6.4 Janela de autorização e reutilização
+
+A expressão **“uso único” não representa a política final do FLIKE** e deve ser substituída na tese por **“credencial temporária reutilizável durante a janela de autorização”** ou, de forma abreviada, **“credencial por janela de validade”**. Cada solicitação aprovada gera uma credencial. Enquanto estiver dentro do período autorizado, o usuário pode apresentá-la quantas vezes precisar para entrar e sair. Depois da expiração, credenciais antigas não devem autorizar novo acesso.
 
 - **Emissão:** a expiração é incluída na mensagem autenticada e armazenada no banco. As rotas administrativas usam 24 horas por padrão quando não há expiração informada.
-- **Interface:** `useClientDashboard` considera ativa uma chave com `used === 0` e expiração futura, segundo o relógio do navegador. Essa condição é recalculada no carregamento/refresh, não continuamente por um timer no hook.
-- **Consumo na API:** `use_digital_key()` procura o payload no banco, rejeita se já marcado como usado, verifica CMAC e atualiza `used`/`used_at`. Não compara expiração com o horário atual.
-- **Firmware:** só calcula/confere CMAC; não extrai timestamps nem controla reutilização.
-- **Unicidade local:** não foram encontrados armazenamento persistente de credenciais consumidas ou proteção contra replay após reinicialização.
+- **Interface atual:** `useClientDashboard` considera ativa uma chave com `used === 0` e expiração futura, segundo o relógio do navegador. Essa lógica conflita com a política final porque uma primeira utilização não deveria encerrar a autorização.
+- **Consumo atual na API:** `use_digital_key()` rejeita payload marcado como usado e atualiza `used`/`used_at`, mas não compara a expiração com o horário atual. Esse comportamento também implementa a semântica antiga e deve ser removido ou reinterpretado. `used_at` pode ser mantido apenas como instante do primeiro uso para auditoria, sem invalidar a credencial.
+- **Firmware atual:** só calcula/confere CMAC; ainda não extrai nem compara os timestamps do payload.
+- **Firmware pretendido:** deve conferir CMAC, identidade da tranca e intervalo de validade usando seu relógio local. Não precisa consultar `used` no servidor nem manter uma lista de credenciais consumidas, pois reapresentações dentro da janela são permitidas.
 
-Logo, campos de expiração e uso estão implementados, mas **a garantia de expiração e uso único na abertura física não está implementada nos arquivos examinados**. A flag no servidor não é consultada pelo firmware. [B03, B04, F04, W02]
+Logo, o payload contém a expiração, mas **a validação temporal na abertura física não está implementada nos arquivos examinados**. A flag `used` não deve participar da decisão offline e sua semântica atual diverge da política confirmada pela equipe. [B03, B04, F04, W02]
 
-Também há limites transacionais: o consumo faz leitura de `used` seguida de atualização, sem um `UPDATE ... WHERE used = FALSE` ou bloqueio explícito nessa rotina. Não se deve afirmar proteção comprovada contra dois consumos concorrentes. Na aprovação, emissão da chave e atualização de status têm commits separados; falha intermediária pode deixar chave emitida e pedido ainda pendente. Esses cenários são inferências estáticas, não falhas reproduzidas por teste.
+Na aprovação, emissão da chave e atualização de status têm commits separados; falha intermediária pode deixar chave emitida e pedido ainda pendente. Esse cenário é uma inferência estática, não uma falha reproduzida por teste.
 
 Os timestamps são construídos com `datetime.now()` sem timezone explícito no fluxo de chaves e convertidos por `datetime.timestamp()`. O JWT, em contraste, usa UTC explícito. Fuso do servidor, sessão MySQL, interpretação no navegador e relógio embarcado precisam ser definidos e testados; este levantamento não assume que coincidam.
 
 ## 7. Frontend
 
-### 7.1 Aplicação Next.js encontrada fora da branch aberta
+### 7.1 Aplicação Next.js adotada na análise
 
 O commit `9005601...` declara Next.js `16.2.9`, React/React DOM `19.2.4`, `qrcode` `^1.5.4`, TypeScript `^5`, Tailwind CSS `^4` e ESLint `^9`. Existe `package-lock.json`. A estrutura usa App Router, componentes TSX, hooks para estado/carregamento e serviços de chamadas HTTP. São versões declaradas na fonte, não versões instaladas verificadas. [F01]
 
 As chamadas usam `fetch` com base em `NEXT_PUBLIC_API_URL`. O login armazena `data.token` em `localStorage` sob a chave `access_token`; endpoints protegidos recebem Bearer. Várias páginas verificam apenas a existência local do token para redirecionar ao login, enquanto a validação criptográfica ocorre na API. Não foi encontrado middleware de autenticação global nem refresh de sessão. O login redireciona para `/dashboard`, sem distinguir um campo `type` de usuário. [F02–F04]
 
-Os hooks carregam conjuntos de dados e fazem associações por ID no navegador. A busca de acesso usa listas globais e filtros locais por nome/hierarquia, embora a API também ofereça endpoints `/search`. Ao selecionar sala, `useAccessRequest` usa a **primeira tranca retornada**, não uma seleção explícita entre todas. Isso é uma limitação de interface diante da cardinalidade de várias trancas por sala.
+Os hooks carregam conjuntos de dados e fazem associações por ID no navegador. A busca de acesso usa listas globais e filtros locais por nome/hierarquia, embora a API também ofereça endpoints `/search`. Ao selecionar sala, `useAccessRequest` usa a **primeira tranca retornada**. A chave é associada a uma tranca digital, não diretamente à sala. Para uma sala com múltiplas trancas, a solução pode permitir que o usuário escolha qual abrir ou configurar todas com o mesmo segredo; a interface atual materializa apenas a primeira alternativa de forma implícita.
 
 ### 7.2 Páginas e funcionalidades concretas
 
@@ -309,17 +312,9 @@ Não foi localizada interface de emissão administrativa direta conectada a `/ad
 
 **D02 — Detalhes de solicitações administrativas.** O frontend declara/consome `user_name`, `user_email`, `room_name` e `building_name` nos pedidos. O backend retorna `digital_key_request.*`, sem selecionar esses campos dos JOINs. A consulta usa JOINs para limitar proprietário, não para enriquecer o resultado. A interface não receberá esses detalhes no contrato examinado. [F04, F07, B03]
 
-**D03 — “Expirada” e “utilizada”.** O dashboard classifica qualquer chave não ativa como `used`, inclusive uma chave apenas expirada, e a tabela apresenta “Já utilizada”. Além disso, mantém a ação de gerar QR para chaves não rejeitadas, inclusive usadas/expiradas. O hook de QR não impõe validação temporal ou de uso. A interface não pode ser tratada como autoridade de autorização. [F04–F06]
+**D03 — “Expirada” e “utilizada”.** O dashboard classifica qualquer chave não ativa como `used`, inclusive uma chave apenas expirada, e a tabela apresenta “Já utilizada”. A distinção correta é entre credencial **dentro** e **fora** da janela de autorização; a apresentação durante a validade pode se repetir. O hook de QR não impõe validação temporal, e a interface não deve ser tratada como autoridade de autorização. [F04–F06]
 
 **D04 — Página de acesso vazia.** A rota dinâmica anunciada em documentação não é a implementação do QR. A descrição da tese deve apontar o modal efetivo, sem afirmar que essa página está concluída. [F06]
-
-### 7.4 Protótipo HTML da branch `main`
-
-Contém doze páginas HTML: seis de usuário e seis administrativas, com CSS embutido e JavaScript principalmente para menu lateral. Mostra nomes, métricas, bateria, logs e salas de exemplo; não foram encontradas chamadas à API da aplicação nessas páginas. O formulário de login não implementa autenticação com o backend.
-
-Em `gerar_qr.html`, `generateKey()` requisita a um serviço externo de QR uma imagem para **texto fixo de demonstração**, sem payload AES-CMAC. O contador de cinco minutos só altera a exibição e não invalida criptograficamente nada. A página de configuração apresenta MQTT/IP/porta como campos estáticos. Isso é material de prototipação de interface, não evidência de integração, broker ativo, telemetria ou política de expiração final.
-
-O serviço externo usado nesse HTML não deve ser confundido com a aplicação Next.js, que gera o QR no navegador. Não foi acessado esse serviço durante a análise. [F09]
 
 ## 8. Firmware e hardware
 
@@ -349,13 +344,13 @@ A função compara os 16 bytes da tag calculada com a recebida. Não verifica o 
 
 **D05 — Assinatura divergente:** o cabeçalho/implementação local de `validateDigitalKey` exige três argumentos — mensagem, tamanho e segredo — mas `main.cpp` chama com dois. Não há overload ou argumento default localizado. É uma incompatibilidade identificada estaticamente, suficiente para impedir essa chamada de compilar conforme os arquivos apresentados; não foi executado build de placa.
 
-`digital_lock.cpp`, ainda não rastreado, define segredo fixo de 32 bytes, `roomID`, `setPrivateKey()` e `setRoomID()`. O cabeçalho correspondente só inclui headers, sem declarar essa interface. Não foi localizada conexão dessas funções ao fluxo de `main.cpp`, comunicação de provisionamento ou persistência do segredo. O valor do segredo não é reproduzido neste documento. [W03]
+`digital_lock.cpp`, ainda não rastreado, define segredo fixo de 32 bytes, `roomID`, `setPrivateKey()` e `setRoomID()`. O cabeçalho correspondente só inclui headers, sem declarar essa interface. Não foi localizada conexão dessas funções ao fluxo de `main.cpp`. Isso é coerente apenas parcialmente com a decisão de escopo: o fornecedor grava previamente o segredo e a identificação da tranca no ESP32-CAM; não haverá interface de provisionamento, troca de segredo ou configuração em campo. O valor do segredo não é reproduzido neste documento. [W03]
 
 ### 8.5 Elementos físicos/embarcados não confirmados
 
-Não foram localizados nos fontes examinados: driver de relé/solenoide, circuito de potência, sensores de porta, botão de saída, controle de travamento, RTC/sincronização de horário, cliente MQTT, configuração Bluetooth, provisionamento seguro, rotação de segredo, persistência NVS/arquivo de credenciais consumidas, log auditável local ou envio de eventos ao backend.
+Não foram localizados nos fontes examinados: driver de relé/solenoide, sensores de porta, botão de saída, controle de travamento, RTC/sincronização de horário, persistência NVS, log auditável local ou envio de eventos ao backend. MQTT, gateway, Bluetooth, Flutter e armazenamento S3 foram abandonados e não pertencem à arquitetura final. Provisionamento em campo e rotação de segredo também estão fora do escopo por decisão da equipe.
 
-Também faltam evidências de modelo da fechadura elétrica, chave mecânica de contingência, fonte/bateria, autonomia de seis horas, consumo, comportamento em queda de energia, MTTF, ruído e adequação sensorial. Essas funções podem existir em montagem ou versões externas; não foram demonstradas pelos repositórios disponíveis.
+A equipe confirmou a montagem de um circuito físico simples composto por ESP32-CAM, transistores, fonte de energia e tranca elétrica. Os detalhes de circuito, componentes, pinagem e funções demonstradas ainda serão fornecidos. Continuam faltando evidências sobre modelo da fechadura, chave mecânica de contingência, bateria/autonomia de seis horas, consumo, comportamento em queda de energia, MTTF, ruído e adequação sensorial. Não existe firmware mais recente fora do repositório examinado, e as mudanças locais não devem ser consideradas uma refatoração em andamento.
 
 ## 9. Fluxos funcionais reconstruídos
 
@@ -365,7 +360,7 @@ O navegador envia cadastro à API; ela cria usuário/credenciais e retorna `user
 
 ### 9.2 Preparação administrativa
 
-O usuário autenticado cria instituição da qual se torna responsável; cadastra prédio, sala e tranca. A criação de tranca gera segredo no backend. **Este fluxo termina no registro lógico:** não foi localizado procedimento implementado que entregue automaticamente esse segredo ao ESP32 correspondente.
+O usuário autenticado cria instituição da qual se torna responsável; cadastra prédio, sala e tranca. A criação de tranca gera segredo no backend. **Este fluxo termina no registro lógico:** não existe distribuição automática para o ESP32. No modelo assumido, o fornecedor deve programar previamente no dispositivo o mesmo segredo e a identificação da tranca. A divergência entre o segredo gerado no cadastro e o segredo embarcado precisa ser resolvida por procedimento operacional, ainda não documentado.
 
 ### 9.3 Solicitação e aprovação
 
@@ -373,11 +368,11 @@ O usuário autenticado cria instituição da qual se torna responsável; cadastr
 2. Frontend consulta trancas da sala e escolhe a primeira.
 3. `POST /digital_key/request` cria pedido `pending`, com usuário do JWT.
 4. Responsável consulta pedidos de suas instituições e decide.
-5. Aprovação confere propriedade e estado pendente, emite chave e altera pedido para `approved`.
+5. Aprovação confere propriedade e estado pendente, emite uma chave para aquela solicitação e altera o pedido para `approved`.
 6. Rejeição altera pedido para `rejected`, sem emitir chave.
 7. Chave aprovada pode ser consultada pelo ID de usuário/chave; a exibição de recusas no dashboard depende do endpoint ausente descrito em D01.
 
-A aprovação sem data explícita usa 24 horas contadas da aprovação/emissão. Não há permissão recorrente, agenda por dias da semana ou concessão de acesso para intervalo com geração autônoma de várias credenciais. O README Next.js registra essa ampliação como possibilidade futura.
+A política final é **uma chave por solicitação**. A aprovação sem data explícita usa 24 horas contadas da aprovação/emissão. Durante essa janela a chave pode ser apresentada repetidamente; depois dela deve ser rejeitada. Não há permissão recorrente, agenda por dias da semana ou concessão de acesso para intervalo com geração autônoma de várias credenciais.
 
 ### 9.4 Exibição e leitura
 
@@ -385,9 +380,9 @@ Abrir o modal consulta uma chave **já emitida**, converte o hexadecimal para by
 
 ### 9.5 Registro de uso e histórico
 
-`POST /digital_key/use` recebe hexadecimal, recupera a chave, verifica estado/CMAC e registra horário do servidor. Não há chamada a esse endpoint no firmware ou nos serviços frontend examinados. Portanto, a existência de `used_at` não demonstra ingestão automática de um evento físico. Também não diferencia leitura de QR, autorização, destravamento, abertura da porta, entrada, saída ou fechamento.
+`POST /digital_key/use` recebe hexadecimal, recupera a chave, verifica estado/CMAC e registra horário do servidor. Não há chamada a esse endpoint no firmware ou nos serviços frontend examinados. Além disso, invalidar a chave após esse registro contraria a política de reutilização dentro da janela. Portanto, a existência de `used_at` não demonstra ingestão automática de um evento físico. Também não diferencia leitura de QR, autorização, destravamento, abertura da porta, entrada, saída ou fechamento.
 
-Uma auditoria física precisaria definir esses eventos e suas fontes de verdade. Não é possível deduzir ocupação da sala a partir de chaves emitidas ou `MAX(used)`.
+Para evolução da auditoria, adota-se a seguinte taxonomia conceitual: `QR_READ` para uma leitura óptica; `AUTH_GRANTED` ou `AUTH_DENIED` para a decisão local, com motivo; `UNLOCK_ACTUATED` para o comando elétrico; e, somente se houver sensor físico, `DOOR_OPENED` e `DOOR_CLOSED`. Entrada, saída e ocupação não podem ser inferidas com confiabilidade apenas dessas leituras, pois uma credencial válida pode ser reapresentada e uma porta destravada pode não ser atravessada. Sem sensores direcionais ou outra fonte de evidência, o FLIKE não deve prometer contagem de pessoas nem ocupação em tempo real. Essa taxonomia é uma decisão de projeto proposta para a tese; não está implementada no firmware atual.
 
 ## 10. Tese e diagramas: correspondências e diferenças
 
@@ -401,30 +396,30 @@ As figuras 1–4 aparecem no PDF como caixas com os nomes dos arquivos; isso foi
 
 | Fonte | O que representa | Situação perante o código |
 | --- | --- | --- |
-| `contexto_c4.drawio.png` | Cliente, admin, aplicação, serviços externos, tranca física e gateway | Gateway e integração com serviços externos não localizados como componentes ativos |
-| `application_container_c4.drawio.png` | Next.js, Flutter, FastAPI, AWS S3 e PostgreSQL | Next.js/FastAPI correspondem ao código; banco implementado é MySQL; Flutter/S3 não encontrados |
-| `physical_lock_container_c4.drawio.png` | OV2640, ESP32-CAM, HMI, tranca, saída, Bluetooth e MQTT | Leitura/CMAC têm código; demais integrações precisam ser confirmadas |
+| `contexto_c4.drawio.png` | Cliente, administrador, aplicação, serviços externos, tranca física e gateway | **Obsoleto:** gateway e integrações externas foram abandonados; o diagrama deve ser redesenhado |
+| `application_container_c4.drawio.png` | Next.js, Flutter, FastAPI, AWS S3 e PostgreSQL | **Obsoleto em parte:** a solução adotada usa Next.js, FastAPI e MySQL; aplicativo móvel, S3 e PostgreSQL foram abandonados |
+| `physical_lock_container_c4.drawio.png` | OV2640, ESP32-CAM, HMI, tranca, saída, Bluetooth e MQTT | **Obsoleto em parte:** câmera, ESP32-CAM e tranca pertencem ao protótipo; Bluetooth, MQTT e as demais integrações não fazem parte da solução final |
 | `relacionamentos.drawio.png` | Cliente/admin, instituição/prédio/sala, chave/tranca e histórico/evento | Modelo conceitual anterior; não corresponde literalmente ao DDL |
 | `uml.png` | Herança de usuário, campos de tipo/status, chave e histórico | Não representa as tabelas/classes ativas em vários pontos; não é uma das quatro figuras incluídas no cap. 5 |
 
-No diagrama físico, existem setas MQTT envolvendo botão de saída e tranca elétrica. O circuito real não foi fornecido; não se deve reproduzir essas setas como descrição de cabeamento ou afirmar que o atuador tem cliente MQTT. “Contêiner” no C4 também não implica Docker; não há configuração Docker encontrada.
+No diagrama físico, existem setas MQTT envolvendo botão de saída e tranca elétrica. Elas representam uma proposta abandonada e não devem ser reproduzidas na nova arquitetura. O protótipo físico confirmado usa ESP32-CAM, transistores, fonte de alimentação e tranca elétrica; esquema, componentes exatos e funções demonstradas ainda serão fornecidos pela equipe. “Contêiner” no C4 também não implica Docker; não há configuração Docker encontrada.
 
 ### 10.3 Quadro de reconciliação para a escrita
 
 | Afirmação ou expectativa | Conclusão sustentada |
 | --- | --- |
-| “Frontend em React” | Correto para a referência Next.js; incorreto se considerado apenas o checkout HTML |
-| “PostgreSQL e AWS S3” | Proposta dos diagramas; implementação examinada usa MySQL e não integra S3 |
-| “Aplicativo Flutter” | Previsto em diagrama, não encontrado nos quatro repositórios |
+| “Frontend em React” | A aplicação oficial é o frontend Next.js/React da referência examinada |
+| “PostgreSQL e AWS S3” | Propostas abandonadas; a solução adotada usa MySQL e não inclui S3 |
+| “Aplicativo Flutter” | Proposta abandonada; não será desenvolvido aplicativo móvel |
 | “Backend gera QR” | Backend gera/autentica bytes; Next.js renderiza imagem QR |
 | “QR contém ID da sala” | Código antigo usa sala; API ativa usa ID da tranca digital |
-| “Códigos únicos e temporários” | Campos e partes do controle existem; garantia física de uso único/expiração não comprovada |
+| “Códigos únicos e temporários” | Reformular como uma credencial por solicitação, reutilizável durante sua janela de validade e inválida fora dela; a validação temporal ainda falta no firmware |
 | “Assinatura e irretratabilidade” | Implementação é MAC simétrico; não sustenta não repúdio isoladamente |
-| “Segredo compartilhado assincronamente” | Não foi localizado protocolo implementado de distribuição |
-| “Tranca funciona offline” | Verificação CMAC pode ocorrer sem rede; abertura offline completa não demonstrada |
-| “Auditoria e ocupação” | Há tabelas/campos e consultas parciais; falta cadeia de eventos físicos |
-| “QR vale 5 minutos” | Texto do HTML antigo; padrão administrativo atual é 24 horas |
-| “Projeto praticamente concluído” | Pode refletir versões ou montagem não disponíveis; requer confirmação diante das lacunas e incompatibilidades identificadas |
+| “Segredo compartilhado assincronamente” | Proposta abandonada; assume-se provisionamento prévio do identificador e do segredo pelo fornecedor no ESP32-CAM |
+| “Tranca funciona offline” | É a decisão arquitetural: a autorização deve ser validada localmente, sem consulta ao servidor; o firmware atual ainda não implementa toda a decisão temporal nem o acionamento encontrado no protótipo físico |
+| “Revogação de credencial” | Não faz parte do escopo implementado; a impossibilidade de revogar com confiabilidade uma credencial já emitida é um risco aceito da operação offline |
+| “Auditoria e ocupação” | Adota-se a taxonomia de leitura, decisão e acionamento da seção 9.5; entrada, saída e ocupação exigiriam sensores adicionais e não são prometidas |
+| “Projeto praticamente concluído” | A equipe adotou uma entrega de escopo reduzido; não há versões mais novas do firmware nem componentes adicionais fora dos repositórios examinados |
 
 ## 11. Segurança e confiabilidade: limites observados
 
@@ -436,20 +431,20 @@ Estes pontos são relevantes para escrever com precisão, não uma auditoria exa
 | S02 | `/digital_key/new` não exige token/propriedade [B05] | Há caminho para emissão fora do fluxo de aprovação administrativa |
 | S03 | Consulta pública de chaves por usuário/chave e listagem global [B05] | Payloads que funcionam como credenciais podem ser obtidos fora do perfil proprietário |
 | S04 | `/digital_key/use` público e sem identidade de dispositivo [B05] | Registro de uso não comprova origem no hardware nem evento físico |
-| S05 | Consumo não verifica expiração; firmware não verifica uso/tempo [B03, W02] | Não afirmar proteção completa contra expiração e replay |
+| S05 | Firmware não verifica o identificador da tranca nem a janela temporal [W02] | A validade temporal da credencial ainda não é garantida na abertura física; reapresentações dentro da janela são permitidas pela política adotada |
 | S06 | `messageLength` ignorado e falhas de CMAC não propagadas corretamente [W02] | Entrada malformada/erro de biblioteca não têm tratamento defensivo suficiente |
-| S07 | Leitura/atualização de uso e aprovação sem atomicidade completa [B03, B04] | Concorrência e falhas intermediárias precisam de tratamento/ensaio |
-| S08 | Segredo fixo no fonte local de firmware, sem provisionamento integrado [W03] | Não alegar gestão segura de ciclo de vida de chaves |
+| S07 | Aprovação e emissão não formam uma transação atômica completa [B03, B04] | Concorrência e falhas intermediárias podem deixar a solicitação e a credencial em estados divergentes |
+| S08 | O protótipo mantém segredo fixo no fonte local do firmware [W03] | Corresponde ao provisionamento prévio assumido, mas exige proteção do código e do processo do fornecedor; configuração e rotação pelo usuário ficam fora do escopo |
 | S09 | Senhas com SHA-256 simples + salt; JWT em `localStorage` [B06, F03] | Descrever escolhas reais e avaliar proteção de credenciais/sessão sem presumir endurecimento de produção |
 | S10 | Ausência de sincronização de relógio e log físico persistente [W01–W03] | Não garantir autonomia temporal, recuperação após reinício ou auditoria offline |
 
 Também não foram localizados controles de rate limiting, política de retenção, backups, monitoramento operacional, proteção física do segredo ou configuração de criptografia em repouso. A ausência nos fontes não demonstra ausência em infraestrutura externa. Em sentido inverso, não autoriza afirmar que tais controles existam.
 
-Nome, e-mail e histórico de chaves são dados pessoais no contexto do projeto. O esquema examinado não solicita diagnóstico ou laudo. Não se deve importar para a descrição do banco campos de documentos/Nº USP do HTML antigo. Qualquer alegação de conformidade jurídica ou normativa demanda avaliação própria; este documento não a estabelece.
+Nome, e-mail e histórico de chaves são dados pessoais no contexto do projeto. O esquema examinado não solicita diagnóstico, laudo, documentos pessoais ou número USP. Qualquer alegação de conformidade jurídica ou normativa demanda avaliação própria; este documento não a estabelece.
 
 ## 12. Acessibilidade e experiência de uso
 
-A contribuição pretendida é reduzir dependência de portaria/chaves físicas e tornar o acesso mais previsível para pessoas neurodivergentes. Isso é finalidade do projeto; não há estudo de usuários ou medição de redução de sobrecarga cognitiva nos materiais examinados. [T01]
+A contribuição pretendida é reduzir dependência de portaria/chaves físicas e tornar o acesso mais previsível para pessoas neurodivergentes. Isso é finalidade do projeto. A equipe confirmou que não realizou testes ou avaliação com o público-alvo; portanto, não há medição de redução de sobrecarga cognitiva nem validação empírica desses benefícios. [T01]
 
 A interface Next.js implementa feedback textual de carregamento/erro, seleção hierárquica, indicação de status, formulários e QR em destaque. Porém, existem menus acionados por `div`/`span`, card clicável sem controle de teclado explícito, modais sem tratamento de foco identificado nesses componentes e `lang="en"` no layout raiz apesar do conteúdo em português. Esses pontos merecem avaliação, sem confundir inspeção de código com teste completo de acessibilidade. [F02, F06, F08]
 
@@ -465,7 +460,7 @@ A classificação corresponde às fontes disponíveis, não ao estado de uma ins
 | --- | --- |
 | RF-00-00 — controle seguro, auditável e automatizado | **Parcial:** API, credenciais e leitor; segurança, atuação e auditoria têm lacunas |
 | RNF-00-00 — confidencialidade, integridade e disponibilidade | **Parcial/não demonstrado:** CMAC presente, mas exposição de segredos e ausência de avaliação global |
-| RF-01-00 — destravar sem internet | **Parcial:** cálculo de CMAC sem rede; destravamento não localizado |
+| RF-01-00 — destravar sem internet | **Parcial:** a arquitetura define validação local e o CMAC funciona sem rede; faltam no firmware examinado a checagem temporal e o acionamento físico completo |
 | RF-01-01 — agnóstico ao modelo de tranca elétrica | **Previsto:** falta interface elétrica/driver comprovado |
 | RF-01-02 — operar após queda de energia | **Não confirmado:** alimentação/contingência não documentadas |
 | RF-01-03 — autonomia mínima de seis horas | **Não confirmado:** sem especificação de bateria ou ensaio |
@@ -482,8 +477,8 @@ A classificação corresponde às fontes disponíveis, não ao estado de uma ins
 | RF-06-03 — irretratabilidade | **Não sustentado:** MAC simétrico não oferece não repúdio isoladamente |
 | RF-06-04 — assinatura eletrônica | **Reformular tecnicamente:** autenticação simétrica por CMAC; não afirmar assinatura assimétrica |
 | RNF-06-00 — leitura em menos de dois segundos | **Não confirmado:** intervalos de polling/delay não são medição de latência |
-| RF-07-00 — autenticidade, integridade, expiração e uso único antes de abrir | **Parcial:** validação embarcada só de CMAC |
-| RF-09-00 — web responsiva, cadastro/login/solicitação/chaves/admin | **Parcial:** Next.js implementa várias funções; D01/D02, armazenamento e avaliação responsiva pendentes |
+| RF-07-00 — autenticidade, integridade, expiração e “uso único” antes de abrir *(redação original a substituir)* | **Reformular:** validar autenticidade, integridade, tranca e janela de validade, permitindo reapresentações durante essa janela; hoje o firmware valida somente o CMAC |
+| RF-09-00 — web responsiva, cadastro/login/solicitação/chaves/admin | **Parcial:** Next.js implementa várias funções; contratos D01/D02, download ou disponibilidade permanente do QR e avaliação responsiva permanecem pendentes |
 | RF-10-00 — autenticação, autorização, emissão, persistência e auditoria | **Parcial:** núcleo API implementado; rotas públicas contornam política e auditoria física falta |
 | REQ-FUNC-01 — não hiperestimular sensorialmente | **Não confirmado:** depende de avaliação da tranca/HMI |
 | REQ-FUNC-01 — minimizar sobrecarga cognitiva | **Objetivo previsto:** sem evidência de avaliação com usuários |
@@ -499,10 +494,10 @@ O PDF repete `RF-10-00` na própria linha e usa `REQ-FUNC-01` para três requisi
 - **Conceitos:** controle de acesso, autenticação/autorização, credencial versus segredo, MAC simétrico, transporte binário por QR, operação offline e suas limitações.
 - **Projeto:** frontend Next.js, API FastAPI, MySQL, domínio hierárquico, modelo de proprietário e formato de 48 bytes.
 - **Implementação:** rotas/repositórios, geração CMAC, conversão hex↔bytes, hooks/serviços, tarefa de leitura embarcada e estágio real de integração.
-- **Resultados:** funcionalidades demonstradas por ensaios que a equipe fornecer; não usar dados fixos do HTML como resultados.
-- **Discussão:** autonomia versus aprovação individual, segurança do segredo, expiração/replay, sincronização, acessibilidade e limitações.
+- **Resultados:** funcionalidades demonstradas por ensaios que a equipe ainda produzir ou documentar.
+- **Discussão:** autonomia versus aprovação individual, segurança do segredo, janela de validade, reutilização, ausência de revogação confiável, sincronização, acessibilidade e limitações.
 
-Não foram encontrados relatórios de testes automatizados ou ensaios físicos nos arquivos inventariados, nem pipeline de CI que forneça seus resultados. Este levantamento realizou inspeção estática, não teste funcional da aplicação ou da placa. A falta de relatório no repositório não significa que a equipe nunca testou o sistema.
+Não foram encontrados relatórios de testes automatizados ou ensaios físicos nos arquivos inventariados, nem pipeline de CI que forneça seus resultados. Este levantamento realizou inspeção estática, não teste funcional da aplicação ou da placa. A equipe também confirmou que não realizou testes ou avaliação com o público-alvo.
 
 ### 14.2 Evidências que faltam para fechar a tese
 
@@ -512,27 +507,29 @@ Não foram encontrados relatórios de testes automatizados ou ensaios físicos n
 | Integração web | Cadastro/login, consulta de recusas, aprovação/rejeição e exibição de QR com os contratos efetivos |
 | Protocolo | Vetores comuns Python/C++, bytes ≥128/zero, tamanho inválido, tag alterada, chave de outra tranca e segredo errado |
 | Autorização | Usuário sem token, não proprietário, tentativa de emissão/consulta indevida e não exposição de segredos |
-| Tempo/uso único | Expiração nas fronteiras, fusos, relógio incorreto, replay, reinício, concorrência e falha após autorização |
+| Validade e reutilização | Expiração nas fronteiras, fusos, relógio incorreto, reapresentações dentro e fora da janela, reinício e indisponibilidade do servidor |
 | Hardware | Esquema elétrico, lista de materiais, modelo de tranca, alimentação, driver, proteção e contingência mecânica |
 | Óptica | Latência e taxa de sucesso por brilho, distância, ângulo, tamanho de QR e condições de iluminação |
 | Energia/confiabilidade | Ensaio de autonomia, comportamento em queda de energia e fundamento de MTTF |
 | Auditoria | Origem dos eventos, timestamps, persistência offline, sincronização e distinção entre autorização e abertura real |
 | Acessibilidade | Procedimento de avaliação, tarefas, participantes/consentimento quando aplicável, resultados e limitações |
 
-### 14.3 Questões prioritárias para revisão da equipe
+### 14.3 Decisões confirmadas e informações ainda pendentes
 
-1. A aplicação final é mesmo a de `origin/frontend_prototype`? Há backend mais recente com `/digital_key/requests` e detalhes enriquecidos de solicitações?
-2. Existe firmware mais novo, fora desta pasta, que aciona a tranca, controla expiração/uso único e registra eventos? As mudanças locais representam uma refatoração em andamento?
-3. Qual é o nome final do projeto e o significado de FLIKE? A denominação CAUSP-LOCK permanece na monografia?
-4. Qual fechadura/circuito/bateria foi montado, e quais funções foram demonstradas fisicamente?
-5. Como o segredo por tranca é instalado no dispositivo e como o dispositivo identifica sua tranca digital?
-6. A política final será uma chave por solicitação, acesso recorrente ou autorização por intervalo? Qual validade deve prevalecer?
-7. O segundo campo do protocolo deve identificar sala ou tranca? Como ficam salas com múltiplas trancas?
-8. MQTT, gateway, Bluetooth, Flutter e S3 foram abandonados, adiados ou implementados em fontes ainda não fornecidas?
-9. Como serão distinguidos leitura, autorização, destravamento, entrada, saída e ocupação?
-10. Quais resultados de testes e avaliação com o público-alvo já existem fora do Git?
+As seguintes decisões foram confirmadas pela equipe e devem orientar a tese:
 
-Correções podem indicar os IDs D01–D05/S01–S10, a seção afetada e o commit/arquivo ou evidência física correspondente. Assim, o documento pode evoluir sem converter hipóteses em fatos.
+1. O nome oficial é **FLIKE**, em homenagem ao gato de infância de um dos autores; o nome não é uma sigla.
+2. O papel é contextual: qualquer usuário administra as instituições que possui e atua como cliente nas instituições de outras pessoas.
+3. Cada solicitação aprovada gera uma credencial, reutilizável quantas vezes forem necessárias durante sua janela de validade.
+4. A tranca valida a credencial sem consultar o servidor. A impossibilidade de revogar com confiabilidade uma credencial já emitida é um risco aceito.
+5. O fornecedor programa previamente no ESP32-CAM o identificador da tranca e seu segredo; configuração e rotação pelo usuário estão fora do escopo.
+6. A credencial identifica a tranca. Em uma sala com várias trancas, a implementação futura poderá permitir a escolha de uma delas ou configurar o mesmo segredo em todas; a alternativa final ainda precisa ser escolhida.
+7. Gateway, MQTT, Bluetooth, armazenamento S3, aplicativo móvel e as integrações correspondentes foram abandonados.
+8. Não há firmware mais novo fora do repositório, e as mudanças locais não representam uma refatoração ativa conhecida.
+9. O protótipo físico usa ESP32-CAM, transistores, fonte de alimentação e tranca elétrica.
+10. Não foram realizados testes ou avaliações com o público-alvo.
+
+Ainda faltam à equipe fornecer ou decidir: esquema elétrico, lista de componentes e funções demonstradas fisicamente; duração final padrão da janela de validade; escolha para salas com várias trancas; commits usados na demonstração; e evidências dos testes técnicos que serão relatados. A distinção proposta entre leitura, autorização, acionamento e estado da porta está na seção 9.5; entrada, saída e ocupação não serão alegadas sem sensores capazes de comprová-las.
 
 ## 15. Índice de fontes para conferência
 
@@ -566,7 +563,6 @@ Os caminhos abaixo são relativos à raiz identificada pelo prefixo, para permit
 | F06 | `app/(main_pages)/dashboard/page.tsx`, `app/(main_pages)/access/request/page.tsx`, `app/(main_pages)/access/[key_id]/page.tsx`, `components/{ActiveKeyCard,DigitalKeysTable}.tsx` |
 | F07 | `services/{admin,keyRequest}.service.ts`, `hooks/{useAdminData,useMyAdminData,useKeyRequests,useKeyHolders}.ts`, páginas administrativas, `components/KeyRequestsTable.tsx` |
 | F08 | Páginas `profile`, `settings`, `logs`, `users`, histórico individual e portadores por sala; `components/modals/`, `components/Sidebar.tsx`, `components/KeyUsageHistoryTable.tsx`; `README.md`, `docs/pages.md` |
-| F09 | **Frontend `main`**: `paginas_html/user/*.html` e `paginas_html/admin/*.html`; especialmente `gerar_qr.html`, `login_user.html` e `config.html` |
 | W01 | `platformio.ini`, arquivo local `sdkconfig.defaults` |
 | W02 | `src/main.cpp`, `src/qr_code.{cpp,h}`, `src/digital_key.{cpp,h}`, `src/binutils.{cpp,h}` |
 | W03 | Arquivos locais `src/digital_lock.{cpp,h}` e mudanças locais de `digital_key` |
