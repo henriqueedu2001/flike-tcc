@@ -4,7 +4,7 @@ Documento de trabalho para orientar a redação do TCC e receber correções da 
 
 ## 1. Como interpretar este levantamento
 
-O projeto propõe controle de acesso físico com credenciais em QR Code, emissão centralizada e validação criptográfica local no ESP32-CAM. Há implementação de backend, aplicação web em Next.js/React e firmware de leitura/verificação de QR. Entretanto, as versões disponíveis não permitem afirmar que todo o percurso até a abertura física, validação da janela temporal e auditoria esteja integrado e validado.
+O projeto propõe controle de acesso físico com credenciais em QR Code, emissão centralizada e validação criptográfica local no ESP32-CAM. Há implementação de backend, aplicação web em Next.js/React e firmware de leitura/verificação de QR. O material histórico demonstra o percurso até a abertura física com o protocolo anterior HMAC-SHA1, e a equipe realizou diversos testes posteriores bem-sucedidos de QR Code e AES-CMAC. Segundo confirmação recebida em 01/09/2026, um integrante da equipe remontou a maquete na noite anterior e demonstrou de ponta a ponta leitura do QR Code, validação local por AES-CMAC, sinal `HIGH`, circuito de acionamento e resposta da fechadura. Portanto, a integração física completa do FLIKE está demonstrada. As versões atualmente disponíveis no repositório não preservam todo o acionamento usado no ensaio, e as evidências não permitem afirmar validação da janela temporal e auditoria completas.
 
 A aplicação React examinada está na referência local `origin/frontend_prototype`. Ela foi lida diretamente do Git, sem checkout. A equipe não indicou uma versão mais recente e confirmou que adotou uma abordagem de esforço reduzido na fase final. O backend aberto está em `massive-vibe-code-session`, e não em `main`. O firmware possui mudanças locais ainda não commitadas cuja origem a equipe não reconhece; elas não devem ser tratadas como refatoração ativa. Portanto, “o código do projeto” não corresponde simplesmente às quatro branches `main`.
 
@@ -13,6 +13,7 @@ As afirmações usam estas categorias:
 - **Implementado no código:** existe lógica concreta nos arquivos examinados. Não significa execução bem-sucedida em ambiente real.
 - **Parcial:** há componentes, mas faltam integração, controles ou evidência de funcionamento completo.
 - **Previsto:** aparece na tese, nos diagramas ou em documentação de intenção, sem implementação correspondente localizada.
+- **Demonstrado historicamente:** aparece em relatório, fotografia ou vídeo de uma etapa anterior; não implica que o checkout final reproduza o mesmo fluxo.
 - **Não confirmado:** depende de montagem física, ambiente, versões não disponíveis, decisões da equipe ou ensaios não registrados.
 - **Divergência:** duas fontes disponíveis descrevem comportamentos diferentes.
 
@@ -28,18 +29,21 @@ Não foram alterados frontend, backend ou firmware; não foram executados script
 | Firmware | `main` + arquivos locais | `c2983f4ce6e02fd4ce68c212a54e8c5fd6ef1e78`, 09/03/2026, com mudanças descritas abaixo |
 | TCC | `main` | `ae922115f778c18a81b581697026d122a94adab4`, 30/08/2026 |
 | PDF recebido | arquivo local ainda não rastreado | `pdfs/FLIKE-referencia-2026-08-30.pdf`, 45 páginas; metadados de criação em 30/08/2026, 22:35:27, UTC−03 |
+| Projeto histórico do Laboratório de Processadores | pacote Overleaf em `materiais/CAUSP_LOCK/` | fonte LaTeX, diagramas, fotografias e vídeo público; protocolo HMAC-SHA1 anterior ao AES-CMAC final |
 
 Alterações já existentes antes deste trabalho: backend `scripts/run_server.sh` modificado; firmware `src/digital_key.cpp` e `src/digital_key.h` modificados, além de `sdkconfig.defaults`, `src/digital_lock.cpp` e `src/digital_lock.h` não rastreados. O PDF também já estava não rastreado. Esses arquivos foram preservados.
 
 ### 1.2 Convenção de evidências
 
-Nas referências abaixo, **B** significa backend na versão principal acima; **F** significa frontend no commit Next.js; **W** significa firmware com as mudanças locais; **T** significa TCC. A seção 15 relaciona caminhos e símbolos para localizar cada evidência. Para F, a consulta reproduzível é `git show 9005601719e98b5cac1c3586d07ef79b06a28a00:caminho/do/arquivo`, executada no repositório do frontend.
+Nas referências abaixo, **B** significa backend na versão principal acima; **F** significa frontend no commit Next.js; **W** significa firmware com as mudanças locais; **T** significa TCC; **H** significa material histórico do Laboratório de Processadores e fontes oficiais associadas. A seção 15 relaciona caminhos e símbolos para localizar cada evidência. Para F, a consulta reproduzível é `git show 9005601719e98b5cac1c3586d07ef79b06a28a00:caminho/do/arquivo`, executada no repositório do frontend.
 
 ## 2. Problema, contexto e fronteira do sistema
 
 A tese tem o título **“Desenvolvimento e implementação de um sistema de controle de acesso a espaços públicos acessível a neurodivergentes”**. Os autores são Hélcio Prado de Lima, Henrique Eduardo dos Santos de Souza e Mateus Kosicov Perugini; o orientador é o Prof. Dr. Reginaldo Arakaki, no Departamento de Engenharia de Computação e Sistemas Digitais da Escola Politécnica da USP. [T01]
 
 O cenário descrito é a sala de apoio à amamentação e regulação sensorial da Faculdade de Direito da USP, no prédio histórico do Largo de São Francisco. O problema apresentado é a dependência de retirada manual de chaves com funcionários, associada a constrangimento, barreiras sociais e cognitivas, subutilização e dificuldades de controle. Isso é o **contexto relatado pela equipe na tese**, não resultado de pesquisa de campo realizada neste levantamento. [T01, cap. 1]
+
+A notícia oficial da FDUSP confirma a inauguração da sala em abril de 2024, sua localização no terceiro andar do Prédio Histórico e sua finalidade de apoio à amamentação e regulação sensorial. Ela não confirma as dificuldades de liberação de chave, que permanecem sustentadas pela experiência de um autor, por reunião institucional e por relatos informais de colegas. [H08]
 
 O objetivo é proporcionar autonomia a usuários autorizados e reduzir interações obrigatórias para entrar no espaço, mantendo controle e rastreabilidade. A aprovação administrativa continua existindo no fluxo implementado; a proposta não elimina toda intervenção humana na concessão de acesso. O cadastro não comprova por si só vínculo com a USP nem pertencimento ao público-alvo.
 
@@ -346,11 +350,13 @@ A função compara os 16 bytes da tag calculada com a recebida. Não verifica o 
 
 `digital_lock.cpp`, ainda não rastreado, define segredo fixo de 32 bytes, `roomID`, `setPrivateKey()` e `setRoomID()`. O cabeçalho correspondente só inclui headers, sem declarar essa interface. Não foi localizada conexão dessas funções ao fluxo de `main.cpp`. Isso é coerente apenas parcialmente com a decisão de escopo: o fornecedor grava previamente o segredo e a identificação da tranca no ESP32-CAM; não haverá interface de provisionamento, troca de segredo ou configuração em campo. O valor do segredo não é reproduzido neste documento. [W03]
 
-### 8.5 Elementos físicos/embarcados não confirmados
+### 8.5 Demonstração física histórica e integração final
 
-Não foram localizados nos fontes examinados: driver de relé/solenoide, sensores de porta, botão de saída, controle de travamento, RTC/sincronização de horário, persistência NVS, log auditável local ou envio de eventos ao backend. MQTT, gateway, Bluetooth, Flutter e armazenamento S3 foram abandonados e não pertencem à arquitetura final. Provisionamento em campo e rotação de segredo também estão fora do escopo por decisão da equipe.
+Não foram localizados no firmware final examinado: driver de relé/solenoide, sensores de porta, botão de saída, controle de travamento, RTC/sincronização de horário, persistência NVS, log auditável local ou envio de eventos ao backend. MQTT, gateway, Bluetooth, Flutter e armazenamento S3 foram abandonados e não pertencem à arquitetura final. Provisionamento em campo e rotação de segredo também estão fora do escopo por decisão da equipe.
 
-A equipe confirmou a montagem de um circuito físico simples composto por ESP32-CAM, transistores, fonte de energia e tranca elétrica. Os detalhes de circuito, componentes, pinagem e funções demonstradas ainda serão fornecidos. Continuam faltando evidências sobre modelo da fechadura, chave mecânica de contingência, bateria/autonomia de seis horas, consumo, comportamento em queda de energia, MTTF, ruído e adequação sensorial. Não existe firmware mais recente fora do repositório examinado, e as mudanças locais não devem ser consideradas uma refatoração em andamento.
+O material do Laboratório de Processadores preserva relatório, diagrama, fotografias e vídeo de uma demonstração física. Nessa etapa, a ESP32-CAM reconhecia e decodificava o QR Code, verificava um autenticador HMAC-SHA1 e emitia o comando elétrico. Um transistor NPN 2N2222 operava como chave e conversor de nível para a entrada de um módulo de relé de 12 V; o contato normalmente aberto aplicava o pulso à fechadura Papaiz AA-ERL200P sem sensor. A fonte chaveada foi documentada como 12 V/5 A. A ficha oficial da fechadura informa potência de 12 W e acionamento de 1 s, coerentes com aproximadamente 1 A em 12 V. [H01–H06]
+
+O diagrama previa um botão de saída em paralelo com o contato do relé, mas o relatório declara que ele foi omitido na montagem. O ensaio histórico também ignorou a expiração. Depois da migração do protocolo, a equipe realizou diversos testes bem-sucedidos de leitura do QR Code, decodificação, extração de dados e validação AES-CMAC. O circuito elétrico é exatamente o mesmo e sua única entrada lógica continua sendo o sinal `HIGH` da ESP32-CAM. Em 31/08/2026, segundo confirmação da equipe, um de seus integrantes remontou a maquete e executou com sucesso todo o caminho com AES-CMAC e a fechadura conectada. O sistema físico do FLIKE foi, portanto, demonstrado de ponta a ponta. Ainda faltam o número do GPIO, as versões exatas do firmware dos ensaios, eventual registro visual da demonstração final, medições elétricas, proteções, comportamento em queda de energia, autonomia, MTTF, ruído e adequação sensorial. [H01–H07]
 
 ## 9. Fluxos funcionais reconstruídos
 
@@ -374,9 +380,11 @@ O usuário autenticado cria instituição da qual se torna responsável; cadastr
 
 A política final é **uma chave por solicitação**. A aprovação sem data explícita usa 24 horas contadas da aprovação/emissão. Durante essa janela a chave pode ser apresentada repetidamente; depois dela deve ser rejeitada. Não há permissão recorrente, agenda por dias da semana ou concessão de acesso para intervalo com geração autônoma de várias credenciais.
 
+A equipe relatou que demonstrou o fluxo completo de software: o usuário solicitava a chave e, após aprovação, recebia a credencial digital em seu dashboard; o responsável cadastrava edifícios e trancas e aprovava ou rejeitava solicitações. A inspeção dos repositórios sustenta os componentes principais desse fluxo, mas também encontrou as divergências de contrato e o endpoint ausente documentados neste levantamento. A tese deverá identificar separadamente o fluxo demonstrado pela equipe e o fluxo reproduzível no estado preservado.
+
 ### 9.4 Exibição e leitura
 
-Abrir o modal consulta uma chave **já emitida**, converte o hexadecimal para bytes e renderiza QR. O botão “Gerar chave de acesso”, nesse contexto, gera a representação gráfica, não uma nova credencial no banco. O leitor embarcado extrai bytes e foi escrito para conferir CMAC localmente. A passagem desse resultado para abertura física não está implementada nos arquivos observados.
+Abrir o modal consulta uma chave **já emitida**, converte o hexadecimal para bytes e renderiza QR. O botão “Gerar chave de acesso”, nesse contexto, gera a representação gráfica, não uma nova credencial no banco. O leitor final extrai bytes e foi escrito para conferir CMAC localmente. O material histórico demonstra a passagem do autenticador HMAC-SHA1 ao acionamento físico. Na demonstração final confirmada pela equipe, o caminho QR Code/AES-CMAC foi executado em uma única operação com a fechadura conectada, demonstrando categoricamente a integração física completa. [H01–H05, W02]
 
 ### 9.5 Registro de uso e histórico
 
@@ -402,7 +410,7 @@ As figuras 1–4 aparecem no PDF como caixas com os nomes dos arquivos; isso foi
 | `relacionamentos.drawio.png` | Cliente/admin, instituição/prédio/sala, chave/tranca e histórico/evento | Modelo conceitual anterior; não corresponde literalmente ao DDL |
 | `uml.png` | Herança de usuário, campos de tipo/status, chave e histórico | Não representa as tabelas/classes ativas em vários pontos; não é uma das quatro figuras incluídas no cap. 5 |
 
-No diagrama físico, existem setas MQTT envolvendo botão de saída e tranca elétrica. Elas representam uma proposta abandonada e não devem ser reproduzidas na nova arquitetura. O protótipo físico confirmado usa ESP32-CAM, transistores, fonte de alimentação e tranca elétrica; esquema, componentes exatos e funções demonstradas ainda serão fornecidos pela equipe. “Contêiner” no C4 também não implica Docker; não há configuração Docker encontrada.
+No diagrama físico, existem setas MQTT envolvendo botão de saída e tranca elétrica. Elas representam uma proposta abandonada e não devem ser reproduzidas na nova arquitetura. O material histórico fornece um diagrama elétrico separado e fotografias do protótipo com ESP32-CAM, 2N2222, módulo de relé, fonte de 12 V e fechadura Papaiz. Essa montagem demonstrou HMAC-SHA1 e acionamento, enquanto o diagrama C4 e o checkout final não documentam corretamente esse circuito. “Contêiner” no C4 também não implica Docker; não há configuração Docker encontrada. [H01–H05]
 
 ### 10.3 Quadro de reconciliação para a escrita
 
@@ -416,7 +424,7 @@ No diagrama físico, existem setas MQTT envolvendo botão de saída e tranca el�
 | “Códigos únicos e temporários” | Reformular como uma credencial por solicitação, reutilizável durante sua janela de validade e inválida fora dela; a validação temporal ainda falta no firmware |
 | “Assinatura e irretratabilidade” | Implementação é MAC simétrico; não sustenta não repúdio isoladamente |
 | “Segredo compartilhado assincronamente” | Proposta abandonada; assume-se provisionamento prévio do identificador e do segredo pelo fornecedor no ESP32-CAM |
-| “Tranca funciona offline” | É a decisão arquitetural: a autorização deve ser validada localmente, sem consulta ao servidor; o firmware atual ainda não implementa toda a decisão temporal nem o acionamento encontrado no protótipo físico |
+| “Tranca funciona offline” | A demonstração final comprovou, de ponta a ponta, leitura, validação AES-CMAC e acionamento sem consulta ao servidor. A aplicação web e a emissão inicial continuam dependentes de rede, e a decisão temporal completa deve ser tratada separadamente |
 | “Revogação de credencial” | Não faz parte do escopo implementado; a impossibilidade de revogar com confiabilidade uma credencial já emitida é um risco aceito da operação offline |
 | “Auditoria e ocupação” | Adota-se a taxonomia de leitura, decisão e acionamento da seção 9.5; entrada, saída e ocupação exigiriam sensores adicionais e não são prometidas |
 | “Projeto praticamente concluído” | A equipe adotou uma entrega de escopo reduzido; não há versões mais novas do firmware nem componentes adicionais fora dos repositórios examinados |
@@ -460,8 +468,8 @@ A classificação corresponde às fontes disponíveis, não ao estado de uma ins
 | --- | --- |
 | RF-00-00 — controle seguro, auditável e automatizado | **Parcial:** API, credenciais e leitor; segurança, atuação e auditoria têm lacunas |
 | RNF-00-00 — confidencialidade, integridade e disponibilidade | **Parcial/não demonstrado:** CMAC presente, mas exposição de segredos e ausência de avaliação global |
-| RF-01-00 — destravar sem internet | **Parcial:** a arquitetura define validação local e o CMAC funciona sem rede; faltam no firmware examinado a checagem temporal e o acionamento físico completo |
-| RF-01-01 — agnóstico ao modelo de tranca elétrica | **Previsto:** falta interface elétrica/driver comprovado |
+| RF-01-00 — destravar sem internet | **Demonstrado:** a maquete executou, de ponta a ponta, leitura, validação AES-CMAC, sinal `HIGH` e acionamento sem rede. A checagem temporal completa permanece uma verificação separada |
+| RF-01-01 — agnóstico ao modelo de tranca elétrica | **Parcial:** interface com relé demonstrada para a Papaiz AA-ERL200P; generalidade para outros modelos não foi avaliada |
 | RF-01-02 — operar após queda de energia | **Não confirmado:** alimentação/contingência não documentadas |
 | RF-01-03 — autonomia mínima de seis horas | **Não confirmado:** sem especificação de bateria ou ensaio |
 | RNF-01-00 — MTTF maior que seis meses | **Não confirmado:** sem cálculo/ensaio/evidência de confiabilidade |
@@ -494,7 +502,7 @@ O PDF repete `RF-10-00` na própria linha e usa `REQ-FUNC-01` para três requisi
 - **Conceitos:** controle de acesso, autenticação/autorização, credencial versus segredo, MAC simétrico, transporte binário por QR, operação offline e suas limitações.
 - **Projeto:** frontend Next.js, API FastAPI, MySQL, domínio hierárquico, modelo de proprietário e formato de 48 bytes.
 - **Implementação:** rotas/repositórios, geração CMAC, conversão hex↔bytes, hooks/serviços, tarefa de leitura embarcada e estágio real de integração.
-- **Resultados:** funcionalidades demonstradas por ensaios que a equipe ainda produzir ou documentar.
+- **Resultados:** demonstração histórica documentada em relatório, fotografias e vídeo, complementada por verificações reproduzíveis que ainda possam ser feitas sobre os artefatos finais.
 - **Discussão:** autonomia versus aprovação individual, segurança do segredo, janela de validade, reutilização, ausência de revogação confiável, sincronização, acessibilidade e limitações.
 
 Não foram encontrados relatórios de testes automatizados ou ensaios físicos nos arquivos inventariados, nem pipeline de CI que forneça seus resultados. Este levantamento realizou inspeção estática, não teste funcional da aplicação ou da placa. A equipe também confirmou que não realizou testes ou avaliação com o público-alvo.
@@ -521,15 +529,19 @@ As seguintes decisões foram confirmadas pela equipe e devem orientar a tese:
 1. O nome oficial é **FLIKE**, em homenagem ao gato de infância de um dos autores; o nome não é uma sigla.
 2. O papel é contextual: qualquer usuário administra as instituições que possui e atua como cliente nas instituições de outras pessoas.
 3. Cada solicitação aprovada gera uma credencial, reutilizável quantas vezes forem necessárias durante sua janela de validade.
-4. A tranca valida a credencial sem consultar o servidor. A impossibilidade de revogar com confiabilidade uma credencial já emitida é um risco aceito.
+4. A arquitetura prevê validação local sem consulta ao servidor. O material histórico demonstra HMAC-SHA1 e acionamento elétrico, e a equipe confirmou que a maquete posteriormente executou de ponta a ponta QR Code, AES-CMAC, sinal `HIGH` e acionamento da fechadura. A integração física completa está demonstrada. O firmware final atualmente preservado não contém o acionamento nem toda a decisão temporal. A impossibilidade de revogar com confiabilidade uma credencial já emitida é um risco aceito.
 5. O fornecedor programa previamente no ESP32-CAM o identificador da tranca e seu segredo; configuração e rotação pelo usuário estão fora do escopo.
 6. A credencial identifica a tranca. Em uma sala com várias trancas, a implementação futura poderá permitir a escolha de uma delas ou configurar o mesmo segredo em todas; a alternativa final ainda precisa ser escolhida.
 7. Gateway, MQTT, Bluetooth, armazenamento S3, aplicativo móvel e as integrações correspondentes foram abandonados.
 8. Não há firmware mais novo fora do repositório, e as mudanças locais não representam uma refatoração ativa conhecida.
-9. O protótipo físico usa ESP32-CAM, transistores, fonte de alimentação e tranca elétrica.
+9. O protótipo físico documentado usa ESP32-CAM, 2N2222, resistores de 1 kΩ, módulo de relé de 12 V, fonte chaveada de 12 V/5 A e fechadura Papaiz AA-ERL200P sem sensor.
 10. Não foram realizados testes ou avaliações com o público-alvo.
+11. Relatório, fotografias e vídeo documentam uma montagem que reconheceu o QR Code, decodificou o payload, verificou HMAC-SHA1, produziu o sinal elétrico e acionou a fechadura. Em 31/08/2026, segundo confirmação da equipe, a maquete também demonstrou de ponta a ponta o protocolo AES-CMAC final com a fechadura conectada. O circuito elétrico é exatamente o mesmo e recebe apenas o sinal `HIGH`. A integração física completa do FLIKE está demonstrada. O ensaio histórico ignorou expiração.
+12. Segundo relato da equipe, o fluxo de software foi demonstrado do pedido à disponibilização da credencial no dashboard, incluindo cadastro de edifícios e trancas e aprovação ou rejeição pelo responsável.
+13. Não haverá desenvolvimento de novas funcionalidades; o trabalho restante é documentação, reconstrução de evidências e verificações possíveis sobre os artefatos existentes.
+14. A sala sensorial da Faculdade de Direito da USP motivou o projeto a partir da experiência de um autor autista e integrante do CAUSP, de reunião com dirigentes e de relatos informais de colegas. Os requisitos foram derivados pela equipe, sem elicitação formal nem avaliação com usuários.
 
-Ainda faltam à equipe fornecer ou decidir: esquema elétrico, lista de componentes e funções demonstradas fisicamente; duração final padrão da janela de validade; escolha para salas com várias trancas; commits usados na demonstração; e evidências dos testes técnicos que serão relatados. A distinção proposta entre leitura, autorização, acionamento e estado da porta está na seção 9.5; entrada, saída e ocupação não serão alegadas sem sensores capazes de comprová-las.
+Ainda faltam à equipe fornecer ou decidir: número do GPIO e versões do firmware usados nos ensaios; eventual fotografia, vídeo ou log da demonstração ponta a ponta final; duração final padrão da janela de validade; escolha para salas com várias trancas; commits usados nas demonstrações; e demais evidências dos testes técnicos. A distinção proposta entre leitura, autorização, acionamento e estado da porta está na seção 9.5; entrada, saída e ocupação não serão alegadas sem sensores capazes de comprová-las.
 
 ## 15. Índice de fontes para conferência
 
@@ -568,5 +580,14 @@ Os caminhos abaixo são relativos à raiz identificada pelo prefixo, para permit
 | W03 | Arquivos locais `src/digital_lock.{cpp,h}` e mudanças locais de `digital_key` |
 | T01 | `pdfs/FLIKE-referencia-2026-08-30.pdf`; `FLIKE/main.tex`, capítulos em `FLIKE/capitulos/` |
 | T02 | PNGs de contexto, aplicação, tranca física, relacionamentos e `uml.png` em `FLIKE/imagens/` |
+| H01 | `materiais/CAUSP_LOCK/main.tex`: relatório histórico, especialmente “Sistema Físico” e “Protótipo” |
+| H02 | `materiais/CAUSP_LOCK/images/causp-lock-protocol-ELETRIC_DIAGRAM.png`: diagrama elétrico histórico |
+| H03 | `materiais/CAUSP_LOCK/images/protótipo.jpg`: fotografia original da bancada |
+| H04 | `materiais/CAUSP_LOCK/images/protótipo_anotado.png`: fotografia anotada da bancada |
+| H05 | [vídeo PCS3732 da demonstração](https://youtu.be/gl5iByZ4_28) |
+| H06 | [Papaiz — ficha técnica da fechadura AA-ERL200P](https://www.papaiz.com.br/content/dam/assa-abloy/americas/latam/papaiz/br/pt/fichas-t%C3%A9cnicas/Ficha%20t%C3%A9cnica%20-%20Fechadura%20El%C3%A9trica%20Sobrepor.pdf) |
+| H07 | [Papaiz — botoeira auxiliar AA-BP01NA](https://www.segurancaeletronica.papaiz.com.br/content/dam/assa-abloy/americas/latam/papaiz/br/pt/seguran%C3%A7a-eletr%C3%B4nica/aa-bp01na/Datasheet%20-%20AA-BP01NA.pdf) |
+| H08 | [FDUSP — notícia oficial sobre a sala](https://direito.usp.br/noticia/e59450c2bb90-fdusp-tera-sala-de-apoio-a-amamentacao-e-de-regulacao-sensorial) |
+| H09 | `docs/ANALISE_MATERIAL_HISTORICO_CAUSP_LOCK.md`: reconstrução, comparação de protocolos e limites de evidência |
 
 Referências conceituais externas usadas apenas para qualificar a terminologia criptográfica: [NIST SP 800-38B — CMAC](https://csrc.nist.gov/pubs/sp/800/38/b/upd1/final) e [NIST — Message Authentication Code](https://csrc.nist.gov/glossary/term/message_authentication_code). A bibliografia acadêmica já presente no TCC não foi validada bibliograficamente neste trabalho; suas entradas não devem ser consideradas verificadas por este documento.

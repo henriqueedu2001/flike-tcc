@@ -13,6 +13,8 @@ As duas fontes internas centrais são:
 
 As regras editoriais e institucionais extraídas dos materiais fornecidos pela equipe estão consolidadas em `docs/ORIENTACOES_INSTITUCIONAIS_TCC.md`. Esse documento deverá integrar a verificação de todas as rodadas.
 
+O projeto histórico do Laboratório de Processadores, incluindo circuito, fotografias e vídeo da demonstração, foi analisado em `docs/ANALISE_MATERIAL_HISTORICO_CAUSP_LOCK.md`. Ele documenta a etapa HMAC-SHA1 que antecedeu o protocolo AES-CMAC final. Segundo confirmação da equipe, a maquete foi remontada e realizou uma nova demonstração ponta a ponta com o protocolo final em 31/08/2026.
+
 ### 1.1 Estado da execução em 01/09/2026
 
 | Passo | Estado | Registro |
@@ -20,40 +22,41 @@ As regras editoriais e institucionais extraídas dos materiais fornecidos pela e
 | Fase A, passo 0 | aprovado | Processo incremental aprovado pela equipe. |
 | Fase A, passo 1 | concluído | 50 monografias de 2024 e 2025 coletadas e validadas. |
 | Fase A, passo 2 | aprovado | 50 fichas concluídas; padrão técnico, detalhado e visual aprovado pela equipe. |
-| Fase A, passo 3 | próximo | Fechar pergunta, objetivos, escopo e limitações com a equipe. |
-| Fase A, passo 4 | pendente | Fixar vocabulário e alegações após a aprovação do contrato do TCC. |
+| Fase A, passo 3 | aprovado | Contrato acadêmico aprovado pela equipe em 01/09/2026. |
+| Fase A, passo 4 | aprovado | Vocabulário e alegações controladas revisados e aprovados pela equipe em 01/09/2026. |
 
 ## 2. Tese central proposta
 
-A monografia deve apresentar o FLIKE como o **projeto e protótipo de um sistema de controle de acesso físico**, composto por aplicação web, API, banco de dados, credenciais temporárias em QR Code e uma tranca baseada em ESP32-CAM. Sua decisão arquitetural característica é permitir que a tranca autentique a credencial e verifique sua janela de validade localmente, sem consultar o servidor no momento do acesso.
+A formulação completa e aprovada deste bloco está em `docs/CONTRATO_ACADEMICO_TCC.md`. Esse documento prevalece em caso de diferença de detalhamento.
 
-A contribuição acadêmica não deve ser formulada como a comprovação de que o sistema resolveu o problema de acessibilidade ou atingiu segurança de produção. Não houve avaliação com o público-alvo, e partes da integração embarcada permanecem incompletas. A contribuição defensável é:
+A monografia deve apresentar o FLIKE como o **projeto e protótipo de um sistema de controle de acesso físico**, composto por aplicação web, API, banco de dados, credenciais temporárias em QR Code e uma tranca baseada em ESP32-CAM. Sua decisão arquitetural característica é autenticar a credencial localmente, sem consultar o servidor no momento da leitura. A janela temporal faz parte do formato e da política pretendida, mas sua verificação completa não foi localizada no firmware preservado.
+
+A contribuição acadêmica não deve ser formulada como a comprovação de que o sistema resolveu o problema de acessibilidade ou atingiu segurança de produção. Não houve avaliação com o público-alvo. O material histórico demonstra leitura e decodificação do QR Code, autenticação HMAC-SHA1 e acionamento da fechadura. Depois da migração, a equipe realizou testes bem-sucedidos de QR Code e AES-CMAC. Em 31/08/2026, a maquete executou em uma única demonstração a leitura do QR Code, a validação local por AES-CMAC, a emissão do sinal `HIGH` e o acionamento da fechadura. A integração física completa está demonstrada e deverá ser afirmada categoricamente na tese. O checkout atualmente preservado não contém todo o acionamento usado no ensaio. A contribuição defensável é:
 
 1. a especificação de uma solução de acesso voltada à redução de interações humanas obrigatórias;
 2. a arquitetura integrada de frontend, backend, protocolo de credencial e dispositivo embarcado;
 3. a implementação dos componentes descritos no estado real do projeto;
 4. a análise técnica dos resultados, das limitações e dos riscos da validação offline.
 
-### 2.1 Pergunta de projeto sugerida
+### 2.1 Pergunta de pesquisa proposta
 
-> Como projetar e prototipar um sistema de controle de acesso por QR Code que reduza interações humanas obrigatórias e permita a validação local de credenciais temporárias por uma tranca embarcada?
+> Como projetar e implementar um protótipo de controle de acesso físico para espaços institucionais compartilhados que integre a gestão web de permissões a credenciais temporárias em QR Code autenticadas localmente por uma tranca eletrônica, sem consulta ao servidor no momento da leitura?
 
 Essa formulação deve ser validada com o orientador. Ela evita prometer benefícios humanos não medidos e mantém no centro os dois aspectos distintivos do trabalho: acessibilidade como motivação de projeto e validação local como decisão técnica.
 
 ### 2.2 Objetivo geral sugerido
 
-Projetar, implementar e avaliar tecnicamente um protótipo de controle de acesso composto por aplicação web, backend e tranca embarcada, capaz de emitir credenciais temporárias em QR Code e validá-las localmente para autorizar o acesso a um espaço físico.
+Projetar, implementar e documentar tecnicamente o FLIKE, um protótipo de controle de acesso físico que gerencia solicitações e permissões por meio de uma aplicação web e utiliza credenciais temporárias em QR Code autenticadas localmente por um dispositivo baseado em ESP32-CAM para acionar uma fechadura elétrica.
 
 ### 2.3 Objetivos específicos sugeridos
 
-1. Caracterizar o problema de acesso ao espaço e as barreiras que motivaram o projeto.
-2. Especificar requisitos funcionais, não funcionais e de acessibilidade compatíveis com o escopo efetivamente adotado.
-3. Projetar a arquitetura e o modelo de dados do sistema.
-4. Implementar os fluxos web de cadastro, solicitação, aprovação e consulta de credenciais.
-5. Definir e implementar o formato binário da credencial autenticada por AES-CMAC.
-6. Implementar no ESP32-CAM a leitura do QR Code e a validação local possível no protótipo.
-7. Integrar e demonstrar o circuito com a tranca elétrica no nível efetivamente alcançado.
-8. Avaliar tecnicamente componentes e fluxos selecionados, registrando resultados, limitações e requisitos não atendidos.
+1. Caracterizar o cenário de acesso à sala sensorial que motivou o projeto e explicitar a origem e os limites das informações usadas nessa caracterização.
+2. Especificar os requisitos funcionais, não funcionais e de acessibilidade derivados pela equipe para o protótipo.
+3. Projetar a arquitetura, o modelo de dados e os fluxos de interação entre usuários, proprietários de instituições, aplicação web, API e trancas.
+4. Implementar os fluxos de software para cadastro e autenticação, gestão de instituições, edifícios e trancas, solicitação e decisão de acesso, emissão da credencial e disponibilização do QR Code.
+5. Definir e implementar um formato binário de credencial que identifique a tranca e a janela de validade e que seja autenticado por AES-CMAC antes de ser codificado em QR Code.
+6. Desenvolver um protótipo embarcado capaz de ler e decodificar o QR Code, verificar localmente sua autenticidade e produzir o sinal necessário para acionar uma fechadura elétrica por meio de um circuito de potência.
+7. Confrontar os requisitos e objetivos com o código, a documentação e as demonstrações disponíveis, registrando o nível de realização, as limitações, os riscos e os elementos que não puderam ser reproduzidos ou avaliados.
 
 ## 3. Delimitação editorial do escopo
 
@@ -182,7 +185,7 @@ Estrutura proposta:
 3. **Projeto da solução:** decomposição entre frontend, backend, protocolo, firmware e circuito.
 4. **Implementação:** ambientes, repositórios, tecnologias, integração e controle de versões.
 5. **Procedimento de avaliação:** testes definidos, métricas, equipamentos, versões e critérios de aprovação.
-6. **Tratamento das limitações:** ausência de estudo com participantes, lacunas de integração e distinção entre inspeção estática, teste e demonstração física.
+6. **Tratamento das limitações:** ausência de estudo com participantes, lacunas de preservação e reprodutibilidade e distinção entre inspeção estática, testes isolados e a demonstração física ponta a ponta final.
 
 Informações que a equipe deverá fornecer:
 
@@ -267,7 +270,7 @@ O conjunto final dependerá do estado executável dos componentes e da disponibi
 | Protocolo | vetor comum Python/C++, 48 bytes, bytes nulos/altos, tamanho inválido e tag alterada | entradas, saídas esperadas e observadas |
 | Validação | segredo correto/incorreto, tranca correta/incorreta, antes/durante/depois da validade | tabela de decisões e timestamps controlados |
 | Autorização web | usuário comum, proprietário, acesso indevido e rotas sensíveis | requisição, resposta e requisito relacionado |
-| Fluxo integrado | solicitação → aprovação → QR → leitura → decisão → acionamento possível | roteiro, capturas/logs e pontos incompletos |
+| Fluxo integrado | solicitação → aprovação → QR → leitura → validação AES-CMAC → sinal `HIGH` → acionamento da fechadura | roteiro, capturas, logs, versão do firmware e registro visual da execução ponta a ponta |
 | Leitura óptica | distância, ângulo, brilho, tamanho do QR e tempo de leitura | protocolo, repetições, taxa de sucesso e latência |
 | Hardware | acionamento, alimentação e comportamento observado da tranca | esquema, fotos/vídeo, medições e condições |
 | Acessibilidade | inspeção heurística/técnica da interface, claramente separada de teste com usuários | critérios, achados e limitações |
@@ -284,7 +287,7 @@ Estrutura proposta, preservando as três seções atuais:
 
 1. **Conclusões do Projeto de Formatura:** retomar problema e objetivo geral; sintetizar os resultados por objetivo específico; declarar o nível de integração alcançado e os requisitos não atendidos.
 2. **Contribuições:** separar contribuição da equipe, artefatos produzidos e aprendizados técnicos. Não atribuir ao FLIKE impacto social não avaliado.
-3. **Perspectivas de Continuidade:** integração completa do firmware e do atuador, validação temporal confiável, endurecimento de segurança, provisionamento do segredo, auditoria física e avaliação futura com o público-alvo.
+3. **Perspectivas de Continuidade:** validação temporal confiável, endurecimento de segurança, provisionamento do segredo, auditoria física e avaliação futura com o público-alvo. A integração já demonstrada entre firmware e atuador será apresentada como resultado do trabalho, não como perspectiva futura.
 
 Critério de conclusão: cada afirmação de sucesso deverá estar apoiada por uma evidência apresentada no capítulo 5; cada limitação material deverá aparecer explicitamente.
 
@@ -374,17 +377,17 @@ Se algum teste não puder ser feito, a equipe decidirá entre reduzir o requisit
 
 ### Próxima ação
 
-A próxima rodada será o **passo 3**. Assistente e equipe fecharão pergunta de pesquisa, objetivo geral, objetivos específicos, escopo e limitações antes de modificar os capítulos. As orientações institucionais fornecidas já foram incorporadas ao planejamento; regras específicas de 2026 e decisões do orientador serão acrescentadas quando estiverem disponíveis.
+O **passo 4** foi aprovado pela equipe em 01/09/2026. A Fase A está encerrada. A próxima rodada iniciará a reconstrução dos requisitos do Capítulo 4 no passo 5.
 
 ### Acompanhamento da Fase A
 
 | Passo | Estado | Registro | Próxima ação |
 | --- | --- | --- | --- |
 | 0. Validar o processo | **Aprovado** | Plano de trabalho aprovado pela equipe em 31/08/2026 | Concluído |
-| 1. Receber referências | **Concluído** | 50 monografias e sete materiais institucionais organizados e examinados | Incorporar futuros documentos quando fornecidos |
+| 1. Receber referências | **Concluído** | 50 monografias, sete materiais institucionais e o projeto histórico do Laboratório de Processadores organizados e examinados | Incorporar futuros documentos quando fornecidos |
 | 2. Analisar as boas teses | **Aprovado** | 50 fichas e síntese comparativa; equipe escolheu padrão técnico, detalhado e visual em 01/09/2026 | Concluído |
-| 3. Fechar o contrato do TCC | **Próximo** | Padrão editorial e orientações institucionais disponíveis | Preparar alternativas para pergunta, objetivos, escopo e limitações |
-| 4. Fixar vocabulário e alegações | **Não iniciado** | Depende do passo 3 | Consolidar terminologia e alegações permitidas |
+| 3. Fechar o contrato do TCC | **Aprovado** | Pergunta, objetivo geral, sete objetivos específicos, escopo e limitações aprovados em 01/09/2026 | Concluído |
+| 4. Fixar vocabulário e alegações | **Aprovado** | Dicionário editorial, auditoria inicial, distinção HMAC-SHA1 histórico × AES-CMAC final e demonstração física ponta a ponta registrados e aprovados em 01/09/2026 | Concluído |
 
 ## 7. Fontes e informações a solicitar à equipe
 
@@ -519,5 +522,6 @@ A equipe aprovou a dinâmica de trabalho e o padrão editorial:
 6. começar pelas teses de referência, sem modificar os capítulos nessa primeira análise;
 7. adotar texto técnico e detalhado;
 8. usar diagramas, tabelas, esquemas e fotografias em quantidade suficiente para documentar o projeto.
+9. no início e no encerramento de cada passo, informar explicitamente o que a equipe precisa fornecer, revisar, decidir ou aprovar; quando nenhuma ação for necessária, declarar isso de forma direta.
 
-As teses de referência e as orientações institucionais já foram analisadas. A tese central, a pergunta, os objetivos e o escopo serão fechados no passo 3, que é a próxima rodada. Cada parte do conteúdo continuará sujeita aos portões específicos descritos na seção 6.
+As teses de referência e as orientações institucionais já foram analisadas. A tese central, a pergunta, os objetivos e o escopo foram aprovados no passo 3. O vocabulário e as alegações controladas foram aprovados no passo 4. Cada parte do conteúdo continuará sujeita aos portões específicos descritos na seção 6.
