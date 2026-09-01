@@ -1,0 +1,7 @@
+# Project-local compiler, downloaded TeX resources and generated files.
+/.tools/
+/.cache/
+/build/
+/pdfs/FLIKE.pdf
+/pdfs/.FLIKE-*
+__pycache__/

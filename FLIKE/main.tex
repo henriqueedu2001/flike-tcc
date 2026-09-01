@@ -52,8 +52,25 @@
 % Pacotes básicos 
 % ---
 \usepackage{lmodern}			% Usa a fonte Latin Modern			
-\usepackage[T1]{fontenc}		% Selecao de codigos de fonte.
-\usepackage[utf8]{inputenc}		% Codificacao do documento (conversão automática dos acentos)
+\usepackage{iftex}
+\ifPDFTeX
+    \usepackage[T1]{fontenc}
+    \usepackage[utf8]{inputenc}
+\else
+    % Tectonic/XeTeX: fontes Unicode preservam acentos e travessões literais.
+    \usepackage{fontspec}
+    \defaultfontfeatures{Ligatures=TeX}
+    % Nomes de arquivos do pacote TeX: não dependem das fontes do sistema.
+    \setmainfont{lmroman12-regular.otf}[
+        BoldFont=lmroman12-bold.otf,
+        ItalicFont=lmroman12-italic.otf,
+        BoldItalicFont=lmroman10-bolditalic.otf]
+    \setsansfont{lmsans10-regular.otf}[
+        BoldFont=lmsans10-bold.otf,
+        ItalicFont=lmsans10-oblique.otf,
+        BoldItalicFont=lmsans10-boldoblique.otf]
+    \setmonofont{lmmono10-regular.otf}[ItalicFont=lmmono10-italic.otf]
+\fi
 \usepackage{indentfirst}		% Indenta o primeiro parágrafo de cada seção.
 \usepackage{color}				% Controle das cores
 \usepackage{graphicx}			% Inclusão de gráficos
@@ -127,6 +144,7 @@
 % informações do PDF
 \makeatletter
 \hypersetup{
+        hypertexnames=false,     % Âncoras únicas mesmo quando a paginação reinicia.
      	%pagebackref=true,
 		pdftitle={\@title}, 
 		pdfauthor={\@author},
@@ -485,19 +503,25 @@ To ensure the security of the physical space, CAUSP-LOCK generates single-use, t
 \textual
 
 % Capítulo 1. Introdução
-\include{capitulos/Cap1-Intro}
+% Um único .aux para a bibliografia global; as quebras de página são mantidas.
+\input{capitulos/Cap1-Intro}
+\clearpage
 
 % Capítulo 2. Aspectos Conceituais
-\include{capitulos/Cap2-Conceitos}
+\input{capitulos/Cap2-Conceitos}
+\clearpage
 
 % Capítulo 3. Metodologia do Trabalho
-\include{capitulos/Cap3-Metodo}
+\input{capitulos/Cap3-Metodo}
+\clearpage
 
 % Capítulo 4. Especificação de Requisitos
-\include{capitulos/Cap4-Especificacao}
+\input{capitulos/Cap4-Especificacao}
+\clearpage
 
 % Capítulo 5. Desenvolvimento do Trabalho
-\include{capitulos/Cap5-Desenvolvimento}
+\input{capitulos/Cap5-Desenvolvimento}
+\clearpage
 
 % ---
 % Capitulo com exemplos de comandos inseridos de arquivo externo 
@@ -518,7 +542,8 @@ To ensure the security of the physical space, CAUSP-LOCK generates single-use, t
 % Conclusão
 % ---
 % Capítulo 6. Considerações Finais
-\include{capitulos/Cap6-Consideracoes}
+\input{capitulos/Cap6-Consideracoes}
+\clearpage
 
 % ----------------------------------------------------------
 % ELEMENTOS PÓS-TEXTUAIS
