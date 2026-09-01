@@ -377,7 +377,7 @@ Se algum teste não puder ser feito, a equipe decidirá entre reduzir o requisit
 
 ### Próxima ação
 
-O **passo 4** foi aprovado pela equipe em 01/09/2026. A Fase A está encerrada. A próxima rodada iniciará a reconstrução dos requisitos do Capítulo 4 no passo 5.
+O **passo 5** foi aprovado pela equipe em 01/09/2026. A estrutura, os requisitos, os critérios de verificação e as decisões P1–P8 estão registrados em `docs/PROPOSTA_REQUISITOS_CAPITULO_4.md`. A próxima rodada iniciará o passo 6 com a reescrita incremental do primeiro grupo do Capítulo 4.
 
 ### Acompanhamento da Fase A
 
@@ -388,6 +388,13 @@ O **passo 4** foi aprovado pela equipe em 01/09/2026. A Fase A está encerrada. 
 | 2. Analisar as boas teses | **Aprovado** | 50 fichas e síntese comparativa; equipe escolheu padrão técnico, detalhado e visual em 01/09/2026 | Concluído |
 | 3. Fechar o contrato do TCC | **Aprovado** | Pergunta, objetivo geral, sete objetivos específicos, escopo e limitações aprovados em 01/09/2026 | Concluído |
 | 4. Fixar vocabulário e alegações | **Aprovado** | Dicionário editorial, auditoria inicial, distinção HMAC-SHA1 histórico × AES-CMAC final e demonstração física ponta a ponta registrados e aprovados em 01/09/2026 | Concluído |
+
+### Acompanhamento da Fase B
+
+| Passo | Estado | Registro | Próxima ação |
+| --- | --- | --- | --- |
+| 5. Planejar o Capítulo 4 | **Aprovado** | Estrutura, 14 requisitos funcionais, quatro não funcionais, quatro de acessibilidade, critérios de verificação e decisões P1–P8 aprovados em 01/09/2026 | Concluído |
+| 6. Reescrever o Capítulo 4 | **Não iniciado** | A reescrita será dividida em grupos pequenos conforme o catálogo aprovado | Iniciar origem, método, limites, escopo, atores e entidades; submeter o bloco à equipe |
 
 ## 7. Fontes e informações a solicitar à equipe
 
