@@ -6,7 +6,7 @@ Este capítulo apresenta os requisitos que delimitam o FLIKE e orientam a análi
 
 O problema que motivou o FLIKE foi identificado a partir da experiência de um dos autores, pessoa autista e integrante do Coletivo Autista da USP, de sua participação em uma reunião com dirigentes da Faculdade de Direito da Universidade de São Paulo e de relatos informais de colegas sobre dificuldades para acessar a sala de apoio à amamentação e regulação sensorial. Essas fontes indicaram à equipe um processo dependente da retirada e da liberação de chaves por funcionários, sem um protocolo suficientemente previsível para os potenciais usuários do espaço.
 
-Não foram realizadas entrevistas estruturadas, questionários, observações sistemáticas ou sessões de validação com o público-alvo. Consequentemente, os requisitos apresentados neste capítulo devem ser entendidos como requisitos de projeto definidos pelos autores, e não como necessidades validadas empiricamente junto a pessoas autistas, pessoas neurodivergentes ou usuárias da sala. A redução de interações presenciais e a preocupação com estímulos sensoriais orientam o projeto, mas seus efeitos sobre autonomia, constrangimento ou sobrecarga cognitiva não foram medidos.
+Não foram realizadas entrevistas estruturadas, questionários, observações sistemáticas ou sessões de validação com o público-alvo. Consequentemente, os requisitos apresentados neste capítulo devem ser entendidos como requisitos de projeto definidos pelos autores, e não como necessidades validadas empiricamente junto a pessoas autistas, pessoas neurodivergentes ou usuárias da sala. Em estudo qualitativo com adultos autistas, previsibilidade, disponibilidade antecipada de informações e flexibilidade nos meios de comunicação apareceram entre os fatores relacionados à acessibilidade de espaços públicos \cite{maclennan2023sensory}. Esses resultados fundamentam a direção adotada pela equipe, mas não demonstram que o FLIKE produza os mesmos efeitos. A redução de interações presenciais e a preocupação com estímulos sensoriais orientam o projeto, porém seus efeitos sobre autonomia, constrangimento ou sobrecarga cognitiva não foram medidos.
 
 O catálogo foi consolidado retrospectivamente a partir dos enunciados produzidos no início do trabalho, do protótipo desenvolvido na disciplina Laboratório de Processadores, das decisões tomadas durante a implementação e do comportamento observado nos componentes de software, firmware e hardware. Essa consolidação também incorporou as decisões finais de escopo, como o uso exclusivo de uma aplicação web, a associação da credencial a uma tranca digital e a validação local por AES-CMAC. Propostas abandonadas, como aplicativo móvel, Bluetooth, MQTT, gateway e armazenamento S3, não integram os requisitos finais.
 
@@ -18,9 +18,9 @@ O FLIKE abrange o cadastro e a autenticação de usuários; a representação de
 
 A administração é contextual. Qualquer usuário autenticado pode ser responsável pelas instituições das quais é proprietário e, simultaneamente, solicitar acesso a instituições pertencentes a outras pessoas. Não existe uma classe distinta de cliente, um papel global de administrador, um superadministrador ou, no modelo implementado, a associação de vários responsáveis à mesma instituição.
 
-A aplicação web e a API dependem de conectividade para cadastro, autenticação, gestão, solicitação, decisão e obtenção inicial da credencial. A operação local refere-se ao momento em que a credencial já emitida é apresentada à tranca: a ESP32-CAM deve avaliá-la e comandar o circuito sem consultar o servidor. Essa escolha aceita como limitação a impossibilidade de revogar com confiabilidade uma credencial ainda válida quando o dispositivo não recebe atualizações do servidor.
+A aplicação web e a API dependem de conectividade para cadastro, autenticação, gestão, solicitação, decisão e obtenção inicial da credencial. A operação local refere-se ao momento em que a credencial já emitida é apresentada à tranca: a ESP32-CAM deve avaliá-la e comandar o circuito sem consultar o servidor. Arquiteturas nas quais a tranca não mantém comunicação direta com o servidor apresentam um compromisso entre disponibilidade local e consistência do estado de autorização, inclusive diante de revogações \cite{ho2016smartlocks}. No FLIKE, essa escolha implica aceitar a impossibilidade de revogar com confiabilidade uma credencial ainda válida quando o dispositivo não recebe atualizações do servidor.
 
-Não fazem parte do escopo final um aplicativo móvel, a implantação operacional na Faculdade de Direito, a configuração ou a rotação do segredo pelo usuário, a comprovação de entrada, saída ou ocupação da sala e a avaliação de impacto junto ao público-alvo. A credencial registra uma autorização para determinada tranca e janela de validade; sua apresentação e o acionamento elétrico não comprovam, isoladamente, que uma pessoa abriu a porta ou entrou no ambiente.
+Não fazem parte do escopo final um aplicativo móvel, a implantação operacional na Faculdade de Direito, a configuração ou a rotação do segredo pelo usuário, a comprovação de entrada, saída ou ocupação da sala e a avaliação de impacto junto ao público-alvo. O CMAC oferece autenticação da origem e integridade de uma mensagem sob a premissa de que o segredo simétrico compartilhado permaneça protegido \cite{nist2005cmac,barker2020keymanagement}; a representação dessa mensagem em QR Code, contudo, pode ser copiada ou redistribuída \cite{kieseberg2010qrcode}. Assim, a credencial registra uma autorização para determinada tranca e janela de validade, mas sua apresentação e o acionamento elétrico não comprovam, isoladamente, qual pessoa física apresentou o código, abriu a porta ou entrou no ambiente.
 
 \section{Atores e entidades do domínio}
 
@@ -98,6 +98,54 @@ A representação hierárquica da estrutura física permite determinar a institu
 \textbf{Justificativa:} solicitações e credenciais precisam ser associadas a recursos físicos identificáveis e ao responsável autorizado a decidir sobre eles. A hierarquia instituição--edifício--sala--tranca fornece essa associação sem atribuir a administração a um papel global.
 
 \textbf{Critério de verificação:} criar, consultar, alterar e excluir recursos em cada nível da hierarquia; verificar a preservação dos vínculos entre os níveis; rejeitar operações executadas por usuário que não seja proprietário da instituição; e impedir exclusões que violem relações ainda existentes.
+
+\subsection{Solicitação e decisão de acesso}
+
+O FLIKE representa a obtenção de acesso como um fluxo explícito: o usuário seleciona a tranca, registra uma solicitação, acompanha seu estado e aguarda a decisão do responsável pela instituição. Essa organização foi concebida pela equipe para aumentar a previsibilidade do processo e reduzir a necessidade de negociação presencial no momento da entrada. A decisão é coerente com relatos de adultos autistas sobre a importância de informações antecipadas e de alternativas à comunicação falada em espaços públicos \cite{maclennan2023sensory}. Entretanto, como não houve avaliação com usuários do FLIKE, essa relação constitui uma justificativa de projeto, e não evidência de benefício produzido pelo protótipo.
+
+\subsubsection*{RF-04 --- Identificação da tranca destinatária}
+
+\textbf{Enunciado:} toda solicitação de acesso deve identificar exatamente uma tranca digital destinatária.
+
+\textbf{Justificativa:} a credencial é autenticada para uma tranca, e não genericamente para uma sala. A identificação explícita evita que o sistema escolha silenciosamente um atuador quando uma sala possuir mais de uma tranca.
+
+\textbf{Critério de verificação:} criar uma solicitação e confirmar o identificador da tranca selecionada; em uma sala com várias trancas, exigir a escolha explícita e verificar que a solicitação preserva essa escolha.
+
+\subsubsection*{RF-05 --- Solicitação e acompanhamento}
+
+\textbf{Enunciado:} o usuário autenticado deve poder solicitar uma credencial para uma tranca e acompanhar o estado \texttt{pending}, \texttt{approved} ou \texttt{rejected} da solicitação.
+
+\textbf{Justificativa:} o estado torna visível se o pedido aguarda decisão, foi aceito ou foi recusado. A consulta deve estar disponível ao solicitante e não pressupõe que a aprovação seja automática.
+
+\textbf{Critério de verificação:} submeter uma solicitação autenticada; consultar o pedido na conta que o criou; observar as três transições previstas; e impedir que outro solicitante altere o estado.
+
+\subsubsection*{RF-06 --- Decisão pelo responsável}
+
+\textbf{Enunciado:} o responsável pela instituição destinatária deve poder consultar e aprovar ou rejeitar solicitações pendentes.
+
+\textbf{Justificativa:} a autorização administrativa pertence ao usuário proprietário da instituição à qual a tranca está vinculada. Um papel global de administrador não faz parte do domínio.
+
+\textbf{Critério de verificação:} confirmar que o proprietário correto visualiza e decide o pedido uma única vez; que um usuário sem propriedade não consegue decidi-lo; e que uma solicitação já decidida não retorna ao estado pendente por repetição da operação.
+
+\subsection{Emissão e apresentação da credencial}
+
+A decisão administrativa e a emissão da credencial são etapas distintas do fluxo. A aprovação deve produzir uma credencial associada ao pedido, ao solicitante e à tranca destinatária, enquanto a rejeição encerra o pedido sem emitir credencial. A política de uma credencial por solicitação não significa uso único: o mesmo QR Code pode ser reapresentado enquanto permanecer dentro de sua janela de validade. A composição e a validação temporal da credencial serão especificadas nos requisitos dedicados ao protocolo e à tranca.
+
+\subsubsection*{RF-07 --- Emissão condicionada à aprovação}
+
+\textbf{Enunciado:} cada solicitação aprovada deve gerar uma credencial digital, enquanto uma solicitação rejeitada não deve gerar credencial.
+
+\textbf{Justificativa:} a credencial materializa a autorização concedida e precisa manter relação inequívoca com o pedido, o usuário e a tranca destinatária.
+
+\textbf{Critério de verificação:} comparar solicitações e credenciais antes e depois de aprovar e rejeitar pedidos; verificar a existência de exatamente uma credencial para a aprovação e nenhuma para a rejeição; e confirmar os vínculos com o solicitante e a tranca.
+
+\subsubsection*{RF-08 --- Consulta e apresentação da credencial}
+
+\textbf{Enunciado:} o usuário deve poder consultar suas credenciais emitidas e apresentar o QR Code correspondente durante a janela de validade.
+
+\textbf{Justificativa:} após a aprovação, o titular precisa recuperar a representação visual utilizada pela tranca. O requisito admite exibição persistente no painel, download para o aparelho ou solução equivalente, desde que a credencial permaneça acessível durante sua vigência. Ele não exige um aplicativo móvel nem implica operação offline da aplicação web.
+
+\textbf{Critério de verificação:} autenticar o solicitante após a aprovação; recuperar a credencial emitida; renderizar o QR Code correto; confirmar sua disponibilidade durante a janela de validade; e impedir que outra conta consulte a credencial sem autorização.
 
 % O conteúdo legado abaixo será substituído nos próximos blocos do passo 6.
 \clearpage

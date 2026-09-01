@@ -1,6 +1,6 @@
 # FLIKE — proposta do bloco 3 do Capítulo 4
 
-**Estado:** aguardando aprovação da equipe
+**Estado:** aprovado pela equipe
 
 **Rodada:** Fase B, passo 6, bloco 3
 
@@ -16,7 +16,7 @@ O bloco 3 tratará do fluxo que começa na escolha da tranca e termina na dispon
 4. emissão de uma credencial por solicitação aprovada;
 5. consulta e apresentação do QR Code pelo usuário.
 
-Esta proposta ainda não altera `FLIKE/capitulos/Cap4-Especificacao.tex`. A edição será feita somente depois da aprovação do escopo e do mapa de fontes abaixo.
+O escopo e o mapa de fontes abaixo foram autorizados pela equipe em 01/09/2026. A implementação da rodada está registrada na Seção 9.
 
 Não integrarão este bloco:
 
@@ -123,16 +123,16 @@ Os seguintes trechos não precisam de citação externa:
 
 ## 6. Alterações bibliográficas previstas
 
-Na redação do bloco, as entradas efetivamente citadas serão integradas a `FLIKE/referencias/abntex2-modelo-references.bib`. A compilação deverá confirmar:
+Na redação do bloco, as entradas efetivamente citadas foram integradas a `FLIKE/referencias/abntex2-modelo-references.bib`. A compilação confirmou:
 
 1. ausência de chaves indefinidas;
 2. formatação pelo estilo ABNT já usado no projeto;
 3. citação no mesmo parágrafo da afirmação sustentada;
 4. nenhuma obra presente apenas na bibliografia sem chamada no texto.
 
-## 7. Verificação da futura edição
+## 7. Verificação da edição
 
-Depois da aprovação desta proposta, a redação do bloco 3 deverá passar por:
+Depois da autorização desta proposta, a redação do bloco 3 passou por:
 
 1. conferência de RF-04 a RF-08 contra o catálogo aprovado;
 2. auditoria das afirmações externas e das citações dos blocos 1 a 3;
@@ -140,12 +140,47 @@ Depois da aprovação desta proposta, a redação do bloco 3 deverá passar por:
 4. inspeção de referências indefinidas, avisos bibliográficos e conteúdo legado remanescente;
 5. apresentação do diff e do PDF para revisão da equipe.
 
-## 8. Portão de saída
+## 8. Portão de revisão
 
-Para autorizar a redação, a equipe deve revisar somente:
+Para aprovar a redação produzida, a equipe deve revisar:
 
 1. se RF-04 a RF-08 representam corretamente o fluxo desejado;
 2. se exibição no painel, download ou solução equivalente devem continuar aceitos em RF-08;
 3. se o mapa distingue adequadamente literatura, decisões dos autores e evidências do projeto.
 
-Com a aprovação desses três pontos, o assistente poderá editar o Capítulo 4, inserir as citações, integrar as entradas BibTeX, compilar a tese e apresentar o bloco 3 concluído.
+Com a aprovação desses três pontos no PDF compilado, o bloco 3 poderá ser consolidado e a proposta do bloco seguinte será preparada.
+
+## 9. Registro da implementação
+
+**Data:** 01/09/2026
+
+**Arquivos da tese alterados:**
+
+- `FLIKE/capitulos/Cap4-Especificacao.tex`;
+- `FLIKE/referencias/abntex2-modelo-references.bib`;
+- `FLIKE/capitulos/Cap6-Consideracoes.tex`, apenas para remover a bibliografia manual legada que duplicava a bibliografia gerada pelo BibTeX.
+
+**Conteúdo produzido:**
+
+- inserção de RF-04 a RF-08, com enunciado, justificativa e critério de verificação;
+- criação das subseções “Solicitação e decisão de acesso” e “Emissão e apresentação da credencial”;
+- auditoria e inserção das citações necessárias nos blocos 1 a 3;
+- integração de cinco entradas bibliográficas efetivamente citadas;
+- remoção da segunda seção de referências, que continha entradas manuais antigas e sem chamadas no texto.
+
+**Citações inseridas:**
+
+- `maclennan2023sensory`: previsibilidade, informação antecipada e alternativas à comunicação falada;
+- `ho2016smartlocks`: compromisso entre disponibilidade local e consistência de revogação;
+- `nist2005cmac` e `barker2020keymanagement`: autenticação de mensagens e premissa de proteção do segredo simétrico;
+- `kieseberg2010qrcode`: possibilidade de copiar ou redistribuir a representação em QR Code.
+
+**Verificações executadas:**
+
+- compilação integral por `./compile.sh`, concluída em 6,3 segundos;
+- PDF final com 49 páginas e cinco referências bibliográficas, todas citadas no texto;
+- nenhuma citação, referência ou chave BibTeX indefinida;
+- inspeção visual do Capítulo 4 e da bibliografia sem texto cortado, sobreposição ou referência duplicada;
+- um aviso não bloqueante de `Underfull \vbox` próximo a RF-01, sem defeito visual observado.
+
+**Estado da rodada:** aprovado pela equipe em 01/09/2026. O conteúdo legado posterior a RF-08 permanece no capítulo de propósito e será substituído nos próximos blocos do passo 6.

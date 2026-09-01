@@ -99,6 +99,10 @@ A escrita será incremental e colaborativa. **Não será produzido um capítulo 
 
 Uma rodada deve produzir uma unidade fácil de revisar: uma decisão editorial, um conjunto pequeno de requisitos, uma subseção, um diagrama ou uma tabela de resultados. Quando uma etapa do plano envolver várias subseções, cada subseção será tratada em uma rodada própria.
 
+#### Indicador de progresso
+
+Toda abertura e todo encerramento de rodada informarão explicitamente a fase, o número do passo atual e o progresso global. Como o plano é numerado de 0 a 25, o denominador fixo é de **26 passos**. O percentual será calculado por `número de passos integralmente concluídos / 26 × 100`; blocos internos de um passo em andamento não aumentarão o numerador até a conclusão de todo o passo.
+
 O documento `ARQUITETURA_E_ESTADO_DO_PROJETO.md` continuará funcionando como base factual. Se a equipe fornecer informação técnica nova, primeiro será avaliado se essa base precisa ser atualizada; depois a informação será convertida em texto acadêmico. Assim, correções factuais não ficam escondidas apenas dentro de um capítulo.
 
 #### Registro de cada rodada
@@ -397,7 +401,7 @@ Se algum teste não puder ser feito, a equipe decidirá entre reduzir o requisit
 
 ### Próxima ação
 
-O **passo 6** está em andamento. Os blocos 1 e 2 do Capítulo 4 foram aprovados pela equipe em 01/09/2026. O escopo de RF-04 a RF-08, o mapa de fontes do bloco 3 e a primeira auditoria de citações dos blocos anteriores estão em `docs/PROPOSTA_BLOCO_3_CAPITULO_4.md`, aguardando aprovação antes da edição da tese.
+O **passo 6** está em andamento. Os blocos 1 e 2 e o bloco 3 do Capítulo 4 foram aprovados pela equipe em 01/09/2026. RF-01 a RF-08 estão consolidados. A próxima ação é preparar a proposta do bloco 4, dedicado ao formato e à autenticação da credencial em RF-09.
 
 ### Acompanhamento da Fase A
 
@@ -414,7 +418,7 @@ O **passo 6** está em andamento. Os blocos 1 e 2 do Capítulo 4 foram aprovados
 | Passo | Estado | Registro | Próxima ação |
 | --- | --- | --- | --- |
 | 5. Planejar o Capítulo 4 | **Aprovado** | Estrutura, 14 requisitos funcionais, quatro não funcionais, quatro de acessibilidade, critérios de verificação e decisões P1–P8 aprovados em 01/09/2026 | Concluído |
-| 6. Reescrever o Capítulo 4 | **Em andamento — bloco 3 planejado** | Blocos 1 e 2 aprovados; RF-01 a RF-03 aceitos; proposta de RF-04 a RF-08 e mapa de fontes preparados em 01/09/2026 | Equipe revisar `docs/PROPOSTA_BLOCO_3_CAPITULO_4.md` e autorizar a redação |
+| 6. Reescrever o Capítulo 4 | **Em andamento — bloco 3 aprovado** | Blocos 1 a 3 aprovados; RF-01 a RF-08 consolidados, citados, compilados e inspecionados em 01/09/2026 | Assistente preparar a proposta do bloco 4 para RF-09 |
 
 ## 7. Fontes e informações a solicitar à equipe
 
