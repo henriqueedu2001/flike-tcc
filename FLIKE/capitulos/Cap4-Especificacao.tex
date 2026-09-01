@@ -1,27 +1,106 @@
 \chapter{Especificação de Requisitos} \label{cap:especificacao}
 
-Este capítulo documenta os requisitos do sistema.
-\section{Requisitos do sistema}
-\begin{enumerate}
-    \item [] RF-00-00: O sistema deve permitir o controle seguro, auditável e automatizado de acesso à sala de amamentação e regulação sensorial por meio de chaves digitais baseadas em QR Code.
-    
-    \item [] RNF-00-00: O sistema deve garantir confidencialidade, integridade e disponibilidade das informações, em conformidade com boas práticas de segurança da informação e proteção de dados.
-\end{enumerate}
-    
-\section{Requisitos da tranca física}
-\begin{enumerate}
-    \item [] RF-01-00: A tranca física deve autorizar o acesso ao espaço, destravando a tranca elétrica, sem necessidade de internet.
-    \item [] RF-01-01: A tranca física deve ser agnóstica para a tranca elétrica, permitindo qualquer tipo ou modelo.
-    \item [] RF-01-02: A tranca física deve operar mesmo após uma eventual queda de energia da rede elétrica.
-    \item [] RF-01-03: A tranca física deve operar por no mínimo 6 horas após uma eventual queda de energia da rede elétrica.
-    \item [] RNF-01-00: A tranca física deve ter MTTF (mean time to failure) superior a 6 meses.
-\end{enumerate}
+Este capítulo apresenta os requisitos que delimitam o FLIKE e orientam a análise de seu atendimento. Inicialmente, são descritas a origem dos requisitos, as fronteiras do sistema e as entidades envolvidas. Em seguida, os requisitos são organizados em funcionais, não funcionais e de acessibilidade. Para evitar que uma intenção de projeto seja confundida com um resultado, o estado de atendimento de cada requisito será examinado separadamente, com base em critérios observáveis e nas evidências apresentadas nos capítulos seguintes.
 
-\section{Requisitos da tranca elétrica}
-\begin{enumerate}
-    \item [] RF-02-00: A tranca elétrica pode ser aberta por chaves físicas a qualquer momento, no caso de falha do microcontrolador.
-\end{enumerate}
+\section{Origem e delimitação dos requisitos}
 
+O problema que motivou o FLIKE foi identificado a partir da experiência de um dos autores, pessoa autista e integrante do Coletivo Autista da USP, de sua participação em uma reunião com dirigentes da Faculdade de Direito da Universidade de São Paulo e de relatos informais de colegas sobre dificuldades para acessar a sala de apoio à amamentação e regulação sensorial. Essas fontes indicaram à equipe um processo dependente da retirada e da liberação de chaves por funcionários, sem um protocolo suficientemente previsível para os potenciais usuários do espaço.
+
+Não foram realizadas entrevistas estruturadas, questionários, observações sistemáticas ou sessões de validação com o público-alvo. Consequentemente, os requisitos apresentados neste capítulo devem ser entendidos como requisitos de projeto definidos pelos autores, e não como necessidades validadas empiricamente junto a pessoas autistas, pessoas neurodivergentes ou usuárias da sala. A redução de interações presenciais e a preocupação com estímulos sensoriais orientam o projeto, mas seus efeitos sobre autonomia, constrangimento ou sobrecarga cognitiva não foram medidos.
+
+O catálogo foi consolidado retrospectivamente a partir dos enunciados produzidos no início do trabalho, do protótipo desenvolvido na disciplina Laboratório de Processadores, das decisões tomadas durante a implementação e do comportamento observado nos componentes de software, firmware e hardware. Essa consolidação também incorporou as decisões finais de escopo, como o uso exclusivo de uma aplicação web, a associação da credencial a uma tranca digital e a validação local por AES-CMAC. Propostas abandonadas, como aplicativo móvel, Bluetooth, MQTT, gateway e armazenamento S3, não integram os requisitos finais.
+
+Para tornar os enunciados verificáveis, cada requisito recebe um identificador único e um critério observável. Os requisitos funcionais descrevem comportamentos oferecidos pelo sistema; os não funcionais estabelecem qualidades ou restrições sobre esses comportamentos; e os requisitos de acessibilidade registram critérios técnicos derivados pela equipe. Decisões de implementação, como linguagens, frameworks e modelos de componentes, serão descritas como restrições ou escolhas arquiteturais, sem serem convertidas automaticamente em requisitos.
+
+\section{Escopo e fronteiras do sistema}
+
+O FLIKE abrange o cadastro e a autenticação de usuários; a representação de instituições, edifícios, salas e trancas; a solicitação e a decisão de acesso; a emissão e a apresentação de credenciais digitais em QR Code; a validação local da credencial por um dispositivo baseado em ESP32-CAM; e o acionamento de uma fechadura elétrica. O sistema também contempla consultas administrativas sobre solicitações, credenciais emitidas e seus portadores.
+
+A administração é contextual. Qualquer usuário autenticado pode ser responsável pelas instituições das quais é proprietário e, simultaneamente, solicitar acesso a instituições pertencentes a outras pessoas. Não existe uma classe distinta de cliente, um papel global de administrador, um superadministrador ou, no modelo implementado, a associação de vários responsáveis à mesma instituição.
+
+A aplicação web e a API dependem de conectividade para cadastro, autenticação, gestão, solicitação, decisão e obtenção inicial da credencial. A operação local refere-se ao momento em que a credencial já emitida é apresentada à tranca: a ESP32-CAM deve avaliá-la e comandar o circuito sem consultar o servidor. Essa escolha aceita como limitação a impossibilidade de revogar com confiabilidade uma credencial ainda válida quando o dispositivo não recebe atualizações do servidor.
+
+Não fazem parte do escopo final um aplicativo móvel, a implantação operacional na Faculdade de Direito, a configuração ou a rotação do segredo pelo usuário, a comprovação de entrada, saída ou ocupação da sala e a avaliação de impacto junto ao público-alvo. A credencial registra uma autorização para determinada tranca e janela de validade; sua apresentação e o acionamento elétrico não comprovam, isoladamente, que uma pessoa abriu a porta ou entrou no ambiente.
+
+\section{Atores e entidades do domínio}
+
+Os termos empregados para os atores indicam responsabilidades no sistema e não categorias permanentes de pessoas. Um mesmo usuário pode atuar como solicitante em uma instituição e como responsável em outra. O termo ``administrador'' poderá aparecer ao reproduzir rótulos da interface, mas, no domínio, refere-se ao responsável por uma instituição e não a uma classe separada de conta. O Quadro~\ref{qua:atores-flike} sintetiza esses papéis.
+
+\begin{quadro}[htb]
+    \caption{Atores do FLIKE}
+    \label{qua:atores-flike}
+    \small
+    \begin{tabular}{|p{0.27\textwidth}|p{0.63\textwidth}|}
+        \hline
+        \textbf{Ator} & \textbf{Responsabilidade} \\ \hline
+        Usuário & Pessoa cadastrada que autentica uma conta, solicita acesso e consulta as credenciais emitidas para ela. \\ \hline
+        Responsável & Usuário que administra uma instituição de sua propriedade, sua estrutura física e as solicitações destinadas às respectivas trancas. \\ \hline
+        Fornecedor ou mantenedor & Agente externo que grava previamente no dispositivo o identificador da tranca e o segredo compartilhado. O provisionamento e a rotação desse segredo estão fora do escopo do protótipo. \\ \hline
+    \end{tabular}
+    \fonte{Elaborado pelos autores.}
+\end{quadro}
+
+O Quadro~\ref{qua:entidades-flike} define as entidades centrais empregadas nos requisitos. A distinção entre tranca digital, dispositivo embarcado e fechadura elétrica é necessária porque cada elemento participa de uma etapa diferente da autorização.
+
+\begin{quadro}[htb]
+    \caption{Entidades centrais do FLIKE}
+    \label{qua:entidades-flike}
+    \small
+    \begin{tabular}{|p{0.27\textwidth}|p{0.63\textwidth}|}
+        \hline
+        \textbf{Entidade} & \textbf{Definição} \\ \hline
+        Instituição & Entidade organizacional pertencente a um usuário e composta por um ou mais edifícios. \\ \hline
+        Edifício & Agrupamento físico pertencente a uma instituição e composto por uma ou mais salas. \\ \hline
+        Sala & Espaço físico pertencente a um edifício e associado a uma ou mais trancas digitais. \\ \hline
+        Tranca digital & Registro lógico associado a uma sala, a um identificador e a um segredo criptográfico simétrico. \\ \hline
+        Dispositivo embarcado & Conjunto constituído por ESP32-CAM, câmera, firmware e interface elétrica, responsável pela leitura e pela decisão local. \\ \hline
+        Fechadura elétrica & Atuador físico energizado pelo circuito para permitir o destravamento. \\ \hline
+        Solicitação de acesso & Pedido de uma credencial para uma tranca digital, com estado pendente, aprovado ou rejeitado. \\ \hline
+        Credencial digital & Payload binário emitido para um usuário e uma tranca, autenticado por AES-CMAC e transportado visualmente por um QR Code. \\ \hline
+    \end{tabular}
+    \fonte{Elaborado pelos autores.}
+\end{quadro}
+
+Neste trabalho, ``chave digital'' é um nome legado da interface para a credencial digital. O termo não deve ser confundido com a chave criptográfica simétrica, que permanece no servidor e no dispositivo, nem com uma chave mecânica. A credencial é emitida uma vez por solicitação aprovada e pode ser reapresentada durante sua janela de validade.
+
+\section{Requisitos funcionais}
+
+Os requisitos funcionais descrevem os comportamentos observáveis necessários para realizar o fluxo de controle de acesso. Cada requisito é apresentado por um enunciado normativo, uma justificativa para sua presença no escopo e um critério de verificação. O critério estabelece a evidência esperada, enquanto o estado de atendimento será consolidado posteriormente na matriz de rastreabilidade.
+
+\subsection{Identidade e responsabilidade contextual}
+
+A identidade da conta permite relacionar solicitações e credenciais aos registros do sistema. Essa associação oferece rastreabilidade da conta e da credencial, mas não comprova que a pessoa física titular operou uma sessão ou apresentou o QR Code. A responsabilidade administrativa, por sua vez, decorre da propriedade da instituição e deve ser avaliada em cada operação.
+
+\subsubsection*{RF-01 --- Cadastro e autenticação}
+
+\textbf{Enunciado:} o sistema deve permitir o cadastro e a autenticação de usuários.
+
+\textbf{Justificativa:} os fluxos de solicitação, decisão e consulta de credenciais dependem de uma conta identificável e de uma sessão autenticada. O requisito não inclui autenticação federada, autenticação multifator ou recuperação de senha, que não fazem parte do escopo final.
+
+\textbf{Critério de verificação:} cadastrar uma conta com dados válidos; autenticar essa conta com as credenciais corretas; obter uma sessão aceita por uma operação protegida; e verificar que credenciais incorretas não produzem uma sessão válida.
+
+\subsubsection*{RF-02 --- Responsabilidade contextual}
+
+\textbf{Enunciado:} um usuário autenticado deve poder administrar as instituições das quais é proprietário e solicitar acesso a instituições pertencentes a outros usuários.
+
+\textbf{Justificativa:} o FLIKE não separa permanentemente clientes e administradores. A mesma pessoa pode decidir solicitações no contexto de uma instituição própria e atuar como solicitante em outro contexto. A autorização administrativa deve, portanto, ser derivada da propriedade do recurso acessado.
+
+\textbf{Critério de verificação:} utilizar duas contas e duas instituições para confirmar que cada usuário administra somente a estrutura sob sua propriedade, não consegue modificar a instituição alheia e consegue criar uma solicitação destinada a uma tranca pertencente à outra instituição.
+
+\subsection{Cadastro da estrutura institucional}
+
+A representação hierárquica da estrutura física permite determinar a instituição responsável por uma solicitação e a tranca à qual uma credencial se destina. O cadastro da tranca digital também estabelece o identificador empregado no payload e o segredo necessário à autenticação local.
+
+\subsubsection*{RF-03 --- Gestão de instituições, edifícios, salas e trancas}
+
+\textbf{Enunciado:} o responsável deve poder cadastrar e administrar instituições, edifícios, salas e trancas digitais em uma hierarquia coerente.
+
+\textbf{Justificativa:} solicitações e credenciais precisam ser associadas a recursos físicos identificáveis e ao responsável autorizado a decidir sobre eles. A hierarquia instituição--edifício--sala--tranca fornece essa associação sem atribuir a administração a um papel global.
+
+\textbf{Critério de verificação:} criar, consultar, alterar e excluir recursos em cada nível da hierarquia; verificar a preservação dos vínculos entre os níveis; rejeitar operações executadas por usuário que não seja proprietário da instituição; e impedir exclusões que violem relações ainda existentes.
+
+% O conteúdo legado abaixo será substituído nos próximos blocos do passo 6.
+\clearpage
 \section{Requisitos do microcontrolador}
 \begin{enumerate}
     \item [] RF-03-00: O microcontrolador deve destravar a tranca elétrica mediante a leitura de chaves digitais legítimas pela câmera.

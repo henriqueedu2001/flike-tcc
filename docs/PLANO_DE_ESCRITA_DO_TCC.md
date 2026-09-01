@@ -114,6 +114,24 @@ Cada entrega deverá informar:
 
 Commits poderão acompanhar os marcos aprovados pela equipe. Não será misturada no mesmo commit uma alteração editorial aprovada com experimentos ou mudanças de código sem relação.
 
+#### Protocolo de referências durante a redação
+
+As referências serão inseridas **no corpo do texto durante a redação de cada bloco**, junto das afirmações que sustentam. A etapa final de referências não será usada para acrescentar citações retrospectivamente em massa; ela servirá para auditar, padronizar e eliminar inconsistências no conjunto já construído.
+
+Cada rodada seguirá estas regras:
+
+1. antes da redação, identificar as afirmações que exigem fonte e relacioná-las às fontes disponíveis;
+2. inserir a chamada de citação no mesmo parágrafo da afirmação sustentada e criar ou revisar a respectiva entrada BibTeX na própria rodada;
+3. preferir a fonte primária e registrar página, seção, versão, DOI ou URL quando esses dados forem necessários para localizar a evidência;
+4. não usar uma referência apenas por proximidade temática: a fonte deve sustentar precisamente a afirmação associada a ela;
+5. distinguir quatro formas de sustentação: literatura ou norma recebe citação bibliográfica; comportamento implementado recebe evidência de código ou teste e remissão ao capítulo correspondente; relato da equipe é identificado como relato e explicado no método; requisito ou decisão concebida pelos autores é apresentado como elaboração dos autores;
+6. manter na bibliografia somente obras efetivamente citadas e não citar uma obra que não tenha sido examinada;
+7. impedir a aprovação de um bloco que contenha afirmação externa relevante sem fonte, citação quebrada ou referência bibliográfica incompleta.
+
+Ao apresentar uma rodada para revisão, o assistente deverá informar também quais citações foram inseridas, qual afirmação cada uma sustenta e quais trechos não exigem referência externa por descreverem o próprio projeto. O resumo e o abstract permanecem sem citações, conforme o padrão editorial já definido.
+
+A busca de referências é uma **atividade transversal**, executada antes de cada bloco de redação dos passos 6 a 21. Ela começa no passo 6, antes do bloco 3 do Capítulo 4, e inclui uma auditoria dos blocos 1 e 2 já aprovados. O passo 18 tem uma função mais ampla: realizar a pesquisa bibliográfica dirigida e organizar a fundamentação e os trabalhos relacionados do Capítulo 2. Portanto, o passo 18 aprofunda e sistematiza a bibliografia, mas não adia até esse momento as citações necessárias aos capítulos escritos anteriormente.
+
 ## 4. Estrutura planejada da monografia
 
 A macroestrutura atual será mantida. Subseções podem ser criadas, removidas ou reordenadas para construir uma sequência argumentativa clara. As proporções abaixo são referências editoriais, não metas formais de páginas; deverão ser recalibradas após a leitura das boas teses fornecidas pela equipe e das regras do curso.
@@ -307,7 +325,7 @@ Esses elementos serão finalizados depois do corpo principal, quando contribuiç
 
 ### 5.2 Pós-textuais
 
-- consolidar toda a bibliografia em um único mecanismo BibTeX/ABNT;
+- auditar e padronizar no mecanismo único BibTeX/ABNT as referências que já terão sido inseridas durante cada rodada de redação;
 - remover a bibliografia manual atualmente inserida no capítulo 6;
 - incluir apenas referências efetivamente citadas;
 - considerar apêndices para protocolo detalhado, matriz completa de testes ou material produzido pela equipe;
@@ -335,7 +353,7 @@ Nenhum capítulo será reescrito antes da aprovação do passo 4.
 | Passo | Participação da equipe | Ação do assistente | Entrega e portão de saída |
 | --- | --- | --- | --- |
 | 5. Planejar o Capítulo 4 | Confirmar quais requisitos ainda representam o produto | Apresentar nova organização, IDs e critérios de verificação, sem editar o capítulo | Estrutura e decisões dos requisitos aprovadas |
-| 6. Reescrever o Capítulo 4 | Revisar os requisitos em pequenos grupos | Editar um grupo por rodada, compilar e apresentar o diff | Capítulo 4 aprovado e requisitos rastreáveis |
+| 6. Reescrever o Capítulo 4 | Revisar os requisitos em pequenos grupos | Antes de cada grupo, buscar e validar as fontes necessárias; depois editar, inserir as citações no texto, compilar e apresentar o diff | Capítulo 4 aprovado, citado e com requisitos rastreáveis |
 | 7. Preparar evidências do Capítulo 5 | Fornecer commits, fotos, circuito, componentes, demonstrações e decisões | Classificar cada item como código, relato, teste ou evidência física | Inventário técnico validado; lacunas explicitadas |
 | 8. Aprovar o esqueleto do Capítulo 5 | Revisar ordem e profundidade das subseções | Propor títulos, função de cada seção, figuras e fontes | Esqueleto detalhado aprovado, ainda sem redação extensa |
 | 9. Escrever visão geral e arquitetura | Validar fronteiras, componentes e diagramas | Redigir a visão geral e produzir diagramas atualizados | Subseções e diagramas aprovados |
@@ -361,7 +379,7 @@ Se algum teste não puder ser feito, a equipe decidirá entre reduzir o requisit
 | Passo | Participação da equipe | Ação do assistente | Entrega e portão de saída |
 | --- | --- | --- | --- |
 | 17. Reconstruir o método | Relatar cronologia, responsabilidades e decisões reais | Preparar perguntas objetivas e redigir uma etapa do método por rodada | Capítulo 3 aprovado, sem processo inventado |
-| 18. Planejar a revisão bibliográfica | Validar os temas e fornecer fontes já usadas | Propor perguntas de busca e bibliografia comentada | Fontes e estrutura do Capítulo 2 aprovadas |
+| 18. Planejar a revisão bibliográfica ampla | Validar os temas e fornecer fontes já usadas | Sistematizar perguntas de busca, fundamentação e trabalhos relacionados; consolidar uma bibliografia comentada | Fontes e estrutura do Capítulo 2 aprovadas |
 | 19. Escrever os conceitos | Revisar clareza e pertinência ao FLIKE | Redigir uma seção conceitual por rodada, com citações verificadas | Capítulo 2 aprovado e bibliografia consistente |
 | 20. Reescrever a introdução | Confirmar contexto, motivação e tom das contribuições | Redigir uma seção por rodada, alinhada aos capítulos já aprovados | Capítulo 1 aprovado |
 | 21. Escrever as considerações finais | Validar o balanço dos três autores | Relacionar cada conclusão a objetivo e evidência | Capítulo 6 aprovado |
@@ -371,13 +389,13 @@ Se algum teste não puder ser feito, a equipe decidirá entre reduzir o requisit
 | Passo | Participação da equipe | Ação do assistente | Entrega e portão de saída |
 | --- | --- | --- | --- |
 | 22. Finalizar pré-textuais | Fornecer agradecimentos e dados institucionais pendentes | Redigir resumo, abstract, palavras-chave e limpar listas provisórias | Elementos pré-textuais aprovados |
-| 23. Finalizar pós-textuais | Confirmar materiais suplementares e referências | Consolidar BibTeX, apêndices e anexos | Referências e materiais complementares aprovados |
+| 23. Finalizar pós-textuais | Confirmar materiais suplementares e referências | Auditar e padronizar o BibTeX já construído durante a redação, além de consolidar apêndices e anexos | Referências e materiais complementares aprovados |
 | 24. Revisar o todo | Cada autor faz leitura integral e registra correções | Fazer revisão técnica, editorial e de consistência; compilar e inspecionar o PDF | Versão candidata aprovada pelos autores |
 | 25. Incorporar orientação formal | Enviar retorno do orientador ou banca | Aplicar cada correção em rodadas rastreáveis e repetir QA | Versão final autorizada para entrega |
 
 ### Próxima ação
 
-O **passo 5** foi aprovado pela equipe em 01/09/2026. A estrutura, os requisitos, os critérios de verificação e as decisões P1–P8 estão registrados em `docs/PROPOSTA_REQUISITOS_CAPITULO_4.md`. A próxima rodada iniciará o passo 6 com a reescrita incremental do primeiro grupo do Capítulo 4.
+O **passo 6** está em andamento. Os blocos 1 e 2 do Capítulo 4 foram aprovados pela equipe em 01/09/2026. Antes da redação do bloco 3, o assistente deverá apresentar seu escopo e um mapa que associe cada afirmação externa às fontes que serão citadas no próprio texto. A primeira auditoria de referências também abrangerá os blocos já aprovados, sem reabrir suas decisões de conteúdo.
 
 ### Acompanhamento da Fase A
 
@@ -394,7 +412,7 @@ O **passo 5** foi aprovado pela equipe em 01/09/2026. A estrutura, os requisitos
 | Passo | Estado | Registro | Próxima ação |
 | --- | --- | --- | --- |
 | 5. Planejar o Capítulo 4 | **Aprovado** | Estrutura, 14 requisitos funcionais, quatro não funcionais, quatro de acessibilidade, critérios de verificação e decisões P1–P8 aprovados em 01/09/2026 | Concluído |
-| 6. Reescrever o Capítulo 4 | **Não iniciado** | A reescrita será dividida em grupos pequenos conforme o catálogo aprovado | Iniciar origem, método, limites, escopo, atores e entidades; submeter o bloco à equipe |
+| 6. Reescrever o Capítulo 4 | **Em andamento — bloco 2 aprovado** | Blocos 1 e 2 aprovados; RF-01 a RF-03 aceitos pela equipe em 01/09/2026; protocolo de inserção contínua de referências incorporado ao plano | Preparar a proposta do bloco 3 e seu mapa de fontes antes da redação |
 
 ## 7. Fontes e informações a solicitar à equipe
 
