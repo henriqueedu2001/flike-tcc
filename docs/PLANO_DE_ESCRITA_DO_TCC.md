@@ -413,7 +413,7 @@ Se algum teste não puder ser feito, a equipe decidirá entre reduzir o requisit
 
 ### Próxima ação
 
-O **passo 8** foi concluído em 01/09/2026 com a aprovação das Seções 5.1 a 5.8, da distribuição dos passos 9 a 16 e das figuras F5-01 a F5-06. O **passo 9** está em andamento: `PROPOSTA_BLOCO_1_CAPITULO_5.md` detalha a visão geral, a arquitetura, o modelo de dados e as duas primeiras figuras.
+O **passo 9** foi concluído em 01/09/2026 com a aprovação das Seções 5.1, 5.2, 5.2.1--5.2.3 e 5.3.1, do quadro de responsabilidades e das figuras F5-01 e F5-02. A próxima ação é iniciar o **passo 10** com uma proposta curta para o bloco de software restante: backend, frontend e fluxo integrado de solicitação, decisão e emissão.
 
 ### Acompanhamento da Fase A
 
@@ -433,7 +433,8 @@ O **passo 8** foi concluído em 01/09/2026 com a aprovação das Seções 5.1 a 
 | 6. Reescrever o Capítulo 4 | **Aprovado** | Capítulo 4 completo: RF-01 a RF-14, RNF-01 a RNF-05, RA-01 a RA-04, decisões arquiteturais e Seção 4.8 aprovados em 01/09/2026 | Concluído |
 | 7. Preparar evidências do Capítulo 5 | **Aprovado** | `INVENTARIO_EVIDENCIAS_CAPITULO_5.md` consolida código, documentação, demonstrações e relatos; commits finais confirmados e nível de detalhe do hardware aprovado em 01/09/2026 | Concluído |
 | 8. Aprovar o esqueleto do Capítulo 5 | **Aprovado** | Seções 5.1–5.8, distribuição dos passos 9–16 e figuras F5-01 a F5-06 aprovadas em 01/09/2026 | Concluído |
-| 9. Arquitetura e modelo de dados | **Em andamento — proposta do bloco 1 produzida** | `PROPOSTA_BLOCO_1_CAPITULO_5.md` especifica as Seções 5.1, 5.2 e 5.3.1 e as figuras F5-01/F5-02 | Equipe validar o bloco antes da redação e compilação |
+| 9. Arquitetura e modelo de dados | **Aprovado** | Seções 5.1, 5.2, 5.2.1--5.2.3 e 5.3.1, quadro de responsabilidades e figuras F5-01/F5-02 aprovados em 01/09/2026 | Concluído |
+| 10. Escrever software | **Próximo** | Abrangerá backend, frontend e fluxo integrado de solicitação, decisão e emissão | Assistente preparar a proposta do primeiro bloco; equipe revisá-la antes da redação |
 
 ## 7. Fontes e informações a solicitar à equipe
 

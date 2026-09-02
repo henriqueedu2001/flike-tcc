@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1700" height="1120" viewBox="0 0 1700 1120">
+  <defs>
+    <style>
+      .header { fill: #245b7a; }
+      .body { fill: #f7fafc; stroke: #245b7a; stroke-width: 3; }
+      .title { font-family: 'DejaVu Sans', sans-serif; font-size: 28px; font-weight: 700; fill: white; text-anchor: middle; }
+      .field { font-family: 'DejaVu Sans Mono', monospace; font-size: 24px; fill: #263b4a; }
+      .key { font-weight: 700; fill: #9a4c18; }
+      .relation { fill: none; stroke: #42697f; stroke-width: 4; }
+      .logical { fill: none; stroke: #9a6a3a; stroke-width: 4; stroke-dasharray: 11 9; }
+      .card { font-family: 'DejaVu Sans', sans-serif; font-size: 24px; font-weight: 700; fill: #245b7a; paint-order: stroke; stroke: white; stroke-width: 6px; }
+      .label { font-family: 'DejaVu Sans', sans-serif; font-size: 21px; font-weight: 600; fill: #526a77; text-anchor: middle; paint-order: stroke; stroke: white; stroke-width: 7px; }
+      .legend { font-family: 'DejaVu Sans', sans-serif; font-size: 22px; fill: #344e5d; }
+    </style>
+  </defs>
+  <rect width="1700" height="1120" fill="#ffffff"/>
+
+  <!-- relations are drawn behind the tables -->
+  <path d="M350 165 H430" class="relation"/>
+  <text x="362" y="150" class="card">1</text><text x="410" y="150" class="card">N</text>
+  <path d="M750 165 H830" class="relation"/>
+  <text x="762" y="150" class="card">1</text><text x="810" y="150" class="card">N</text>
+  <path d="M1150 165 H1230" class="relation"/>
+  <text x="1162" y="150" class="card">1</text><text x="1210" y="150" class="card">N</text>
+  <path d="M1395 260 V370" class="relation"/>
+  <text x="1410" y="285" class="card">1</text><text x="1410" y="358" class="card">N</text>
+
+  <path d="M205 260 V370" class="logical"/>
+  <text x="300" y="323" class="label">associação pela aplicação</text>
+
+  <path d="M350 230 H390 V335 H540 V370" class="relation"/>
+  <text x="365" y="220" class="card">1</text><text x="520" y="360" class="card">N</text>
+  <path d="M1230 475 H840" class="relation"/>
+  <text x="1210" y="462" class="card">1</text><text x="850" y="462" class="card">N</text>
+
+  <path d="M60 165 H28 V825 H720" class="relation"/>
+  <text x="38" y="195" class="card">1</text><text x="700" y="812" class="card">N</text>
+  <path d="M1230 520 H1110 V825 H1100" class="relation"/>
+  <text x="1210" y="545" class="card">1</text><text x="1107" y="810" class="card">N</text>
+  <path d="M1395 570 V730" class="relation"/>
+  <text x="1410" y="598" class="card">1</text><text x="1410" y="718" class="card">N</text>
+
+  <!-- user -->
+  <g>
+    <rect x="60" y="70" width="290" height="190" rx="12" class="body"/>
+    <path d="M72 70 H338 Q350 70 350 82 V120 H60 V82 Q60 70 72 70" class="header"/>
+  </g>
+  <text x="205" y="105" class="title">user</text>
+  <text x="82" y="151" class="field key">PK  id</text>
+  <text x="82" y="184" class="field">name</text>
+  <text x="82" y="217" class="field">email</text>
+  <text x="82" y="250" class="field">created_at</text>
+
+  <!-- institution -->
+  <g>
+    <rect x="430" y="70" width="320" height="190" rx="12" class="body"/>
+    <path d="M442 70 H738 Q750 70 750 82 V120 H430 V82 Q430 70 442 70" class="header"/>
+  </g>
+  <text x="590" y="105" class="title">institution</text>
+  <text x="452" y="151" class="field key">PK  id</text>
+  <text x="452" y="184" class="field key">FK  owner_id</text>
+  <text x="452" y="217" class="field">name</text>
+  <text x="452" y="250" class="field">created_at</text>
+
+  <!-- building -->
+  <g>
+    <rect x="830" y="70" width="320" height="220" rx="12" class="body"/>
+    <path d="M842 70 H1138 Q1150 70 1150 82 V120 H830 V82 Q830 70 842 70" class="header"/>
+  </g>
+  <text x="990" y="105" class="title">building</text>
+  <text x="852" y="151" class="field key">PK  id</text>
+  <text x="852" y="184" class="field key">FK  institution_id</text>
+  <text x="852" y="217" class="field">name</text>
+  <text x="852" y="250" class="field">address fields</text>
+  <text x="852" y="283" class="field">created_at</text>
+
+  <!-- room -->
+  <g>
+    <rect x="1230" y="70" width="330" height="190" rx="12" class="body"/>
+    <path d="M1242 70 H1548 Q1560 70 1560 82 V120 H1230 V82 Q1230 70 1242 70" class="header"/>
+  </g>
+  <text x="1395" y="105" class="title">room</text>
+  <text x="1252" y="151" class="field key">PK  id</text>
+  <text x="1252" y="184" class="field key">FK  building_id</text>
+  <text x="1252" y="217" class="field">name, number</text>
+  <text x="1252" y="250" class="field">created_at</text>
+
+  <!-- auth -->
+  <g>
+    <rect x="60" y="370" width="360" height="220" rx="12" class="body"/>
+    <path d="M72 370 H408 Q420 370 420 382 V420 H60 V382 Q60 370 72 370" class="header"/>
+  </g>
+  <text x="240" y="405" class="title">auth</text>
+  <text x="82" y="451" class="field key">PK  id</text>
+  <text x="82" y="484" class="field">hashed_email</text>
+  <text x="82" y="517" class="field">hashed_password</text>
+  <text x="82" y="550" class="field">salt</text>
+  <text x="240" y="580" class="label" style="font-size:19px">sem chave estrangeira para user</text>
+
+  <!-- digital key request -->
+  <g>
+    <rect x="460" y="370" width="380" height="250" rx="12" class="body"/>
+    <path d="M472 370 H828 Q840 370 840 382 V420 H460 V382 Q460 370 472 370" class="header"/>
+  </g>
+  <text x="650" y="405" class="title">digital_key_request</text>
+  <text x="482" y="451" class="field key">PK  id</text>
+  <text x="482" y="484" class="field key">FK  user_id</text>
+  <text x="482" y="517" class="field key">FK  digital_lock_id</text>
+  <text x="482" y="550" class="field">status</text>
+  <text x="482" y="583" class="field">created_at</text>
+  <text x="650" y="610" class="label" style="font-size:19px">sem FK para digital_key</text>
+
+  <!-- digital lock -->
+  <g>
+    <rect x="1230" y="370" width="330" height="200" rx="12" class="body"/>
+    <path d="M1242 370 H1548 Q1560 370 1560 382 V420 H1230 V382 Q1230 370 1242 370" class="header"/>
+  </g>
+  <text x="1395" y="405" class="title">digital_lock</text>
+  <text x="1252" y="451" class="field key">PK  id</text>
+  <text x="1252" y="484" class="field key">FK  room_id</text>
+  <text x="1252" y="517" class="field">secret_key</text>
+  <text x="1252" y="550" class="field">created_at</text>
+
+  <!-- digital key -->
+  <g>
+    <rect x="720" y="690" width="380" height="300" rx="12" class="body"/>
+    <path d="M732 690 H1088 Q1100 690 1100 702 V740 H720 V702 Q720 690 732 690" class="header"/>
+  </g>
+  <text x="910" y="725" class="title">digital_key</text>
+  <text x="742" y="771" class="field key">PK  id</text>
+  <text x="742" y="804" class="field key">FK  user_id</text>
+  <text x="742" y="837" class="field key">FK  digital_lock_id</text>
+  <text x="742" y="870" class="field">payload BINARY(48)</text>
+  <text x="742" y="903" class="field">expires_at</text>
+  <text x="742" y="936" class="field">used, used_at</text>
+  <text x="742" y="969" class="field">created_at</text>
+
+  <!-- event log -->
+  <g>
+    <rect x="1230" y="730" width="330" height="230" rx="12" class="body"/>
+    <path d="M1242 730 H1548 Q1560 730 1560 742 V780 H1230 V742 Q1230 730 1242 730" class="header"/>
+  </g>
+  <text x="1395" y="765" class="title">event_log</text>
+  <text x="1252" y="811" class="field key">PK  id</text>
+  <text x="1252" y="844" class="field key">FK  digital_lock_id</text>
+  <text x="1252" y="877" class="field">type, log</text>
+  <text x="1252" y="910" class="field">created_at</text>
+
+  <!-- legend -->
+  <line x1="80" y1="1060" x2="160" y2="1060" class="relation"/>
+  <text x="180" y="1067" class="legend">relação declarada por chave estrangeira</text>
+  <line x1="660" y1="1060" x2="740" y2="1060" class="logical"/>
+  <text x="760" y="1067" class="legend">associação lógica sem chave estrangeira</text>
+  <text x="1300" y="1067" class="legend"><tspan font-weight="700" fill="#9a4c18">PK/FK</tspan><tspan dx="12">chave primária/estrangeira</tspan></text>
+</svg>

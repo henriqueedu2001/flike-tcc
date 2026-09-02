@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L12,6 L0,12 z" fill="#315b78"/>
+    </marker>
+    <marker id="arrowBoth" markerWidth="12" markerHeight="12" refX="2" refY="6" orient="auto-start-reverse" markerUnits="strokeWidth">
+      <path d="M12,0 L0,6 L12,12 z" fill="#315b78"/>
+    </marker>
+    <style>
+      .zone-title { font-family: 'DejaVu Sans', sans-serif; font-size: 30px; font-weight: 700; fill: #17324d; }
+      .box-title { font-family: 'DejaVu Sans', sans-serif; font-size: 29px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+      .box-text { font-family: 'DejaVu Sans', sans-serif; font-size: 24px; fill: #ffffff; text-anchor: middle; }
+      .edge { fill: none; stroke: #315b78; stroke-width: 4; marker-end: url(#arrow); }
+      .edge-both { fill: none; stroke: #315b78; stroke-width: 4; marker-start: url(#arrowBoth); marker-end: url(#arrow); }
+      .edge-label { font-family: 'DejaVu Sans', sans-serif; font-size: 23px; font-weight: 600; fill: #315b78; text-anchor: middle; paint-order: stroke; stroke: #ffffff; stroke-width: 7px; stroke-linejoin: round; }
+      .note { font-family: 'DejaVu Sans', sans-serif; font-size: 21px; fill: #48606f; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="900" fill="#ffffff"/>
+
+  <rect x="35" y="45" width="1530" height="355" rx="24" fill="#edf6fb" stroke="#87b8d4" stroke-width="3"/>
+  <text x="75" y="92" class="zone-title">Gestão conectada</text>
+  <text x="1300" y="89" class="note">cadastro, solicitação, decisão e emissão</text>
+
+  <rect x="35" y="440" width="1530" height="405" rx="24" fill="#f3f7f1" stroke="#9ab58d" stroke-width="3"/>
+  <text x="75" y="488" class="zone-title">Validação e acionamento locais</text>
+  <text x="1280" y="485" class="note">sem consulta ao servidor no instante da leitura</text>
+
+  <!-- connected boxes -->
+  <g>
+    <rect x="90" y="155" width="245" height="145" rx="18" fill="#2f6f9f"/>
+    <rect x="430" y="155" width="300" height="145" rx="18" fill="#2f6f9f"/>
+    <rect x="825" y="155" width="285" height="145" rx="18" fill="#2f6f9f"/>
+    <rect x="1205" y="155" width="265" height="145" rx="18" fill="#2f6f9f"/>
+  </g>
+  <text x="212" y="210" class="box-title">Pessoa</text>
+  <text x="212" y="244" class="box-text">solicitante ou</text>
+  <text x="212" y="274" class="box-text">responsável</text>
+  <text x="580" y="205" class="box-title">Frontend</text>
+  <text x="580" y="240" class="box-title" style="font-size:22px">Next.js / React</text>
+  <text x="580" y="276" class="box-text">interface e QR Code</text>
+  <text x="967" y="205" class="box-title">API FastAPI</text>
+  <text x="967" y="242" class="box-text">regras e emissão</text>
+  <text x="967" y="273" class="box-text">da credencial</text>
+  <text x="1337" y="210" class="box-title">MySQL</text>
+  <text x="1337" y="248" class="box-text">estado persistente</text>
+
+  <path d="M335 228 H430" class="edge-both"/>
+  <text x="382" y="140" class="edge-label">interação web</text>
+  <path d="M730 228 H825" class="edge-both"/>
+  <text x="777" y="140" class="edge-label">HTTP / JSON</text>
+  <text x="777" y="330" class="note">payload representado em hexadecimal na resposta</text>
+  <path d="M1110 228 H1205" class="edge-both"/>
+  <text x="1158" y="140" class="edge-label">SQL</text>
+
+  <!-- local boxes -->
+  <g>
+    <rect x="180" y="585" width="245" height="145" rx="18" fill="#5b8060"/>
+    <rect x="530" y="585" width="300" height="145" rx="18" fill="#5b8060"/>
+    <rect x="940" y="585" width="270" height="145" rx="18" fill="#5b8060"/>
+    <rect x="1320" y="585" width="205" height="145" rx="18" fill="#5b8060"/>
+  </g>
+  <text x="302" y="640" class="box-title">QR Code</text>
+  <text x="302" y="678" class="box-text">payload binário</text>
+  <text x="680" y="635" class="box-title">ESP32-CAM</text>
+  <text x="680" y="672" class="box-text">câmera, firmware</text>
+  <text x="680" y="702" class="box-text">e decisão local</text>
+  <text x="1075" y="635" class="box-title">Circuito</text>
+  <text x="1075" y="672" class="box-text">transistor e relé</text>
+  <text x="1422" y="635" class="box-title">Fechadura</text>
+  <text x="1422" y="672" class="box-text">atuador elétrico</text>
+
+  <!-- boundary crossing -->
+  <path d="M580 300 V470 Q580 520 530 520 H302 V585" class="edge"/>
+  <text x="468" y="540" class="edge-label">conversão em bytes e renderização local</text>
+  <path d="M425 658 H530" class="edge"/>
+  <text x="477" y="572" class="edge-label">canal óptico</text>
+  <path d="M830 658 H940" class="edge"/>
+  <text x="885" y="572" class="edge-label">sinal HIGH</text>
+  <path d="M1210 658 H1320" class="edge"/>
+  <text x="1265" y="572" class="edge-label">acionamento</text>
+
+  <line x1="65" y1="420" x2="1535" y2="420" stroke="#6f8a98" stroke-width="2" stroke-dasharray="10 9"/>
+  <text x="800" y="414" class="note" style="font-weight:700">fronteira: a credencial transporta a autorização até a tranca</text>
+</svg>

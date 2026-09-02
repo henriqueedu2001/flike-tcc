@@ -1,50 +1,88 @@
 \chapter{Desenvolvimento do Trabalho} \label{cap:desenvolvimento}
 
-\section{Tecnologias Utilizadas}
-O CAUSP-LOCK utiliza um conjunto integrado de tecnologias de hardware e software para implementar um sistema seguro e eficiente de controle de acesso.
+\section{Visão geral do desenvolvimento}
 
-No hardware, destaca-se o uso do microcontrolador ESP32-CAM, que integra processamento e comunicação, juntamente com a câmera OV2640 para leitura de QR Codes. O dispositivo é responsável por validar os códigos e acionar a fechadura elétrica, permitindo ou negando o acesso. O sistema também conta com uma interface simples (HMI), com LEDs e botões para feedback ao usuário.
+O FLIKE foi desenvolvido como um sistema integrado de gestão de autorizações e controle de acesso físico. Sua implementação combina uma aplicação web, uma API com persistência relacional, uma credencial temporária transportada por QR Code e um dispositivo embarcado capaz de tomar a decisão de abertura junto à fechadura. Essa decomposição permite separar a concessão administrativa do acesso da apresentação da credencial no espaço físico, mantendo entre as duas etapas um formato comum de dados.
 
-No software, a solução é dividida em frontend, backend e firmware embarcado. O frontend (web) permite cadastro e acesso dos usuários. O backend, desenvolvido em Python com FastAPI, gerencia autenticação, geração e assinatura dos QR Codes, além do armazenamento de dados em banco relacional.
+A parte conectada compreende cadastro, autenticação, administração da estrutura institucional, solicitação de acesso, aprovação ou rejeição e emissão da credencial. Nela, o frontend organiza a interação com usuários e responsáveis, enquanto a API aplica as regras do domínio e persiste contas, recursos, solicitações, trancas e credenciais. Depois da aprovação, o usuário recupera o payload emitido e a aplicação o representa como QR Code.
 
-A segurança é garantida por meio de QR Codes únicos, temporários e assinados com criptografia simétrica, assegurando autenticidade e integridade. A validação é feita localmente no dispositivo, permitindo operação offline.
+A parte local começa quando esse QR Code é apresentado à câmera da ESP32-CAM. O dispositivo recupera o payload, verifica sua estrutura, seu destino, sua janela temporal e seu código de autenticação e, quando a decisão é positiva, produz o sinal lógico enviado ao circuito de acionamento. Essa decisão não exige consulta à API no momento da leitura. A expressão ``operação local'' empregada neste capítulo refere-se a essa etapa; a obtenção inicial da credencial continua dependente da aplicação conectada.
 
-Essas tecnologias permitem um sistema acessível, seguro e automatizado para controle de acesso ao espaço físico.
+As seções seguintes descrevem primeiro a arquitetura e o modelo de dados e depois detalham aplicação, credencial, dispositivo físico, segurança e avaliação. A descrição combina o código preservado nos repositórios, a documentação técnica e as demonstrações confirmadas pela equipe. A existência de código é tratada como evidência de implementação, enquanto o atendimento dos requisitos será confrontado posteriormente com testes e resultados.
 
+\section{Arquitetura do FLIKE}
 
-\section{Projeto e Implementação}
-Descrever os resultados do projeto e da implementação do trabalho, com justificativas das decisões tomadas.
+A arquitetura organiza as responsabilidades em torno do percurso da autorização: o servidor registra a decisão administrativa e emite uma credencial; o navegador a transforma em representação visual; e o dispositivo físico interpreta essa representação e decide sobre o acionamento. A Figura~\ref{fig:arquitetura-flike} sintetiza esse percurso e destaca a fronteira entre as operações conectadas e a validação local.
 
-\section{Testes e Avaliação}
-Descrever o procedimento da avaliação do trabalho (teste de hardware, teste de software, teste de módulo, teste de integração, teste de validação), de acordo com o tipo do sistema, com o apoio do orientador, se necessário.
-\section{Diagramas de arquitetura}
-O sistema integra dispositivos físicos e softwares. Os usuários acessam uma interface web em React para se cadastrar, solicitar acesso e obter QR Codes; administradores podem gerenciar usuários, consultar o histórico, conceder ou negar acessos e controlar a ocupação da sala. A aplicação se comunica com uma API em Python (FastAPI), responsável por gerar os QR Codes e interagir com o banco de dados SQL, onde são armazenadas informações de usuários, chaves secretas e registros de uso.
+\subsection{Componentes e responsabilidades}
 
+O usuário interage com o frontend executado no navegador. A interface envia requisições HTTP em JSON à API FastAPI, que reúne as regras de autenticação, propriedade institucional, solicitação, aprovação e emissão. A API acessa o banco MySQL para consultar e persistir o estado do domínio. Quando uma credencial é consultada, seu payload binário é representado em hexadecimal na resposta JSON; o frontend reconstrói os bytes e gera o QR Code localmente.
 
-\begin{figure}[h]
+No espaço físico, o QR Code funciona como canal óptico entre a aplicação e a ESP32-CAM. A câmera captura o símbolo, e o firmware decodifica e avalia a credencial com o identificador, o relógio e o segredo provisionados no dispositivo. Uma autorização positiva produz um sinal lógico \texttt{HIGH}. O estágio com transistor e relé adapta esse comando ao circuito da fechadura elétrica. O Quadro~\ref{qua:componentes-flike} resume as responsabilidades sem antecipar os detalhes das seções dedicadas a cada subsistema.
+
+\begin{quadro}[htb]
+    \caption{Componentes e responsabilidades na arquitetura do FLIKE}
+    \label{qua:componentes-flike}
+    \small
+    \begin{tabular}{|p{0.25\textwidth}|p{0.40\textwidth}|p{0.25\textwidth}|}
+        \hline
+        \textbf{Componente} & \textbf{Responsabilidade principal} & \textbf{Fronteira relevante} \\ \hline
+        Frontend Next.js/React & Apresentar os fluxos web, comunicar-se com a API e renderizar a credencial como QR Code. & Depende da API para obter e atualizar os dados do sistema. \\ \hline
+        API FastAPI & Autenticar contas, aplicar regras do domínio, decidir operações administrativas e emitir credenciais. & Não participa da decisão física no instante da leitura. \\ \hline
+        Banco MySQL & Persistir usuários, estrutura institucional, trancas, solicitações, credenciais e registros previstos. & Representa estado lógico; não comprova por si só um evento físico. \\ \hline
+        QR Code & Transportar visualmente o payload binário já emitido até a câmera. & Pode ser copiado; não executa autenticação por si próprio. \\ \hline
+        ESP32-CAM e firmware & Capturar o símbolo, recuperar o payload, decidir localmente e emitir o comando lógico. & Opera com dados, relógio e segredo disponíveis no dispositivo. \\ \hline
+        Circuito e fechadura & Adaptar o sinal lógico e realizar o destravamento elétrico. & O comando não comprova que a porta abriu ou que uma pessoa entrou. \\ \hline
+    \end{tabular}
+    \fonte{Elaborado pelos autores.}
+\end{quadro}
+
+\begin{figure}[htb]
     \centering
-    \includegraphics[width=0.5\textwidth]{relacionamentos.drawio.png}
-    \caption{ Diagrama entidade relacionamento}
-    \label{fig:relacionamentos}
+    \includegraphics[width=\textwidth]{arquitetura_flike.pdf}
+    \caption{Arquitetura geral e fronteira de operação do FLIKE}
+    \label{fig:arquitetura-flike}
+    \fonte{Elaborado pelos autores.}
 \end{figure}
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.5\textwidth]{contexto_c4.drawio.png}
-    \caption{ Diagrama C4 de arquitetura C4, a nível de contexto}
-    \label{fig:contexto_c4}
-\end{figure}
+\subsection{Fronteira entre operação conectada e operação local}
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.5\textwidth]{application_container_c4.drawio.png}
-    \caption{  Diagrama C4 de arquitetura a nível de contêiner da aplicação}
-    \label{fig:application_container_c4}
-\end{figure}
+Na região conectada da Figura~\ref{fig:arquitetura-flike}, o navegador, a API e o banco mantêm o estado administrativo. O usuário precisa acessar essa região para cadastrar-se, autenticar-se, solicitar uma credencial, acompanhar a decisão do responsável e recuperar o QR Code emitido. O FLIKE não implementa um aplicativo móvel nativo nem oferece gestão web independente do servidor.
 
-\begin{figure}[h]
+A fronteira é atravessada pelo próprio payload apresentado visualmente. Depois que a credencial está disponível, a ESP32-CAM não precisa consultar o banco nem a API para decidir sobre a abertura: ela verifica localmente as informações autenticadas. Essa escolha evita que uma indisponibilidade momentânea da rede impeça a leitura de uma autorização já concedida, mas também impede que o dispositivo conheça imediatamente uma mudança realizada no servidor. As consequências para revogação, relógio e proteção do segredo serão discutidas na seção dedicada à operação local e à segurança.
+
+A separação também delimita os registros produzidos em cada lado. Solicitação, aprovação e emissão pertencem ao estado central. Leitura, autorização e sinal de acionamento ocorrem no dispositivo. Sem um canal de sincronização e sem sensores adicionais, um registro no banco não equivale automaticamente à abertura da porta, e um comando elétrico não comprova entrada, saída ou ocupação.
+
+\subsection{Decisões tecnológicas}
+
+O frontend foi implementado com Next.js 16 e React 19, usando a organização de rotas pelo diretório \texttt{app}. O App Router do Next.js estrutura páginas e layouts por convenções do sistema de arquivos e integra os componentes React empregados pela interface \cite{vercel2026nextjs}. A escolha permitiu reunir no mesmo projeto as páginas de autenticação, solicitação, consulta e administração, além dos componentes e serviços que consomem a API.
+
+O backend utiliza Python e FastAPI, com modelos Pydantic para representar entradas e saídas das rotas. A documentação oficial do framework destaca a integração entre anotações de tipo, validação de dados e geração de esquemas OpenAPI \cite{fastapi2026features}. No FLIKE, esses recursos organizam os contratos HTTP, enquanto as regras e o acesso ao banco permanecem distribuídos entre rotas, módulos e repositórios próprios do projeto.
+
+A persistência foi implementada com MySQL e o conector oficial para Python. O modelo relacional permite expressar por chaves estrangeiras a hierarquia instituição--edifício--sala--tranca e os vínculos de usuários com solicitações e credenciais. A sintaxe e os tipos empregados seguem o sistema documentado no manual do MySQL \cite{oracle2026mysql84}; a estrutura concreta do FLIKE, entretanto, é definida pelos comandos de criação do próprio backend, apresentados na Subseção~\ref{subsec:modelo-dados}.
+
+No dispositivo físico, a ESP32-CAM reúne câmera e capacidade de processamento para adquirir o QR Code e executar a validação próxima ao atuador. O QR Code foi adotado como transporte visual de dados binários, cuja capacidade depende da versão e do nível de correção de erros \cite{denso2012qressentials}. A autenticação do payload usa AES-CMAC, mecanismo simétrico que permite verificar a integridade e a origem criptográfica da mensagem sob a premissa de proteção do segredo compartilhado \cite{nist2005cmac}. O formato e as consequências de segurança dessas escolhas serão detalhados nas seções dedicadas à credencial digital e à operação local.
+
+\section{Aplicação conectada e persistência}
+
+A aplicação conectada reúne a interface, as regras de negócio e a persistência necessárias para transformar uma solicitação aprovada em credencial. Esta seção parte do modelo de domínio e de dados; as subseções posteriores descreverão a API, o frontend e o fluxo integrado de solicitação e emissão.
+
+\subsection{Modelo de domínio e dados} \label{subsec:modelo-dados}
+
+O esquema relacional foi reconstruído a partir dos comandos SQL de criação executados pelo backend. Essa fonte foi preferida ao arquivo DBML disponível no repositório porque o documento visual omite a tabela de solicitações e conserva uma versão anterior de campos da credencial. O diagrama da Figura~\ref{fig:modelo-dados-flike} representa, portanto, as nove tabelas efetivamente declaradas no script de inicialização e apenas as relações materializadas por chaves estrangeiras.
+
+O núcleo institucional reúne relações sucessivas. \texttt{user} liga-se a \texttt{institution}; a hierarquia segue por \texttt{building} e \texttt{room} até chegar a \texttt{digital\_lock}. A coluna \texttt{owner\_id}, na tabela de instituições, associa cada instituição a um usuário e materializa a responsabilidade contextual: não existe tabela de administradores nem atributo global de papel. A mesma linha de \texttt{user} pode, assim, ser proprietária de instituições e também aparecer como solicitante ou titular de credenciais destinadas a trancas de outra instituição.
+
+A tabela \texttt{digital\_key\_request} registra o usuário solicitante, a tranca destinatária e o estado \texttt{pending}, \texttt{approved} ou \texttt{rejected}. A tabela \texttt{digital\_key} armazena o usuário, a tranca, o payload de 48 bytes, a expiração e os campos de uso previstos pela aplicação. Ambas se ligam independentemente a \texttt{user} e \texttt{digital\_lock}: o esquema não possui uma chave estrangeira entre a solicitação aprovada e a credencial gerada. Essa ausência exige que a correspondência seja inferida pelo fluxo da aplicação e impede demonstrar somente pelo banco uma relação persistente e inequívoca entre os dois registros.
+
+As credenciais de login ficam em \texttt{auth}, separadas dos dados de domínio em \texttt{user}. A associação entre as duas tabelas é conduzida pela aplicação a partir do e-mail transformado, mas não existe \texttt{user\_id} nem chave estrangeira que imponha essa correspondência no banco. Por esse motivo, a Figura~\ref{fig:modelo-dados-flike} usa uma linha tracejada para indicar a associação lógica e a distingue das relações referenciais declaradas pelo esquema.
+
+Por fim, a tabela de eventos, \texttt{event\_log}, prevê registros associados a uma tranca. A tabela \texttt{digital\_key}, por sua vez, possui os campos \texttt{used} e \texttt{used\_at}. A existência dessas estruturas não demonstra coleta automática de eventos do dispositivo: o firmware não mantém comunicação com o backend durante a leitura. Esses campos representam possibilidades do modelo central e não devem ser interpretados como prova de abertura, passagem de uma pessoa ou ocupação do espaço.
+
+\begin{figure}[p]
     \centering
-    \includegraphics[width=0.5\textwidth]{physical_lock_container_c4.drawio.png}
-    \caption{  Diagrama C4 de arquitetura a nível de contêiner da tranca}
-    \label{fig:physical_lock_container_c4}
+    \includegraphics[width=\textwidth,height=0.76\textheight,keepaspectratio]{modelo_dados_flike.pdf}
+    \caption{Modelo de dados efetivo do FLIKE}
+    \label{fig:modelo-dados-flike}
+    \fonte{Elaborado pelos autores a partir dos comandos SQL do backend.}
 \end{figure}

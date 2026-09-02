@@ -1,6 +1,6 @@
 # FLIKE — proposta do bloco 1 do Capítulo 5
 
-**Estado:** proposta produzida; aguardando validação da equipe
+**Estado:** implementado e aprovado pela equipe em 01/09/2026
 
 **Rodada:** Fase C, passo 9, bloco 1
 
@@ -8,7 +8,9 @@
 
 **Data:** 01/09/2026
 
-**Progresso global:** 9 de 26 passos concluídos (34,6%)
+**Progresso global:** 10 de 26 passos concluídos (38,5%)
+
+**Resultado:** conteúdo incorporado a `FLIKE/capitulos/Cap5-Desenvolvimento.tex`, compilado e aprovado no PDF da tese. As figuras F5-01 e F5-02 foram produzidas em SVG e PDF e integradas ao capítulo.
 
 ## 1. Objetivo da rodada
 
@@ -116,7 +118,7 @@ Versões de dependências poderão aparecer em quadro ou nota somente quando for
 
 ### 5.1 Fonte de verdade
 
-O diagrama será derivado de `scripts/create_db.py` no commit final `e9268cc...`, e não de `docs/database.dbml`. O DBML está desatualizado: omite `digital_key_request`, registra campos antigos de `digital_key` e não representa todas as decisões do DDL efetivo.
+O diagrama será derivado de `scripts/create_db.py` no commit final `e9268cc...`, e não de `docs/database.dbml`. Esse script contém a **Linguagem de Definição de Dados** (DDL, do inglês *Data Definition Language*): os comandos SQL que criam tabelas, colunas, tipos, chaves primárias e chaves estrangeiras. O DBML está desatualizado: omite `digital_key_request`, registra campos antigos de `digital_key` e não representa todas as decisões dos comandos efetivamente usados para criar o banco.
 
 ### 5.2 Entidades e relações
 
@@ -188,9 +190,9 @@ Antes de alterar a tese, a equipe deve validar:
 
 1. a sequência das Seções 5.1, 5.2.1–5.2.3 e 5.3.1;
 2. a composição e a fronteira conectado/local da figura F5-01;
-3. o uso do DDL efetivo, com nove tabelas, na figura F5-02;
+3. o uso dos comandos SQL efetivos de criação do banco, com nove tabelas, na figura F5-02;
 4. a apresentação explícita das duas ausências do esquema: `auth` sem FK para `user` e solicitação sem FK para credencial;
 5. a remoção imediata dos quatro diagramas obsoletos do Capítulo 5;
 6. a inclusão de referências oficiais para as características gerais de Next.js, FastAPI e MySQL.
 
-Com essa aprovação, o bloco 1 estará autorizado para redação, criação das duas figuras, compilação e inspeção do PDF.
+As seis decisões foram aprovadas pela equipe em 01/09/2026. O bloco 1 está autorizado para redação, criação das duas figuras, compilação e inspeção do PDF.

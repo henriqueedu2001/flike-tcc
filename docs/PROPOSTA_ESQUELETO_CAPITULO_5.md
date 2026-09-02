@@ -6,7 +6,7 @@
 
 **Data:** 01/09/2026
 
-**Progresso global:** 9 de 26 passos concluídos (34,6%)
+**Progresso global:** 10 de 26 passos concluídos (38,5%)
 
 ## 1. Função do capítulo
 
