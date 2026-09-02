@@ -63,6 +63,44 @@ O Quadro~\ref{qua:entidades-flike} define as entidades centrais empregadas nos r
 
 Neste trabalho, ``chave digital'' é um nome legado da interface para a credencial digital. O termo não deve ser confundido com a chave criptográfica simétrica, que permanece no servidor e no dispositivo, nem com uma chave mecânica. A credencial é emitida uma vez por solicitação aprovada e pode ser reapresentada durante sua janela de validade.
 
+\section{Decisões arquiteturais e restrições de escopo}
+
+As decisões desta seção delimitam uma realização do FLIKE e esclarecem as condições sob as quais os requisitos devem ser interpretados. Elas não transformam automaticamente tecnologias específicas em necessidades do produto: componentes de software, bibliotecas, formatos binários e parâmetros elétricos serão apresentados no Capítulo~\ref{cap:desenvolvimento}, junto de sua implementação.
+
+\subsection{Fronteira entre aplicação conectada e decisão local}
+
+O FLIKE foi concebido como uma aplicação web apoiada por API e banco de dados. Cadastro, autenticação, administração da estrutura física, solicitação, decisão, emissão e obtenção inicial da credencial dependem de conexão. Não foi desenvolvido um aplicativo móvel nativo, nem se exige que a aplicação web continue funcionando sem acesso ao servidor. O usuário pode apresentar o QR Code enquanto o tiver disponível em seu dispositivo, seja diretamente pelo painel conectado, seja por uma cópia previamente salva.
+
+A operação local começa depois da obtenção da credencial. No momento da leitura, o dispositivo embarcado interpreta o QR Code, verifica sua autenticidade e sua validade e decide sobre o acionamento sem consultar a API. Portanto, a expressão ``operação offline'' empregada neste trabalho qualifica a decisão realizada pela tranca, e não o conjunto do sistema.
+
+\subsection{Destino e validade da credencial}
+
+Cada solicitação aprovada produz uma credencial para uma única tranca digital. Quando uma sala possui várias trancas, o pedido deve identificar aquela à qual se destina. Se uma implantação precisar acionar vários dispositivos em conjunto, poderá provisioná-los como uma mesma tranca lógica, com o mesmo identificador e segredo; essa alternativa não altera a existência de um único destino na solicitação e na credencial.
+
+A autorização é temporal: a credencial pode ser reapresentada quantas vezes forem necessárias desde o instante de emissão, inclusive, até o instante de expiração, exclusive. Esse comportamento permite entrar e sair durante o período autorizado e impede que uma credencial antiga volte a ser aceita depois de expirada. O intervalo padrão de 24 horas adotado pela implementação administrativa quando não se informa outra expiração é um parâmetro da versão desenvolvida, e não uma duração universal imposta ao domínio. A codificação binária exata e a distribuição de seus campos serão descritas no Capítulo~\ref{cap:desenvolvimento}.
+
+\subsection{Segredo compartilhado e provisionamento}
+
+O servidor e o dispositivo associado à tranca compartilham um segredo simétrico, usado para calcular e verificar o AES-CMAC da credencial. O protótipo assume que o fornecedor ou mantenedor grave previamente no dispositivo esse segredo e o identificador da tranca correspondente. Configuração pelo usuário, rotação e recuperação do segredo não integram o escopo desenvolvido.
+
+Essa premissa exige proteger o material criptográfico tanto no servidor quanto no dispositivo. Além disso, como o verificador conhece o mesmo segredo que permite gerar uma tag válida, o mecanismo oferece autenticação e integridade sob segredo compartilhado, mas não constitui assinatura digital assimétrica nem produz não repúdio perante terceiros \cite{nist2005cmac,barker2020keymanagement}.
+
+\subsection{Consequências da decisão local}
+
+Uma tranca sem comunicação com o servidor não recebe imediatamente mudanças posteriores à emissão. Assim, o FLIKE não garante a revogação imediata de uma credencial já entregue e ainda válida. O projeto aceita essa limitação e restringe a autorização por meio do instante de expiração autenticado no próprio payload. Reduzir o período de validade diminui a janela de exposição, mas não cria um canal de revogação.
+
+A disponibilidade local também não elimina riscos externos ao procedimento criptográfico. Queda de energia impede o acionamento; perda do aparelho ou cópia do QR Code pode permitir que outra pessoa apresente a credencial; e comprometimento do segredo possibilita produzir tags que o dispositivo reconheça como autênticas. Essas limitações impedem interpretar a aprovação de uma solicitação ou o acionamento da fechadura como comprovação da identidade da pessoa que entrou no espaço.
+
+\subsection{Plataforma física demonstrada}
+
+O protótipo físico integra uma ESP32-CAM e sua câmera a um circuito de acionamento, uma fonte de alimentação e uma fechadura elétrica. Na demonstração de ponta a ponta, o dispositivo leu o QR Code, extraiu a credencial, verificou o AES-CMAC e a validade, emitiu o sinal lógico de abertura, acionou o circuito de potência e destravou a fechadura. A arquitetura, o circuito elétrico, os componentes e os procedimentos empregados nessa demonstração serão documentados no Capítulo~\ref{cap:desenvolvimento}.
+
+O acionamento físico permanece parte do escopo e da contribuição do protótipo. Ele não foi repetido como requisito funcional autônomo porque representa o resultado final do fluxo já definido pelos requisitos de leitura, validação e decisão local.
+
+\subsection{Propostas não incorporadas à solução final}
+
+Aplicativo Flutter, comunicação Bluetooth, MQTT, gateway intermediário e armazenamento S3 apareceram em versões preliminares, mas não integram a arquitetura final. Também permanecem fora do escopo bateria com autonomia especificada, meta de tempo médio entre falhas, compatibilidade universal com fechaduras, registro persistente no dispositivo, sensores de porta, comprovação de entrada ou ocupação e interface para administrar o segredo da tranca. Essas propostas não serão tratadas como funções implementadas nem como compromissos automáticos de trabalho futuro.
+
 \section{Requisitos funcionais}
 
 Os requisitos funcionais descrevem os comportamentos observáveis necessários para realizar o fluxo de controle de acesso. Cada requisito é apresentado por um enunciado normativo, uma justificativa para sua presença no escopo e um critério de verificação. O critério estabelece a evidência esperada, enquanto o estado de atendimento será consolidado posteriormente na matriz de rastreabilidade.
@@ -147,54 +185,233 @@ A decisão administrativa e a emissão da credencial são etapas distintas do fl
 
 \textbf{Critério de verificação:} autenticar o solicitante após a aprovação; recuperar a credencial emitida; renderizar o QR Code correto; confirmar sua disponibilidade durante a janela de validade; e impedir que outra conta consulte a credencial sem autorização.
 
-% O conteúdo legado abaixo será substituído nos próximos blocos do passo 6.
+\subsection{Conteúdo e autenticação da credencial}
+
+A credencial digital materializa uma autorização concedida pelo responsável. Sua função é transportar essa autorização do servidor, onde é emitida após a aprovação da solicitação, até a tranca destinatária, que precisa avaliá-la sem consultar a aplicação naquele momento. Para isso, a credencial reúne dados que identificam o sujeito, o destino e o período da autorização e acrescenta um código que permite à tranca verificar localmente sua origem e sua integridade.
+
+\subsubsection*{RF-09 --- Conteúdo da credencial}
+
+\textbf{Enunciado:} cada credencial deve identificar o usuário autorizado e a tranca destinatária e delimitar sua janela de validade por meio dos instantes de emissão e expiração.
+
+\textbf{Justificativa:} esses dados relacionam a autorização ao seu titular lógico, ao atuador correto e ao período em que poderá ser aceita. O identificador do usuário vincula a credencial a uma conta do sistema, mas não comprova a identidade física da pessoa que apresenta o QR Code.
+
+\textbf{Critério de verificação:} emitir uma credencial a partir de uma solicitação aprovada; recuperar seus dados; e confirmar que usuário, tranca, emissão e expiração correspondem à autorização que originou a emissão.
+
+Os dados da autorização, isoladamente, não permitem detectar uma modificação. Um terceiro poderia substituir o usuário, a tranca ou a expiração antes de apresentar o QR Code. Para proteger conjuntamente esses valores, o servidor calcula uma tag AES-CMAC com o segredo simétrico compartilhado com a tranca destinatária. A tranca recalcula a tag sobre os dados recebidos e compara os resultados. O CMAC é um mecanismo de autenticação de mensagens destinado a fornecer garantia de autenticidade e integridade dos dados \cite{nist2005cmac}; ele não cifra o conteúdo da credencial nem constitui uma assinatura digital assimétrica.
+
+\subsubsection*{RF-10 --- Autenticação da credencial}
+
+\textbf{Enunciado:} o sistema deve autenticar conjuntamente todos os dados da credencial com um código verificável localmente pela tranca destinatária.
+
+\textbf{Justificativa:} a tranca precisa detectar credenciais fabricadas e alterações no usuário, na tranca ou na janela temporal sem consultar o servidor. No FLIKE, essa propriedade depende do AES-CMAC e da proteção do segredo compartilhado entre servidor e tranca; qualquer agente que obtenha esse segredo poderá produzir credenciais aceitas como autênticas.
+
+\textbf{Critério de verificação:} emitir uma credencial; validar seu código de autenticação com o segredo da tranca correta; modificar separadamente cada dado protegido sem recalcular o código; e confirmar que todas as versões modificadas falham na autenticação.
+
+Dados da autorização e tag são codificados em uma sequência binária antes da geração do QR Code. Essa representação evita o custo adicional de converter números e bytes arbitrários em texto e reduz a densidade do símbolo apresentado à câmera. A ordem dos campos, a largura de cada valor e a serialização adotada são decisões da implementação e serão detalhadas no Capítulo~\ref{cap:desenvolvimento}.
+
+\subsection{Leitura e validação local}
+
+A câmera captura o QR Code, mas não decide se o acesso está autorizado. O leitor recupera a sequência binária transportada, e o dispositivo interpreta a credencial antes de produzir uma decisão. Essa separação permite distinguir uma leitura bem-sucedida de uma autorização: reconhecer o símbolo não implica que sua estrutura, sua autenticação, seu destino ou sua validade temporal estejam corretos.
+
+\subsubsection*{RF-11 --- Recuperação do payload binário}
+
+\textbf{Enunciado:} o dispositivo embarcado deve ler o QR Code e recuperar integralmente o payload binário da credencial.
+
+\textbf{Justificativa:} a autenticação e a interpretação dos campos dependem de os bytes recebidos serem idênticos aos emitidos. Tratá-los como texto, representação hexadecimal ou cadeia terminada por byte nulo pode alterar ou truncar a credencial.
+
+\textbf{Critério de verificação:} gerar uma credencial que contenha também bytes nulos e valores superiores a \texttt{0x7f}; apresentá-la à câmera; comparar comprimento e conteúdo recuperados no dispositivo com a sequência emitida; e rejeitar símbolos que não forneçam uma credencial completa.
+
+Depois da decodificação, o dispositivo precisa verificar a estrutura recebida, recalcular o código de autenticação, confirmar que a credencial se destina à própria tranca e comparar seu relógio local com os instantes protegidos de emissão e expiração. Essas condições compõem uma única decisão: a falha de qualquer uma delas deve impedir a autorização.
+
+\subsubsection*{RF-12 --- Validação local da credencial}
+
+\textbf{Enunciado:} antes de autorizar o acesso, o dispositivo deve verificar localmente a estrutura da credencial, seu código de autenticação, a identidade da tranca destinatária e sua janela de validade.
+
+\textbf{Justificativa:} uma tag válida permite detectar alterações realizadas sem conhecimento do segredo, mas não basta quando a credencial se destina a outra tranca ou está fora do período autorizado. Todas as condições precisam ser avaliadas localmente antes de uma decisão positiva.
+
+\textbf{Critério de verificação:} apresentar uma credencial válida e, separadamente, casos com estrutura, tag, identificador da tranca, emissão ou expiração inválidos; confirmar que somente o caso integralmente válido produz autorização.
+
+A janela de autorização é fechada no instante de emissão e aberta no instante de expiração: a credencial vale quando o relógio local satisfaz \texttt{issued\_at <= agora < expires\_at}. A apresentação não consome a credencial nem depende de uma flag de uso no servidor. Assim, o usuário pode reapresentar o mesmo QR Code durante o período concedido, mas não antes dele nem a partir de seu término.
+
+\subsubsection*{RF-13 --- Reapresentação durante a janela de autorização}
+
+\textbf{Enunciado:} uma credencial autêntica destinada à tranca deve poder ser reapresentada enquanto estiver em sua janela de autorização e deve ser rejeitada antes da emissão e a partir da expiração.
+
+\textbf{Justificativa:} cada solicitação aprovada produz uma credencial temporária, e não um passe consumível. O usuário pode apresentá-la quantas vezes forem necessárias dentro do período concedido; credenciais antigas não devem autorizar acessos posteriores.
+
+\textbf{Critério de verificação:} apresentar a mesma credencial ao menos duas vezes dentro do intervalo e confirmar duas autorizações; apresentá-la antes da emissão, exatamente na expiração e depois dela; e confirmar a rejeição nos três casos.
+
+\subsection{Consulta administrativa de credenciais}
+
+O histórico administrativo do FLIKE representa credenciais emitidas e autorizações concedidas. Cada registro pode relacionar o usuário titular, a tranca destinatária e os instantes de emissão e expiração. A existência desse registro comprova que o sistema emitiu uma credencial depois da aprovação, mas não demonstra que o QR Code foi apresentado, que a fechadura abriu ou que alguém entrou no ambiente.
+
+\subsubsection*{RF-14 --- Consulta administrativa de credenciais}
+
+\textbf{Enunciado:} o responsável deve poder consultar os usuários que receberam credenciais e o histórico de credenciais emitidas para as trancas das instituições que administra.
+
+\textbf{Justificativa:} a consulta permite acompanhar as autorizações concedidas dentro do escopo administrativo do proprietário sem transformá-las em evidência de acesso físico. O resultado precisa preservar os vínculos entre usuário, tranca e período autorizado.
+
+\textbf{Critério de verificação:} emitir credenciais para trancas pertencentes a duas instituições com proprietários distintos; confirmar que cada responsável consulta somente os registros de sua instituição; verificar usuário, tranca, emissão e expiração; e confirmar que a interface não rotula a emissão como entrada, saída ou ocupação.
+
+\section{Requisitos não funcionais}
+
+Os requisitos não funcionais estabelecem restrições sobre a forma como os comportamentos anteriores devem ser realizados.
+
+\subsubsection*{RNF-01 --- Decisão local sem consulta ao servidor}
+
+\textbf{Enunciado:} a decisão de autorização e o acionamento da fechadura não devem depender de consulta ao servidor no momento da leitura.
+
+\textbf{Justificativa:} a operação local permite avaliar uma credencial já emitida mesmo quando a tranca está sem conectividade. Para isso, identificador, segredo e referência temporal precisam estar disponíveis no dispositivo. Solicitação, aprovação, emissão e obtenção inicial do QR Code continuam dependentes da aplicação web e da API.
+
+\textbf{Critério de verificação:} deixar o dispositivo sem conexão de rede e, com identificador, segredo e relógio disponíveis localmente, apresentar uma credencial válida; confirmar que leitura, validação, decisão e acionamento são concluídos sem comunicação com o servidor.
+
+\subsubsection*{RNF-02 --- Autenticação e autorização administrativa}
+
+\textbf{Enunciado:} operações administrativas e decisões sobre solicitações devem exigir autenticação e respeitar a propriedade da instituição envolvida.
+
+\textbf{Justificativa:} o papel administrativo é contextual. Estar autenticado não autoriza um usuário a administrar instituições de terceiros, e nenhuma operação administrativa sensível deve ser executada anonimamente.
+
+\textbf{Critério de verificação:} para cada operação administrativa e decisão de solicitação, executar chamadas como proprietário, como usuário autenticado sem propriedade e sem autenticação; confirmar sucesso somente para o proprietário correto.
+
+\subsubsection*{RNF-03 --- Não exposição do segredo da tranca}
+
+\textbf{Enunciado:} o segredo AES-CMAC associado a cada tranca não deve ser exposto a usuários, respostas da API ou registros da aplicação.
+
+\textbf{Justificativa:} quem conhece o segredo pode calcular tags aceitas como autênticas pela tranca. O valor deve permanecer restrito ao servidor e ao dispositivo provisionado, conforme a premissa criptográfica do projeto e a necessidade de proteção do material criptográfico durante seu ciclo de vida \cite{barker2020keymanagement}. Esse requisito trata da exposição pelas interfaces do sistema; armazenamento seguro, rotação e provisionamento são decisões arquiteturais próprias.
+
+\textbf{Critério de verificação:} inspecionar respostas de cadastro, consulta e alteração de trancas, mensagens de erro e registros produzidos pela aplicação; confirmar que o segredo não aparece em nenhum desses canais destinados a usuários ou operadores comuns.
+
+\subsubsection*{RNF-04 --- Responsividade da aplicação web}
+
+\textbf{Enunciado:} a aplicação web deve manter suas funções principais utilizáveis em telas representativas de celular e computador, sem perda de conteúdo ou de controles essenciais.
+
+\textbf{Justificativa:} solicitação, acompanhamento, decisão e consulta do QR Code podem ocorrer em dispositivos diferentes. A adaptação do layout deve preservar a execução desses fluxos, sem exigir um aplicativo móvel separado. Responsividade, isoladamente, não demonstra acessibilidade da interface.
+
+\textbf{Critério de verificação:} executar cadastro, autenticação, solicitação, decisão administrativa e consulta da credencial nos viewports definidos para celular e computador; confirmar que textos e controles essenciais permanecem visíveis, acionáveis e sem sobreposição.
+
+Para o transporte óptico da credencial, versão e nível de correção de erros determinam a quantidade de módulos e a capacidade do QR Code; níveis mais altos de correção reservam maior parcela do símbolo para redundância e reduzem o espaço disponível para dados \cite{denso2012qressentials}.
+
+\subsubsection*{RNF-05 --- Compatibilidade óptica do QR Code}
+
+\textbf{Enunciado:} a representação completa da credencial deve ser codificada em modo binário como QR Code versão 3, com nível L de correção de erros.
+
+\textbf{Justificativa:} limitar a versão restringe a matriz a 29 por 29 módulos e reduz a densidade visual do símbolo para um mesmo tamanho físico. O nível L fornece a capacidade necessária à credencial do FLIKE dentro dessa versão, assumindo-se como compromisso a menor redundância para recuperação de módulos danificados.
+
+\textbf{Critério de verificação:} gerar uma credencial completa; confirmar que o símbolo resultante possui matriz de 29 por 29 módulos e nível L, sem promoção para versão superior; demonstrar sua leitura pela ESP32-CAM; e, caso seja realizada medição temporal, registrar o tempo entre a apresentação do símbolo e a conclusão da leitura.
+
+\section{Requisitos de acessibilidade definidos pela equipe}
+
+Os requisitos desta seção foram derivados pela equipe a partir do problema que motivou o projeto e de referências sobre acessibilidade. Eles estabelecem critérios técnicos verificáveis, mas não foram validados com participantes. Seu atendimento não permite concluir que o FLIKE reduza efetivamente sobrecarga cognitiva, constrangimento ou estímulos sensoriais para pessoas autistas.
+
+\subsubsection*{RA-01 --- Entrada sem interação humana obrigatória}
+
+\textbf{Enunciado:} depois de receber uma credencial válida, o usuário deve conseguir apresentá-la e obter o destravamento sem interação obrigatória com funcionários no momento da entrada.
+
+\textbf{Justificativa:} o FLIKE foi concebido para eliminar a necessidade de negociar presencialmente a liberação de uma chave no momento de usar o espaço. O requisito começa depois da emissão da credencial: a solicitação inicial ainda depende da decisão do responsável pela instituição.
+
+\textbf{Critério de verificação:} com uma credencial previamente aprovada e disponível, executar sua apresentação, a decisão local e o destravamento sem intervenção de funcionário, contato com portaria ou consulta ao servidor.
+
+\subsubsection*{RA-02 --- Comunicação textual dos estados}
+
+\textbf{Enunciado:} a aplicação web deve comunicar por texto os estados de carregamento, sucesso e erro e a situação das solicitações e credenciais, sem depender exclusivamente de cor.
+
+\textbf{Justificativa:} rótulos textuais tornam o estado explícito e evitam que uma diferença cromática seja o único meio de transmitir informação. O eMAG recomenda que cor e outras características sensoriais não sejam usadas isoladamente para comunicar conteúdo e que erros e orientações sejam apresentados de forma clara \cite{brasil2014emag}.
+
+\textbf{Critério de verificação:} percorrer os fluxos principais e provocar estados de carregamento, sucesso e erro; verificar mensagens textuais correspondentes; e confirmar que \texttt{pending}, \texttt{approved}, \texttt{rejected}, credencial válida e credencial expirada podem ser distinguidos sem interpretar apenas cores.
+
+\subsubsection*{RA-03 --- Sequência previsível da solicitação}
+
+\textbf{Enunciado:} o fluxo de solicitação deve apresentar instituição, edifício, sala, tranca e estado do pedido em uma sequência previsível e identificada.
+
+\textbf{Justificativa:} a seleção progressiva explicita o contexto e o destino da solicitação. Estudos com adultos autistas relacionam previsibilidade, informação antecipada e flexibilidade de comunicação à acessibilidade de espaços públicos \cite{maclennan2023sensory}; essa referência orienta a decisão, mas não comprova efeito do FLIKE sobre seus usuários.
+
+\textbf{Critério de verificação:} percorrer o fluxo desde a escolha da instituição até o acompanhamento do pedido; verificar ordem e rótulos das etapas, seleção explícita da tranca, confirmação da solicitação, retorno de erro e apresentação posterior do estado.
+
+\subsubsection*{RA-04 --- Ausência de feedback sensorial acessório}
+
+\textbf{Enunciado:} o protótipo físico não deve utilizar alarmes sonoros, música ou luzes intermitentes como feedback de acesso.
+
+\textbf{Justificativa:} esses estímulos não são necessários para a função principal e podem aumentar a carga sensorial. Permanecem fora dessa proibição a iluminação necessária para a câmera e o ruído inerente ao relé e à fechadura elétrica; o projeto não alega que esses estímulos inevitáveis sejam confortáveis ou tenham sido avaliados com usuários.
+
+\textbf{Critério de verificação:} inventariar os sinais produzidos durante inicialização, espera, leitura, aceitação e rejeição; confirmar a ausência de alarmes, música e luz intermitente usada como feedback; e identificar separadamente iluminação funcional e ruído eletromecânico inevitável.
+
+\section{Rastreabilidade para verificação}
+
+A organização dos requisitos com identificadores únicos, origem declarada e critérios observáveis permite relacionar as decisões do projeto às verificações que deverão sustentá-las. Essa estrutura segue, em caráter geral, os conceitos públicos de engenharia, gestão e rastreabilidade de requisitos reunidos na norma consultada \cite{iso29148:2018}. Não se alega conformidade integral com ela.
+
+Os Quadros~\ref{qua:rastreabilidade-rf-web} a~\ref{qua:rastreabilidade-ra} registram a origem resumida de cada requisito e a família de evidência necessária para avaliar seu atendimento. O critério completo permanece junto do respectivo enunciado. Nesta etapa, a matriz não atribui os estados atendido, parcialmente atendido, não atendido ou não avaliado: essa classificação será feita depois de confrontar os critérios com as evidências efetivamente reunidas.
+
+\begin{quadro}[htb]
+    \caption{Rastreabilidade de RF-01 a RF-08: aplicação web e fluxo de autorização}
+    \label{qua:rastreabilidade-rf-web}
+    \small
+    \renewcommand{\arraystretch}{1.12}
+    \begin{tabular}{|>{\centering\arraybackslash}p{0.09\textwidth}|>{\raggedright\arraybackslash}p{0.35\textwidth}|>{\raggedright\arraybackslash}p{0.46\textwidth}|}
+        \hline
+        \textbf{ID} & \textbf{Origem resumida} & \textbf{Evidência necessária} \\ \hline
+        RF-01 & Fluxo de identidade implementado e associação das operações a contas. & Cadastro, autenticação, rejeição de credenciais incorretas e acesso a operação protegida. \\ \hline
+        RF-02 & Modelo no qual a propriedade da instituição define a responsabilidade administrativa. & Cenário com duas contas e instituições próprias e alheias. \\ \hline
+        RF-03 & Modelo hierárquico implementado e identificação dos recursos físicos administrados. & Operações na hierarquia e tentativas autorizadas e não autorizadas. \\ \hline
+        RF-04 & Decisão de associar solicitação e credencial a uma única tranca lógica. & Sala com múltiplas trancas e confirmação do destino escolhido. \\ \hline
+        RF-05 & Fluxo definido pela equipe para substituir a retirada informal de chaves. & Criação de pedido, acompanhamento dos três estados e isolamento entre usuários. \\ \hline
+        RF-06 & Responsabilidade do proprietário sobre pedidos destinados às trancas de sua instituição. & Aprovação e rejeição pelo proprietário e bloqueio de terceiros. \\ \hline
+        RF-07 & Política de uma credencial por solicitação aprovada. & Emissão após aprovação, ausência após rejeição e inexistência de emissão duplicada. \\ \hline
+        RF-08 & Necessidade de o titular obter e apresentar a credencial emitida. & Consulta do próprio QR Code durante a validade e bloqueio para outra conta. \\ \hline
+    \end{tabular}
+    \fonte{Elaborado pelos autores.}
+\end{quadro}
+
+\begin{quadro}[htb]
+    \caption{Rastreabilidade de RF-09 a RF-14: credencial e decisão local}
+    \label{qua:rastreabilidade-rf-credencial}
+    \small
+    \renewcommand{\arraystretch}{1.12}
+    \begin{tabular}{|>{\centering\arraybackslash}p{0.09\textwidth}|>{\raggedright\arraybackslash}p{0.35\textwidth}|>{\raggedright\arraybackslash}p{0.46\textwidth}|}
+        \hline
+        \textbf{ID} & \textbf{Origem resumida} & \textbf{Evidência necessária} \\ \hline
+        RF-09 & Protocolo final de autorização temporal para usuário e tranca identificados. & Decodificação e comparação dos quatro dados da autorização. \\ \hline
+        RF-10 & Detecção local de fabricação ou alteração por meio de AES-CMAC. & Vetor válido e adulteração individual de cada campo protegido. \\ \hline
+        RF-11 & Transporte binário pelo QR Code e restrições observadas na leitura embarcada. & Comparação byte a byte, incluindo bytes nulos e superiores a \texttt{0x7f}. \\ \hline
+        RF-12 & Decisão local que combina estrutura, autenticação, destino e validade. & Casos válidos e inválidos para cada condição da decisão. \\ \hline
+        RF-13 & Política de credencial temporária reutilizável durante a janela concedida. & Reapresentação e testes antes da emissão, na expiração e depois dela. \\ \hline
+        RF-14 & Fluxo administrativo para acompanhar autorizações concedidas. & Consultas cruzadas entre instituições e conferência dos dados exibidos. \\ \hline
+    \end{tabular}
+    \fonte{Elaborado pelos autores.}
+\end{quadro}
+
+\begin{quadro}[htb]
+    \caption{Rastreabilidade dos requisitos não funcionais}
+    \label{qua:rastreabilidade-rnf}
+    \small
+    \renewcommand{\arraystretch}{1.12}
+    \begin{tabular}{|>{\centering\arraybackslash}p{0.09\textwidth}|>{\raggedright\arraybackslash}p{0.35\textwidth}|>{\raggedright\arraybackslash}p{0.46\textwidth}|}
+        \hline
+        \textbf{ID} & \textbf{Origem resumida} & \textbf{Evidência necessária} \\ \hline
+        RNF-01 & Decisão de autorizar localmente sem comunicação da tranca com a API. & Leitura, decisão e acionamento com o dispositivo sem rede. \\ \hline
+        RNF-02 & Modelo de responsabilidade contextual e proteção das operações administrativas. & Matriz com proprietário, usuário sem propriedade e chamada anônima. \\ \hline
+        RNF-03 & Premissa do AES-CMAC e necessidade de proteger o segredo. & Inspeção de respostas, erros e registros produzidos pela aplicação. \\ \hline
+        RNF-04 & Uso da aplicação web em celular e computador, sem aplicativo móvel nativo. & Execução dos fluxos principais em viewports representativos. \\ \hline
+        RNF-05 & Decisão experimental de limitar a densidade óptica ao QR Code versão 3-L. & Inspeção da matriz e dos parâmetros do símbolo e leitura pela ESP32-CAM. \\ \hline
+    \end{tabular}
+    \fonte{Elaborado pelos autores.}
+\end{quadro}
+
 \clearpage
-\section{Requisitos do microcontrolador}
-\begin{enumerate}
-    \item [] RF-03-00: O microcontrolador deve destravar a tranca elétrica mediante a leitura de chaves digitais legítimas pela câmera.
-    \item [] RF-03-01: O microcontrolador deve registrar os eventos de leitura da chave digital, abertura e fechamento da tranca física, configurações e envio de dados no histórico de eventos.
-    \item [] RF-03-02: O microcontrolador deve armazenar internamente o histórico de eventos em um documento auditável.
-\end{enumerate}
 
-\section{Requisitos da câmera}
-\begin{enumerate}
-    \item [] RF-04-00: A câmera deve ter resolução suficiente para efetuar a leitura e interpretação de um QR Code versão 3.
-\end{enumerate}
+\begin{quadro}[htb]
+    \caption{Rastreabilidade dos requisitos de acessibilidade}
+    \label{qua:rastreabilidade-ra}
+    \small
+    \renewcommand{\arraystretch}{1.12}
+    \begin{tabular}{|>{\centering\arraybackslash}p{0.09\textwidth}|>{\raggedright\arraybackslash}p{0.35\textwidth}|>{\raggedright\arraybackslash}p{0.46\textwidth}|}
+        \hline
+        \textbf{ID} & \textbf{Origem resumida} & \textbf{Evidência necessária} \\ \hline
+        RA-01 & Problema relatado de dependência de funcionários para obter acesso à sala. & Fluxo posterior à emissão executado sem intervenção humana. \\ \hline
+        RA-02 & Decisão apoiada pelo eMAG sobre comunicação textual e uso não exclusivo de cor. & Inspeção dos estados, mensagens e distinções sem interpretação cromática. \\ \hline
+        RA-03 & Fluxo progressivo e literatura sobre previsibilidade e informação antecipada. & Inspeção da sequência completa, dos rótulos e dos retornos ao usuário. \\ \hline
+        RA-04 & Decisão da equipe de evitar feedback sensorial acessório no protótipo físico. & Inventário dos sinais durante inicialização, leitura, aceitação e rejeição. \\ \hline
+    \end{tabular}
+    \fonte{Elaborado pelos autores.}
+\end{quadro}
 
-\section{Requisitos da HMI}
-\begin{enumerate}
-    \item [] RF-05-00: A HMI deve fornecer feedback claro ao usuário sobre o status da tranca
-\end{enumerate}
-
-\section{Requisitos das chaves digitais}
-\begin{enumerate}
-    \item [] RF-06-00: A chave digital de acesso deve conter a identificação do usuário, a identificação da sala, o tempo em que a chave foi gerada e sua expiração.
-    \item [] RF-06-01: A chave digital deve fornecer autenticidade.
-    \item [] RF-06-02: A chave digital deve fornecer integridade.
-    \item [] RF-06-03: A chave digital deve fornecer irretratabilidade do acesso ao espaço.
-    \item [] RF-06-04: A chave digital deve ser assinada eletronicamente.
-    \item [] RNF-06-00: A chave digital deve ser lida pela câmera em menos de 2 segundos.
-\end{enumerate}
-
-\section{Requisitos das trancas digitais}
-\begin{enumerate}
-    \item [] RF-07-00: A tranca digital deve validar a autenticidade, integridade, expiração e uso único da chave digital antes de autorizar a abertura da tranca elétrica.
-\end{enumerate}
-
-\section{Requisitos da aplicação web}
-\begin{enumerate}
-    \item [] RF-09-00: A aplicação web deve ser responsiva, permitindo ao usuário realizar cadastro, login, solicitação de acesso, visualização e armazenamento das chaves digitais, além de fornecer painel administrativo para gestores autorizados.
-
-\end{enumerate}
-
-\section{Requisitos do back end}
-\begin{enumerate}
-    \item [] RF-10-00: RF-10-00: O back end deve implementar serviços de autenticação, autorização, geração e assinatura criptográfica das chaves digitais, validação de permissões, persistência em banco de dados e registro auditável de todas as operações relevantes.
-\end{enumerate}
-
-\section{Requisitos de Acessibilidade}
-\begin{enumerate}
-    \item [] REQ-FUNC-01: A tranca elétrica não deve ser sensorialmente hiperestimulante.
-    \item [] REQ-FUNC-01: O processo de acessar o espaço, desde o registro na plataforma web até o destravamento da tranca, deve minimizar a sobrecarga cognitiva
-    \item [] REQ-FUNC-01: O sistema deve minimizar as interações obrigatórias com seres humanos.
-\end{enumerate}
+Os requisitos deste capítulo constituem o contrato técnico adotado pela equipe para o FLIKE. A presença de um comportamento no código, sua origem em um relato ou a definição de um critério não demonstram, isoladamente, seu atendimento. O Capítulo~\ref{cap:desenvolvimento} descreverá os componentes construídos e sua integração; a avaliação confrontará as evidências disponíveis com cada critério e registrará o estado correspondente. Para os requisitos de acessibilidade, essa análise permanecerá uma inspeção técnica do protótipo, sem ser apresentada como validação com o público-alvo.

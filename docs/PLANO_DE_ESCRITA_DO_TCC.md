@@ -13,7 +13,7 @@ As duas fontes internas centrais são:
 
 As regras editoriais e institucionais extraídas dos materiais fornecidos pela equipe estão consolidadas em `docs/ORIENTACOES_INSTITUCIONAIS_TCC.md`. Esse documento deverá integrar a verificação de todas as rodadas.
 
-O projeto histórico do Laboratório de Processadores, incluindo circuito, fotografias e vídeo da demonstração, foi analisado em `docs/ANALISE_MATERIAL_HISTORICO_CAUSP_LOCK.md`. Ele documenta a etapa HMAC-SHA1 que antecedeu o protocolo AES-CMAC final. Segundo confirmação da equipe, a maquete foi remontada e realizou uma nova demonstração ponta a ponta com o protocolo final em 31/08/2026.
+O projeto do Laboratório de Processadores que antecedeu o FLIKE foi analisado em `docs/ANALISE_MATERIAL_HISTORICO_CAUSP_LOCK.md`. Ele será citado somente como origem histórica e como base do circuito elétrico reaproveitado. O produto descrito nesta monografia é o FLIKE, com credenciais autenticadas por AES-CMAC. Segundo confirmação da equipe, o protótipo realizou uma demonstração física ponta a ponta em 31/08/2026.
 
 ### 1.1 Estado da execução em 01/09/2026
 
@@ -33,7 +33,7 @@ A formulação completa e aprovada deste bloco está em `docs/CONTRATO_ACADEMICO
 
 A monografia deve apresentar o FLIKE como o **projeto e protótipo de um sistema de controle de acesso físico**, composto por aplicação web, API, banco de dados, credenciais temporárias em QR Code e uma tranca baseada em ESP32-CAM. Sua decisão arquitetural característica é autenticar a credencial localmente, sem consultar o servidor no momento da leitura. A janela temporal faz parte do formato e da política pretendida, mas sua verificação completa não foi localizada no firmware preservado.
 
-A contribuição acadêmica não deve ser formulada como a comprovação de que o sistema resolveu o problema de acessibilidade ou atingiu segurança de produção. Não houve avaliação com o público-alvo. O material histórico demonstra leitura e decodificação do QR Code, autenticação HMAC-SHA1 e acionamento da fechadura. Depois da migração, a equipe realizou testes bem-sucedidos de QR Code e AES-CMAC. Em 31/08/2026, a maquete executou em uma única demonstração a leitura do QR Code, a validação local por AES-CMAC, a emissão do sinal `HIGH` e o acionamento da fechadura. A integração física completa está demonstrada e deverá ser afirmada categoricamente na tese. O checkout atualmente preservado não contém todo o acionamento usado no ensaio. A contribuição defensável é:
+A contribuição acadêmica não deve ser formulada como a comprovação de que o sistema resolveu o problema de acessibilidade ou atingiu segurança de produção. Não houve avaliação com o público-alvo. A equipe realizou testes bem-sucedidos de QR Code e AES-CMAC. Em 31/08/2026, o protótipo executou em uma única demonstração a leitura e decodificação do QR Code, a validação do comprimento, do identificador da tranca, da janela temporal e do AES-CMAC, a emissão do sinal `HIGH` e o acionamento da fechadura. A integração física completa está demonstrada e deverá ser afirmada categoricamente na tese. O checkout atualmente preservado não contém todo o firmware usado no ensaio. A contribuição defensável é:
 
 1. a especificação de uma solução de acesso voltada à redução de interações humanas obrigatórias;
 2. a arquitetura integrada de frontend, backend, protocolo de credencial e dispositivo embarcado;
@@ -102,6 +102,18 @@ Uma rodada deve produzir uma unidade fácil de revisar: uma decisão editorial, 
 #### Indicador de progresso
 
 Toda abertura e todo encerramento de rodada informarão explicitamente a fase, o número do passo atual e o progresso global. Como o plano é numerado de 0 a 25, o denominador fixo é de **26 passos**. O percentual será calculado por `número de passos integralmente concluídos / 26 × 100`; blocos internos de um passo em andamento não aumentarão o numerador até a conclusão de todo o passo.
+
+#### Identificação dos blocos e trechos para revisão
+
+Toda menção a um bloco interno deverá vir acompanhada de uma frase que relembre seu conteúdo. Um pedido de revisão não poderá indicar apenas “bloco 8”, por exemplo: deverá informar também o tema e relacioná-lo aos números das seções e subseções correspondentes na tese.
+
+Como a numeração impressa nas páginas da tese difere da posição física das páginas no arquivo PDF, os portões de revisão usarão prioritariamente números e títulos de seções, subseções, quadros e requisitos. Páginas poderão aparecer apenas como informação auxiliar, nunca como única forma de localizar o trecho.
+
+Toda entrega que exija revisão começará por indicar inequivocamente o artefato a abrir, com uma chamada direta no formato **“Veja este documento: [link]”** ou **“Veja este PDF: [link]”**. Quando houver Markdown e PDF relacionados, o assistente declarará qual deles é o objeto principal da revisão e para que serve o outro. O pedido também repetirá as seções específicas que devem ser examinadas.
+
+#### Figuras, diagramas e espaços reservados
+
+As figuras não serão priorizadas durante a redação atual. Cada proposta de bloco deverá declarar se uma imagem ou diagrama contribuiria materialmente para o trecho. Antes de inserir uma figura existente, produzir um diagrama novo ou criar um espaço reservado, o assistente deverá explicar sua função e perguntar à equipe se o material existe e se sua inclusão está autorizada. Na ausência de confirmação, o bloco será escrito sem a figura. Tabelas e quadros textuais necessários à especificação poderão ser produzidos normalmente, pois não dependem de um ativo visual externo.
 
 O documento `ARQUITETURA_E_ESTADO_DO_PROJETO.md` continuará funcionando como base factual. Se a equipe fornecer informação técnica nova, primeiro será avaliado se essa base precisa ser atualizada; depois a informação será convertida em texto acadêmico. Assim, correções factuais não ficam escondidas apenas dentro de um capítulo.
 
@@ -294,9 +306,9 @@ O conjunto final dependerá do estado executável dos componentes e da disponibi
 | Protocolo | vetor comum Python/C++, 48 bytes, bytes nulos/altos, tamanho inválido e tag alterada | entradas, saídas esperadas e observadas |
 | Validação | segredo correto/incorreto, tranca correta/incorreta, antes/durante/depois da validade | tabela de decisões e timestamps controlados |
 | Autorização web | usuário comum, proprietário, acesso indevido e rotas sensíveis | requisição, resposta e requisito relacionado |
-| Fluxo integrado | solicitação → aprovação → QR → leitura → validação AES-CMAC → sinal `HIGH` → acionamento da fechadura | roteiro, capturas, logs, versão do firmware e registro visual da execução ponta a ponta |
-| Leitura óptica | distância, ângulo, brilho, tamanho do QR e tempo de leitura | protocolo, repetições, taxa de sucesso e latência |
-| Hardware | acionamento, alimentação e comportamento observado da tranca | esquema, fotos/vídeo, medições e condições |
+| Fluxo integrado | solicitação → aprovação → QR → leitura → validação AES-CMAC → sinal `HIGH` → acionamento da fechadura | demonstração confirmada pela equipe e verificações adicionais que forem executadas sobre os artefatos disponíveis |
+| Leitura óptica | tempo de leitura, se a medição for viável | procedimento, repetições e latência observada |
+| Hardware | acionamento, alimentação e comportamento observado da tranca | descrição funcional, material já disponível e demonstração confirmada pela equipe |
 | Acessibilidade | inspeção heurística/técnica da interface, claramente separada de teste com usuários | critérios, achados e limitações |
 
 Não serão fabricados resultados retroativos. Se um teste não puder ser executado, o texto indicará “não avaliado” e explicará a consequência.
@@ -401,7 +413,7 @@ Se algum teste não puder ser feito, a equipe decidirá entre reduzir o requisit
 
 ### Próxima ação
 
-O **passo 6** está em andamento. Os blocos 1 e 2 e o bloco 3 do Capítulo 4 foram aprovados pela equipe em 01/09/2026. RF-01 a RF-08 estão consolidados. A próxima ação é preparar a proposta do bloco 4, dedicado ao formato e à autenticação da credencial em RF-09.
+O **passo 8** foi concluído em 01/09/2026 com a aprovação das Seções 5.1 a 5.8, da distribuição dos passos 9 a 16 e das figuras F5-01 a F5-06. O **passo 9** está em andamento: `PROPOSTA_BLOCO_1_CAPITULO_5.md` detalha a visão geral, a arquitetura, o modelo de dados e as duas primeiras figuras.
 
 ### Acompanhamento da Fase A
 
@@ -411,14 +423,17 @@ O **passo 6** está em andamento. Os blocos 1 e 2 e o bloco 3 do Capítulo 4 for
 | 1. Receber referências | **Concluído** | 50 monografias, sete materiais institucionais e o projeto histórico do Laboratório de Processadores organizados e examinados | Incorporar futuros documentos quando fornecidos |
 | 2. Analisar as boas teses | **Aprovado** | 50 fichas e síntese comparativa; equipe escolheu padrão técnico, detalhado e visual em 01/09/2026 | Concluído |
 | 3. Fechar o contrato do TCC | **Aprovado** | Pergunta, objetivo geral, sete objetivos específicos, escopo e limitações aprovados em 01/09/2026 | Concluído |
-| 4. Fixar vocabulário e alegações | **Aprovado** | Dicionário editorial, auditoria inicial, distinção HMAC-SHA1 histórico × AES-CMAC final e demonstração física ponta a ponta registrados e aprovados em 01/09/2026 | Concluído |
+| 4. Fixar vocabulário e alegações | **Aprovado** | Dicionário editorial, identidade exclusiva do FLIKE, AES-CMAC como protocolo vigente e demonstração física ponta a ponta registrados e aprovados em 01/09/2026 | Concluído |
 
 ### Acompanhamento da Fase B
 
 | Passo | Estado | Registro | Próxima ação |
 | --- | --- | --- | --- |
-| 5. Planejar o Capítulo 4 | **Aprovado** | Estrutura, 14 requisitos funcionais, quatro não funcionais, quatro de acessibilidade, critérios de verificação e decisões P1–P8 aprovados em 01/09/2026 | Concluído |
-| 6. Reescrever o Capítulo 4 | **Em andamento — bloco 3 aprovado** | Blocos 1 a 3 aprovados; RF-01 a RF-08 consolidados, citados, compilados e inspecionados em 01/09/2026 | Assistente preparar a proposta do bloco 4 para RF-09 |
+| 5. Planejar o Capítulo 4 | **Aprovado** | Estrutura, 14 requisitos funcionais, cinco não funcionais, quatro de acessibilidade, critérios de verificação e decisões P1–P8 aprovados em 01/09/2026 | Concluído |
+| 6. Reescrever o Capítulo 4 | **Aprovado** | Capítulo 4 completo: RF-01 a RF-14, RNF-01 a RNF-05, RA-01 a RA-04, decisões arquiteturais e Seção 4.8 aprovados em 01/09/2026 | Concluído |
+| 7. Preparar evidências do Capítulo 5 | **Aprovado** | `INVENTARIO_EVIDENCIAS_CAPITULO_5.md` consolida código, documentação, demonstrações e relatos; commits finais confirmados e nível de detalhe do hardware aprovado em 01/09/2026 | Concluído |
+| 8. Aprovar o esqueleto do Capítulo 5 | **Aprovado** | Seções 5.1–5.8, distribuição dos passos 9–16 e figuras F5-01 a F5-06 aprovadas em 01/09/2026 | Concluído |
+| 9. Arquitetura e modelo de dados | **Em andamento — proposta do bloco 1 produzida** | `PROPOSTA_BLOCO_1_CAPITULO_5.md` especifica as Seções 5.1, 5.2 e 5.3.1 e as figuras F5-01/F5-02 | Equipe validar o bloco antes da redação e compilação |
 
 ## 7. Fontes e informações a solicitar à equipe
 
@@ -431,16 +446,16 @@ A lista abaixo é um mapa de dependências, não um pedido para que tudo seja re
 3. Feedback já fornecido pelo orientador ou pela banca intermediária.
 4. Confirmação da pergunta, objetivo geral e objetivos específicos.
 5. Cronologia real do projeto e divisão de responsabilidades entre os autores.
-6. Versões/commits usados na última demonstração de cada componente.
+6. Versões finais disponíveis de cada componente, quando sua identificação for necessária à rastreabilidade do texto.
 
 ### 7.2 Prioridade técnica — antes de concluir o capítulo 5
 
 1. Esquema ou desenho do circuito montado.
-2. Lista de componentes, modelos e características da fonte e da tranca elétrica.
-3. Fotos e vídeos originais do protótipo, com contexto e data aproximada.
+2. Lista funcional dos componentes do circuito, sem exigir modelos comerciais das fontes e do relé.
+3. Fotos e vídeos existentes do protótipo, sem transformar a ausência de novo registro em bloqueio.
 4. Descrição exata do que foi demonstrado fisicamente.
 5. Procedimento adotado para gravar identificador e segredo no ESP32-CAM.
-6. Logs, capturas de tela ou roteiros de demonstrações anteriores.
+6. Logs, capturas de tela ou roteiros que já existam ou possam ser produzidos durante os testes planejados.
 7. Ambiente disponível para executar testes novos.
 
 ### 7.3 Prioridade contextual — antes de fechar introdução e método

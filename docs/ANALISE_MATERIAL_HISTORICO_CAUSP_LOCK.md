@@ -4,11 +4,11 @@
 
 **Fonte principal:** `materiais/CAUSP_LOCK/`
 
-**Papel no TCC:** documentação histórica e evidência do protótipo físico que antecedeu o FLIKE
+**Papel no TCC:** antecedente histórico e fonte da base elétrica reaproveitada pelo FLIKE
 
 ## 1. Finalidade e regra de nomenclatura
 
-O diretório contém o projeto Overleaf produzido anteriormente para a disciplina Laboratório de Processadores, identificada no vídeo como PCS3732. O relatório usa o nome antigo “CAUSP-LOCK”. Na monografia atual, o projeto será chamado **FLIKE**. O nome antigo aparecerá apenas ao identificar literalmente o título, os arquivos ou a etapa histórica.
+O diretório contém o projeto Overleaf produzido anteriormente para a disciplina Laboratório de Processadores, identificada no vídeo como PCS3732. Esse trabalho não constitui uma versão do FLIKE. Na monografia, ele será mencionado somente como antecedente que ajudou a originar o TCC e como fonte da base elétrica reaproveitada. O produto atual será denominado **FLIKE** em toda a descrição técnica.
 
 O material é valioso sobretudo por preservar:
 
@@ -147,7 +147,7 @@ O vídeo comprova diretamente a integração física ponta a ponta da etapa hist
 
 Segundo confirmação da equipe em 01/09/2026, um de seus integrantes remontou a maquete na noite anterior e executou com sucesso uma demonstração ponta a ponta do sistema físico com o protocolo AES-CMAC final. O ensaio integrou leitura do QR Code, validação local por AES-CMAC, emissão do sinal de comando, circuito elétrico e acionamento da fechadura.
 
-A tese deverá afirmar categoricamente: **“O protótipo físico do FLIKE realizou, de ponta a ponta, a leitura do QR Code, a validação local por AES-CMAC, a emissão do sinal de comando e o acionamento da fechadura elétrica.”** O relatório e o vídeo antigos continuam sendo evidências da evolução histórica com HMAC-SHA1; a demonstração final com AES-CMAC é um resultado técnico posterior confirmado pela equipe.
+A tese deverá afirmar categoricamente: **“O protótipo físico do FLIKE realizou, de ponta a ponta, a leitura e a decodificação do QR Code, as verificações estrutural, de tranca e temporal, a validação local por AES-CMAC, a emissão do sinal de comando e o acionamento da fechadura elétrica.”** Essa é uma afirmação sobre o FLIKE confirmada pela equipe. O material anterior não será usado para comparar protocolos na narrativa do produto atual.
 
 ## 6. Elementos diretamente aproveitáveis no TCC
 
@@ -155,9 +155,9 @@ A tese deverá afirmar categoricamente: **“O protótipo físico do FLIKE reali
 
 A notícia oficial da FDUSP sustenta a existência, localização no terceiro andar, finalidade e inauguração da sala em abril de 2024. Ela também registra a parceria institucional e declarações sobre acolhimento e regulação sensorial. Os problemas de liberação de chave, protocolo e constrangimento continuam sendo relato do autor e de colegas; não aparecem confirmados na notícia institucional.
 
-### 6.2 Capítulo 3 — método e evolução do projeto
+### 6.2 Capítulo 3 — antecedente do projeto
 
-O trabalho da disciplina fornece um marco verificável na cronologia: concepção inicial, protocolo HMAC-SHA1, circuito de bancada e demonstração física. Ele permite explicar que o TCC evoluiu um protótipo anterior, separando o que foi herdado, alterado e abandonado.
+O trabalho da disciplina poderá receber uma referência histórica breve para explicar que um projeto anterior ajudou a originar o FLIKE e forneceu a base de seu circuito elétrico. A monografia não precisa narrar seu protocolo nem compará-lo com o AES-CMAC do FLIKE.
 
 ### 6.3 Capítulo 5 — hardware e implementação
 
@@ -229,10 +229,11 @@ A fotografia mostra fonte aberta, protoboard e condutores expostos, adequados a 
 
 1. Manter o pacote original intacto em `materiais/CAUSP_LOCK/` como fonte histórica.
 2. Não usar o ZIP e a pasta como duas fontes independentes; eles são cópias idênticas.
-3. Citar o relatório e o vídeo como artefatos produzidos pelos autores.
+3. Usar relatório, fotografias, diagrama e vídeo apenas para reconstruir a base elétrica, sem apresentá-los como evidência do produto FLIKE.
 4. Redesenhar o circuito somente na rodada de hardware do Capítulo 5.
 5. Copiar fotografias para `FLIKE/imagens/` apenas quando a subseção correspondente for autorizada.
 6. Incluir a ficha oficial da fechadura e a página institucional da sala na futura bibliografia.
 7. Registrar como concluída a demonstração ponta a ponta com AES-CMAC realizada em 31/08/2026, segundo confirmação da equipe.
-8. Reunir, se disponível, evidência documental complementar do ensaio final — configuração, versão do firmware, sequência observada, fotografia, vídeo ou log — para fortalecer sua reprodutibilidade.
-9. Registrar que o circuito elétrico é o mesmo nas duas etapas e recebe apenas o sinal `HIGH` da ESP32-CAM.
+8. Não exigir novo registro, GPIO, versão exata do firmware ou modelo comercial das fontes e do relé para redigir o resultado confirmado pela equipe.
+9. Registrar que o FLIKE reaproveita a base elétrica do projeto anterior e que o circuito recebe o sinal `HIGH` da ESP32-CAM.
+10. Não usar o projeto anterior para estabelecer uma comparação de protocolos na narrativa técnica do FLIKE.
