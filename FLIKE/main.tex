@@ -117,7 +117,7 @@
 % ---
 % Informações de dados para CAPA e FOLHA DE ROSTO
 % ---
-\titulo{Desenvolvimento e implementação de um sistema de controle de acesso a espaços públicos acessível a neurodivergentes}
+\titulo{FLIKE: desenvolvimento de um protótipo de controle de acesso físico com credenciais temporárias em QR Code e autenticação local}
 \autor{Hélcio Prado de Lima, Henrique Eduardo dos Santos de Souza, Mateus Kosicov Perugini}
 \local{São Paulo, SP}
 \data{2026}
@@ -150,7 +150,7 @@
 		pdfauthor={\@author},
     	pdfsubject={\imprimirpreambulo},
 	    pdfcreator={LaTeX with abnTeX2},
-		pdfkeywords={abnt}{latex}{abntex}{abntex2}{trabalho acadêmico}, 
+		pdfkeywords={FLIKE}{controle de acesso}{QR Code}{AES-CMAC}{ESP32-CAM}{acessibilidade},
 		colorlinks=true,       		% false: boxed links; true: colored links
     	linkcolor=blue,          	% color of internal links
     	citecolor=blue,        		% color of links to bibliography
@@ -232,7 +232,7 @@
 % Folha de rosto
 % (o * indica que haverá a ficha bibliográfica)
 % ---
-\imprimirfolhaderosto*
+\imprimirfolhaderosto
 % ---
 
 % ---
@@ -246,10 +246,7 @@
 % com o documento, salve-o como PDF no diretório do seu projeto e substitua todo
 % o conteúdo de implementação deste arquivo pelo comando abaixo:
 %
-%% TODO: utilizar a ficha catalográfica gerada em https://www.poli.usp.br/bibliotecas/servicos/catalogacao-na-publicacao
-\begin{fichacatalografica}
-    \includepdf{pre-textuais/ficha.pdf}
-\end{fichacatalografica}
+% A ficha catalográfica definitiva deverá ser inserida depois de emitida pela biblioteca.
 
 % \begin{fichacatalografica}
 % 	\sffamily
@@ -376,15 +373,6 @@
 % ---
 
 % ---
-% Agradecimentos
-% ---
-\begin{agradecimentos}
-Os agradecimentos principais são direcionados ...
-
-\end{agradecimentos}
-% ---
-
-% ---
 % Epígrafe
 % ---
 % \begin{epigrafe}
@@ -402,26 +390,19 @@ Os agradecimentos principais são direcionados ...
 % resumo em português
 \setlength{\absparsep}{18pt} % ajusta o espaçamento dos parágrafos do resumo
 \begin{resumo}
-Trata-se de um conjunto de sistemas de hardware e software suficientes para garantir o acesso de múltiplos usuários a um mesmo espaço físico, nesse caso, a sala de apoio à amamentação e regulação sensorial da Faculdade de Direito da USP, localizada em seu prédio histórico, no centro de São Paulo e destinada especialmente à comunidade autista e neurodivergente. O nome "CAUSP" de CAUSP-LOCK é referência ao Coletivo Autista da USP, do qual o Henrique S. Souza faz parte.
-O hardware consiste primordialmente em uma fechadura eletrônica capaz de ler e interpretar QR Codes em um protocolo próprio. Ela será composta por três principais componentes: (i) um microcontrolador ESP32-CAM, (ii) uma câmera OV2640, e (iii) uma fechadura elétrica. O ESP32-CAM controla a câmera, que, por sua vez, efetua a captura das imagens dos QR Codes, e, caso o acesso seja autorizado, aciona a abertura da fechadura elétrica. 
-Para promover segurança do espaço físico, o CAUSP-LOCK gera QR Codes de acesso de uso único, temporário e assinados digitalmente, com algoritmo criptograficamente seguro, o que garante autenticidade, integridade e irretratabilidade dos acessos. A chave criptográfica empregada na assinatura é compartilhada entre o microcontrolador e o backend da aplicação assincronamente. Portanto, a tranca eletrônica funciona offline, sem necessidade de internet para autenticar os códigos de acesso dos QR Codes.
+Este trabalho apresenta o FLIKE, um protótipo integrado de controle de acesso físico concebido a partir de dificuldades relatadas no acesso à sala de apoio à amamentação e regulação sensorial da Faculdade de Direito da Universidade de São Paulo. O sistema combina uma aplicação web para solicitações e decisões administrativas, uma API e um banco relacional, credenciais temporárias em QR Code e um dispositivo baseado em ESP32-CAM conectado a uma fechadura elétrica. Cada solicitação aprovada produz uma credencial destinada a uma tranca e válida em um intervalo. O payload binário contém identificadores de usuário e tranca e os instantes de emissão e expiração; seus 32 bytes de dados recebem uma tag AES-CMAC de 16 bytes. O frontend codifica o resultado em QR Code versão 3-L. No ponto de acesso, o dispositivo recupera o payload, verifica comprimento, autenticador, destino e intervalo temporal e, diante de uma decisão positiva, comanda um transistor e um relé que acionam a fechadura. Uma demonstração física ponta a ponta confirmou leitura, validação local e atuação sem consulta ao servidor no momento da apresentação. A análise dos 23 requisitos classificou 13 como atendidos, sete como parciais, dois como não atendidos e um como não avaliado. Entre as limitações estão exposição do segredo por rotas da API, impossibilidade de revogação imediata durante a operação local, ausência de sensores de passagem, firmware final não preservado e inexistência de avaliação com usuários. Portanto, o resultado demonstra a viabilidade técnica do protótipo, mas não comprova benefício de acessibilidade nem prontidão para implantação.
 
- \textbf{Palavras-chave}: Controle de acesso inteligente
-QR Code criptográfico, Sistema embarcado (ESP32-CAM), fechadura eletrônica, acessibilidade e inclusão neurodivergente
+\textbf{Palavras-chave}: controle de acesso; QR Code; AES-CMAC; ESP32-CAM; fechadura elétrica; acessibilidade.
 \end{resumo}
 
 % resumo em inglês
 \begin{resumo}[Abstract]
  \begin{otherlanguage*}{english}
-This work presents a set of hardware and software systems designed to ensure access for multiple users to a shared physical space, in this case, the breastfeeding support and sensory regulation room at the Faculty of Law of the University of São Paulo, located in its historic building in downtown São Paulo, and especially intended for the autistic and neurodivergent community. The name "CAUSP" in CAUSP-LOCK refers to the Autistic Collective of USP, of which Henrique S. Souza is a member.
-
-The hardware primarily consists of an electronic lock capable of reading and interpreting QR Codes using a proprietary protocol. It is composed of three main components: (i) an ESP32-CAM microcontroller, (ii) an OV2640 camera, and (iii) an electric lock. The ESP32-CAM controls the camera, which captures images of the QR Codes and, if access is authorized, triggers the unlocking mechanism.
-
-To ensure the security of the physical space, CAUSP-LOCK generates single-use, time-limited, and digitally signed access QR Codes using a cryptographically secure algorithm, guaranteeing authenticity, integrity, and non-repudiation of access events. The cryptographic key used for signing is shared asynchronously between the microcontroller and the backend of the application. Therefore, the electronic lock operates offline, without requiring an internet connection to authenticate QR Code access credentials.
+This work presents FLIKE, an integrated physical access control prototype motivated by reported difficulties in accessing the breastfeeding support and sensory regulation room at the University of São Paulo Law School. The system combines a web application for requests and administrative decisions, an API and a relational database, temporary QR Code credentials, and an ESP32-CAM-based device connected to an electric lock. Each approved request produces a credential addressed to one lock and valid within a time interval. Its binary payload contains user and lock identifiers and issue and expiration timestamps; the 32 data bytes receive a 16-byte AES-CMAC tag. The frontend encodes the result as a version 3-L QR Code. At the access point, the device recovers the payload, verifies its length, authenticator, destination, and validity interval, and, after a positive decision, drives a transistor and relay circuit that actuates the lock. An end-to-end physical demonstration confirmed reading, local validation, and actuation without consulting the server when the credential was presented. Of 23 requirements, 13 were classified as satisfied, seven as partially satisfied, two as not satisfied, and one as not evaluated. Limitations include disclosure of the lock secret by API routes, lack of immediate revocation during local operation, absence of passage sensors, failure to preserve the final firmware, and no user evaluation. The result demonstrates the prototype's technical feasibility, but it does not establish accessibility benefits or readiness for deployment.
    \vspace{\onelineskip}
  
    \noindent 
-   \textbf{Keywords}: Intelligent access control, cryptographic QR Code, embedded system (ESP32-CAM), electronic lock, accessibility and neurodivergent inclusion
+   \textbf{Keywords}: access control; QR Code; AES-CMAC; ESP32-CAM; electric lock; accessibility.
  \end{otherlanguage*}
 \end{resumo}
 
@@ -461,31 +442,21 @@ To ensure the security of the physical space, CAUSP-LOCK generates single-use, t
 % ---
 
 % ---
-% inserir lista de tabelas
-% ---
-\pdfbookmark[0]{\listtablename}{lot}
-\listoftables*
-\cleardoublepage
-% ---
-
-% ---
 % inserir lista de abreviaturas e siglas
 % ---
 \begin{siglas}
-  \item[ABNT] Associação Brasileira de Normas Técnicas
-  \item[abnTeX] ABsurdas Normas para TeX
+  \item[AES] Advanced Encryption Standard
+  \item[API] Application Programming Interface
+  \item[CMAC] Cipher-based Message Authentication Code
+  \item[GPIO] General-Purpose Input/Output
+  \item[HTTP] Hypertext Transfer Protocol
+  \item[JSON] JavaScript Object Notation
+  \item[JWT] JSON Web Token
+  \item[MAC] Message Authentication Code
+  \item[QR] Quick Response
+  \item[SQL] Structured Query Language
+  \item[USP] Universidade de São Paulo
 \end{siglas}
-% ---
-
-% ---
-% inserir lista de símbolos
-% ---
-\begin{simbolos}
-  \item[$ \Gamma $] Letra grega Gama
-  \item[$ \Lambda $] Lambda
-  \item[$ \zeta $] Letra grega minúscula zeta
-  \item[$ \in $] Pertence
-\end{simbolos}
 % ---
 
 % ---

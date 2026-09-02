@@ -1,57 +1,51 @@
 \chapter{Introdução} \label{cap:introducao}
 
-A crescente necessidade de promover acessibilidade, inclusão e autonomia em ambientes institucionais tem impulsionado o desenvolvimento de soluções tecnológicas voltadas ao controle inteligente de acesso a espaços físicos. Em especial, ambientes destinados a públicos com necessidades específicas, como pessoas autistas, neurodivergentes e gestantes, exigem não apenas segurança, mas também processos de acesso que reduzam barreiras sociais, cognitivas e sensoriais.
+O acesso a um espaço institucional compartilhado envolve duas necessidades que podem entrar em tensão: permitir a entrada de pessoas autorizadas e impedir o uso por quem não recebeu permissão. Quando esse processo depende de localizar um funcionário, explicar a necessidade e retirar uma chave física, a regra administrativa também se torna uma interação social obrigatória. Essa dependência pode acrescentar imprevisibilidade e constrangimento ao uso de um ambiente criado justamente para oferecer apoio.
 
-Nesse contexto, a Faculdade de Direito da Universidade de São Paulo (USP), localizada no histórico prédio do Largo de São Francisco, passou a contar com uma sala de apoio à amamentação e regulação sensorial como parte de suas políticas de inclusão e pertencimento. Apesar de sua importância, o uso desse espaço ainda é limitado por dificuldades relacionadas à segurança e à ausência de um sistema eficiente de controle de acesso. Atualmente, o modelo baseado na retirada manual de chaves junto a funcionários pode gerar constrangimentos, inconsistências de acesso e dificuldades adicionais, especialmente para usuários neurodivergentes.
+O problema que motivou este trabalho surgiu na sala de apoio à amamentação e regulação sensorial da Faculdade de Direito da Universidade de São Paulo, no Largo de São Francisco. Um dos autores, pessoa autista e integrante do Coletivo Autista da USP, tomou conhecimento do fluxo de acesso em uma reunião com dirigentes da Faculdade e por relatos informais de colegas. Segundo essas fontes, estudantes autistas encontravam dificuldade para obter a liberação da sala, não havia um protocolo claro para a concessão e a decisão prática dependia de funcionários da segurança. Esses relatos explicam a escolha do problema, mas não constituem levantamento sistemático, diagnóstico institucional ou opinião representativa do público-alvo.
 
-Diante desse cenário, o projeto CAUSP-LOCK propõe uma solução integrada de hardware e software para viabilizar o acesso seguro, autônomo e simplificado ao ambiente. O sistema utiliza uma fechadura eletrônica baseada em microcontrolador ESP32-CAM e câmera OV2640, capaz de ler e validar QR Codes de acesso gerados por uma aplicação dedicada. Esses códigos são únicos, temporários e protegidos por mecanismos criptográficos, garantindo autenticidade, integridade e irretratabilidade dos acessos, além de permitir a operação offline da tranca.
+A literatura oferece razões para tratar previsibilidade e comunicação como dimensões relevantes desse cenário. Em estudo qualitativo com adultos autistas, barreiras em espaços públicos resultaram da combinação entre estímulos sensoriais, imprevisibilidade, comunicação inflexível e falta de locais de recuperação; informação antecipada e alternativas à fala apareceram entre as medidas consideradas úteis \cite{maclennan2023sensory}. Uma revisão sobre ambiente construído também identifica qualidade sensorial, inteligibilidade e orientação como temas recorrentes, embora ressalte que a evidência disponível é limitada e heterogênea \cite{tola2021builtenvironment}. Esses trabalhos fundamentam a direção do projeto, sem demonstrar que uma solução digital produza benefício para toda pessoa autista.
 
-Além de atender aos requisitos de segurança da informação, o sistema foi projetado com foco em acessibilidade, buscando minimizar a sobrecarga cognitiva e reduzir interações humanas obrigatórias no processo de acesso. Dessa forma, o CAUSP-LOCK se apresenta como uma solução que integra tecnologia, segurança e inclusão, contribuindo para o uso mais eficiente, seguro e digno de espaços institucionais compartilhados.
+O FLIKE foi concebido para formalizar o percurso da permissão. Em sua aplicação web, uma pessoa solicita acesso a uma tranca; o usuário responsável pela instituição aprova ou rejeita o pedido; e uma aprovação produz uma credencial temporária apresentada como QR Code. No ponto de acesso, uma ESP32-CAM lê a credencial, verifica localmente seus dados autenticados e, quando as condições são satisfeitas, comanda um circuito que aciona a fechadura elétrica. O nome FLIKE é um nome próprio dado ao projeto e homenageia o gato de infância de um dos autores; não é uma sigla.
 
+A decisão de manter a autorização física no dispositivo diferencia a arquitetura de um sistema que consulta o servidor a cada tentativa. Uma credencial já emitida pode ser avaliada sem conectividade no instante da leitura. Essa escolha também cria restrições: uma permissão não pode ser revogada imediatamente enquanto a tranca permanecer isolada; o relógio e o segredo precisam estar disponíveis localmente; e uma cópia do QR Code permanece apresentável durante sua vigência. O trabalho trata essas consequências como parte do projeto, em vez de usar o termo \textit{offline} como uma promessa abrangente.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Motivação}
-\begin{itemize}
-    \item Subutilização de uma sala inclusiva com alto potencial de impacto social
-    \item Dificuldades e constrangimentos no acesso devido ao modelo manual de retirada de chaves
-    \item Falta de padronização e critérios claros para concessão de acesso
-    \item Vulnerabilidade do espaço a furtos e uso indevido
-    \item Necessidade de aliar segurança, acessibilidade e autonomia por meio de tecnologia
-\end{itemize}
+\section{Problema e pergunta de pesquisa}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Objetivo}
-\begin{itemize}
-    \item Promover o bem-estar de pessoas autistas, neurodivergentes e gestantes
-    \item Garantir o uso efetivo da sala de amamentação e regulação sensorial
-    \item Reduzir a subutilização do espaço
-    \item Aumentar a segurança contra furtos e uso indevido
-    \item Eliminar a necessidade de retirada manual de chaves com funcionários
-    \item Reduzir constrangimentos no processo de acesso
-    \item Padronizar e formalizar o controle de acesso
-    \item Permitir acesso autônomo aos usuários autorizados
-    \item Implementar autenticação via QR Codes
-    \item Garantir segurança por meio de criptografia (autenticidade e integridade)
-    \item Utilizar códigos de acesso temporários e de uso único
-    \item Possibilitar gestão de acessos via website ou aplicativo
-    \item Minimizar esforço e sobrecarga cognitiva dos usuários
-    \item Reduzir interações humanas obrigatórias no acesso
-    \item Assegurar o uso adequado e controlado do espaço
-\end{itemize}
+O problema técnico consiste em integrar três domínios. O primeiro é administrativo: identificar contas, representar instituições e suas trancas, registrar solicitações e permitir que o responsável decida. O segundo é criptográfico e óptico: transportar uma autorização compacta, destinada a uma tranca e limitada no tempo, de modo que alterações possam ser detectadas localmente. O terceiro é físico: capturar o QR Code em um microcontrolador, produzir uma decisão e adaptar o sinal lógico à tensão e à corrente da fechadura.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Justificativa}
-\begin{itemize}
-    \item Necessidade de garantir acesso digno, autônomo e inclusivo a um espaço essencial
-    \item Importância de reduzir barreiras enfrentadas por usuários neurodivergentes e gestantes
-    \item Demanda por maior segurança e controle no uso de ambientes institucionais
-    \item Aplicação de tecnologias acessíveis e de baixo custo para resolver problemas reais
-    \item Contribuição para políticas de inclusão e melhoria da experiência dos usuários
-\end{itemize}
+Ao mesmo tempo, a solução deve preservar uma fronteira conceitual. O servidor decide se emite uma autorização; o dispositivo decide se aceita a credencial apresentada; e o circuito executa o acionamento. Nenhuma dessas etapas comprova, isoladamente, que uma pessoa específica entrou ou permaneceu no ambiente. Essa separação evita atribuir aos registros mais significado do que os sensores permitem observar.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Organização do Trabalho}
-Descrever sucintamente os capítulos e as demais partes do trabalho.
+Diante desse problema, a pergunta que orienta o trabalho é:
 
-Lembre-se de colocar rótulos nos capítulos e seções (com label{} ) e depois utilizar o ref{}
-Por exemplo, o Capítulo \ref{cap:conceitos} apresenta conceitos....
+\begin{quote}
+Como projetar e implementar um protótipo de controle de acesso físico para espaços institucionais compartilhados que integre a gestão web de permissões a credenciais temporárias em QR Code autenticadas localmente por uma tranca eletrônica, sem consulta ao servidor no momento da leitura?
+\end{quote}
+
+\section{Objetivos}
+
+O objetivo geral é projetar, implementar e documentar tecnicamente o FLIKE, um protótipo de controle de acesso físico que gerencia solicitações e permissões por uma aplicação web e utiliza credenciais temporárias em QR Code, autenticadas localmente por um dispositivo baseado em ESP32-CAM, para acionar uma fechadura elétrica.
+
+Para alcançar esse objetivo, foram definidos os seguintes objetivos específicos:
+
+\begin{enumerate}
+    \item caracterizar o cenário da sala sensorial que motivou o projeto e explicitar a origem e os limites das informações empregadas;
+    \item especificar requisitos funcionais, não funcionais e de acessibilidade derivados pela equipe;
+    \item projetar a arquitetura, o modelo de dados e os fluxos entre usuários, responsáveis, aplicação web, API e trancas;
+    \item implementar cadastro e autenticação, gestão da estrutura institucional, solicitação e decisão de acesso, emissão da credencial e disponibilização do QR Code;
+    \item definir e implementar uma credencial binária que identifique usuário, tranca e janela de validade e seja autenticada por AES-CMAC;
+    \item desenvolver um protótipo embarcado capaz de ler o QR Code, verificar a credencial localmente e acionar uma fechadura por meio de um circuito elétrico; e
+    \item confrontar requisitos e objetivos com código, documentação, verificações e demonstrações, registrando realizações, limitações e riscos.
+\end{enumerate}
+
+\section{Escopo e contribuição}
+
+O trabalho abrange aplicação web em Next.js e React, API em FastAPI, banco MySQL, protocolo binário com AES-CMAC, QR Code, firmware para ESP32-CAM, estágio com transistor e relé e fechadura elétrica. O modelo não separa permanentemente clientes e administradores: cada usuário administra as instituições das quais é proprietário e pode solicitar acesso a instituições pertencentes a outras pessoas. Cada solicitação aprovada produz uma credencial destinada a uma tranca e reapresentável dentro de sua janela temporal.
+
+A contribuição principal é a especificação e a construção do sistema integrado. Ela reúne uma fronteira conectada para gestão e emissão e uma fronteira local para autenticação e acionamento. O trabalho também contribui com a descrição do formato da credencial, a rastreabilidade dos requisitos e uma análise das limitações observadas na implementação.
+
+Não fazem parte do escopo aplicativo móvel, Bluetooth, MQTT, gateway, armazenamento S3, implantação operacional, interface de provisionamento do segredo, revogação imediata de credenciais já emitidas, sensores de porta ou ocupação e endurecimento para produção. Também não foi realizada avaliação com usuários, pesquisa de usabilidade ou medição de impacto social. A redução de interação presencial, o aumento de autonomia e a diminuição de sobrecarga são motivações e resultados esperados; não são efeitos comprovados por este trabalho.
+
+\section{Organização do trabalho}
+
+O Capítulo~\ref{cap:conceitos} apresenta a fundamentação sobre autismo e ambiente, acessibilidade digital, controle de acesso, QR Code, autenticação de mensagens e sistemas embarcados, além de comparar trabalhos relacionados. O Capítulo~\ref{cap:metodo} descreve o método de engenharia, as etapas, as fontes de evidência e os limites da avaliação. O Capítulo~\ref{cap:especificacao} delimita atores, entidades e requisitos e estabelece critérios rastreáveis. O Capítulo~\ref{cap:desenvolvimento} explica arquitetura, software, credencial, firmware, circuito e integração e confronta a implementação com os requisitos. Por fim, o Capítulo~\ref{cap:consideracoes} responde à pergunta, avalia os objetivos, sintetiza as contribuições e indica trabalhos futuros.

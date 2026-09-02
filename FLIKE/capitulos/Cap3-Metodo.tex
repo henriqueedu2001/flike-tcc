@@ -1,7 +1,59 @@
 \chapter{Método do trabalho} \label{cap:metodo}
 
-\begin{itemize}
-    \item Apresentar o processo de desenvolvimento do trabalho, através das suas fases (por exemplo, especificação de requisitos, projeto, implementação, testes). As fases dependem do tipo do trabalho e devem ser definidas com o apoio do orientador.
-    \item O desenvolvimento das fases e seus resultados devem estar descritos nos capítulos seguintes e não no capítulo de Método do Trabalho.
-    \item Citar os trabalhos consultados no texto.
-\end{itemize}
+Este trabalho adota uma abordagem de engenharia aplicada orientada à construção e à análise de um protótipo. O objeto é um sistema integrado de software, firmware e hardware. O percurso combina definição do problema, especificação de requisitos, projeto da arquitetura, implementação incremental, integração e verificação. Como parte dessas atividades ocorreu antes da redação final, o método também inclui reconstrução retrospectiva das decisões e das evidências preservadas.
+
+O estudo não é uma pesquisa experimental com participantes. Não foram conduzidas entrevistas estruturadas, questionários, observações sistemáticas, estudo de usabilidade ou implantação na Faculdade de Direito. A experiência de um autor, a reunião institucional e os relatos informais recebidos pela equipe serviram para escolher e interpretar o problema; não foram tratados como amostra de uma população.
+
+\section{Caracterização da abordagem}
+
+A unidade de análise é o FLIKE completo: aplicação web, API, banco, credencial, dispositivo embarcado, circuito e fechadura. A pergunta é respondida pela demonstração de que esses componentes podem formar o percurso da autorização e pela análise das condições e lacunas desse percurso. A avaliação considera o comportamento especificado para o protótipo, e não conformidade integral com uma norma ou prontidão para produção.
+
+Três princípios organizaram o trabalho. Primeiro, requisitos e critérios devem possuir identificadores que permitam relacioná-los à implementação e às evidências. Essa prática segue, em caráter geral, conceitos públicos de rastreabilidade da ISO/IEC/IEEE 29148, sem alegação de conformidade integral \cite{iso29148:2018}. Segundo, decisões conectadas e locais são descritas separadamente para expor dependências e riscos. Terceiro, uma propriedade somente é apresentada como resultado quando existe código, documento, verificação executada ou demonstração correspondente.
+
+\section{Origem e consolidação dos requisitos}
+
+Os requisitos foram elaborados pela equipe a partir de sua avaliação do cenário da sala sensorial, das metas iniciais do projeto, de protótipos produzidos durante o curso e do comportamento implementado. Esse processo não incluiu elicitação formal com usuários. Na consolidação para a monografia, enunciados vagos foram divididos, propostas abandonadas foram retiradas e cada requisito recebeu justificativa e critério observável.
+
+Foram usadas três categorias. Requisitos funcionais descrevem comportamentos, como solicitar acesso, emitir uma credencial e validar um QR Code. Requisitos não funcionais estabelecem restrições, como decidir localmente e não expor o segredo. Requisitos de acessibilidade definidos pela equipe registram escolhas técnicas motivadas pelo problema, como comunicar estados textualmente e dispensar interação com funcionário depois da emissão.
+
+A consolidação também fixou decisões de escopo: aplicação exclusivamente web; uma credencial por solicitação; autorização reutilizável durante o intervalo; associação da credencial à tranca; QR Code versão 3-L; autenticação AES-CMAC; e provisionamento prévio do segredo. Aplicativo móvel, Bluetooth, MQTT, gateway e S3 foram excluídos da arquitetura final.
+
+\section{Etapas do desenvolvimento}
+
+O desenvolvimento foi organizado nas seguintes etapas lógicas:
+
+\begin{enumerate}
+    \item \textbf{caracterização do problema:} identificação do caso motivador e levantamento de literatura sobre ambiente, acessibilidade e controle de acesso;
+    \item \textbf{especificação:} delimitação de atores, entidades, fronteiras, requisitos e critérios de verificação;
+    \item \textbf{projeto:} definição da arquitetura conectada e local, modelo relacional, fluxo administrativo, formato da credencial e circuito de acionamento;
+    \item \textbf{implementação de software:} construção da API, persistência, autenticação, autorização contextual e interface web;
+    \item \textbf{implementação do protocolo e firmware:} serialização binária, AES-CMAC, geração e leitura do QR Code, validações locais e sinal lógico;
+    \item \textbf{integração física:} conexão da ESP32-CAM ao estágio com transistor, relé, fonte e fechadura; e
+    \item \textbf{verificação e síntese:} inspeção dos artefatos, execução de vetor criptográfico, registro das demonstrações e classificação dos requisitos.
+\end{enumerate}
+
+As etapas não representam uma cronologia estritamente linear. Decisões foram revistas à medida que limitações apareceram. Um exemplo é o formato da credencial: a dificuldade de leitura de símbolos densos levou à redução do payload e à fixação da versão 3-L. Outro é a política de uso: o campo legado de uso único foi separado da autorização temporária reapresentável adotada na solução final.
+
+\section{Artefatos e fontes de evidência}
+
+Foram examinados quatro conjuntos de artefatos. O primeiro é o repositório da monografia, que contém decisões aprovadas, inventários, referências, figuras e texto. O segundo é o backend, incluindo rotas, esquemas Pydantic, repositórios SQL, criação do banco, serialização e AES-CMAC. O terceiro é o frontend Next.js/React, lido na referência final indicada pela equipe. O quarto é o firmware, junto do esquema elétrico, fotografias e relatório do protótipo antecedente.
+
+As evidências foram classificadas por natureza. \textit{Código versionado} demonstra que determinada lógica foi preservada, sem provar execução. \textit{Documento local} registra intenção, projeto ou configuração. \textit{Teste executado} conserva entradas, procedimento e resultado. \textit{Evidência física} mostra montagem ou ação observável. \textit{Relato da equipe} registra uma demonstração confirmada sem log independente preservado.
+
+Essa distinção é relevante para o firmware. O repositório preserva leitura de QR Code e verificação AES-CMAC, mas não a imagem exata usada no ensaio final. A equipe confirmou que a demonstração de 31 de agosto de 2026 verificou comprimento, destino, emissão, expiração e CMAC antes de acionar a fechadura. A tese registra o resultado e, ao mesmo tempo, a limitação de reprodutibilidade.
+
+\section{Procedimentos de verificação}
+
+A inspeção estática relacionou requisitos a rotas, estruturas de dados, componentes de interface, funções criptográficas e circuito. Foram examinadas também condições negativas: ausência de autenticação, exposição de segredo, cardinalidades não impostas pelo banco, seleção de tranca e diferença entre registros administrativos e eventos físicos.
+
+A verificação executável do protocolo reproduziu a serialização de quatro inteiros de 64 bits em ordem \textit{big-endian} e o AES-CMAC-256. Um vetor determinístico permitiu conferir o payload e modificar separadamente cada campo sem recalcular a tag. As quatro adulterações foram rejeitadas. Os testes de QR Code e AES-CMAC realizados durante o desenvolvimento e as demonstrações dos fluxos de software e do circuito complementaram essa verificação.
+
+A matriz final usa quatro estados: atendido, parcial, não atendido e não avaliado. A classificação compara cada critério do Capítulo~\ref{cap:especificacao} com as evidências disponíveis. Um comportamento implementado pode ser parcial se não cobrir uma condição do critério; uma ausência de ensaio é não avaliada quando a inspeção não permite decidir.
+
+\section{Limites metodológicos e integridade do relato}
+
+Não foram produzidas métricas de taxa de leitura, distância, iluminação, latência, consumo, autonomia, vida útil ou resistência a ataques. Não houve roteiro completo de responsividade, auditoria formal de acessibilidade ou análise jurídica de proteção de dados. Logo, esses aspectos não são inferidos a partir de demonstrações qualitativas.
+
+A revisão bibliográfica usa fontes acadêmicas, normas, documentos oficiais e documentação técnica. Resultados de outros protótipos fundamentam conceitos e comparações, mas não são transferidos ao FLIKE. Alegações externas recebem citação no parágrafo correspondente; resultados próprios são relacionados aos artefatos do projeto.
+
+Por fim, o método evita três equivalências indevidas: aprovação não equivale a entrada; tag AES-CMAC não equivale a assinatura digital; e atendimento técnico de um requisito não equivale a benefício comprovado para pessoas autistas. Essas fronteiras orientam a especificação do capítulo seguinte e a interpretação dos resultados.

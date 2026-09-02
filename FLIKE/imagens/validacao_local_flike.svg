@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="850" viewBox="0 0 1200 850">
+  <defs>
+    <style>
+      .title{font:700 29px sans-serif;fill:#172033}.label{font:600 21px sans-serif;fill:#172033}.small{font:18px sans-serif;fill:#334155}.box{fill:#f8fafc;stroke:#334155;stroke-width:2.5;rx:14}.decision{fill:#eef6ff;stroke:#2563eb;stroke-width:2.5}.ok{fill:#ecfdf5;stroke:#15803d;stroke-width:2.5;rx:14}.no{fill:#fff1f2;stroke:#be123c;stroke-width:2.5;rx:14}.arrow{stroke:#475569;stroke-width:3;fill:none;marker-end:url(#a)}
+    </style>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#475569"/></marker>
+  </defs>
+  <text x="600" y="45" text-anchor="middle" class="title">Decisão local de autorização</text>
+  <rect x="390" y="75" width="420" height="62" class="box"/><text x="600" y="113" text-anchor="middle" class="label">Capturar e decodificar o QR Code</text>
+  <path d="M600 137 V170" class="arrow"/>
+  <polygon points="600,170 825,225 600,280 375,225" class="decision"/><text x="600" y="220" text-anchor="middle" class="label">Payload completo?</text><text x="600" y="247" text-anchor="middle" class="small">48 bytes</text>
+  <path d="M825 225 H985 V695" class="arrow"/><text x="845" y="211" class="small">não</text>
+  <path d="M600 280 V310" class="arrow"/><text x="617" y="300" class="small">sim</text>
+  <polygon points="600,310 825,365 600,420 375,365" class="decision"/><text x="600" y="360" text-anchor="middle" class="label">Tag AES-CMAC válida?</text><text x="600" y="387" text-anchor="middle" class="small">dados sem alteração conhecida</text>
+  <path d="M825 365 H985" class="arrow"/><text x="845" y="351" class="small">não</text>
+  <path d="M600 420 V450" class="arrow"/><text x="617" y="441" class="small">sim</text>
+  <polygon points="600,450 825,505 600,560 375,505" class="decision"/><text x="600" y="500" text-anchor="middle" class="label">Tranca destinatária coincide?</text><text x="600" y="527" text-anchor="middle" class="small">digital_lock_id local</text>
+  <path d="M825 505 H985" class="arrow"/><text x="845" y="491" class="small">não</text>
+  <path d="M600 560 V590" class="arrow"/><text x="617" y="581" class="small">sim</text>
+  <polygon points="600,590 825,645 600,700 375,645" class="decision"/><text x="600" y="640" text-anchor="middle" class="label">Dentro da janela temporal?</text><text x="600" y="667" text-anchor="middle" class="small">issued_at ≤ agora &lt; expires_at</text>
+  <path d="M825 645 H985" class="arrow"/><text x="845" y="631" class="small">não</text>
+  <path d="M600 700 V735" class="arrow"/><text x="617" y="723" class="small">sim</text>
+  <rect x="395" y="735" width="410" height="78" class="ok"/><text x="600" y="768" text-anchor="middle" class="label">Autorizar e emitir HIGH</text><text x="600" y="794" text-anchor="middle" class="small">acionar o estágio elétrico</text>
+  <rect x="850" y="695" width="270" height="82" class="no"/><text x="985" y="730" text-anchor="middle" class="label">Rejeitar</text><text x="985" y="756" text-anchor="middle" class="small">não acionar a fechadura</text>
+</svg>

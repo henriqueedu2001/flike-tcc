@@ -1,8 +1,83 @@
-\chapter{Aspectos Conceituais} \label{cap:conceitos}
+\chapter{Fundamentação e trabalhos relacionados} \label{cap:conceitos}
 
-\begin{itemize}
-    \item Definir as seções representativas em função do trabalho.
-    \item Apresentar os conceitos empregados e a revisão da literatura.
-    \item Citar os trabalhos consultados no texto.
-\end{itemize}
-    
+Este capítulo reúne os conceitos necessários para interpretar as decisões do FLIKE. A discussão começa pelo contexto humano e pela distinção entre acesso ao ambiente e acessibilidade da interface. Em seguida, apresenta controle de acesso, credenciais ópticas, autenticação de mensagens e atuação embarcada. O capítulo termina comparando protótipos de fechaduras inteligentes com a arquitetura proposta.
+
+\section{Autismo, ambiente e previsibilidade}
+
+Pessoas autistas formam uma população heterogênea, e uma única preferência não deve ser generalizada. Ainda assim, estudos permitem identificar barreiras recorrentes no uso de espaços públicos. MacLennan et al. analisaram experiências sensoriais de adultos autistas e encontraram relações entre acessibilidade, previsibilidade, flexibilidade da comunicação, intensidade dos estímulos e disponibilidade de locais de recuperação \cite{maclennan2023sensory}. Os participantes descreveram efeitos combinados: ruído, luz, multidões, incerteza e exigências sociais podiam se acumular, em vez de atuar isoladamente.
+
+Tola et al., em revisão de escopo sobre ambiente construído, organizaram recomendações em dimensões como qualidade sensorial, inteligibilidade espacial e orientação. Espaços silenciosos, possibilidade de afastamento e organização previsível aparecem com frequência, mas os autores também assinalam limitações metodológicas e concentração da literatura em determinados grupos e contextos \cite{tola2021builtenvironment}. Assim, uma sala de regulação pode oferecer um recurso relevante, mas sua mera existência não garante acesso efetivo nem adequação a todos os usuários.
+
+No FLIKE, essa base fundamenta duas escolhas de projeto: permitir que a solicitação ocorra por escrito e antecipadamente e evitar uma negociação presencial obrigatória no instante da entrada. A literatura não prova que a aplicação seja preferível para cada pessoa, nem que o protótipo reduza sobrecarga. Tais efeitos dependeriam de implantação e avaliação com participantes, ausentes neste trabalho.
+
+\section{Acessibilidade do mecanismo digital}
+
+Acessibilidade do espaço, acessibilidade do processo e acessibilidade da aplicação são problemas relacionados, mas distintos. Uma sala pode oferecer condições sensoriais adequadas e ainda exigir um percurso administrativo difícil. De forma inversa, substituir uma conversa por um formulário não torna automaticamente o processo acessível: a interface pode conter navegação inconsistente, mensagens dependentes apenas de cor, controles sem rótulo ou excesso de etapas.
+
+O Modelo de Acessibilidade em Governo Eletrônico recomenda que informação e funcionalidade sejam perceptíveis e operáveis por diferentes pessoas e tecnologias, que erros recebam identificação e orientação claras e que características sensoriais isoladas não sejam o único meio de comunicação. O documento também indica que avaliação automática não basta e deve ser acompanhada por inspeção manual e participação de pessoas com deficiência \cite{brasil2014emag}. Por isso, o FLIKE converteu parte da intenção de acessibilidade em critérios observáveis, como estados textuais e ausência de feedback físico acessório.
+
+Esses critérios permitem uma verificação técnica limitada. Sem avaliação com usuários, atender a um requisito de interface não sustenta uma conclusão sobre autonomia, satisfação ou carga cognitiva. A tese usa o termo acessibilidade para designar a motivação e os requisitos definidos pela equipe e explicita quando uma alegação dependeria de avaliação humana.
+
+\section{Controle de acesso e fechaduras inteligentes}
+
+Um sistema de controle de acesso transforma uma política em uma decisão sobre um recurso. Para isso, precisa representar ao menos o sujeito, o objeto protegido, a autorização e as condições de uso. Em uma fechadura inteligente, o percurso costuma envolver apresentação de uma credencial, verificação, decisão, geração de um comando e atuação eletromecânica. Interfaces de administração e registros podem complementar o fluxo, mas não substituem a observação do evento físico.
+
+As arquiteturas variam quanto ao lugar da decisão. Em um modelo centralizado, a tranca envia dados ao servidor e aguarda a resposta para cada tentativa. Isso facilita o uso de estado atual e a revogação, porém cria dependência de rede e do serviço. Em um modelo local, o dispositivo recebe previamente informações suficientes para decidir. O acesso pode continuar quando o servidor está indisponível, mas o estado tende a ficar desatualizado.
+
+Ho et al. mostram que a conectividade e a consistência de estado são problemas centrais em fechaduras comerciais. Quando o dispositivo não recebe imediatamente uma atualização, permissões revogadas podem permanecer eficazes; eventos locais também podem não chegar ao servidor. Os autores discutem listas versionadas e filas autenticadas como formas de consistência eventual, que pressupõem algum canal posterior de sincronização \cite{ho2016smartlocks}. O FLIKE assume uma alternativa mais simples: o servidor emite uma credencial com prazo curto e a tranca a verifica localmente, sem canal de revogação durante a leitura.
+
+Uma segunda distinção diz respeito ao evento registrado. A emissão indica que o sistema concedeu permissão. A leitura indica que um símbolo foi decodificado. A autorização indica que regras lógicas foram satisfeitas. O sinal elétrico indica um comando. A abertura e a passagem exigem sensores próprios. Associar todos esses eventos ao termo ``acesso'' oculta limites de auditoria e pode atribuir a uma conta a ação física de outra pessoa.
+
+\section{QR Code como canal óptico}
+
+O QR Code organiza dados em uma matriz bidimensional com padrões de localização, sincronização, formato, dados e correção de erros. Sua versão determina o número de módulos; o nível de correção determina a redundância disponível para recuperar partes danificadas. O formato aceita dados binários e leitura em diferentes orientações, propriedades úteis para transportar uma credencial entre a tela do usuário e a câmera \cite{denso2012qressentials}.
+
+Correção de erros e autenticação resolvem problemas diferentes. A primeira ajuda o decodificador a recuperar dados diante de dano ou oclusão dentro de certos limites. Ela não informa quem criou o conteúdo nem impede substituição do símbolo. Kieseberg et al. analisam ataques que exploram justamente a dificuldade humana de inspecionar o conteúdo de um QR Code e a confiança indevida de processos automatizados nos dados decodificados \cite{kieseberg2010qrcode}. No FLIKE, todo payload recebido é tratado como entrada não confiável.
+
+O símbolo também pode ser fotografado, copiado ou compartilhado. Portanto, proteger a integridade dos bytes não produz posse exclusiva. A política precisa decidir se uma reapresentação é legítima e limitar a janela durante a qual uma cópia pode funcionar. O FLIKE escolhe uma autorização temporária reutilizável: múltiplas apresentações são aceitas no intervalo, e a expiração limita seu uso futuro.
+
+Por fim, densidade óptica afeta a captura em uma câmera de protótipo. Aumentar versão ou redundância amplia o número de módulos para o mesmo conteúdo. A equipe reduziu a representação a 48 bytes em modo binário e fixou versão 3, nível L. Essa escolha é específica ao artefato e não constitui recomendação universal para sistemas baseados em QR Code.
+
+\section{Autenticação de mensagens e AES-CMAC}
+
+Um código de autenticação de mensagem, ou MAC, associa dados e um segredo a uma tag de tamanho fixo. O emissor calcula a tag sobre a mensagem; o verificador, conhecendo o mesmo segredo, repete o cálculo. Se mensagem ou tag forem alteradas sem conhecimento da chave, a verificação deve falhar. A segurança depende do algoritmo, do tamanho da tag, da qualidade e proteção da chave e da forma de comparação.
+
+O CMAC é uma construção padronizada baseada em cifra de bloco. No caso do AES-CMAC, o AES processa a mensagem com subchaves derivadas e produz uma tag. A recomendação NIST SP 800-38B define o mecanismo e seu uso para autenticação de mensagens \cite{nist2005cmac}. O FLIKE aplica uma chave AES de 256 bits aos quatro campos serializados e usa a tag completa de 128 bits.
+
+O resultado deve ser descrito com precisão. AES-CMAC fornece integridade e autenticação de origem criptográfica sob uma chave compartilhada. Não cifra o conteúdo: identificadores e instantes continuam legíveis. Não impede que uma mensagem autêntica seja reapresentada. Tampouco é uma assinatura digital, pois servidor e tranca possuem a mesma chave e qualquer um deles pode produzir uma tag válida.
+
+A gestão da chave é parte da segurança, e não um detalhe posterior. Recomendações do NIST tratam geração, armazenamento, período de uso, distribuição, substituição e resposta a comprometimento como elementos do ciclo de vida do material criptográfico \cite{barker2020keymanagement}. No protótipo, o provisionamento fica a cargo do fornecedor e não há rotação ou elemento seguro. Se o segredo for exposto por uma API ou extraído do dispositivo, um terceiro poderá fabricar credenciais indistinguíveis das emitidas legitimamente.
+
+\section{Sistemas embarcados e acionamento da carga}
+
+O dispositivo embarcado liga o domínio digital ao físico. Ele captura a imagem, recupera bytes, executa verificações e produz um nível lógico. A família ESP32 combina processador, memória, periféricos e GPIOs em um sistema integrado, adequado à prototipação de processamento próximo ao atuador \cite{espressif2026esp32}. A ESP32-CAM acrescenta câmera e conexão ao sensor OV2640 na placa usada pelo projeto.
+
+Um GPIO não fornece a tensão e a corrente de uma fechadura elétrica. É necessário um estágio de acionamento que receba o sinal lógico e controle energia de uma fonte apropriada. Protótipos descritos por Li et al. e Kamelia et al. empregam a cadeia microcontrolador, transistor ou driver, relé e carga de 12~V \cite{li2018intelligentlock,kamelia2014doorautomation}. Essa semelhança é funcional; dimensionamento e segurança dependem do circuito efetivamente construído.
+
+O relé permite comutar a alimentação da fechadura a partir de um sinal de controle. Seu acionamento não oferece, por si só, confirmação de movimento do mecanismo. Uma instalação permanente ainda exigiria análise de proteção da carga indutiva, isolamento, fonte, aquecimento, falhas seguras, gabinete, cabeamento e conformidade elétrica, aspectos não avaliados na maquete do FLIKE.
+
+\section{Trabalhos relacionados}
+
+Os trabalhos selecionados mostram que ``fechadura inteligente'' abrange arquiteturas muito diferentes. O SmartLock Lite usa ESP32, identificação RFID, consulta a servidor e relé, com foco em uma solução de custo reduzido \cite{lima2022smartlocklite}. O ACCESS combina Raspberry Pi, aplicativo, nuvem, MQTT, Bluetooth e permissões temporárias; sua contingência offline usa códigos locais \cite{gadupu2021access}. Li et al. fazem a autorização no servidor por NB-IoT após leitura RFID \cite{li2018intelligentlock}. Asman, Permata e Fatkhurrokhman integram ESP8266, Blynk, sensores, relés, solenoides e bateria de reserva \cite{asman2019smartlock}. Kamelia et al. usam um comando Bluetooth enviado por aplicativo Android a um Arduino \cite{kamelia2014doorautomation}.
+
+O Quadro~\ref{qua:trabalhos-relacionados} compara os aspectos mais relevantes para o FLIKE. As avaliações publicadas variam de demonstrações qualitativas a medições de latência e componentes; nenhum desses resultados é transferido ao protótipo deste trabalho.
+
+\begin{quadro}[htbp]
+    \caption{Comparação com trabalhos relacionados}
+    \label{qua:trabalhos-relacionados}
+    \small
+    \setlength{\tabcolsep}{3pt}
+    \begin{tabular}{|p{0.18\textwidth}|p{0.17\textwidth}|p{0.19\textwidth}|p{0.18\textwidth}|p{0.18\textwidth}|}
+        \hline
+        \textbf{Trabalho} & \textbf{Credencial} & \textbf{Decisão} & \textbf{Comunicação} & \textbf{Atuação} \\ \hline
+        SmartLock Lite & RFID & Servidor & Wi-Fi & Relé e fechadura \\ \hline
+        ACCESS & Aplicativo, BLE e código & Nuvem ou contingência local & MQTT, HTTP e BLE & Relé e solenoide \\ \hline
+        Li et al. & RFID & Servidor & NB-IoT & Transistor, relé e fechadura \\ \hline
+        Asman et al. & Aplicativo & Serviço conectado & Wi-Fi/Blynk & Relé e solenoides \\ \hline
+        Kamelia et al. & Comando no aplicativo & Microcontrolador & Bluetooth & Driver, relé e solenoide \\ \hline
+        FLIKE & QR temporário com AES-CMAC & Dispositivo local & Óptica; sem rede na leitura & Transistor, relé e fechadura \\ \hline
+    \end{tabular}
+    \fonte{Elaborado pelos autores.}
+\end{quadro}
+
+O FLIKE não pretende superar esses trabalhos em desempenho, robustez ou segurança. Sua contribuição específica está na integração de uma gestão web contextual com uma credencial binária temporária, transportada por QR Code e autenticada localmente, além de uma motivação de acessibilidade explicitamente limitada pela ausência de avaliação com usuários.

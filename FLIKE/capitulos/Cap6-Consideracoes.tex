@@ -1,10 +1,63 @@
-\chapter{Considerações Finais} \label{cap:consideracoes}
+\chapter{Considerações finais} \label{cap:consideracoes}
 
-\section{Conclusões do Projeto de Formatura}
-Apresentar o balanço do trabalho: resultados atingidos e não atingidos, com justificativas.
+\section{Resposta à pergunta de pesquisa}
+
+Este trabalho investigou como integrar gestão web de permissões, credenciais temporárias em QR Code e decisão local em uma tranca eletrônica. O resultado mostra que essa integração pode ser construída pela separação de duas fronteiras. Na fronteira conectada, a aplicação identifica contas, representa instituições e trancas, recebe solicitações, registra a decisão do responsável e emite uma autorização. Na fronteira local, a credencial transporta usuário, destino e intervalo autenticados por AES-CMAC; a ESP32-CAM recupera esses dados, verifica as condições e comanda o estágio elétrico sem consultar o servidor.
+
+A demonstração física completou esse percurso. O QR Code foi lido e decodificado, seus 48 bytes foram interpretados, comprimento, tranca, emissão, expiração e tag foram verificados, e uma decisão positiva gerou o sinal que acionou transistor, relé e fechadura. Portanto, a pergunta foi respondida no nível de um protótipo integrado.
+
+Essa resposta é condicionada. A decisão local troca atualização imediata por independência no instante da leitura. Uma credencial não pode ser revogada com confiabilidade antes de expirar se o dispositivo não recebe estado novo. A validade depende de relógio local, o símbolo pode ser copiado, e a segurança depende da proteção do segredo. Além disso, a implementação examinada expõe esse segredo em uma rota pública, falha que precisa ser corrigida antes de qualquer implantação.
+
+\section{Cumprimento dos objetivos}
+
+O objetivo geral foi alcançado quanto ao projeto, à implementação e à demonstração do protótipo. O Quadro~\ref{qua:objetivos-finais} sintetiza os objetivos específicos sem ocultar suas limitações.
+
+\begin{quadro}[htbp]
+    \caption{Balanço dos objetivos específicos}
+    \label{qua:objetivos-finais}
+    \small
+    \begin{tabular}{|p{0.08\textwidth}|p{0.18\textwidth}|p{0.62\textwidth}|}
+        \hline
+        \textbf{Obj.} & \textbf{Resultado} & \textbf{Balanço} \\ \hline
+        1 & Alcançado com limite & O caso motivador e a origem dos relatos foram caracterizados, sem generalização para o público-alvo. \\ \hline
+        2 & Alcançado & Requisitos receberam identificadores, justificativas, critérios e matriz de resultados. \\ \hline
+        3 & Alcançado & Arquitetura, fronteiras, modelo de dados e fluxos foram documentados. \\ \hline
+        4 & Parcialmente alcançado & Fluxo web foi implementado e demonstrado; persistem rotas públicas, seleção implícita de tranca e fragilidades de persistência. \\ \hline
+        5 & Alcançado & Formato binário, intervalo e AES-CMAC foram implementados e verificados. \\ \hline
+        6 & Alcançado com limite & Leitura, decisão e acionamento foram demonstrados; firmware exato e registros do ensaio não foram preservados. \\ \hline
+        7 & Alcançado & Requisitos foram confrontados com código, documentos, vetor executado e demonstrações, com limitações explícitas. \\ \hline
+    \end{tabular}
+    \fonte{Elaborado pelos autores.}
+\end{quadro}
+
+Na matriz de requisitos, 13 de 23 itens foram classificados como atendidos, sete como parciais, dois como não atendidos e um como não avaliado. Essa distribuição confirma a realização do núcleo técnico, mas também mostra que a contagem não deve ser usada como índice de maturidade. A exposição do segredo afeta a premissa criptográfica central; já a responsividade não avaliada limita uma qualidade específica. Os impactos não são equivalentes.
 
 \section{Contribuições}
-Apresentar as contribuições do trabalho, ressaltando o que foi efetivamente da autoria da equipe.
 
-\section{Perspectivas de Continuidade}
-Descrever os trabalhos que podem ser realizados como continuação do projeto de formatura.
+A primeira contribuição é uma arquitetura integrada que explicita onde cada decisão ocorre. O servidor concede e materializa a permissão; a credencial transporta os dados; o dispositivo decide; o circuito atua. Essa decomposição permite operar localmente e também torna visíveis as consequências de não sincronizar estado.
+
+A segunda contribuição é o protocolo compacto. Quatro valores de 64 bits representam sujeito lógico, tranca e janela temporal; a tag AES-CMAC autentica conjuntamente os dados; e os 48 bytes resultantes cabem em um QR Code versão 3-L em modo binário. O texto distingue autenticação, confidencialidade, repetição e não repúdio, evitando atribuir ao CMAC propriedades que ele não possui.
+
+A terceira contribuição é a materialização física. O protótipo une câmera, firmware, transistor, relé, fontes e fechadura e demonstra que a aceitação do payload pode produzir o efeito eletromecânico previsto. A descrição separa o acionamento observado de eventos que exigiriam sensores adicionais.
+
+A quarta contribuição é documental. Requisitos, critérios, evidências e limitações foram reconstruídos a partir dos artefatos do projeto e organizados de forma rastreável. Essa reconstrução revelou diferenças entre arquitetura e implementação, como segredo exposto, rotas sem proteção, vínculo não persistido entre pedido e credencial e firmware final não versionado.
+
+\section{Limitações}
+
+A limitação mais importante para o propósito social é a ausência de avaliação com usuários. O trabalho não demonstra que o FLIKE aumente autonomia, reduza constrangimento ou seja preferido por pessoas autistas. Também não houve implantação, comparação com o procedimento anterior ou validação institucional do fluxo.
+
+No software, a autorização é incompleta em parte das rotas; o segredo é devolvido por consulta pública; a interface não permite escolher entre várias trancas; e emissão e aprovação não formam uma transação única vinculada no esquema. Na segurança local, não há revogação imediata, proteção especializada do segredo, rotação ou mitigação de cópia. Na auditoria, faltam sincronização e sensores. No hardware, a montagem de bancada não foi submetida a ensaios de desempenho, confiabilidade ou segurança elétrica.
+
+A versão exata do firmware integrado não foi preservada. Essa ausência não apaga a demonstração confirmada, mas reduz sua reprodutibilidade. Uma continuação deve começar por versionar o código e os parâmetros gravados no dispositivo e automatizar vetores comuns entre backend e firmware.
+
+\section{Perspectivas de continuidade}
+
+A primeira frente é corrigir as falhas antes de qualquer piloto: autenticar todas as rotas sensíveis, aplicar autorização contextual, remover o segredo das respostas, vincular pedido e credencial no banco, tornar a aprovação atômica e permitir seleção explícita da tranca. O campo legado de uso deve ser removido ou alinhado à política de reapresentação.
+
+A segunda é fortalecer a operação local. São possibilidades um relógio resistente a reinicializações e manipulação, armazenamento protegido do segredo, provisionamento e rotação, atualização autenticada de estado e revogação com consistência eventual. Cada mecanismo altera disponibilidade, custo e superfície de ataque e deve ser avaliado explicitamente.
+
+A terceira é amadurecer o dispositivo físico: produzir placa e gabinete, dimensionar proteção para carga indutiva, documentar fontes, adicionar realimentação da fechadura e testar falhas de energia, temperatura, iluminação, ângulo, distância, tempo de leitura e repetibilidade. Sensores de porta e passagem somente devem ser acrescentados se houver necessidade legítima e política de dados correspondente.
+
+A quarta é avaliar acessibilidade e uso. Um estudo futuro deve ser planejado com participação de pessoas autistas desde a definição do problema, critérios éticos e proteção de dados. Testes podem comparar previsibilidade, compreensão, esforço, preferências e barreiras do fluxo, sem presumir que a solução digital seja universalmente melhor. A interface também deve passar por auditoria baseada em critérios atuais e testes com tecnologias assistivas.
+
+O FLIKE encerra este trabalho como protótipo funcional e como hipótese de desenho institucional. Sua cadeia técnica foi demonstrada; seu valor para as pessoas e sua prontidão operacional permanecem questões para uma etapa posterior, que deverá combinar correções de engenharia, participação dos usuários e avaliação empírica.

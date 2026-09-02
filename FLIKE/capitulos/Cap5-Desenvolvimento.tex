@@ -135,3 +135,245 @@ Na segunda etapa, o responsável consulta os pedidos relacionados às instituiç
 \end{figure}
 
 Em consulta posterior, o painel do solicitante recupera a credencial emitida e renderiza o QR Code. A obtenção do payload depende da aplicação conectada; somente a leitura e a decisão junto à fechadura dispensam consulta ao servidor. A aprovação, a emissão, a obtenção da imagem e a apresentação física são eventos distintos. Uma única emissão nominal decorre da solicitação aprovada, enquanto a credencial resultante permanece reapresentável até o instante de expiração, exclusive.
+
+\section{Credencial digital}
+
+\subsection{Conceito e ciclo de vida}
+
+A credencial digital é a representação portável de uma autorização temporária. Ela nasce quando o responsável aprova uma solicitação, permanece associada ao usuário lógico e a uma tranca específica e deixa de ser aceita ao término do intervalo concedido. Solicitação, credencial e QR Code têm papéis distintos: a solicitação registra o pedido e sua decisão; a credencial reúne os dados autenticados da autorização; e o QR Code é somente o meio óptico pelo qual os bytes chegam ao dispositivo.
+
+O segredo criptográfico também não integra a credencial. O backend e a tranca destinatária possuem previamente uma cópia desse valor, provisionado no dispositivo pelo fornecedor na programação da ESP32-CAM. O servidor usa o segredo para produzir o código de autenticação, e o dispositivo o usa para verificar o código recebido. Esse arranjo permite a decisão local, mas faz da proteção do segredo uma premissa de segurança do sistema.
+
+O ciclo nominal possui quatro transições. Primeiro, o servidor registra a solicitação pendente. Segundo, o responsável a aprova ou rejeita. Terceiro, somente uma aprovação produz a credencial, cuja emissão inicia a janela de autorização. Quarto, o titular apresenta o QR Code à tranca durante essa janela. A apresentação não consome a autorização: o mesmo símbolo pode ser lido novamente até o instante de expiração.
+
+\subsection{Informações autenticadas}
+
+O conteúdo protegido reúne quatro valores. \texttt{user\_id} identifica a conta à qual a autorização foi concedida; \texttt{digital\_lock\_id} identifica a tranca lógica destinatária; \texttt{issued\_at} registra o primeiro instante admissível; e \texttt{expires\_at} marca o limite superior, que já não pertence ao intervalo. O usuário físico não é autenticado pela apresentação: quem obtiver uma cópia do QR Code poderá reapresentá-lo enquanto ele for válido.
+
+Os instantes são representados como segundos inteiros desde a época POSIX. A condição temporal adotada é
+
+\begin{equation}
+    \texttt{issued\_at} \leq \texttt{agora} < \texttt{expires\_at}.
+\end{equation}
+
+Essa definição evita ambiguidade na fronteira: a credencial vale no instante de emissão, inclusive, e deixa de valer no instante de expiração, exclusive. A comparação depende de um relógio coerente no dispositivo; operar sem servidor não elimina essa dependência temporal.
+
+\subsection{Serialização e autenticação}
+
+Antes do cálculo criptográfico, cada um dos quatro valores é convertido em um inteiro sem sinal de 64 bits, em ordem de bytes do mais significativo para o menos significativo (\textit{big-endian}). A concatenação produz 32 bytes de dados. Sobre essa sequência, o backend calcula uma tag AES-CMAC de 16 bytes com uma chave AES de 256 bits e a anexa ao final. O payload completo possui, como consequência, 48 bytes. O Quadro~\ref{qua:layout-credencial} apresenta o leiaute.
+
+\begin{quadro}[htb]
+    \caption{Leiaute binário da credencial do FLIKE}
+    \label{qua:layout-credencial}
+    \small
+    \setlength{\tabcolsep}{4pt}
+    \begin{tabular}{|p{0.20\textwidth}|p{0.12\textwidth}|p{0.18\textwidth}|p{0.40\textwidth}|}
+        \hline
+        \textbf{Campo} & \textbf{Bytes} & \textbf{Intervalo} & \textbf{Função} \\ \hline
+        \texttt{user\_id} & 8 & 0--7 & Identificar a conta autorizada. \\ \hline
+        \texttt{digital\_lock\_id} & 8 & 8--15 & Vincular a autorização à tranca destinatária. \\ \hline
+        \texttt{issued\_at} & 8 & 16--23 & Delimitar o início da autorização em tempo POSIX. \\ \hline
+        \texttt{expires\_at} & 8 & 24--31 & Delimitar o fim exclusivo da autorização. \\ \hline
+        tag AES-CMAC & 16 & 32--47 & Autenticar conjuntamente os 32 bytes anteriores. \\ \hline
+    \end{tabular}
+    \fonte{Elaborado pelos autores a partir da implementação do backend.}
+\end{quadro}
+
+O CMAC é um código de autenticação de mensagem baseado em cifra de bloco. Sob a premissa de que somente os componentes autorizados conhecem a chave, a coincidência da tag fornece evidência de que os dados foram produzidos por alguém que possui esse segredo e não foram alterados sem a recomputação do código \cite{nist2005cmac}. O mecanismo não oculta os identificadores nem os instantes, não impede a cópia de uma mensagem autêntica e não produz assinatura digital ou não repúdio. A comparação deve abranger a tag completa, e qualquer diferença deve resultar em rejeição.
+
+\subsection{Codificação em QR Code}
+
+O frontend recebe o payload em hexadecimal, converte cada par para o byte correspondente e entrega o vetor à biblioteca de QR Code em modo binário. Essa etapa é necessária porque tratar o conteúdo como texto introduziria uma nova codificação e poderia alterar bytes nulos ou valores superiores a \texttt{0x7f}. O símbolo final é fixado na versão 3, cuja matriz possui 29 por 29 módulos, e usa nível L de correção de erros.
+
+A escolha decorreu de um limite observado durante o desenvolvimento: símbolos mais densos eram lidos com menor facilidade pela câmera do protótipo. O formato binário compacto possibilitou transportar os 48 bytes na versão 3-L, mantendo a matriz menor. O nível L reserva menos redundância do que níveis superiores e, portanto, aceita menor dano físico; trata-se de um compromisso entre capacidade, densidade óptica e tolerância a degradação, não de uma propriedade criptográfica \cite{denso2012qressentials}. Além disso, o QR Code não é um canal confiável por natureza: ele pode ser copiado ou substituído, razão pela qual a decisão depende do conteúdo autenticado e do destino conferido pelo firmware \cite{kieseberg2010qrcode}.
+
+\subsection{Decisão de aceitação}
+
+A leitura bem-sucedida inicia a validação, mas não autoriza o acesso. O dispositivo confirma o comprimento completo, separa dados e tag, recalcula o AES-CMAC, compara o identificador destinatário e avalia a janela temporal. Somente a conjunção dessas condições produz o sinal lógico de abertura. A Figura~\ref{fig:validacao-local-flike} representa o fluxo; sua ordem gráfica não altera a exigência de que todas as verificações precedam o acionamento.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.90\textwidth,height=0.78\textheight,keepaspectratio]{validacao_local_flike.pdf}
+    \caption{Fluxo local de validação da credencial}
+    \label{fig:validacao-local-flike}
+    \fonte{Elaborado pelos autores.}
+\end{figure}
+
+Uma tag válida para outra tranca continua sendo uma mensagem autêntica, mas não uma autorização para o atuador que a recebeu. De forma semelhante, uma mensagem autêntica e destinada ao dispositivo ainda deve ser recusada fora do intervalo temporal. O estado \texttt{used} mantido no banco não participa dessa decisão, pois o dispositivo deliberadamente não consulta o servidor e a política final permite reapresentações durante a vigência.
+
+\section{Dispositivo físico}
+
+\subsection{Plataforma embarcada e aquisição do QR Code}
+
+O dispositivo foi construído com uma placa ESP32-CAM no arranjo AI-Thinker e uma câmera OV2640. A biblioteca de leitura inicializa a câmera, executa a aquisição em uma tarefa do sistema operacional de tempo real e disponibiliza o vetor bruto e seu comprimento ao laço principal. O processamento preserva o tamanho fornecido pelo decodificador; ele não interpreta a credencial como cadeia de caracteres terminada por zero.
+
+A ESP32 integra processador, memória, periféricos digitais e recursos de comunicação adequados à prototipação de sistemas embarcados. No FLIKE, sua função relevante é concentrar aquisição óptica, validação da credencial e geração do sinal de controle próximo ao atuador. O produto não depende de seus rádios durante a decisão de acesso. A ausência de tráfego nesse instante reduz a dependência operacional, mas não transforma a placa em componente endurecido contra extração física de segredo.
+
+\subsection{Firmware de validação}
+
+O firmware preservado no repositório registra a integração entre a biblioteca da câmera e o cálculo AES-CMAC da biblioteca Mbed TLS. Ele separa os 32 bytes de dados dos 16 bytes finais, recalcula a tag com AES-256 e compara o resultado. Essa versão arquivada imprime o conteúdo e o resultado no monitor serial; não contém, no mesmo commit, todas as verificações e o acionamento usados no ensaio final.
+
+Na versão gravada para a demonstração integrada, o processamento também confirmou o comprimento, recuperou os quatro inteiros em ordem \textit{big-endian}, comparou \texttt{digital\_lock\_id} com o identificador provisionado, avaliou \texttt{issued\_at} e \texttt{expires\_at} e emitiu \texttt{HIGH} somente após a aceitação. O código-fonte exato desse ensaio não foi preservado no repositório. Essa lacuna impede reproduzir a imagem de firmware a partir do controle de versão, mas não elimina o resultado observado na demonstração física, descrito na Subseção~\ref{subsec:demonstracao-fisica}.
+
+\subsection{Circuito de acionamento}
+
+O estágio elétrico reaproveita a topologia construída pelos autores em um projeto anterior da disciplina Laboratório de Processadores, antecedente histórico do FLIKE. O sinal lógico da ESP32-CAM chega à base de um transistor NPN 2N2222 por um resistor de 1~k$\Omega$. O transistor funciona como chave e condiciona o comando aplicado à entrada do módulo de relé de 12~V; um segundo resistor de 1~k$\Omega$ estabelece o nível de repouso. O contato normalmente aberto do relé comuta a alimentação da fechadura Papaiz AA-ERL200P.
+
+O circuito usa duas alimentações. Um carregador de celular adaptado fornece a baixa tensão da ESP32-CAM, enquanto uma fonte chaveada de 12~V alimenta relé e fechadura. Essa separação permite que o pino digital controle uma carga que não pode ser acionada diretamente pelo microcontrolador. A Figura~\ref{fig:circuito-eletrico-flike} registra a topologia; o ramo de acionamento manual representado no esquema foi previsto, mas não montado no protótipo avaliado.
+
+\begin{figure}[p]
+    \centering
+    \includegraphics[width=\textwidth,height=0.78\textheight,keepaspectratio]{circuito_eletrico_flike.png}
+    \caption{Esquema elétrico do estágio de acionamento empregado no FLIKE}
+    \label{fig:circuito-eletrico-flike}
+    \fonte{Elaborado pelos autores.}
+\end{figure}
+\clearpage
+
+O protótipo é uma montagem de bancada em protoboard, sem placa dedicada, gabinete, bateria ou certificação elétrica. O relé oferece separação funcional entre comando e carga, mas o projeto não avaliou isolação, imunidade eletromagnética, aquecimento, durabilidade ou adequação a uma instalação permanente. A Figura~\ref{fig:prototipo-flike} identifica os componentes principais da montagem.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth,height=0.72\textheight,keepaspectratio]{prototipo_flike_anotado.png}
+    \caption{Protótipo experimental do circuito de acionamento}
+    \label{fig:prototipo-flike}
+    \fonte{Acervo dos autores.}
+\end{figure}
+
+\subsection{Demonstração física} \label{subsec:demonstracao-fisica}
+
+A equipe realizou uma demonstração física ponta a ponta do FLIKE em 31 de agosto de 2026. Uma credencial foi apresentada à câmera; o dispositivo reconheceu o QR Code, recuperou os 48 bytes, extraiu os campos e verificou comprimento, tranca destinatária, instante de emissão, expiração e tag AES-CMAC. Diante do caso válido, o microcontrolador emitiu o nível \texttt{HIGH}; o transistor comandou o relé; e a fechadura elétrica foi acionada.
+
+O ensaio estabeleceu a continuidade funcional entre canal óptico, decisão embarcada e carga elétrica. Seu registro disponível é o relato concordante da equipe, apoiado pelo código preservado dos subsistemas, pelo esquema e pela fotografia da montagem. Não foram preservados vídeo, log serial ou imagem binária do firmware do ensaio. Consequentemente, o resultado sustenta que a integração ocorreu, mas não permite calcular taxa de sucesso, tempo médio de leitura, tolerância a ângulo ou iluminação, consumo, repetibilidade estatística ou confiabilidade de longo prazo.
+
+O evento observado foi o acionamento da fechadura. Como não há sensor de estado da porta, de passagem ou de ocupação, o sistema não distingue automaticamente destravamento, abertura física, entrada, saída e permanência no ambiente.
+
+\section{Operação local, segurança e auditoria}
+
+\subsection{Consequências da operação sem servidor}
+
+A decisão local permite utilizar uma credencial já emitida quando o dispositivo não possui acesso à API. Essa propriedade cobre leitura, validação e acionamento; cadastro, solicitação, aprovação, emissão e recuperação inicial do QR Code continuam conectados. Ela exige que identificador, segredo e relógio estejam disponíveis localmente.
+
+O mesmo isolamento impede revogação imediata. Depois da emissão, retirar a permissão no banco não informa a tranca sem um canal adicional; a credencial poderá ser aceita até \texttt{expires\_at}. Janelas curtas reduzem a duração desse risco, mas aumentam a frequência de emissão e a dependência do serviço web. O padrão de 24 horas adotado no backend é uma política do protótipo e deve ser ajustado ao risco do espaço em uma implantação.
+
+A cópia do símbolo é outro efeito relevante. Como o dispositivo não consulta um estado de consumo, qualquer cópia byte a byte permanece equivalente ao original durante a vigência. A política do FLIKE admite reapresentação, mas não pretende autorizar o compartilhamento. Vincular o identificador da conta aos dados oferece rastreabilidade lógica; não autentica fisicamente quem segura o telefone ou a imagem impressa.
+
+\subsection{Proteção do segredo e modelo de ameaça}
+
+O modelo considera um adversário capaz de observar, copiar e alterar o QR Code e de chamar interfaces web expostas, mas pressupõe que não conheça o segredo da tranca. Sob essa condição, alterações dos quatro campos são detectadas pelo AES-CMAC. A proteção do material criptográfico durante geração, armazenamento, distribuição e substituição é condição necessária para manter essa propriedade \cite{barker2020keymanagement}.
+
+No protótipo, o fornecedor grava o identificador e o segredo ao programar o dispositivo. Não há interface de provisionamento, rotação, revogação de chave criptográfica nem elemento seguro. A extração do segredo do servidor ou da placa permite fabricar credenciais aceitas para aquela tranca. Um mesmo segredo compartilhado por várias trancas simplifica salas com mais de um atuador, mas amplia o impacto de um comprometimento.
+
+A inspeção da API identificou uma violação direta dessa premissa: respostas públicas de consulta de trancas incluem \texttt{secret\_key} em hexadecimal. Também há consultas públicas de credenciais que expõem payloads. Antes de qualquer uso real, essas rotas precisam exigir autenticação e autorização contextual, e o segredo precisa ser removido dos esquemas de resposta e de registros operacionais. Enquanto essa correção não estiver presente, o protótipo não oferece proteção efetiva contra fabricação de credenciais por um cliente da API.
+
+O AES-CMAC fornece autenticação simétrica e integridade, não irretratabilidade. Backend e dispositivo compartilham o mesmo segredo e ambos podem produzir tags indistinguíveis. A atribuição de uma solicitação a uma conta e de uma apresentação a uma credencial depende conjuntamente de autenticação web, proteção do dispositivo e confiabilidade dos registros; mesmo assim, não comprova que a pessoa física titular executou a ação.
+
+\subsection{Eventos e limites da auditoria}
+
+Para interpretar os registros, o FLIKE distingue seis eventos: emissão da credencial pelo servidor; leitura do símbolo pela câmera; aceitação ou rejeição lógica; emissão do sinal de controle; movimento da fechadura; e passagem de uma pessoa. O banco registra pedidos e credenciais emitidas. A implementação local decide e aciona, porém não sincroniza um log embarcado com o servidor. A fechadura não fornece realimentação ao microcontrolador, e não há sensor de porta ou de presença.
+
+Assim, o histórico administrativo comprova autorizações concedidas no domínio da aplicação. Ele não constitui histórico de acessos físicos. O campo \texttt{used} e a tabela \texttt{event\_log} previstos no esquema não mudam essa conclusão, pois o dispositivo não os atualiza durante a operação offline. Uma auditoria física exigiria armazenamento confiável no dispositivo, sincronização autenticada e sensores compatíveis com o evento que se pretende afirmar.
+
+\section{Verificação técnica e resultados}
+
+\subsection{Estratégia e ambiente}
+
+A verificação combinou três fontes. A inspeção estática examinou os commits finais indicados pela equipe para backend e frontend, o commit preservado do firmware, o esquema SQL, as dependências e os artefatos elétricos. Uma verificação executável independente reproduziu a serialização e o AES-CMAC com a biblioteca \texttt{cryptography}. Por fim, as demonstrações de software e hardware confirmadas pela equipe foram usadas como evidência de integração. Nenhuma dessas fontes foi apresentada como teste com usuários.
+
+Para o vetor criptográfico, adotaram-se uma chave de 32 bytes com valores sucessivos de 0 a 31, usuário 17, tranca 23, emissão 1770000000 e expiração 1770086400. A serialização produziu os 32 bytes esperados, e o AES-CMAC produziu a tag \texttt{2e98 1020 9a16 6e7e 1a61 ece3 2565 7c45}. A alteração de um bit em cada um dos quatro campos, sem recomputar a tag, foi rejeitada nos quatro casos. O ensaio verifica a regra criptográfica e a compatibilidade do formato; ele não avalia resistência da chave nem o armazenamento do segredo.
+
+Não foram executadas medições sistemáticas de leitura óptica, ensaios ambientais, testes elétricos instrumentados ou avaliação de usabilidade. Os fluxos de usuário e responsável e o acionamento físico são resultados de demonstração, sem amostra repetida que permita inferência estatística.
+
+\subsection{Resultados por subsistema}
+
+Na aplicação conectada, a demonstração percorreu cadastro e autenticação, solicitação de acesso, cadastro administrativo de edifícios e trancas, aprovação ou rejeição e disponibilização da credencial no painel do solicitante. A inspeção confirmou os contratos correspondentes nos dois repositórios. Também encontrou lacunas: a interface seleciona implicitamente a primeira tranca de uma sala, a ligação entre pedido e credencial não é persistida por chave estrangeira, e rotas sensíveis permanecem públicas.
+
+Na credencial, a implementação e o vetor executado confirmaram a ordem dos campos, o tamanho, a ordem de bytes e a detecção de alterações pelo AES-CMAC. Os testes de QR Code realizados durante o desenvolvimento confirmaram o transporte dos bytes e levaram à fixação da versão 3-L. Não foi preservada uma série de tempos de leitura; portanto, não se apresenta valor de desempenho.
+
+No dispositivo físico, a demonstração final confirmou leitura, decisão local e acionamento sem consulta ao servidor. A montagem elétrica respondeu ao sinal \texttt{HIGH} e destravou a fechadura. O resultado atende ao objetivo de prototipação ponta a ponta, com as limitações de registro e repetibilidade já expostas.
+
+\subsection{Matriz de atendimento dos requisitos}
+
+Os estados dos Quadros~\ref{qua:resultados-rf-web} a~\ref{qua:resultados-ra} usam quatro categorias. \textit{Atendido} indica evidência suficiente para o critério no nível do protótipo; \textit{parcial} indica que parte do comportamento existe, mas uma condição falhou ou não foi coberta; \textit{não atendido} indica conflito direto com a implementação; e \textit{não avaliado} indica ausência de evidência para decidir.
+
+\begin{quadro}[htbp]
+    \caption{Resultados de RF-01 a RF-08}
+    \label{qua:resultados-rf-web}
+    \small
+    \begin{tabular}{|p{0.10\textwidth}|p{0.15\textwidth}|p{0.61\textwidth}|}
+        \hline
+        \textbf{ID} & \textbf{Estado} & \textbf{Evidência e ressalva principal} \\ \hline
+        RF-01 & Atendido & Cadastro, autenticação, JWT e rejeição de credencial incorreta. \\ \hline
+        RF-02 & Atendido & Propriedade contextual e atuação como solicitante e responsável. \\ \hline
+        RF-03 & Parcial & Hierarquia existe; autorização e exclusões não foram cobertas em todas as operações. \\ \hline
+        RF-04 & Não atendido & Interface escolhe a primeira tranca da sala sem seleção explícita. \\ \hline
+        RF-05 & Atendido & Criação e acompanhamento nos três estados. \\ \hline
+        RF-06 & Atendido & Decisão pelo proprietário e transição de estado. \\ \hline
+        RF-07 & Parcial & Aprovação emite; banco não garante vínculo único nem atomicidade. \\ \hline
+        RF-08 & Parcial & QR é apresentado; consultas públicas impedem comprovar isolamento. \\ \hline
+    \end{tabular}
+    \fonte{Elaborado pelos autores.}
+\end{quadro}
+
+\begin{quadro}[htbp]
+    \caption{Resultados de RF-09 a RF-14}
+    \label{qua:resultados-rf-credencial}
+    \small
+    \begin{tabular}{|p{0.10\textwidth}|p{0.15\textwidth}|p{0.61\textwidth}|}
+        \hline
+        \textbf{ID} & \textbf{Estado} & \textbf{Evidência e ressalva principal} \\ \hline
+        RF-09 & Atendido & Quatro valores da autorização são serializados e autenticados. \\ \hline
+        RF-10 & Atendido & Vetor executado e alterações individuais rejeitadas. \\ \hline
+        RF-11 & Atendido & Transporte e recuperação dos 48 bytes demonstrados. \\ \hline
+        RF-12 & Atendido & Estrutura, tag, destino e intervalo conferidos antes do acionamento. \\ \hline
+        RF-13 & Atendido & Reapresentação aceita na janela e rejeitada fora dela. \\ \hline
+        RF-14 & Parcial & Consultas existem, mas sua proteção é insuficiente. \\ \hline
+    \end{tabular}
+    \fonte{Elaborado pelos autores.}
+\end{quadro}
+
+\begin{quadro}[htbp]
+    \caption{Resultados dos requisitos não funcionais}
+    \label{qua:resultados-rnf}
+    \small
+    \begin{tabular}{|p{0.10\textwidth}|p{0.15\textwidth}|p{0.61\textwidth}|}
+        \hline
+        \textbf{ID} & \textbf{Estado} & \textbf{Evidência e ressalva principal} \\ \hline
+        RNF-01 & Atendido & Leitura, decisão e acionamento sem consulta à API. \\ \hline
+        RNF-02 & Parcial & Operações principais verificam propriedade; há rotas sensíveis públicas. \\ \hline
+        RNF-03 & Não atendido & API pública expõe o segredo em hexadecimal. \\ \hline
+        RNF-04 & Não avaliado & Roteiro completo não foi executado em viewports definidos. \\ \hline
+        RNF-05 & Atendido & QR Code 3-L e leitura pela ESP32-CAM. \\ \hline
+    \end{tabular}
+    \fonte{Elaborado pelos autores.}
+\end{quadro}
+
+\begin{quadro}[htbp]
+    \caption{Resultados dos requisitos de acessibilidade}
+    \label{qua:resultados-ra}
+    \small
+    \begin{tabular}{|p{0.10\textwidth}|p{0.15\textwidth}|p{0.61\textwidth}|}
+        \hline
+        \textbf{ID} & \textbf{Estado} & \textbf{Evidência e ressalva principal} \\ \hline
+        RA-01 & Atendido & Apresentação e destravamento sem funcionário. \\ \hline
+        RA-02 & Parcial & Há mensagens textuais; inspeção de todos os estados não foi executada. \\ \hline
+        RA-03 & Parcial & Sequência é explícita, exceto escolha entre múltiplas trancas. \\ \hline
+        RA-04 & Atendido & Sem alarme, música ou luz intermitente como feedback. \\ \hline
+    \end{tabular}
+    \fonte{Elaborado pelos autores.}
+\end{quadro}
+\clearpage
+
+Dos 23 requisitos avaliados, 13 foram classificados como atendidos, sete como parciais, dois como não atendidos e um como não avaliado. A contagem não constitui uma nota global: a exposição do segredo, por exemplo, tem impacto maior sobre a segurança do que a ausência de uma medição de responsividade. O resultado central é a viabilidade funcional da cadeia ponta a ponta, acompanhada por lacunas que impedem tratar o protótipo como produto pronto para implantação.
+
+\section{Limitações da implementação}
+
+A primeira limitação é metodológica. Os requisitos de acessibilidade foram definidos pela equipe e fundamentados por literatura, porém não foram validados com pessoas autistas ou outros usuários da sala. O projeto pode reduzir uma interação presencial obrigatória no fluxo concebido, mas não demonstrou redução de constrangimento, ansiedade, estímulos sensoriais ou esforço cognitivo.
+
+A segunda é de segurança operacional. A decisão offline não recebe revogação imediata, depende do relógio local e aceita cópias da credencial durante a validade. O segredo é provisionado manualmente, sem rotação nem hardware seguro, e a versão inspecionada da API o expõe. Essas condições exigem correção antes de qualquer piloto com controle de acesso real.
+
+A terceira é de rastreabilidade física. O sistema não possui sensor de porta, identificação da pessoa que apresenta o QR Code, registro embarcado persistente ou sincronização de eventos. Por isso, emissão, leitura, autorização, acionamento, abertura e passagem não podem ser confundidos. Os registros centrais descrevem permissões concedidas, não ocupação do ambiente.
+
+A quarta é de maturidade da engenharia. O firmware exato da demonstração não foi preservado, faltam testes automatizados entre Python e C++, e a montagem permanece em protoboard com fontes de bancada. Não foram avaliados falhas de energia, durabilidade, temperatura, ataque físico, desempenho óptico ou conformidade elétrica. Também persistem inconsistências de software, como seleção implícita da primeira tranca, campos legados de uso, transações não atômicas e rotas sem proteção adequada.
+
+Apesar dessas limitações, o desenvolvimento materializou o percurso completo proposto: uma decisão administrativa no sistema web originou uma credencial compacta, o dispositivo verificou essa autorização localmente e o circuito acionou a fechadura. O capítulo seguinte confronta esse resultado com a pergunta e os objetivos do trabalho.
