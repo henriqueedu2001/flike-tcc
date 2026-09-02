@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1400" viewBox="0 0 1600 1400">
+  <defs>
+    <marker id="arrow" markerWidth="11" markerHeight="8" refX="10" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L11,4 L0,8 Z" fill="#315b78"/>
+    </marker>
+    <style>
+      .title { font: 700 34px 'DejaVu Sans', sans-serif; fill: #19344e; }
+      .phase { font: 700 27px 'DejaVu Sans', sans-serif; fill: #19344e; }
+      .head { font: 700 23px 'DejaVu Sans', sans-serif; fill: white; }
+      .headsmall { font: 17px 'DejaVu Sans', sans-serif; fill: white; }
+      .label { font: 600 19px 'DejaVu Sans', sans-serif; fill: #29485e; }
+      .small { font: 17px 'DejaVu Sans', sans-serif; fill: #466276; }
+      .note { font: 600 17px 'DejaVu Sans', sans-serif; fill: #724519; }
+      .life { stroke: #8799a6; stroke-width: 2; stroke-dasharray: 8 8; }
+      .call { stroke: #315b78; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+      .ret { stroke: #607f91; stroke-width: 2.5; stroke-dasharray: 9 7; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+
+  <rect width="1600" height="1400" fill="white"/>
+  <text x="800" y="47" text-anchor="middle" class="title">Fluxo conectado de solicitação, decisão e emissão</text>
+
+  <rect x="45" y="85" width="1510" height="490" rx="24" fill="#eef6fb" stroke="#80b5d3" stroke-width="3"/>
+  <text x="75" y="126" class="phase">1. Solicitação</text>
+  <rect x="45" y="595" width="1510" height="750" rx="24" fill="#f4f7f1" stroke="#94b184" stroke-width="3"/>
+  <text x="75" y="636" class="phase">2. Decisão e emissão</text>
+
+  <g>
+    <rect x="60" y="150" width="240" height="68" rx="13" fill="#5f8968"/>
+    <text x="180" y="192" text-anchor="middle" class="head">Solicitante</text>
+    <rect x="370" y="150" width="240" height="68" rx="13" fill="#3478a6"/>
+    <text x="490" y="192" text-anchor="middle" class="head">Aplicação web</text>
+    <rect x="680" y="150" width="240" height="68" rx="13" fill="#3478a6"/>
+    <text x="800" y="192" text-anchor="middle" class="head">API FastAPI</text>
+    <rect x="990" y="150" width="240" height="68" rx="13" fill="#526e80"/>
+    <text x="1110" y="192" text-anchor="middle" class="head">Banco MySQL</text>
+    <rect x="1300" y="150" width="240" height="68" rx="13" fill="#5f8968"/>
+    <text x="1420" y="182" text-anchor="middle" class="head">Responsável</text>
+    <text x="1420" y="207" text-anchor="middle" class="headsmall">pela instituição</text>
+  </g>
+
+  <line x1="180" y1="218" x2="180" y2="1310" class="life"/>
+  <line x1="490" y1="218" x2="490" y2="1310" class="life"/>
+  <line x1="800" y1="218" x2="800" y2="1310" class="life"/>
+  <line x1="1110" y1="218" x2="1110" y2="1310" class="life"/>
+  <line x1="1420" y1="218" x2="1420" y2="1310" class="life"/>
+
+  <text x="335" y="258" text-anchor="middle" class="label">selecionar sala e solicitar acesso</text>
+  <line x1="180" y1="270" x2="485" y2="270" class="call"/>
+  <text x="645" y="318" text-anchor="middle" class="label">POST /digital_key/request</text>
+  <text x="645" y="341" text-anchor="middle" class="small">identificador da tranca + JWT Bearer</text>
+  <line x1="490" y1="354" x2="795" y2="354" class="call"/>
+  <text x="955" y="402" text-anchor="middle" class="label">INSERT solicitação pending</text>
+  <text x="955" y="425" text-anchor="middle" class="small">usuário extraído do token</text>
+  <line x1="800" y1="438" x2="1105" y2="438" class="call"/>
+  <text x="955" y="482" text-anchor="middle" class="small">request_id e instante de criação</text>
+  <line x1="1110" y1="494" x2="805" y2="494" class="ret"/>
+  <text x="645" y="532" text-anchor="middle" class="small">confirmação do pedido</text>
+  <line x1="800" y1="544" x2="495" y2="544" class="ret"/>
+
+  <text x="955" y="684" text-anchor="middle" class="label">consultar solicitações</text>
+  <line x1="1420" y1="697" x2="495" y2="697" class="call"/>
+  <text x="645" y="720" text-anchor="middle" class="small">GET /admin/keys/requests</text>
+  <line x1="490" y1="731" x2="795" y2="731" class="call"/>
+  <text x="955" y="777" text-anchor="middle" class="label">SELECT por institution.owner_id</text>
+  <line x1="800" y1="790" x2="1105" y2="790" class="call"/>
+  <text x="955" y="829" text-anchor="middle" class="small">pedidos vinculados às instituições próprias</text>
+  <line x1="1110" y1="841" x2="805" y2="841" class="ret"/>
+  <line x1="800" y1="875" x2="495" y2="875" class="ret"/>
+  <line x1="490" y1="909" x2="1415" y2="909" class="ret"/>
+
+  <text x="955" y="955" text-anchor="middle" class="label">aprovar ou rejeitar solicitação pendente</text>
+  <line x1="1420" y1="968" x2="495" y2="968" class="call"/>
+  <text x="645" y="1011" text-anchor="middle" class="small">POST .../approve ou .../reject</text>
+  <line x1="490" y1="1023" x2="795" y2="1023" class="call"/>
+  <text x="955" y="1067" text-anchor="middle" class="label">verificar propriedade e estado</text>
+  <line x1="800" y1="1080" x2="1105" y2="1080" class="call"/>
+
+  <rect x="825" y="1104" width="570" height="80" rx="12" fill="#fff3df" stroke="#d9a45d" stroke-width="2"/>
+  <text x="1110" y="1136" text-anchor="middle" class="note">rejeição: UPDATE status = rejected</text>
+  <text x="1110" y="1166" text-anchor="middle" class="note">aprovação: INSERT digital_key; UPDATE status = approved</text>
+
+  <text x="955" y="1220" text-anchor="middle" class="small">decisão registrada; na aprovação, credencial emitida</text>
+  <line x1="1110" y1="1232" x2="805" y2="1232" class="ret"/>
+  <line x1="800" y1="1266" x2="495" y2="1266" class="ret"/>
+  <text x="335" y="1305" text-anchor="middle" class="small">consulta posterior: credencial no painel</text>
+  <line x1="490" y1="1317" x2="185" y2="1317" class="ret"/>
+</svg>

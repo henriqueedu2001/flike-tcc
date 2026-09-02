@@ -86,3 +86,52 @@ Por fim, a tabela de eventos, \texttt{event\_log}, prevê registros associados a
     \label{fig:modelo-dados-flike}
     \fonte{Elaborado pelos autores a partir dos comandos SQL do backend.}
 \end{figure}
+\clearpage
+
+\subsection{Backend}
+
+A API organiza o código em rotas FastAPI, modelos Pydantic, repositórios e infraestrutura de persistência. As rotas recebem os parâmetros HTTP, selecionam o caso de uso e convertem exceções do domínio em respostas. Os modelos delimitam os corpos de entrada e parte das saídas. Os repositórios executam diretamente os comandos SQL de cada entidade, sem uma camada de mapeamento objeto--relacional, enquanto a infraestrutura fornece conexões MySQL obtidas de um pool. As regras de negócio ficam, portanto, distribuídas principalmente entre rotas e repositórios.
+
+O cadastro cria os dados pessoais na tabela \texttt{user} e as credenciais na tabela \texttt{auth}. Nesta última, o e-mail é representado por seu hash e a senha recebe um salt aleatório antes da aplicação de SHA-256. No login, a API repete o cálculo e, se os valores coincidirem, emite um JSON Web Token (JWT). Esse formato transporta um conjunto de declarações entre partes de maneira compacta \cite{jones2015jwt}. Na implementação do FLIKE, o token é protegido com HS256, contém o identificador do usuário e a declaração de expiração, definida para uma hora após sua emissão. O segredo usado nesse mecanismo é uma configuração do servidor distinta do segredo AES-CMAC de cada tranca.
+
+As rotas protegidas recebem o JWT no esquema Bearer, verificam sua integridade e validade e recuperam dele o identificador do usuário. A autorização administrativa não depende de uma classe global de administrador: para cada recurso, a API percorre tranca, sala, edifício e instituição até comparar \texttt{institution.owner\_id} com o usuário autenticado. Esse procedimento delimita consulta e manutenção de instituições, edifícios, salas e trancas próprias, assim como a decisão sobre solicitações destinadas a esses recursos.
+
+As demais rotas podem ser agrupadas por sua função. O catálogo de acesso permite consultar a hierarquia institucional usada pelo solicitante. O conjunto de solicitações cria pedidos e os apresenta separadamente ao solicitante e ao responsável. As operações de decisão rejeitam o pedido ou emitem uma credencial. Por fim, as consultas de credenciais devolvem o payload em representação hexadecimal para que o frontend recupere seus bytes. Essa separação reflete dois contextos do mesmo usuário: solicitar acesso em instituições alheias e administrar a estrutura das instituições que possui.
+
+Uma solicitação autenticada recebe o estado \texttt{pending}, a tranca informada e o identificador extraído do token. Antes de aprová-la ou rejeitá-la, a API confirma que ela permanece pendente e que sua tranca pertence ao responsável autenticado. A rejeição apenas altera o estado para \texttt{rejected}. Na aprovação, o backend cria uma credencial para o solicitante e a tranca e, em seguida, marca o pedido como \texttt{approved}. Quando a requisição não informa outra expiração, o padrão é 24 horas contadas do instante da aprovação e da emissão.
+
+A política do projeto estabelece uma credencial para cada solicitação aprovada, mas essa cardinalidade não é imposta pelo esquema. Como visto na Subseção~\ref{subsec:modelo-dados}, não há chave estrangeira entre pedido e credencial. Além disso, a criação da credencial e a mudança do estado são confirmadas em operações separadas. O fluxo nominal produz a correspondência esperada, porém o banco, isoladamente, não permite reconstruí-la de modo inequívoco nem garante uma transição atômica diante de concorrência ou falha intermediária.
+
+A cobertura de autenticação do commit examinado é parcial. As rotas sob o prefixo administrativo e as operações referentes ao próprio perfil e às próprias solicitações exigem JWT. Em contrapartida, listagens gerais de usuários e da estrutura institucional, consultas de credenciais e operações diretas sobre credenciais não aplicam a mesma dependência. As consultas públicas por usuário ou por identificador devolvem o payload, e as respostas das rotas públicas de trancas incluem \texttt{secret\_key} em hexadecimal.
+
+Essa última exposição rompe uma premissa central do modelo de segurança: quem obtiver o segredo de uma tranca poderá produzir tags AES-CMAC válidas para ela. Assim, a implementação examinada não sustenta uma alegação de proteção efetiva do segredo, ainda que a arquitetura pressuponha seu armazenamento restrito ao backend e ao dispositivo. O fechamento dessas rotas e a exclusão do segredo das respostas são correções necessárias antes de qualquer implantação. As consequências para o modelo de ameaça serão retomadas na seção dedicada à segurança.
+
+\subsection{Frontend}
+
+O frontend utiliza as rotas do App Router para compor as páginas visíveis. Componentes reutilizáveis implementam tabelas, cartões, formulários e modais; hooks coordenam estado, carregamento, mensagens de erro e ações; serviços concentram as requisições HTTP; e tipos TypeScript representam os dados trocados com a API. Essa divisão permite que uma página reúna a apresentação e delegue a comunicação e as transições de estado às demais unidades.
+
+Após o cadastro, o usuário autentica-se e o JWT é guardado pelo navegador. A implementação usa o armazenamento local, denominado \textit{localStorage} pela API Web, sob a chave \texttt{access\_token}. As páginas conectadas verificam sua presença para redirecionar ao login, mas essa verificação local não valida o token nem constitui autorização. A decisão efetiva ocorre quando uma rota protegida da API valida o Bearer recebido. Não há, no código examinado, middleware global de sessão, renovação do token ou persistência do login fora do armazenamento do navegador.
+
+No fluxo de solicitação, a interface conduz o usuário pela seleção sucessiva de instituição, edifício e sala. Depois da escolha da sala, o hook consulta as trancas associadas e utiliza a primeira retornada pela API; a versão examinada não apresenta ao usuário uma escolha quando há múltiplas trancas. A ação final envia apenas o identificador dessa tranca, pois o backend deriva do JWT a identidade do solicitante. Uma confirmação textual informa que o pedido foi registrado.
+
+O painel do solicitante combina os dados do usuário, suas credenciais e os pedidos rejeitados. Para apresentar uma credencial, o frontend consulta o registro pelo identificador, separa os pares hexadecimais, reconstrói um vetor de bytes e o entrega à biblioteca de QR Code em modo binário. O resultado é uma URL de dados exibida em um modal. Essa geração ocorre no navegador e não cria nova credencial no servidor. Também não implementa, por si só, download dedicado, funcionamento como aplicativo móvel ou persistência da imagem depois de uma recarga.
+
+A classificação exibida no painel ainda considera ativa apenas a credencial não marcada como usada e cuja expiração está no futuro. Esse critério conserva a semântica legada do campo \texttt{used}, mas não representa a política final do FLIKE: a mesma credencial pode ser reapresentada durante sua janela de validade. Por isso, a marcação de uso da aplicação conectada não será empregada como regra de autorização física.
+
+No fluxo do responsável, a mesma aplicação apresenta somente instituições, edifícios, salas e trancas que pertencem ao usuário autenticado. A tela de pedidos permite filtrar os estados \texttt{pending}, \texttt{approved} e \texttt{rejected}. Os botões de aprovação e rejeição aparecem para pedidos pendentes e, depois da resposta da API, a listagem é consultada novamente. Embora os caminhos e rótulos da interface usem o termo administrativo, a permissão continua derivada da propriedade da instituição.
+
+\subsection{Fluxo de solicitação e emissão}
+
+A Figura~\ref{fig:fluxo-solicitacao-emissao} reúne o caminho principal sem antecipar o formato interno da credencial. Na primeira etapa, o solicitante escolhe a tranca por meio da aplicação. O frontend envia o pedido autenticado, a API associa o usuário extraído do token e o banco persiste o estado pendente. A resposta confirma o registro, mas ainda não contém uma autorização.
+
+Na segunda etapa, o responsável consulta os pedidos relacionados às instituições que possui. Quando envia sua decisão, a API verifica novamente a propriedade da tranca e o estado do pedido. Uma rejeição encerra o fluxo administrativo sem credencial. Uma aprovação cria o payload autenticado, persiste a credencial e altera o pedido para \texttt{approved}. Por padrão, sua janela termina 24 horas depois desse instante; uma expiração diferente pode ser informada no contrato da API.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth,height=0.78\textheight,keepaspectratio]{fluxo_solicitacao_emissao.pdf}
+    \caption{Sequência de solicitação, decisão e emissão da credencial}
+    \label{fig:fluxo-solicitacao-emissao}
+    \fonte{Elaborado pelos autores a partir da implementação do FLIKE.}
+\end{figure}
+
+Em consulta posterior, o painel do solicitante recupera a credencial emitida e renderiza o QR Code. A obtenção do payload depende da aplicação conectada; somente a leitura e a decisão junto à fechadura dispensam consulta ao servidor. A aprovação, a emissão, a obtenção da imagem e a apresentação física são eventos distintos. Uma única emissão nominal decorre da solicitação aprovada, enquanto a credencial resultante permanece reapresentável até o instante de expiração, exclusive.
